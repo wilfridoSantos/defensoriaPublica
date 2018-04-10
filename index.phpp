@@ -1,0 +1,68 @@
+<?php
+if (session_start()) {
+    session_destroy();
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Inicio de sesión</title>
+        <meta http-equiv="Expires" content="0">
+        <meta http-equiv="Last-Modified" content="0">
+        <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="Shortcut Icon" type="image/x-icon" href="assets/icons/favicon.ico" />
+        <script src="js/sweet-alert.min.js"></script>
+        <link rel="stylesheet" href="css/sweet-alert.css">
+        <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/login.css"/>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="js/modernizr.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/main.js"></script>    
+        <link rel="stylesheet" href="css/beforeSend.css">
+    </head>
+    <body class="full-cover-background" style="background-image:url(assets/fondos/default.jpg);">
+
+        <div class="form-container" >
+            <p class="text-center" style="margin-top: 17px;">
+                <i class="zmdi zmdi-account-circle zmdi-hc-5x"></i>
+            </p>
+            <h4 class="text-center all-tittles" style="margin-bottom: 30px;" id="titulo-inicio">inicia sesión con tu cuenta</h4>
+            <form id="form_index">
+                <div class="group-material-login">
+                    <input id="usuarios_inicio" type="text" onkeyup = "if (event.keyCode == 13)
+                    ingresarSistema()" class="material-login-control" required="" maxlength="70">
+                    <span class="highlight-login"></span>
+                    <span class="bar-login"></span>
+                    <label><i class="zmdi zmdi-account"></i> &nbsp; Usuario/Correo</label>
+                </div><br>
+                <div class="group-material-login">
+                    <input id="password_inicio"type="password"  onkeyup = "if (event.keyCode == 13)
+                                ingresarSistema()"  name="password_txt" class="material-login-control" required="" maxlength="70">
+                    <span class="highlight-login"></span>
+                    <span class="bar-login"></span>
+                    <label><i class="zmdi zmdi-lock"></i> &nbsp; Contraseña</label>
+                </div>
+
+                <button id="restorePassword" onclick="olvido();" class="btn-link" type="button" style="color:#fff;"><i class="zmdi zmdi-key"> &nbsp;</i>Olvide mi contraseña</button>
+                <button id="ingresar" onclick="ingresarSistema()" class="btn-login" type="button">Ingresar al sistema &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>                
+                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">                   
+                </div>
+
+            </form>
+
+        </div> 
+        <div class='modalload'>
+
+        </div>
+    </body>
+</html>
