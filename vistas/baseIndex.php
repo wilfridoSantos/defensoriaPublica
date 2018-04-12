@@ -18,7 +18,13 @@ include "../Controlador/sesion.php";
   if ($_SESSION["rol"] == 3) {//ROL -3- => DEFENSOR
     //header("Location: Defensor/index.php");
       echo'<script language="javascript">window.location="Defensor/index.php"</script>';
-  }}else{
+  }
+  if ($_SESSION["rol"] == 4) {//ROL -3- => DEFENSOrCoordinador
+    //header("Location: coordinadorDefensor/indexx.html");
+      echo'<script language="javascript">window.location="coordinadorDefensor/indexx.html"</script>';
+  }
+
+}else{
     header("Location: ../index.php");
   }
 ?>
