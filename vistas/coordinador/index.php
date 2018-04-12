@@ -274,7 +274,7 @@ include "../../Controlador/sesion.php";
                           <td>9512345676</td>
                         </tr>
                         <tr>
-                          <td>Ashton Cox</td>
+                          <td>Ashton </td>
                           <td>Junior Technical Author</td>
                           <td>San Francisco</td>
                           <td>Tokyo</td>
