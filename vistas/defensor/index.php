@@ -1,3 +1,10 @@
+<?php
+include "../../Controlador/sesion.php";
+  //print_r( $_SESSION[session_name()]+" abcde123");
+  if($_SESSION["rol"] != 3){
+     header("Location: ../baseIndex.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -62,7 +69,7 @@
                     <ul class="nav child_menu">
                       <li><a href="index.html">Asesoria</a></li>
                       <li><a href="index2.html">Visitas carcelarias</a></li>
-                 
+
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i>Usuario del servicio<span class="fa fa-chevron-down"></span></a>
@@ -76,11 +83,11 @@
                   <li><a><i class="fa fa-desktop"></i> Reporte <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="general_elements.html">Generar reporte</a></li>
-                      
+
                     </ul>
                   </li>
-                 
-               
+
+
                 </ul>
               </div>
               <div class="menu_section">
@@ -121,7 +128,7 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>                  
+                  </li>
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
@@ -256,7 +263,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                  
+
                   </div>
                 </div>
               </div>
@@ -328,9 +335,9 @@
                           <td>43</td>
                           <td>9512345676</td>
                         </tr>
-                 
-            
-            
+
+
+
                         <tr>
                           <td>Michael Bruce</td>
                           <td>Javascript Developer</td>
@@ -354,15 +361,15 @@
               </div>
 
 
-                   
-					
-					
+
+
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        
+
         <!-- /page content -->
 
         <!-- footer content -->
@@ -373,7 +380,7 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-     
+
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>

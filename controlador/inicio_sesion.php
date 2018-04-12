@@ -1,53 +1,42 @@
 <?php
-
 include "conexion.php";
-//include "encriptador.php";
-$usuario = $_POST["usuario_txt"];
-$password =$_POST["password_txt"];//encriptar();
 
+$usuario = $_POST["usuario_txt"];
+$pass =  $_POST["password_txt"];
 $sql = "SELECT * FROM usuario_sistema WHERE username='$usuario'";
 $ejecutar_consulta = $conexion->query($sql);
 $num_regs = $ejecutar_consulta->num_rows;
-if ($num_regs == 0) {
+//echo 'USER=> '.$usuario . ' PASS=> '. $pass;
+ //echo "<input type='button' onclick='alert('USER=> '.$usuario . ' PASS=> '. $pass)'/>";
+if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
     echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a ' . $usuario . '</strong></p>';
-} else {
-    $sql = "SELECT * FROM usuario_sistema WHERE (username = '$usuario') and (password = '$password')";
-    $sqlRol = "select id_cargo from personal as p inner join usuario_sistema as u on 
-    p.id_personal = u.id_personal where u.username = '$usuario'";
-    $ejecutar_consulta = $conexion->query($sqlRol);
-    $temp = $ejecutar_consulta->mysql_fetch_assoc();
-    $id_cargo = $temp["id_cargo"];
-
-    //printf($id_cargo + "hooola");
-    $ejecutar_consulta = $conexion->query($sql);
-    $num_regs = $ejecutar_consulta->num_rows;
-    if ($num_regs == 0) {
-        echo '<p class="text-danger"><strong>Contraseña incorrecta</strong></p>';
-    } else {
-        $registro = $ejecutar_consulta->fetch_assoc();
-        $estatus = $registro["estado"];
-        $usu = $registro["username"];
-        if ($estatus == 1) {//verifica estado primero si esta activo
-           session_start();//si esta activo inicia session
-            $_SESSION["autentificado"] = true;//queda autenticado
-            $_SESSION["usuario"] = $usu;
-            $_SESSION["rol"] = $id_cargo;
-            if($_SESSION["rol"] == "1"){
-                echo'<script language="javascript">window.location="Vistas/Administrador/index.php"</script>';
-            }
-            if($_SESSION["rol"] == "2"){
-
-                echo'<script language="javascript">window.location="Vistas/Coordinador/index.php"</script>';
-            }
-            
-            if($_SESSION["rol"] == "3"){
-                echo'<script language="javascript">window.location="Vistas/Defensor/index.php"</script>';
-            }
-            //echo'<script language="javascript">window.location="Vistas/Administrador/index.php"</script>';
-        } else {
-            echo '<p class="text-danger"><strong>Cuenta inactiva contacta al administrador</strong></p>';
-        }
+} else { //encontro registro sobre un usuario y ese username
+    $arrayUser = $ejecutar_consulta -> fetch_assoc();//contiene informacion del usuario en un array
+    $passHashed = $arrayUser["password"];// obtiene la Contrasenia del usuario en la BD
+    if(password_verify($pass, $passHashed)){//verifica las contraseñas si son correctas entra al if
+      $sqlRol = "select id_cargo from personal as p inner join usuario_sistema as u on p.id_personal = u.id_personal where u.username = '$usuario'";
+      $ejecutar_consulta = $conexion->query($sqlRol);
+      $temp = $ejecutar_consulta->fetch_assoc();
+      $id_cargo = $temp['id_cargo'];
+      $estado = $arrayUser['estado'];
+      $nombreUsuario = $arrayUser['username'];
+      //echo $id_cargo . ' ' . $estado . ' ' . $nombreUsuario;
+      if($estado == 1){
+          //inicia sesion ?
+          session_start();
+          $_SESSION["autentificado"] = true;//queda autenticado
+      //  echo $_SESSION["autentificado"] . ' valor autentificado de inicio_sesion';
+          echo"<script language='javascript'>alert( 'autentificado inicio_sesion=> ' +  ". $_SESSION['autentificado'].")</script>";
+          $_SESSION["usuario"] = $nombreUsuario; // se asigna el nombre del usuario a la session
+          $_SESSION["rol"] = $id_cargo; //asignamos rol de usuario /admin =1, coordinado =2, defensor =3
+          //echo $_SESSION["usuario"] . ' => rol '.$_SESSION["rol"];
+          echo'<script language="javascript">window.location="Vistas/baseIndex.php"</script>';
+            //header("Location: ../Vistas/baseIndex.php");
+      }else{
+          echo '<p class="text-danger"><strong>Cuenta inactiva contacta al administrador</strong></p>';
+      }
+    }else{
+        echo '<p class="text-danger"><strong>Contraseña incorrecta '.$pass.'</strong></p>';
     }
 }
-
-    
+?>
