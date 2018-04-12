@@ -48,7 +48,7 @@ if (session_start()) {
 
             <form  method="POST">
 
-              <h1>Defensoria publica</h1>
+              <p><img src="recursos/images/defensoriav1.png" width="300px" height="100px"/></p>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required=""  name="username" id="usuarios_inicio"
                 onkeyup = "if (event.keyCode == 13) ingresarSistema()" maxlength="70"/>
@@ -73,15 +73,13 @@ if (session_start()) {
               <div class="separator">
                 <div class="clearfix"></div>
                 <br/>
+
                 <div>
-                  <p>©2018 All Rights Reserved. Defensoria public a de oaxaca Privacy and Terms</p>
+                  <p>©2018 All Rights Reserved. Defensoria publica de oaxaca Privacy and Terms</p>
                 </div>
               </div>
             </form>
           </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
         </div>
       </div>
     </div>
