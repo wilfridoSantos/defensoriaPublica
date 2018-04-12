@@ -8,19 +8,19 @@ function listar_asesoria_x_id($id){
       return $consulta;
   }
 
-  
+
     //Definimos la funciones sobre el objeto crear_asesoria
     function crear_asesoria($asesoria){
         global $conexion;
-        $sql = "INSERT INTO proveedor ";
-        $sql.= "SET id_expediente='".$provedor['id_expediente']."',   fecha_asesoria='".$provedor['fecha_asesoria']."',";
-        $sql.= "observaciones='".$provedor['observaciones']."'";
+        $sql = "INSERT INTO asesoria ";
+        $sql.= "SET id_expediente='".$asesoria['id_expediente']."',   fecha_asesoria='".$asesoria['fecha_asesoria']."',";
+        $sql.= "observaciones='".$asesoria['observaciones']."'";
 
         return consulta($sql, $conexion);
     }
-   
 
- 
+
+
 
 
 
