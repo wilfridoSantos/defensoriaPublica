@@ -1,26 +1,19 @@
 <?php
 if (session_start()) {
- 
   session_destroy();
   $_SESSION["autentificado"] = false;
-  //header("Expires: Tue, 13 Jan 2005 16:00:00 GMT"); // Ponemos la fecha siempre en pasado
-  //header("Pragma: no-cache"); 
-  //header("Cache-Control: no-cache");  
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
         <meta http-equiv="Expires" content="0">
         <meta http-equiv="Last-Modified" content="0">
         <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
         <meta http-equiv="Pragma" content="no-cache">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Defensoria publica del estado de oaxaca| </title>
-
     <!-- Bootstrap -->
     <link href="Recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -32,14 +25,13 @@ if (session_start()) {
     <!-- Custom Theme Style -->
     <link href="Recursos/css/custom.min.css" rel="stylesheet"/>
 
-
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+        <script src="Recursos/js/ajax/jquery.min.js"> </script>
         <script>window.jQuery || document.write('<script src="Recursos/js/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="Recursos/js/modernizr.js"></script>
         <script src="Recursos/js/bootstrap.min.js"></script>
         <script src="Recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="Recursos/js/main.js"></script>    
+        <script src="Recursos/js/main.js"></script>
         <link rel="stylesheet" href="Recursos/css/beforeSend.css">
   </head>
   <body class="login">
@@ -50,9 +42,9 @@ if (session_start()) {
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-          
+
             <form th:action="@{/logincheck}" method="POST">
-              
+
               <h1>Defensoria publica</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required=""  name="username" id="usuarios_inicio"
@@ -63,7 +55,6 @@ if (session_start()) {
                 onkeyup = "if (event.keyCode == 13) ingresarSistema()"  name="password_txt" required="" maxlength="70"/>
               </div>
               <div>
-                
                <button id="ingresar" class="btn btn-primary btn-sm " type="button"  onclick="ingresarSistema()"  >
                <i class="zmdi zmdi-arrow-right">&nbsp;</i>
                 Iniciar Sesion
@@ -72,30 +63,16 @@ if (session_start()) {
                <i class="zmdi zmdi-key"> &nbsp;</i>
                 Recuperar Contrasenia
                </button>
-
-                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">                   
+                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">
                 </div>
-               
-               <!--
-               <button type="submit"  class="btn btn-default">
-                 <a type="submit"> recuperar </a>
-              </button>
-               
-                <button id="ingresar" onclick="ingresarSistema()" class="btn-login" type="button">Ingresar al sistema &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>                
-                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">     
-                  -- >
               </div>
-
               <div class="clearfix"></div>
-
               <div class="separator">
                 <p class="change_link">New to site?
                   <a href="#signup" class="to_register"> Crear nueva cuenta </a>
                 </p>
-
                 <div class="clearfix"></div>
                 <br/>
-
                 <div>
                   <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
                   <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
@@ -107,13 +84,13 @@ if (session_start()) {
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-          
+
             <form>
               <h1>Create Account</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required="" />
               </div>
-              
+
               <div>
                 <a class="btn btn-default submit" type="submit">Submit</a>
               </div>
@@ -159,13 +136,13 @@ if (session_start()) {
                 </div>
 
                 <button id="restorePassword" onclick="olvido();" class="btn-link" type="button" style="color:#fff;"><i class="zmdi zmdi-key"> &nbsp;</i>Olvide mi contraseña</button>
-                <button id="ingresar" onclick="ingresarSistema()" class="btn-login" type="button">Ingresar al sistema &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>                
-                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">                   
+                <button id="ingresar" onclick="ingresarSistema()" class="btn-login" type="button">Ingresar al sistema &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>
+                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">
                 </div>
 
             </form>
 
-        </div> 
+        </div>
         <div class='modalload'>
 
         </div>

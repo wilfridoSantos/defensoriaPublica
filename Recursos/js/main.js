@@ -116,6 +116,7 @@ function ingresarSistema() {
     }
     $('#mensaje_index').html(p);
     if (!error) {
+      console.log('No hay error antes de accesar a inicio_sesion.php');
         $.ajax({
             url: "Controlador/inicio_sesion.php",
             type: "post",
@@ -124,7 +125,7 @@ function ingresarSistema() {
                 $('body').addClass('loading');
             },
             success: function(data) {
-               
+
                 $('#mensaje_index').html(data);
                 $('body').removeClass('loading');
             }

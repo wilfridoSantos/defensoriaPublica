@@ -1,3 +1,10 @@
+<?php
+include "../../Controlador/sesion.php";
+  //print_r( $_SESSION[session_name()]+" abcde123");
+  if($_SESSION["rol"] != 2 ){
+     header("Location: ../baseIndex.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,10 +75,10 @@
                        <li><a id="buscar">Cambiar de adscripcion</a></li>
                     </ul>
                   </li>
-                
+
               </ul>
               </div>
-           
+
 
             </div>
             <!-- /sidebar menu -->
@@ -116,7 +123,7 @@
                         <span>Configuracion</span>
                       </a>
                     </li>
-                  
+
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
                   </ul>
                 </li>
@@ -202,7 +209,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                  
+
                   </div>
                 </div>
               </div>
@@ -274,9 +281,9 @@
                           <td>43</td>
                           <td>9512345676</td>
                         </tr>
-                 
-            
-            
+
+
+
                         <tr>
                           <td>Michael Bruce</td>
                           <td>Javascript Developer</td>
@@ -300,17 +307,17 @@
               </div>
 
 
-                   
-					
-					
+
+
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
         <div id="menuContainer">
-        
+
         </div>
         <!-- /page content -->
 
@@ -322,7 +329,7 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-     
+
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>

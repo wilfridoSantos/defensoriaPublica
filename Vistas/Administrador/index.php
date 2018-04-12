@@ -1,34 +1,25 @@
 <?php
 include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
-
-  if ($_SESSION["rol"] == "2") {//ROL -2- => COORDINADOR
-      header("Location: ../Vistas/Coordinador/index.php");
+  if($_SESSION["rol"] != 1){
+     header("Location: ../baseIndex.php");
   }
-
-  if ($_SESSION["rol"] == "3") {//ROL -3- => DEFENSOR
-    header("Location: ../Vistas/Defensor/index.php");
-  }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<script type="text/javascript">
-history.forward();
-</script>
-  
+
+  <script type="text/javascript">
+    history.forward();
+  </script>
+
   <head>
-  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
     <title>ADMINSTRADOR MODULE</title>
-
-                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <!-- Bootstrap -->
     <link href="../../Recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -43,23 +34,20 @@ history.forward();
     <link href="../../Recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet"/>
     <link href="../../Recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet"/>
     <link href="../../Recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"/>
-
     <!-- Custom Theme Style -->
     <link href="../../Recursos/css/custom.min.css" rel="stylesheet"/>
   </head>
 
   <body class="nav-md">
-  
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa "></i> <span>Defensoria publica</span></a>
+              <a href="index.php" class="site_title"><i class="fa"></i> <span>Defensoria publica</span></a>
             </div>
-
             <div class="clearfix"></div>
-
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
@@ -67,7 +55,9 @@ history.forward();
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                <h2>John Doe</h2>
+                <h2>ADMINISTRADOR:
+                  <?php echo $_SESSION['usuario'] ?>
+                </h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -77,16 +67,16 @@ history.forward();
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                
+
                 <ul class="nav side-menu">
-                 
+
                   <li><a><i class="fa fa-edit"></i> Personal <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="" th:src="@{defensores.html}" >Alta </a></li>
-                      
+
                       <li><a href="" th:src="@{defensores.html}" >Baja </a></li>
                       <li><a href="form_advanced.html">Lista</a></li>
-                      <li><a href="" th:src="@{defensores.html}" >Adscripcion </a></li>                     
+                      <li><a href="" th:src="@{defensores.html}" >Adscripcion </a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> Informes <span class="fa fa-chevron-down"></span></a>
@@ -96,12 +86,12 @@ history.forward();
                       <li><a href="">informe especifico</a></li>
                     </ul>
                   </li>
-               
-                 
-                 
+
+
+
                 </ul>
               </div>
-            
+
 
             </div>
             <!-- /sidebar menu -->
@@ -229,11 +219,11 @@ history.forward();
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              
+
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    
+
                   </div>
                 </div>
               </div>
@@ -247,7 +237,7 @@ history.forward();
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    
+
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -299,7 +289,7 @@ history.forward();
                           <td>2011/07/25</td>
                           <td>$170,750</td>
                         </tr>
-               
+
                         <tr>
                           <td>Gloria Little</td>
                           <td>Systems Administrator</td>
@@ -324,9 +314,9 @@ history.forward();
                           <td>2012/09/26</td>
                           <td>$217,500</td>
                         </tr>
-             
+
                         <tr>
-                          
+
                           <td>Donna Snider</td>
                           <td>Customer Support</td>
                           <td>New York</td>
@@ -340,17 +330,17 @@ history.forward();
                 </div>
               </div>
 
-             
-					
-					
+
+
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        
+
         <div id="menuContainer">
-        
+
         </div>
         <!-- /page content -->
 
@@ -362,7 +352,7 @@ history.forward();
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-     
+
 
     <!-- jQuery -->
     <script src="../../Recursos/vendors/jquery/dist/jquery.min.js"></script>
