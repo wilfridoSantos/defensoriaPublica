@@ -24,10 +24,8 @@ if (session_start()) {
     <link href="recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
     <!-- Custom Theme Style -->
     <link href="recursos/css/custom.min.css" rel="stylesheet"/>
-
-        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
         <script src="Recursos/js/ajax/jquery.min.js"> </script>
-        <script>window.jQuery || document.write('<script src="Recursos/js/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="Recursos/js/jquery-1.11.2.min.js"></script>
         <script src="Recursos/js/modernizr.js"></script>
         <script src="Recursos/js/bootstrap.min.js"></script>
         <script src="Recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -73,14 +71,10 @@ if (session_start()) {
               </div>
               <div class="clearfix"></div>
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Crear nueva cuenta </a>
-                </p>
                 <div class="clearfix"></div>
                 <br/>
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <p>©2018 All Rights Reserved. Defensoria public a de oaxaca Privacy and Terms</p>
                 </div>
               </div>
             </form>
@@ -88,31 +82,6 @@ if (session_start()) {
         </div>
 
         <div id="register" class="animate form registration_form">
-          <section class="login_content">
-
-            <form>
-              <h1>Create Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-
-              <div>
-                <a class="btn btn-default submit" type="submit">Submit</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-              </div>
-            </form>
-          </section>
         </div>
       </div>
     </div>
