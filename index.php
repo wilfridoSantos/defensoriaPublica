@@ -48,9 +48,6 @@ if (session_start()) {
         <div class="animate form login_form">
           <section class="login_content">
 
-
-            <form th:action="@{/logincheck}" method="POST">
-
             <form  method="POST">
 
               <h1>Defensoria publica</h1>
