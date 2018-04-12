@@ -15,16 +15,17 @@ if (session_start()) {
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Defensoria publica del estado de oaxaca| </title>
     <!-- Bootstrap -->
-    <link href="Recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
-    <link href="Recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- NProgress -->
-    <link href="Recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
+    <link href="recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
     <!-- Animate.css -->
-    <link href="Recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
     <!-- Custom Theme Style -->
-    <link href="Recursos/css/custom.min.css" rel="stylesheet"/>
+    <link href="recursos/css/custom.min.css" rel="stylesheet"/>
 
+<<<<<<< HEAD
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
         <script src="Recursos/js/ajax/jquery.min.js"> </script>
         <script>window.jQuery || document.write('<script src="Recursos/js/jquery-1.11.2.min.js"><\/script>')</script>
@@ -32,6 +33,16 @@ if (session_start()) {
         <script src="Recursos/js/bootstrap.min.js"></script>
         <script src="Recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="Recursos/js/main.js"></script>
+=======
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="recursos/js/jquery-1.11.2.min.js"></script>
+        <script src="recursos/js/modernizr.js"></script>
+        <script src="recursos/js/bootstrap.min.js"></script>
+        <script src="recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="recursos/js/main.js"></script>    
+>>>>>>> 7db402602748e346b4f3a1e0cd8460799626f313
         <link rel="stylesheet" href="Recursos/css/beforeSend.css">
   </head>
   <body class="login">
@@ -42,9 +53,15 @@ if (session_start()) {
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
+<<<<<<< HEAD
 
             <form th:action="@{/logincheck}" method="POST">
 
+=======
+          
+            <form  method="POST">
+              
+>>>>>>> 7db402602748e346b4f3a1e0cd8460799626f313
               <h1>Defensoria publica</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required=""  name="username" id="usuarios_inicio"
@@ -111,6 +128,7 @@ if (session_start()) {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   </body> <!--
   <body class="login-wraper" style="background-image:url(assets/fondoLogin.jpg);">
 
@@ -147,4 +165,7 @@ if (session_start()) {
 
         </div>
     </body>-->
+=======
+  </body> 
+>>>>>>> 7db402602748e346b4f3a1e0cd8460799626f313
 </html>
