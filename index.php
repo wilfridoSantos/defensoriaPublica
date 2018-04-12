@@ -22,24 +22,24 @@ if (session_start()) {
     <title>Defensoria publica del estado de oaxaca| </title>
 
     <!-- Bootstrap -->
-    <link href="Recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
-    <link href="Recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- NProgress -->
-    <link href="Recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
+    <link href="recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
     <!-- Animate.css -->
-    <link href="Recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
     <!-- Custom Theme Style -->
-    <link href="Recursos/css/custom.min.css" rel="stylesheet"/>
+    <link href="recursos/css/custom.min.css" rel="stylesheet"/>
 
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="Recursos/js/jquery-1.11.2.min.js"><\/script>')</script>
-        <script src="Recursos/js/modernizr.js"></script>
-        <script src="Recursos/js/bootstrap.min.js"></script>
-        <script src="Recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="Recursos/js/main.js"></script>    
+        <script src="recursos/js/jquery-1.11.2.min.js"></script>
+        <script src="recursos/js/modernizr.js"></script>
+        <script src="recursos/js/bootstrap.min.js"></script>
+        <script src="recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="recursos/js/main.js"></script>    
         <link rel="stylesheet" href="Recursos/css/beforeSend.css">
   </head>
   <body class="login">
@@ -51,7 +51,7 @@ if (session_start()) {
         <div class="animate form login_form">
           <section class="login_content">
           
-            <form th:action="@{/logincheck}" method="POST">
+            <form  method="POST">
               
               <h1>Defensoria publica</h1>
               <div>
@@ -134,40 +134,5 @@ if (session_start()) {
         </div>
       </div>
     </div>
-  </body> <!--
-  <body class="login-wraper" style="background-image:url(assets/fondoLogin.jpg);">
-
-        <div class="form-container" >
-            <p class="text-center" style="margin-top: 17px;">
-                <i class="zmdi zmdi-account-circle zmdi-hc-5x"></i>
-            </p>
-            <h4 class="text-center all-tittles" style="margin-bottom: 30px;" id="titulo-inicio">inicia sesión con tu cuenta</h4>
-            <form id="form_index">
-                <div class="group-material-login">
-                    <input id="usuarios_inicio" type="text" onkeyup = "if (event.keyCode == 13)
-                    ingresarSistema()" class="material-login-control"/ required="" maxlength="70">
-                    <span class="highlight-login"></span>
-                    <span class="bar-login"></span>
-                    <label><i class="zmdi zmdi-account"></i> &nbsp; Usuario/Correo</label>
-                </div><br>
-                <div class="group-material-login">
-                    <input id="password_inicio"type="password"  onkeyup = "if (event.keyCode == 13)
-                                ingresarSistema()"  name="password_txt" class="material-login-control" required="" maxlength="70">
-                    <span class="highlight-login"></span>
-                    <span class="bar-login"></span>
-                    <label><i class="zmdi zmdi-lock"></i> &nbsp; Contraseña</label>
-                </div>
-
-                <button id="restorePassword" onclick="olvido();" class="btn-link" type="button" style="color:#fff;"><i class="zmdi zmdi-key"> &nbsp;</i>Olvide mi contraseña</button>
-                <button id="ingresar" onclick="ingresarSistema()" class="btn-login" type="button">Ingresar al sistema &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>                
-                <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">                   
-                </div>
-
-            </form>
-
-        </div> 
-        <div class='modalload'>
-
-        </div>
-    </body>-->
+  </body> 
 </html>

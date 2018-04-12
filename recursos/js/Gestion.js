@@ -35,6 +35,13 @@
     function buscarUsuario(){
 		    $('#menuContainer').load("usuarios/buscar.html");
 			}
+
+	//var agregarjuzado=document.getElementById('agregarjuzado');
+	//	agregarjuzado.addEventListener('click',agregarjuzados,false);
+		
+	 function agregarjuzados(){
+			 $('#menuContainer').load("coordinador/coordinadorRegistrarJuzgado.html");
+			 }
     });
  
  
