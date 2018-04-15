@@ -1,47 +1,13 @@
-/**
- * 
- */
  $(document).ready(function () {
-///	alert("fdsijfdso");
-    //  $('#menuContainer').load('css/adm.html');
-   var defen=document.getElementById('defensores');
-       defen.addEventListener('click',defensores,false);
-  	  function defensores(){
-  		$('#menuContainer').load("/defensores");
-  		
-  	}
-	 
-	
-	var id=document.getElementById('verusuarios');
-    	id.addEventListener('click',cli,false);
-	                    
-	  function cli(){
-	    $('#menuContainer').load("/usuarios");
-		
-	}
-	var asignar=document.getElementById('asignarDefensor');
-		asignar.addEventListener('click',asinar,false);
-    function asinar(){
-		    $('#menuContainer').load("/asignardefensor");
-		}
-		 
-	var registrar=document.getElementById('registrar');
-    	 registrar.addEventListener('click',registrarUsuario,false);
-	function registrarUsuario(){
-			    $('#menuContainer').load("usuarios/registrar.html");
-			}
-	var buscar=document.getElementById('buscar');
-   	    buscar.addEventListener('click',buscarUsuario,false);
-    function buscarUsuario(){
-		    $('#menuContainer').load("usuarios/buscar.html");
-			}
-
-	//var agregarjuzado=document.getElementById('agregarjuzado');
-	//	agregarjuzado.addEventListener('click',agregarjuzados,false);
-		
-	 function agregarjuzados(){
-			 $('#menuContainer').load("coordinador/coordinadorRegistrarJuzgado.html");
-			 }
-    });
- 
- 
+	var informeA=document.getElementById('informeAnual');
+		informeA.addEventListener('click',informeAnual,false);
+	 	function informeAnual(){
+			$('#menuContainer').load("usuarios/");
+		   };
+//========================================================================		   
+	var registrar=document.getElementById('registrarDefensor');
+			registrar.addEventListener('click',regDefensores,false);
+			function regDefensores(){
+				$('#menuContainer').load("usuarios/registrar.html");
+			};
+});

@@ -4,24 +4,24 @@ include "../Controlador/sesion.php";
   //echo $_SESSION["usuario"] . ' => rol '.$_SESSION["rol"];
 
     //echo"<script language='javascript'>alert( ' autentificado baseIndex=>'+ $_SESSION['autentificado'])</script>";
-    echo"<script language='javascript'>alert( 'autentificado baseIndex=> rol ' +  ". $_SESSION['rol'].")</script>";
+    //echo"<script language='javascript'>alert( 'autentificado baseIndex=> rol ' +  ". $_SESSION['rol'].")</script>";
 
   if($_SESSION["autentificado"] == true){
   if ($_SESSION["rol"] == 1) {//ROL -2- => COORDINADOR
       //header("Location: Administrador/index.php");
-      echo'<script language="javascript">window.location="Administrador/index.php"</script>';
+      echo'<script language="javascript">window.location="administrador/index.php"</script>';
   }
   if ($_SESSION["rol"] == 2) {//ROL -2- => COORDINADOR
       //header("Location: Coordinador/index.php");
-        echo'<script language="javascript">window.location="Coordinador/index.php"</script>';
+        echo'<script language="javascript">window.location="coordinador/index.php"</script>';
   }
   if ($_SESSION["rol"] == 3) {//ROL -3- => DEFENSOR
     //header("Location: Defensor/index.php");
-      echo'<script language="javascript">window.location="Defensor/index.php"</script>';
+      echo'<script language="javascript">window.location="defensor/index.php"</script>';
   }
   if ($_SESSION["rol"] == 4) {//ROL -3- => DEFENSOrCoordinador
     //header("Location: coordinadorDefensor/indexx.html");
-      echo'<script language="javascript">window.location="coordinadorDefensor/indexx.html"</script>';
+      echo'<script language="javascript">window.location="coordinadorDefensor/index.php"</script>';
   }
 
 }else{

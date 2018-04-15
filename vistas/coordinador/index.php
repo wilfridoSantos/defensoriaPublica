@@ -14,25 +14,25 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>DataTables | Gentelella</title>
+    <title>Modulo Coordinador General</title>
 
     <!-- Bootstrap -->
-    <link href="../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
-    <link href="../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- NProgress -->
-    <link href="../recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
     <!-- iCheck -->
-    <link href="../recursos/vendors/iCheck/skins/flat/green.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/iCheck/skins/flat/green.css" rel="stylesheet"/>
     <!-- Datatables -->
-    <link href="../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
-    <link href="../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet"/>
-    <link href="../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet"/>
-    <link href="../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet"/>
-    <link href="../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="../recursos/css/custom.min.css" rel="stylesheet"/>
+    <link href="../../recursos/css/custom.min.css" rel="stylesheet"/>
   </head>
 
   <body class="nav-md">
@@ -41,7 +41,7 @@ include "../../Controlador/sesion.php";
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa "></i> <span>Defensoria publica</span></a>
+              <a href="index.php" class="site_title"><i class="fa "></i> <span>Defensoria publica</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -49,11 +49,11 @@ include "../../Controlador/sesion.php";
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../recursos/images/defensoriav1.png" alt="..." class="img-circle profile_img"/>
+                <img src="../../recursos/images/defensoriav1.png" alt="..." class="img-circle profile_img"/>
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                <h2>John Doe</h2>
+                                  <?php echo $_SESSION['usuario'] ?>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -63,19 +63,43 @@ include "../../Controlador/sesion.php";
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Coordinador de defensores</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Defensores <span class="fa fa-chevron-down"></span></a>
+
+                  <li><a><i class="fa fa-home"></i> Generar Informe <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a id="defensores">lista de defensores</a></li>
-                      <li><a id="verusuarios">Ver los usuarios del servicio</a></li>
-                      <li><a id="asignarDefensor">Asignar  un defensor</a></li>
-                      <li><a id="registrar">Registrar un defensor</a></li>
-                      <li><a id="buscar">Buscar</a></li>
-                       <li><a id="buscar">Cambiar de adscripcion</a></li>
+                      <li><a id="informeAnual">Generar Informe Anual</a></li>
+                      <li><a id="informeMensual">Generar Informe Mensual</a></li>
+                      <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
+                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a id="listarDefensores">Listar Defensores</a></li>
+                      <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
+                      <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
+                      <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
+                      <li><a id="asignarCaso">Asignar Un Caso</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                      <li><a id="registrarDefensor">Registrar Defensor</a></li>
+                      <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
+                      <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
+                      <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
+                      <form action="../../action.php" method="post">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Buscar Defensor(username)" name="busqueda">
+                          <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                      </div>
+                      </form>
+                    </ul>
+                  </li>
               </ul>
               </div>
 
@@ -94,7 +118,7 @@ include "../../Controlador/sesion.php";
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Salir" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../index.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -124,7 +148,7 @@ include "../../Controlador/sesion.php";
                       </a>
                     </li>
 
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
+                    <li><a href="../../index.php"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
                   </ul>
                 </li>
 
@@ -148,7 +172,7 @@ include "../../Controlador/sesion.php";
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -160,7 +184,7 @@ include "../../Controlador/sesion.php";
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -172,7 +196,7 @@ include "../../Controlador/sesion.php";
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -274,7 +298,7 @@ include "../../Controlador/sesion.php";
                           <td>9512345676</td>
                         </tr>
                         <tr>
-                          <td>Ashton </td>
+                          <td>Ashton lkjdlkajldkjask</td>
                           <td>Junior Technical Author</td>
                           <td>San Francisco</td>
                           <td>Tokyo</td>
@@ -332,35 +356,35 @@ include "../../Controlador/sesion.php";
 
 
     <!-- jQuery -->
-    <script src="../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../recursos/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../recursos/vendors/nprogress/nprogress.js"></script>
+    <script src="../../recursos/vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
-    <script src="../recursos/vendors/iCheck/icheck.min.js"></script>
+    <script src="../../recursos/vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
-    <script src="../recursos/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../recursos/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../recursos/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../recursos/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../recursos/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../../recursos/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../recursos/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../../recursos/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../../recursos/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../recursos/js/custom.min.js"></script>
+    <script src="../../recursos/js/custom.min.js"></script>
 
-    <script src="../recursos/js/Gestion.js"></script>
+    <script src="../../recursos/js/Gestion.js"></script>
   </body>
 </html>
