@@ -132,7 +132,10 @@ function ingresarSistema() {
         });
     }
 }
+function llamarListarDef(){
 
+    
+}
 function olvido() {
     $('#titulo-inicio').html("Recupera tu contraseña");
     var contenido = "";
