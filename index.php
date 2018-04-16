@@ -24,12 +24,12 @@ if (session_start()) {
     <link href="recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
     <!-- Custom Theme Style -->
     <link href="recursos/css/custom.min.css" rel="stylesheet"/>
-        <script src="Recursos/js/ajax/jquery.min.js"> </script>
-        <script src="Recursos/js/jquery-1.11.2.min.js"></script>
-        <script src="Recursos/js/modernizr.js"></script>
-        <script src="Recursos/js/bootstrap.min.js"></script>
-        <script src="Recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="Recursos/js/main.js"></script>
+        <script src="recursos/js/ajax/jquery.min.js"> </script>
+        <script src="recursos/js/jquery-1.11.2.min.js"></script>
+        <script src="recursos/js/modernizr.js"></script>
+        <script src="recursos/js/bootstrap.min.js"></script>
+        <script src="recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="recursos/js/main.js"></script>
         <script src="recursos/js/jquery-1.11.2.min.js"></script>
         <script src="recursos/js/modernizr.js"></script>
         <script src="recursos/js/bootstrap.min.js"></script>
