@@ -36,10 +36,10 @@
               }*/
               $registroDef = $listaDef-> fetch_assoc();
               echo '<tr>
-              <td>'.$registroDef['id_defensor'].'</td>
-              <td>'.$registroDef['id_juzgado'].'</td>
-              <td>'.$registroDef['id_estudios'].'</td>
-              <td>'.$registroDef['numero_cedula_profesional'].'</td>
+              <td>'.$arrayDef['id_defensor'].'</td>
+              <td>'.$arrayDef['id_juzgado'].'</td>
+              <td>'.$arrayDef['id_estudios'].'</td>
+              <td>'.$arrayDef['numero_cedula_profesional'].'</td>
               </tr>';
             ?>
           </tbody>

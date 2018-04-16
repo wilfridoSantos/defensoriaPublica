@@ -4,11 +4,9 @@
 
     
     $listaDef = listar_defensores();
-    $arrayDef = $listaDef->fetch_array();
-    
+ 
+
     $num_regs = $listaDef->num_rows;
-
-
     if ($num_regs == 0) { //no encontro ningun registro 
         echo '<p class="text-danger"><strong>Aun no existen defensores agregados al sistema</strong></p>';
     }else{
@@ -16,10 +14,7 @@
         //echo'<script language="javascript"> window.location="../../vistas/coordinador/listarDefensores.php"</script>';
         //echo 'si hay defensores controladorListsDEef son: '.$num_regs;
         //return  $listaDef;
-        echo json_encode($arrayDef);
-        //header('Location: ../../vistas/coordinador/listarDefensores.php');
-
-
+        $arrayDef = $listaDef->fetch_array();
     } 
 
 ?>

@@ -14,8 +14,22 @@
 	var listar=document.getElementById('listarDefensores');
 			listar.addEventListener('click',listDefensores,false);
 			function listDefensores(){
-				$('#menuContainer').load("../../controlador/defensor/controladorlistarDef.php");
+			  $('#menuContainer').load("../../vistas/coordinador/listarDefensores.php");
 				//window.location="../../controlador/defensor/controladorListaDef.php"
+
+				// $.ajax({
+				// 	url: "../../controlador/defensor/controladorlistaDef.php?",
+				// 	type: "post",
+				// 	data: "usuario_txt=" + usuario.value + "&password_txt=" + password.value,
+				// 	beforeSend: function() {
+				// 		$('body').addClass('loading');
+				// 	},
+				// 	success: function(data) {
+		
+				// 		$('#mensaje_index').html(data);
+				// 		$('body').removeClass('loading');
+				// 	}
+				// });
 			};
 	
 			// Datepicker Popups calender to Choose date.
