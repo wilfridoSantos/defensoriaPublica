@@ -1,8 +1,6 @@
-<?php
-  $queryDef = listar_defensores();
-  $arrayDef = $queryDef-> fetch_assoc();
+<?php 
+  include '../../controlador/defensor/controladorListaDef.php';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,61 +16,34 @@
         <table id="datatable" class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Apellido Paterno</th>
-              <th>Apellido Materno</th>
-              <th>Direccion</th>
-              <th>Telefono</th>
-              <th>Cantidad de benificiarios</th>
+              <th>id Defensor</th>
+              <th>id_juzgado</th>
+              <th>id_estudio</th>
+              <th>numero cedula</th>
             </tr>
           </thead>
-
-
           <tbody>
-            <a href="#" ><tr >
-              <td>$arrayDef[0]['id_defensor']</td>
-              <td>System Arckasmflhitect</td>
-              <td>Edinburasjnfgh</td>
-              <td>Edinburgh</td>
-              <td>34</td>
-              <td>9512345676</td>
-            </tr></a>
-            <tr>
-              <td>Garrete esta Winters</td>
-              <td>Accountant</td>
-              <td>Tokyo</td>
-              <td>Tokyo</td>
-              <td>34</td>
-              <td>9512345676</td>
-            </tr>
-            <tr>
-              <td>Ashton lkjdlkajldkjask</td>
-              <td>Junior Technical Author</td>
-              <td>San Francisco</td>
-              <td>Tokyo</td>
-              <td>43</td>
-              <td>9512345676</td>
-            </tr>
+            <?php
+             /* while($registroDef = $listaDef->fetch_array(MYSQLI_BOTH)){
+                echo '<tr>
+                          <td>'.$registroDef['id_defensor'].'</td>
+                          <td>'.$registroDef['id_juzgado'].'</td>
+                          <td>'.$registroDef['id_estudios'].'</td>
+                          <td>'.$registroDef['numero_cedula_profesional'].'</td>
+                      </tr>
+                ';
 
-
-
-            <tr>
-              <td>Michael Bruce</td>
-              <td>Javascript Developer</td>
-              <td>Singapore</td>
-              <td>Singapore</td>
-              <td>34</td>
-              <td>9512345676</td>
-            </tr>
-            <tr>
-              <td>Donna Snider</td>
-              <td>Customer Support</td>
-              <td>Junior</td>
-              <td>Singapore</td>
-              <td>24</td>
-              <td>9512345676</td>
-            </tr>
+              }*/
+              $registroDef = $listaDef-> fetch_assoc();
+              echo '<tr>
+              <td>'.$registroDef['id_defensor'].'</td>
+              <td>'.$registroDef['id_juzgado'].'</td>
+              <td>'.$registroDef['id_estudios'].'</td>
+              <td>'.$registroDef['numero_cedula_profesional'].'</td>
+              </tr>';
+            ?>
           </tbody>
+
         </table>
       </div>
 </body>

@@ -15,6 +15,7 @@
 			listar.addEventListener('click',listDefensores,false);
 			function listDefensores(){
 				$('#menuContainer').load("../../controlador/defensor/controladorlistarDef.php");
+				//window.location="../../controlador/defensor/controladorListaDef.php"
 			};
 	
 			// Datepicker Popups calender to Choose date.

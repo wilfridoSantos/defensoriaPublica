@@ -1,5 +1,5 @@
 <?php
-require_once("conexion.php");
+include '../../controlador/conexion.php';
 
 function listar_defensores(){
     global $conexion;
