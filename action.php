@@ -1,1 +1,1 @@
-Hola usted busca  <?php echo htmlspecialchars($_POST['busqueda']); ?>. ?????
+Hola usted busca  <?php echo htmlspecialchars($_POST['busqueda']); ?>
