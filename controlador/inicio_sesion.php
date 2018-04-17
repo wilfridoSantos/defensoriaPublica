@@ -1,5 +1,5 @@
 <?php
-include "conexion.php";
+include "../libreria/conexion.php";
 
 $usuario = $_POST["usuario_txt"];
 $pass =  $_POST["password_txt"];

@@ -12,10 +12,17 @@
 </head>
 <body>
 <div class="x_content">
-        <p class="text-muted font-13 m-b-30">
+        <h3 id="listaDef" style="color:#DF0101">
           lista de los defensores
-        </p>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por numero cedula..">
+        </h3>
+       <div class="input-group custom-search-form">
+                                <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" onclick="myFunction()" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
         <table id="datatable" class="table table-striped table-bordered">
           <thead>
             <tr class="header">
@@ -29,7 +36,6 @@
             <?php
 
               while($row = $listaDef->fetch_assoc()){
-
                 echo "<tr>
                           <td>".$row['id_defensor']."</td>
                           <td>".$row['id_juzgado']."</td>

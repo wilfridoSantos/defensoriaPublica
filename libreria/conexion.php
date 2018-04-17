@@ -15,4 +15,5 @@ function consulta($sql, $conexion){
     $resultado = $conexion->query($sql);
     return $resultado;
  }
+ 
 $conexion = conectarse();

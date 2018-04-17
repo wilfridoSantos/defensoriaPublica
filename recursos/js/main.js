@@ -238,8 +238,10 @@ function myFunction() {
       if (td) {
         if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
+          console.log('huuuuuuuuu hkajsdkasjhd');
         } else {
           tr[i].style.display = "none";
+          console.log('dosssssssss ');
         }
       }
     }
