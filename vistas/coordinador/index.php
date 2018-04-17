@@ -16,9 +16,9 @@ include "../../Controlador/sesion.php";
 
     <title>Modulo Coordinador General</title>
 
-    <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
+<!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
     <link rel="stylesheet" href="../../recursos/css/style.css" />
-    <script src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+    <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
     
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -271,6 +271,7 @@ include "../../Controlador/sesion.php";
                       lista de los defensores
                     </p>
                     <table id="datatable" class="table table-striped table-bordered">
+                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
                       <thead>
                         <tr>
                           <th>Nombre</th>

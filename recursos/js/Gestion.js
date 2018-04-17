@@ -3,7 +3,12 @@
 		informeA.addEventListener('click',informeAnual,false);
 	 	function informeAnual(){
 			$('#menuContainer').load("../usuarios/informeAnual.html");
+<<<<<<< HEAD
 		   };  
+=======
+		   };
+		      
+>>>>>>> a1477c085b1969ac44c57737617f222d39756546
 	var registrar=document.getElementById('registrarDefensor');
 			registrar.addEventListener('click',regDefensores,false);
 			function regDefensores(){
@@ -15,6 +20,7 @@
 			function listDefensores(){
 			 $('#menuContainer').load("../../vistas/coordinador/listarDefensores.php");
 				//window.location="../../controlador/defensor/controladorListaDef.php"
+<<<<<<< HEAD
 	console.log("fsdfsd");
 			/*	$.ajax({
 				//	 include '../../controlador/defensor/controladorListaDef.php';
@@ -36,6 +42,8 @@
     },
  
 				});*/
+=======
+>>>>>>> a1477c085b1969ac44c57737617f222d39756546
 			};
 	
 			// Datepicker Popups calender to Choose date.
