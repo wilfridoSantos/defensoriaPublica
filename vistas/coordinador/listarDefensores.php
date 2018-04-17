@@ -16,31 +16,31 @@
         <table id="datatable" class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>id Defensor</th>
-              <th>id_juzgado</th>
-              <th>id_estudio</th>
-              <th>numero cedula</th>
+              <th>nombre</th>
+              <th>juzgado</th>
+              <th>telefono</th>
+              <th>correo</th>
             </tr>
           </thead>
           <tbody>
             <?php
-             /* while($registroDef = $listaDef->fetch_array(MYSQLI_BOTH)){
-                echo '<tr>
-                          <td>'.$registroDef['id_defensor'].'</td>
-                          <td>'.$registroDef['id_juzgado'].'</td>
-                          <td>'.$registroDef['id_estudios'].'</td>
-                          <td>'.$registroDef['numero_cedula_profesional'].'</td>
-                      </tr>
-                ';
 
-              }*/
-              $registroDef = $listaDef-> fetch_assoc();
-              echo '<tr>
-              <td>'.$arrayDef['id_defensor'].'</td>
-              <td>'.$arrayDef['id_juzgado'].'</td>
-              <td>'.$arrayDef['id_estudios'].'</td>
-              <td>'.$arrayDef['numero_cedula_profesional'].'</td>
+            //print_r($arrayDef);
+          //  print_r($json);
+            $defensor=json_decode($contenido);
+             // print_r($defensor);
+            
+            
+            foreach($defensor as $obj){
+                
+             echo '<tr>
+              <td>'.$obj->nombre.'</td>
+              <td>'.$obj->juzgado.'</td>
+              <td>'.$obj->telefono.'</td>
+              <td>'.$obj->corre_electronico.'</td>
               </tr>';
+            }
+
             ?>
           </tbody>
 

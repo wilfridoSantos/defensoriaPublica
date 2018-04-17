@@ -3,8 +3,7 @@
 		informeA.addEventListener('click',informeAnual,false);
 	 	function informeAnual(){
 			$('#menuContainer').load("../usuarios/informeAnual.html");
-		   };
-//========================================================================		   
+		   };  
 	var registrar=document.getElementById('registrarDefensor');
 			registrar.addEventListener('click',regDefensores,false);
 			function regDefensores(){
@@ -14,22 +13,29 @@
 	var listar=document.getElementById('listarDefensores');
 			listar.addEventListener('click',listDefensores,false);
 			function listDefensores(){
-			  $('#menuContainer').load("../../vistas/coordinador/listarDefensores.php");
+			 $('#menuContainer').load("../../vistas/coordinador/listarDefensores.php");
 				//window.location="../../controlador/defensor/controladorListaDef.php"
-
-				// $.ajax({
-				// 	url: "../../controlador/defensor/controladorlistaDef.php?",
-				// 	type: "post",
-				// 	data: "usuario_txt=" + usuario.value + "&password_txt=" + password.value,
-				// 	beforeSend: function() {
-				// 		$('body').addClass('loading');
-				// 	},
-				// 	success: function(data) {
-		
-				// 		$('#mensaje_index').html(data);
-				// 		$('body').removeClass('loading');
-				// 	}
-				// });
+	console.log("fsdfsd");
+			/*	$.ajax({
+				//	 include '../../controlador/defensor/controladorListaDef.php';
+					url: "../../controlador/defensor/controladorListaDef.php",
+					type: "GET",
+					data: "",
+					
+					success: function(data) {
+						console.log("FDF",data);
+		//				$('#mensaje_index').html(data);
+		//				$('body').removeClass('loading');
+					},
+ 
+  
+    error : function(xhr, status) {
+		console.log("FDssF",xhr);
+		console.log("FDsF",status);
+        alert('Disculpe, existió un problema');
+    },
+ 
+				});*/
 			};
 	
 			// Datepicker Popups calender to Choose date.
@@ -41,9 +47,9 @@
 				});
 			});*/
 
-			var asignar=document.getElementById('asignarDefensor');
+		/*	var asignar=document.getElementById('asignarDefensor');
 			asignar.addEventListener('click',asinar,false);
-		function asinar(){
+	     	function asinar(){
 				$('#menuContainer').load("/asignardefensor");
 			}
 			 
@@ -56,6 +62,6 @@
 			   buscar.addEventListener('click',buscarUsuario,false);
 		function buscarUsuario(){
 				$('#menuContainer').load("usuarios/buscar.html");
-				}
+				}*/
 });
 
