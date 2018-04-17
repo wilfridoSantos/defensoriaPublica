@@ -2,23 +2,11 @@
 //include '../../controlador/conexion.php';
 include '../../libreria/conexion.php';
 function listar_defensores(){
-   // global $conexion;
-    
-    //$sql = "select * from defensor";
-   //$sql="SELECT * FROM bddefensoria.defensor inner join bddefensoria.personal using(id_personal)";
-   
-    $sql="SELECT * FROM bddefensoria.defensor inner join bddefensoria.personal using(id_personal)
+      $sql="SELECT * FROM bddefensoria.defensor inner join bddefensoria.personal using(id_personal)
 								    inner join bddefensoria.juzgado using(id_juzgado)";			
-   // $consulta = $conexion->query($sql);
-  
-    //return $consulta;
 
-  //$sql="select  * from personal ";
    $lista=consulta($sql);
- //$contenido = json_encode($lista);
-   //print_r(json_encode($lista));
    return $lista;
-     //   $sql = $db->prepare();
 }
 
 function listar_defensor_x_id($id){
