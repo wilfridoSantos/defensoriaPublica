@@ -37,6 +37,7 @@ $(document).ready(function () {
 	var listarDef=document.getElementById('listarDefensores');
 		listarDef.addEventListener('click', listaDefensores, false);
 		function listaDefensores() {
+			console.log("ACCESO A FUNCION listaDefensor ahdka");
 			$('#menuContainer').load("../../vistas/coordinador/listarDefensores.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
 	};

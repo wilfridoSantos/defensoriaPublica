@@ -45,7 +45,6 @@ if (session_start()) {
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-
             <form  method="POST">
 
               <p><img src="recursos/images/defensoriav1.png" width="300px" height="100px"/></p>
