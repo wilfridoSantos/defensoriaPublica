@@ -49,7 +49,7 @@ function listar_defensor_x_cedula($numCedula){
         $sql.= "numero_cedula_profesional='".$provedor['numero_cedula_profesional']."'";
         return consulta($sql, $conexion);
     }
- 
+  echo 'omar es un tontin';
 
 
 

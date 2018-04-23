@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
-<title>== Informe Anual ==</title>
+<title>Informe Anual </title>
       <script src="../../recursos/js/main.js"></script>
 
-      <link href="../../recursos/css/style.css" rel="stylesheet"/>
+     
 </head>
 <body>
 <div class="x_content">
@@ -18,7 +18,7 @@
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por numero cedula..">
         <table id="datatable" class="table table-striped table-bordered">
           <thead>
-            <tr class="header">
+            <tr class="header" >
               <th>nombre</th>
               <th>juzgado</th>
               <th>telefono</th>
