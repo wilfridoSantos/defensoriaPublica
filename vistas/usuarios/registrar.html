@@ -11,20 +11,22 @@ function agrega(){
 			 $('#menuContainer').load("coordinadorRegistrarJuzgado.html");
 			 }
 </script>
+
+
      <div class="row">
-              <div class="col-md-6 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Registro de defensor</h2>
+                    <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >Registro de defensores</label></h1>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#" id="agregarjuzado" onclick="agrega()">agregar Juzgado</a>
+                          <li><a href="#" id="agregarjuzado" onclick="agrega()"><h3><label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >agregar Juzgado</label></h3></a>
                         </li>
-                        <li><a href="#">Settings 2</a>
+                   
                         </li>
                         </ul>
                       </li>
@@ -34,62 +36,75 @@ function agrega(){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <br /><!--  action="agregarDefensor" -->
-<!-- class="form-horizontal form-label-left input_mask"  th:action="@{/defensor/agregarDefensor}" th:object="${defensor}" -->
-                    <form  action ="agregarDefensor" object="defensor" method="post">
+                    <br/>
+                    <form  class="form-horizontal form-label-left" action ="agregarDefensor" object="defensor" method="post">
 
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombre" name="nombre" th:field="*{regionAdscripcion}">
-                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                      
+
+
+                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >Nombre<span class="required">*</span></label>
+                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control " placeholder="Nombre" name="Nombre">
+                          </div>
+                       </div>
+
+                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
+                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >Apellido Paterno<span class="required">*</span></label>
+                         </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Apellido Paterno" name="Apellido_Paterno">
+                          </div>
+                       </div>
+
+                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
+                        <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 text-muted" >Apellido Materno<span class="required">*</span></label>
+                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Apellido Materno" name="Apellido_Materno">
+                           </div>
+                       </div> 
+                       
+                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >Telefono<span class="required">*</span></label>
+                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Telefono" name="nup">
+                         </div>
                       </div>
 
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control" id="inputSuccess3" placeholder="apellidos" name="apellido">
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                           <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >Email<span class="required">*</span></label>
+                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                              <input type="text" class="form-control" placeholder="Email" name="nup">
+                            </div>
                       </div>
+                      
+                     
 
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email" name="email">
-                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
-                      </div>
-
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control" id="inputSuccess5" placeholder="Telefono" name="telefono">
-                        <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >nup<span class="required">*</span></label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >nup<span class="required">*</span></label>
+                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" class="form-control" placeholder="nup" name="nup">
-                        </div>
+                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12"> nue<span class="required">*</span></label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted"> nue<span class="required">*</span></label>
+                        </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" class="form-control"  placeholder="nue" name="nue">
                         </div>
                       </div>
 
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Genero<span class="required">*</span></label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input name="genero" value="male" data-parsley-multiple="gender" type="radio"> &nbsp; masculino &nbsp;
-                            </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input name="genero" value="female" data-parsley-multiple="gender" type="radio"> femenino
-                            </label>
-                          </div>
+                     <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted">Curp<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control"  placeholder="curp" name="curp">
                         </div>
                       </div>
 
 
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">adscripcion</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted">adscripcion</label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <select name="adscripcion"  class="select2_group form-control">
 
                             <optgroup label="Valles centrales">
@@ -144,16 +159,26 @@ function agrega(){
                           </select>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Curp<span class="required">*</span></label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control"  placeholder="curp" name="curp">
+                    
+                      
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted">Genero<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+                          <div id="gender" class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                              <input name="genero" value="male" data-parsley-multiple="gender" type="radio"> masculino
+                            </label>
+                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                              <input name="genero" value="female" data-parsley-multiple="gender" type="radio"> femenino
+                            </label>
+                          </div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Cargo <span class="required">*</span>
-                        </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                      
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted">Cargo <span class="required">*</span>
+                        </label></h4>
+                        <div class="col-md-8 col-sm-9 col-xs-12">
                           <input class="date-picker form-control col-md-7 col-xs-12" required="required" name="cargo" type="text">
 
                         </div>

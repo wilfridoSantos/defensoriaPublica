@@ -31,24 +31,27 @@ $(document).ready(function () {
 	};
 
 	var listarAudiencia=document.getElementById('listarAudiencias');
-	listaAudiencia.addEventListener('click', listarAudiencias, false);
+	listarAudiencia.addEventListener('click', listarAudiencias, false);
 	function listarAudiencias() {
 		$('#menuContainer').load("../../vistas/coordinador/listarAudiencias.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
 	};
 
 	var listarVisitas=document.getElementById('listarVisitas');
-	listaVisitas.addEventListener('click', listarVisitas, false);
+	listarVisitas.addEventListener('click', listarVisitas, false);
 	function listarVisitas() {
 		$('#menuContainer').load("../../vistas/coordinador/listarAudiencias.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
 	};
 
-	var registrar = document.getElementById('registrarDefensor');
+	var registrar = document.getElementById('registrarDefensores');
 	registrar.addEventListener('click', regDefensores, false);
 	function regDefensores() {
-		$('#menuContainer').load("../usuarios/registrar.html");
+		//alert('sfafa');
+		$('#menuContainer').load("../../vistas/usuarios/registrar.html");
 	};
+
+
 
 
 
@@ -61,21 +64,20 @@ $(document).ready(function () {
 		});
 	});*/
 
-	var asignar = document.getElementById('asignarDefensor');
-	asignar.addEventListener('click', asinar, false);
-	function asinar() {
-		$('#menuContainer').load("/asignardefensor");
-	}
 
-	var registrar = document.getElementById('registrar');
-	registrar.addEventListener('click', registrarUsuario, false);
-	function registrarUsuario() {
-		$('#menuContainer').load("usuarios/registrar.html");
-	}
-	var buscar = document.getElementById('buscar');
-	buscar.addEventListener('click', buscarUsuario, false);
-	function buscarUsuario() {
-		$('#menuContainer').load("usuarios/buscar.html");
-	}
+	
+/* 
+
+	var listar=document.getElementById('listarDefensores');
+			listar.addEventListener('click',listDefensores,false);
+			function listDefensores(){
+			 $('#menuContainer').load("../../vistas/coordinador/listarDefensores.php");
+			}; */
+/* 	var infor=document.getElementById('informacionDefensor');
+			infor.addEventListener('click',infoDefensores,false);
+			function infoDefensores(){
+			 $('#menuContainer').load("../../vistas/coordinador/verInfoDefensor.php");
+			}; */
+
 });
 

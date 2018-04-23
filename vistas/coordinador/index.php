@@ -39,7 +39,7 @@ include "../../Controlador/sesion.php";
     <link href="../../recursos/css/custom.min.css" rel="stylesheet"/>
   </head>
 
-  <body class="nav-md">
+  <body class="nav-md" style="background-color:white;">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -81,6 +81,7 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
+                      <li><a id="registrarDefensores">Registrar Defensor</a></li>
                       <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
                       <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
                       <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
@@ -90,7 +91,7 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a id="registrarDefensor">Registrar Defensor</a></li>
+                      <li><a id="registrarDefensor_">Registrar Defensor</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
                       <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
@@ -141,7 +142,7 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../recursos/images/img.jpg" alt=""/>John Doe
+                    <img src="../recursos/images/img.jpg" alt=""/><?php echo $_SESSION['usuario'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -166,7 +167,31 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                        asignacion de caso => defensor: xxx, fecha:
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          asignacion de caso => defensor: xxx, fecha:  
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -178,31 +203,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -213,7 +214,7 @@ include "../../Controlador/sesion.php";
                     <li>
                       <div class="text-center">
                         <a>
-                          <strong>See All Alerts</strong>
+                          <strong>Ver todas las notificaciones</strong>
                           <i class="fa fa-angle-right"></i>
                         </a>
                       </div>
@@ -226,7 +227,12 @@ include "../../Controlador/sesion.php";
         </div>
         <!-- /top navigation -->
   <!-- page content -->
-  <div class="right_col" role="main">
+<div>
+
+<h1 Bienvenido Coordinador </h1>
+</div>
+  
+   <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -267,67 +273,17 @@ include "../../Controlador/sesion.php";
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      lista de los defensores
-                    </p>
-                    <table id="datatable" class="table table-striped table-bordered">
-                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
-                      <thead>
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Apellido Paterno</th>
-                          <th>Apellido Materno</th>
-                          <th>Direccion</th>
-                          <th>Telefono</th>
-                          <th>Cantidad de benificiarios</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <a href="#" ><tr >
-                          <td>Tiger Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>Edinburgh</td>
-                          <td>34</td>
-                          <td>9512345676</td>
-                        </tr></a>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td>Accountant</td>
-                          <td>Tokyo</td>
-                          <td>Tokyo</td>
-                          <td>34</td>
-                          <td>9512345676</td>
-                        </tr>
-                        <tr>
-                          <td>Ashton Cox</td>
-                          <td>Junior Technical Author</td>
-                          <td>San Francisco</td>
-                          <td>Tokyo</td>
-                          <td>43</td>
-                          <td>9512345676</td>
-                        </tr>
-                 
-            
-            
-                        <tr>
-                          <td>Michael Bruce</td>
-                          <td>Javascript Developer</td>
-                          <td>Singapore</td>
-                          <td>Singapore</td>
-                          <td>34</td>
-                          <td>9512345676</td>
-                        </tr>
-                        <tr>
-                          <td>Donna Snider</td>
-                          <td>Customer Support</td>
-                          <td>Junior</td>
-                          <td>Singapore</td>
-                          <td>24</td>
-                          <td>9512345676</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <div align ="center">
+                    <img id="img_index_coord"src="../../recursos/images/defensoria.png">
+                    <h3><p>
+                      La Defensoría Pública del Estado de Oaxaca tiene como objetivo coordinar,
+                       dirigir y vigilar los servicios jurídicos de asesoría, 
+                       patrocinio y defensa eficaz para todas las personas que así lo requieran,
+                        en específico a aquellas que carecen de recursos económicos para solventar una defensa 
+                        particular, así como personas en situación de vulnerabilidad.
+                      </p>
+                      </h3>                    
+                    </div>
                   </div>
                 </div>
               </div>
@@ -345,7 +301,7 @@ include "../../Controlador/sesion.php";
         <div id="menuContainer">
         
         </div>
-        <!-- /page content -->
+        <!-- /page content --> 
 
 
         <!-- footer content -->
@@ -389,5 +345,6 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/js/custom.min.js"></script>
 
     <script src="../../recursos/js/Gestion.js"></script>
+    <script src="../../recursos/js/main.js"></script>
   </body>
 </html>
