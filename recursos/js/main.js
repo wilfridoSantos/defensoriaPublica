@@ -31,31 +31,6 @@ $(document).ready(function() {
             window.location = LinkExitSystem;
         });
     });
-    /*$('.search-book-button').click(function (e) {
-     e.preventDefault();
-     var LinkSearchBook = $(this).attr("data-href");
-     swal({
-     title: "¿Qué libro estás buscando?",
-     text: "Por favor escribe el nombre del libro",
-     type: "input",
-     showCancelButton: true,
-     closeOnConfirm: false,
-     animation: "slide-from-top",
-     cancelButtonText: "Cancelar",
-     confirmButtonText: "Buscar",
-     confirmButtonColor: "#3598D9",
-     inputPlaceholder: "Escribe aquí el nombre de libro"},
-     function (inputValue) {
-     if (inputValue === false)
-     return false;
-
-     if (inputValue === "") {
-     swal.showInputError("Debes escribir el nombre del libro");
-     return false;
-     }
-     window.location = LinkSearchBook + "?bookName=" + inputValue;
-     });
-     });*/
     $('.btn-help').on('click', function() {
         $('#ModalHelp').modal({
             show: true,
@@ -100,6 +75,23 @@ $(document).ready(function() {
     });
 })(jQuery);
 
+function verInfoDefensor(){
+    /* console.log("entro en verInfoDefensor()");
+    var numero_cedula = document.getElementById("cedulaProfesional");
+    console.log(numero_cedula.textContent); */
+    $('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php");
+};
+
+function actualizarDefensor(){
+    $('#menuContainer').load( "../../vistas/coordinador/update.php");
+    //console.log('HOOOOla aCTUALIZAR DEFENSOR');
+}
+
+function updateDefensor(){
+
+    console.log('actualizando datooooss');
+}
+
 function ingresarSistema() {
     console.log("Metodo ingresarSistema()");
     var usuario = document.getElementById("usuarios_inicio"),
@@ -118,7 +110,7 @@ function ingresarSistema() {
     if (!error) {
       console.log('No hay error antes de accesar a inicio_sesion.php');
         $.ajax({
-            url: "Controlador/inicio_sesion.php",
+            url: "controlador/inicio_sesion.php",
             type: "post",
             data: "usuario_txt=" + usuario.value + "&password_txt=" + password.value,
             beforeSend: function() {
@@ -132,10 +124,9 @@ function ingresarSistema() {
         });
     }
 }
-function llamarListarDef(){
 
-    
-}
+
+
 function olvido() {
     $('#titulo-inicio').html("Recupera tu contraseña");
     var contenido = "";
@@ -229,7 +220,7 @@ function myFunction() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-    table = document.getElementById("datatable");
+    table = document.getElementById("datatable2");
     tr = table.getElementsByTagName("tr");
   
     // Loop through all table rows, and hide those who don't match the search query
@@ -238,8 +229,10 @@ function myFunction() {
       if (td) {
         if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
+          //console.log('huuuuuuuuu hkajsdkasjhd');
         } else {
           tr[i].style.display = "none";
+          //console.log('dosssssssss ');
         }
       }
     }

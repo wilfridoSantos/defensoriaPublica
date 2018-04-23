@@ -2,8 +2,9 @@
 //include '../../controlador/conexion.php';
 include '../../libreria/conexion.php';
 function listar_defensores(){
-      $sql="SELECT * FROM bddefensoria.defensor inner join bddefensoria.personal using(id_personal)
-								    inner join bddefensoria.juzgado using(id_juzgado)";			
+        $sql="SELECT * FROM defensor inner join personal using(id_personal)
+                                        inner join juzgado using(id_juzgado)
+                                        inner join estudios using (id_estudios)";			
 
    $lista=consulta($sql);
    return $lista;
@@ -15,12 +16,25 @@ function listar_defensor_x_id($id){
       $consulta = consulta($sql, $conexion);
       return $consulta;
   }
+function obtenerExpedientes(){
+    $sql="SELECT * FROM expediente";			
 
-function listar_defensor_x_cedula($numCedula){
-    global $conexion;
-    $sql = "select * from defensor where numero_cedula_profesional='".$numCedula."'";
-    $consulta = consulta($sql, $conexion);
-    return $consulta;
+$lista=consulta($sql);
+return $lista;
+
+}
+function obtenerDefensorCedula($numCedula){
+    //echo 'entro a  obtenerdefensorcedula '. $numCedula;
+    $sql="SELECT * FROM defensor inner join personal using(id_personal)
+                                    inner join juzgado using(id_juzgado)
+                                    inner join estudios using (id_estudios) 
+                                    where cedula_profesional='25uCCYANARAW'";	
+    global $db;
+    $infor = $db->prepare($sql);
+    $infor->execute(); 
+    $datos = $infor->fetchAll(PDO::FETCH_ASSOC);
+    //$infor = consulta($sql);
+    return $datos;
 }
   
     //Definimos la funciones sobre el objeto crear_defensor

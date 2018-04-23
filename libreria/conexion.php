@@ -1,25 +1,4 @@
 <?php
-/*
-function conectarse()
-{
-    $servidor = "localhost";
-    $usuario  = "root";
-    $password = "";
-    $bd       = "bddefensoria";
-
-    $conectar = new mysqli($servidor, $usuario, $password, $bd);
-    return $conectar;
-}
-function consulta($sql, $conexion){
-   // $resultado = mysqli_query($conexion, $sql)or die(mysqli_error($conexion));
-    $resultado = $conexion->query($sql);
-    return $resultado;
- }
-
-$conexion = conectarse();*/
-?>
-
-<?php
 
 define('BD_SERVIDOR', '127.0.0.1');
 define('BD_NOMBRE', 'bddefensoria');
@@ -36,7 +15,6 @@ function consulta($consulta){
    
   $datos = $sql->fetchAll(PDO::FETCH_ASSOC);
     return $datos;
-
  }
  function registro($consulta){
    global $db;
