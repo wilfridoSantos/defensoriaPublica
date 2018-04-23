@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
-<title>== Informe Anual ==</title>
+<title>Informe Anual </title>
       <script src="../../recursos/js/main.js"></script>
+
       <script src="../../recursos/js/Gestion.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
 </head>
@@ -26,6 +27,13 @@
                             </div>
         <table id="datatable" class="table table-striped table-bordered">
           <thead>
+
+            <tr class="header" >
+              <th>nombre</th>
+              <th>juzgado</th>
+              <th>telefono</th>
+              <th>correo</th>
+
             <tr class="header">
               <th>Nombre</th>
               <th>Ap. Paterno</th>
