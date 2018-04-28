@@ -144,7 +144,7 @@ html , body{
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #2A3F54
+    background: #FBFAE1
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -231,7 +231,8 @@ html , body{
     display: none
 }
 .nav-sm ul.nav.child_menu li {
-    padding: 0 10px
+    padding: 0 10px;
+    
 }
 .nav-sm ul.nav.child_menu li a {
     text-align: left !important
@@ -326,7 +327,7 @@ html , body{
 }
 .nav_menu {
     float: left;
-    background: #EDEDED;
+    background: #FFFFFF;
     border-bottom: 1px solid #D9DEE4;
     margin-bottom: 10px;
     width: 100%;
@@ -488,14 +489,14 @@ body .container.body .right_col {
 .top_nav .nav .open>a,
 .top_nav .nav .open>a:focus,
 .top_nav .nav .open>a:hover {
-    background: #D9DEE4
+    background: #DD0077
 }
 body {
-    color: #73879C;
-    background: #2A3F54;
+    color: #000000;
+    background: #25d018;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 600;
     line-height: 1.471
 }
 .main_container .top_nav {
@@ -740,10 +741,13 @@ a:focus {
 }
 .nav.child_menu li:hover,
 .nav.child_menu li.active {
-    background-color: rgba(255, 255, 255, 0.06)
+/*    background-color: rgba(221,51,170)
+*/    background-color: rgba(238,85,17)
+
 }
 .nav.child_menu li {
-    padding-left: 36px
+    padding-left: 36px;
+        background-color: #FFFFDD;
 }
 .nav-md ul.nav.child_menu li:before {
     background: #425668;
@@ -771,7 +775,7 @@ a:focus {
 }
 .nav.side-menu>li>a,
 .nav.child_menu>li>a {
-    color: #E7E7E7;
+    color: #000000;
     font-weight: 500
 }
 .nav.child_menu li li:hover,
@@ -802,7 +806,7 @@ a:focus {
 }
 .nav.side-menu>li.active>a {
     text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-    background: linear-gradient(#334556, #2C4257), #2A3F54;
+    background: linear-gradient(#EE2200, #EE2200), #2A3F54;
     box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0
 }
 .navbar-brand,
@@ -818,13 +822,14 @@ a:focus {
     font-weight: 400;
     font-size: 22px;
     width: 100%;
-    color: #ECF0F1 !important;
+    color: #f10d24  !important;
     margin-left: 0 !important;
     line-height: 59px;
     display: block;
     height: 55px;
     margin: 0;
-    padding-left: 10px
+    padding-left: 10px;
+        BACKGROUND-COLOR: #FFFFFF
 }
 .site_title:hover,
 .site_title:focus {
@@ -880,8 +885,8 @@ a:focus {
     font-size: 26px
 }
 .nav.child_menu>li>a {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 12px;
+    color: rgba(0,0,0);
+    font-size: 16px;
     padding: 9px
 }
 .panel_toolbox {
@@ -1682,7 +1687,7 @@ span.right {
     font-size: 17px;
     display: block;
     float: left;
-    background: #172D44;
+    background: #f6f8f9;
     cursor: pointer;
 }
 .sidebar-footer a:hover {

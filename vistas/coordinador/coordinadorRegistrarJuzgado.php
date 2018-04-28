@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 
-<script href="../../recursos/coordinador/atendiendoCoordinador.js">
+<script src="../../recursos/js/coordinador/atendiendoCoordinador.js">
 </script>
 <body>
   <div class="row">
@@ -20,7 +20,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form action="../../controlador/juzgado/registrar_juzgado.php?" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >Nombre <span class="required">*</span>
@@ -30,14 +30,29 @@
                              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                         </div>
                       </div>
+                      
+                  
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Region <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="region_juzgado" name="region" required="required" class="form-control has-feedback-left col-md-7 col-xs-12">
-                             <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                          <select name="region"  class="form-control ">
+                            <option >Valles Centrales</option>
+                            <option> Cañada</option>
+                            <option> Costa</option>
+                            <option> Istmo</option>
+                            <option> Mixteca</option>
+                            <option> Papaloapan</option> 
+                            <option> Sierra Norte</option>
+                            <option> Sierra Sur</option>
+                            
+                          </select>
                         </div>
-                      </div>
+<!--                          <input type="text" id="region_juzgado"  required="required" class="form-control has-feedback-left col-md-7 col-xs-12">
+                             <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+-->                     </div>
+
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Calle</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -78,12 +93,15 @@
 						  <button class="btn btn-primary btn btn-info btn-lg" type="reset">Limpiar</button>
 
                    
-                          <button id="crea_juzgado" type="submit" class="btn btn-succes btn btn-success btn-lg">Guardar</button>
+                     <!--     <a id="crea_juzgado" class="btn btn-succes btn btn-success btn-lg">Registrar</a>
+                     -->     <button id="" class="btn btn-succes btn btn-success btn-lg">Guardar</button>
 
                         </div>
                       </div>
 
                     </form>
+                    <h6>
+                   </h6>
                   </div>
                 </div>
               </div>

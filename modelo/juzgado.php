@@ -9,18 +9,16 @@ function listar_juzgado_x_id($id){
       return $consulta;
   }
 
+  function listar_juzgado(){
+     
+      $sql = "select id_juzgado,juzgado,region from juzgado ";
+      $consulta = consulta($sql);
+      return $consulta;
+  }
 
-    function crear_empresa($empresa){
-        global $conexion;
-        $sql = "INSERT INTO empresa ";
-        $sql.= "SET r_social='".$empresa['r_social']."', rfc='".$empresa['rfc']."',";
-        $sql.= "email='".$empresa['email']."', giro='".$empresa['giro']."',";
-        $sql.= "titular='".$empresa['titular']."', puesto_t='".$empresa['puesto_t']."',"; 
-        $sql.= "paginaweb='".$empresa['paginaweb']."', logo='".$empresa['logo']."',";
-        $sql.= "domicilio='".$empresa['domicilio']."', telefono='".$empresa['telefono']."', password='".$empresa['clave']."'";
-        return consulta($sql, $conexion);
-    }
-        
+
+
+   
   
   function crear_juzgado($objetoEntidad){
       //  echo $objetoEntidad[session_name()];
@@ -32,7 +30,8 @@ function listar_juzgado_x_id($id){
         $sql.= "cp='".$objetoEntidad['cp']."', num_telefono='".$objetoEntidad['num_telefono']."'";
         //return consulta($sql, $conexion);
     
-      registro($sql);
+      registro($sql); 
+    //  return 
      /// $conexion->query($sql);
  //       return consulta($sql, $conexion);
 

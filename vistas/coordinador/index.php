@@ -36,10 +36,10 @@ include "../../Controlador/sesion.php";
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="../../recursos/css/custom.min.css" rel="stylesheet"/>
+    <link href="../../recursos/css/custom.css" rel="stylesheet"/>
   </head>
 
-  <body class="nav-md" style="background-color:white;">
+  <body class="nav-md" style="background-color:black;">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -63,7 +63,7 @@ include "../../Controlador/sesion.php";
             <!-- /menu profile quick info -->
 
             <br />
-
+             
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -81,7 +81,7 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
-                      <li><a id="registrarDefensores">Registrar Defensor</a></li>
+            
                       <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
                       <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
                       <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
@@ -91,7 +91,7 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a id="registrarDefensor_">Registrar Defensor</a></li>
+                      <li><a id="registrarDefensor">Registrar Defensor</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
                       <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
@@ -250,31 +250,35 @@ include "../../Controlador/sesion.php";
 
             <div class="clearfix"></div>
 
-            <div class="row" id="menuContainer">
+            <div class="row" id="menuContainers">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+                <div class="x_panel">               
+                  <?php
+                     if($_SESSION['mensaje']){
+                  ?>
+                    <div class="alert alert-success alert-dismissible fade in" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                      </button>
+                      <strong align="center"><?php echo $_SESSION['mensaje'];
+                                                $_SESSION['mensaje']="";
+                      ?>  </strong>
+
+                  </div>
+                <?php }?>
+                
                   <div class="x_title">
                     <h2></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"> 1</a>
-                          </li>
-                          <li><a href="#"> 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
+                   
                     <div class="clearfix"></div>
                   </div>
+                  
+
                   <div class="x_content">
+                    
+                      
                     <div align ="center">
-                    <img id="img_index_coord"src="../../recursos/images/defensoria.png">
+                    <!--<img id="img_index_coord"src="../../recursos/images/defensoria.png">
                     <h3><p>
                       La Defensoría Pública del Estado de Oaxaca tiene como objetivo coordinar,
                        dirigir y vigilar los servicios jurídicos de asesoría, 
@@ -282,7 +286,20 @@ include "../../Controlador/sesion.php";
                         en específico a aquellas que carecen de recursos económicos para solventar una defensa 
                         particular, así como personas en situación de vulnerabilidad.
                       </p>
-                      </h3>                    
+                      </h3> -->
+                      <?php 
+            switch (isset($_GET['dirigir'])) {
+                case 'registrar_defensor':
+                    require_once("../usuarios/registrar.php");                    
+                    break;
+                
+                
+                
+                default:
+                  //  require_once("/vista principal.php");
+                    break;
+            }
+        ?>                   
                     </div>
                   </div>
                 </div>
@@ -298,8 +315,7 @@ include "../../Controlador/sesion.php";
             </div>
           </div>
           
-        <div id="menuContainer">
-        
+         
         </div>
         <!-- /page content --> 
 

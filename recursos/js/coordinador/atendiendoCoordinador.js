@@ -6,6 +6,7 @@
 
 	var registroJuzgado=document.getElementById('crea_juzgado');
 			registroJuzgado.addEventListener('click',registrarJuzgado,false);
+			
 			function registrarJuzgado(){
 			$.ajax({
 				//	 include '../../controlador/defensor/controladorListaDef.php';
