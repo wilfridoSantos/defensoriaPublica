@@ -10,7 +10,7 @@ $(document).ready(function () {
 	var registrar=document.getElementById('registrarDefensor');
 			registrar.addEventListener('click',regDefensores,false);
 			function regDefensores(){
-				$('#menuContainers').load("../usuarios/registrar.php");
+				$('#menuContainer').load("../usuarios/registrar.php");
 			};
 			
 

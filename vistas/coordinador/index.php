@@ -250,7 +250,7 @@ include "../../Controlador/sesion.php";
 
             <div class="clearfix"></div>
 
-            <div class="row" id="menuContainers">
+            <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               
                   <?php
