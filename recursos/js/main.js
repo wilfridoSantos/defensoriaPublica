@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('#principal').load('form/inicio.php');
     $('.tooltips-general').tooltip('hide');
     $('.mobile-menu-button').on('click', function() {
@@ -31,6 +30,31 @@ $(document).ready(function() {
             window.location = LinkExitSystem;
         });
     });
+    /*$('.search-book-button').click(function (e) {
+     e.preventDefault();
+     var LinkSearchBook = $(this).attr("data-href");
+     swal({
+     title: "¿Qué libro estás buscando?",
+     text: "Por favor escribe el nombre del libro",
+     type: "input",
+     showCancelButton: true,
+     closeOnConfirm: false,
+     animation: "slide-from-top",
+     cancelButtonText: "Cancelar",
+     confirmButtonText: "Buscar",
+     confirmButtonColor: "#3598D9",
+     inputPlaceholder: "Escribe aquí el nombre de libro"},
+     function (inputValue) {
+     if (inputValue === false)
+     return false;
+
+     if (inputValue === "") {
+     swal.showInputError("Debes escribir el nombre del libro");
+     return false;
+     }
+     window.location = LinkSearchBook + "?bookName=" + inputValue;
+     });
+     });*/
     $('.btn-help').on('click', function() {
         $('#ModalHelp').modal({
             show: true,
@@ -64,24 +88,58 @@ $(document).ready(function() {
 });
 (function($) {
     $(window).load(function() {
-        $(".custom-scroll-containers").mCustomScrollbar({
-            theme: "dark-thin",
-            scrollbarPosition: "inside",
-            autoHideScrollbar: true,
-            scrollButtons: {
-                enable: true
-            }
-        });
+
     });
 })(jQuery);
-
-function verInfoDefensor(){
-    /* console.log("entro en verInfoDefensor()");
-    var numero_cedula = document.getElementById("cedulaProfesional");
-    console.log(numero_cedula.textContent); */
-    $('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php");
-};
-
+function buscarXCedula() {
+    // Declare variables
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("inputCedula");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("datatable");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[4];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          //console.log('huuuuuuuuu hkajsdkasjhd');
+        } else {
+          tr[i].style.display = "none";
+          //console.log('dosssssssss ');
+        }
+      }
+    }
+  }
+ 
+  
+  /* $(".boton").click(function() {
+    var cedula = $(this).closest('tr').find('#dataCedula').text() 
+    //console.log(cedula);
+    console.log('algoooooo');
+    //var ced = document.getElementById("cedulaProf").textContent;
+    //alert('entro a expediente num #  ' + ced);
+    
+    
+      //$('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php?cedula="+ cedula);
+      //header('Location: ../../controlador/defensor/controlDefensor.php?cedula='+ cedula);
+     /*  $.ajax({
+        url: "../../controlador/defensor/controlDefensor.php",
+        type: "post",
+        data: "numCedula=" + cedula,
+        beforeSend: function() {
+            $('body').load('verInfoDefensor.php');
+        },
+        success: function(data) {
+            var jsonDefensores = jQuery.parseJSON(data);
+            console.log(jsonDefensores);
+            //$('#menuContainer').html(data);
+            //$('body').removeClass('loading');
+        }
+    }); 
+  });*/
 function actualizarDefensor(){
     $('#menuContainer').load( "../../vistas/coordinador/update.php");
     //console.log('HOOOOla aCTUALIZAR DEFENSOR');
@@ -237,3 +295,4 @@ function myFunction() {
       }
     }
   }
+  

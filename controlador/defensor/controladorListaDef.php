@@ -1,14 +1,20 @@
 <?php 
-    header('Content-Type: application/json');
-    include '../../modelo/defensor/defensor.php';
     
+    include '../../modelo/defensor/defensor.php';
+    //echo '<script>alert('.$_GET['mensaje'].') </script>';
     $listaDef = listar_defensores();
+   
 
     $num_regs = count($listaDef);//$listaDef->num_rows;
     if ($num_regs == 0) { //no encontro ningun registro 
-        echo '<p class="text-danger"><strong>Aun no existen defensores agregados al sistema</strong></p>';
+       // echo '<p class="text-danger"><strong>Aun no existen defensores agregados al sistema</strong></p>';
     }else{
         $contenido = json_encode($listaDef);
+        echo $contenido;
         //echo 'va bienn';
-    } 
+        //echo '<script> $('#menuContainer').load("listarDefensores.php")</script>';
+        //header('Location: ../../vistas/coordinador/listarDefensores.php');
+
+    }
+
 ?>
