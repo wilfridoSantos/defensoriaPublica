@@ -1,17 +1,9 @@
 $(document).ready(function () {
 	var informeA=document.getElementById('informeAnual');
-<<<<<<< HEAD
 		informeA.addEventListener('click', informeAnual, false);
 		function informeAnual() {
 			$('#menuContainer').load("informeAnual.html");
 		};
-=======
-
-		informeA.addEventListener('click',informeAnual,false);
-	 	function informeAnual(){
-			$('#menuContainer').load("../usuarios/informeAnual.html");
-
-		   };  
 
 		  
 		      
@@ -21,7 +13,6 @@ $(document).ready(function () {
 				$('#menuContainers').load("../usuarios/registrar.php");
 			};
 			
->>>>>>> d55496c7b02273a1062ae91570565258b8fb4836
 
 	var informeM=document.getElementById('informeMensual');
 		informeM.addEventListener('click', informeMensual, false);
@@ -61,17 +52,6 @@ $(document).ready(function () {
 		$('#menuContainer').load("listarVisitas.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
 	};
-<<<<<<< HEAD
-=======
-
-	var registrar = document.getElementById('registrarDefensores');
-	registrar.addEventListener('click', regDefensores, false);
-	function regDefensores() {
-		//alert('sfafa');
-		$('#menuContainer').load("../usuarios/registrar.html");
-	};
-<<<<<<< HEAD
-=======
 
 
 
@@ -87,10 +67,6 @@ $(document).ready(function () {
 	});*/
 
 
->>>>>>> 1068426b574148a9d1fc3b3d5e675e20a5ac9ef2
-	
-
-	
 
 			
 	
@@ -119,6 +95,5 @@ $(document).ready(function () {
 			function infoDefensores(){
 			 $('#menuContainer').load("../../vistas/coordinador/verInfoDefensor.php");
 			}; */
->>>>>>> d55496c7b02273a1062ae91570565258b8fb4836
 });
 
