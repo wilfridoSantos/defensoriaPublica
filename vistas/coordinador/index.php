@@ -81,7 +81,6 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
-                      <li><a id="registrarDefensores">Registrar Defensor</a></li>
                       <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
                       <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
                       <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
@@ -91,7 +90,7 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a id="registrarDefensor_">Registrar Defensor</a></li>
+                  <li><a id="registrarDefensores">Registrar Defensor</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
                       <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
@@ -297,10 +296,6 @@ include "../../Controlador/sesion.php";
               </div>
             </div>
           </div>
-          
-        <div id="menuContainer">
-        
-        </div>
         <!-- /page content --> 
 
 

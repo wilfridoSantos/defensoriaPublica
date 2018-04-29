@@ -33,7 +33,6 @@ if (session_start()) {
         <script src="recursos/js/jquery-1.11.2.min.js"></script>
         <script src="recursos/js/modernizr.js"></script>
         <script src="recursos/js/bootstrap.min.js"></script>
-        <script src="recursos/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="recursos/js/main.js"></script>
         <link rel="stylesheet" href="Recursos/css/beforeSend.css">
   </head>

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('#principal').load('form/inicio.php');
     $('.tooltips-general').tooltip('hide');
     $('.mobile-menu-button').on('click', function() {
@@ -31,6 +30,31 @@ $(document).ready(function() {
             window.location = LinkExitSystem;
         });
     });
+    /*$('.search-book-button').click(function (e) {
+     e.preventDefault();
+     var LinkSearchBook = $(this).attr("data-href");
+     swal({
+     title: "¿Qué libro estás buscando?",
+     text: "Por favor escribe el nombre del libro",
+     type: "input",
+     showCancelButton: true,
+     closeOnConfirm: false,
+     animation: "slide-from-top",
+     cancelButtonText: "Cancelar",
+     confirmButtonText: "Buscar",
+     confirmButtonColor: "#3598D9",
+     inputPlaceholder: "Escribe aquí el nombre de libro"},
+     function (inputValue) {
+     if (inputValue === false)
+     return false;
+
+     if (inputValue === "") {
+     swal.showInputError("Debes escribir el nombre del libro");
+     return false;
+     }
+     window.location = LinkSearchBook + "?bookName=" + inputValue;
+     });
+     });*/
     $('.btn-help').on('click', function() {
         $('#ModalHelp').modal({
             show: true,
@@ -64,22 +88,28 @@ $(document).ready(function() {
 });
 (function($) {
     $(window).load(function() {
-        $(".custom-scroll-containers").mCustomScrollbar({
-            theme: "dark-thin",
-            scrollbarPosition: "inside",
-            autoHideScrollbar: true,
-            scrollButtons: {
-                enable: true
-            }
-        });
+
     });
 })(jQuery);
-
-function verInfoDefensor(){
+function verExpedientes(){
+    //alert('entro a expedientes');
     /* console.log("entro en verInfoDefensor()");
     var numero_cedula = document.getElementById("cedulaProfesional");
     console.log(numero_cedula.textContent); */
-    $('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php");
+    $(".boton").click(function() {
+
+        var valores = "";
+        console.log($(this).parents("tr"));
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        /* $(this).parents("tr").find(".numero").each(function() {
+          valores += $(this).html() + "\n";
+        });
+        console.log(valores);
+        alert(valores); */
+      });
+    //$('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php?cedula="+ cedula);
 };
 
 function actualizarDefensor(){
@@ -237,3 +267,5 @@ function myFunction() {
       }
     }
   }
+
+

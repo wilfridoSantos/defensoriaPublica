@@ -1,5 +1,6 @@
 <?php 
   include '../../controlador/defensor/controladorListaDef.php';
+ // header('Content-Type: application/json');
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,7 @@
 <body>
 
 <div class="x_content">
-        <h3 id="listaDef" style="color:#000000">
+        <h3 >
           lista de los defensores
         </h3>
        <div class="input-group custom-search-form">
@@ -25,15 +26,9 @@
                                 </button>
                             </span>
                             </div>
+         
         <table id="datatable" class="table table-striped table-bordered">
-          <thead>
-
-            <tr class="header" >
-              <th>nombre</th>
-              <th>juzgado</th>
-              <th>telefono</th>
-              <th>correo</th>
-
+          <thead  >
             <tr class="header">
               <th>Nombre</th>
               <th>Ap. Paterno</th>
@@ -52,9 +47,9 @@
               <td>'.$obj->ap_paterno.'</td>
               <td>'.$obj->ap_materno.'</td>
               <td>'.$obj->juzgado.'</td>
-              <td name="cedulaProfesional">'.$obj->cedula_profesional.'</td>
+              <td id="'.$obj->cedula_profesional.'">'.$obj->cedula_profesional.'</td>
             <td>
-							<button type="button" class="btn btn-info" id="boton1" name="info" onclick="verInfoDefensor()" ><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>
+							<button type="button" class="btn btn-info boton" id="boton" name="info" onclick="verExpedientes()" ><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>
 							<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button>
 							<button type="button" class="btn btn-warning" onclick="actualizarDefensor()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
@@ -66,6 +61,7 @@
           
 
         </table>
+       
         
       </div>
       

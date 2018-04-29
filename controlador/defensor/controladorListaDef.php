@@ -1,5 +1,5 @@
 <?php 
-    header('Content-Type: application/json');
+    //
     include '../../modelo/defensor/defensor.php';
     
     $listaDef = listar_defensores();
@@ -10,5 +10,8 @@
     }else{
         $contenido = json_encode($listaDef);
         //echo 'va bienn';
-    } 
+        //echo '<script> $('#menuContainer').load("listarDefensores.php")</script>';
+        //header('Location: ../../vistas/coordinador/listarDefensores.php');
+    }
+
 ?>
