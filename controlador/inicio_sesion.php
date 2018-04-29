@@ -29,6 +29,7 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
           //echo"<script language='javascript'>alert( 'autentificado inicio_sesion=> ' +  ". $_SESSION['autentificado'].")</script>";
           $_SESSION["usuario"] = $nombreUsuario; // se asigna el nombre del usuario a la session
           $_SESSION["rol"] = $id_cargo; //asignamos rol de usuario /admin =1, coordinado =2, defensor =3
+           $_SESSION["mensaje"] = "";
           //echo $_SESSION["usuario"] . ' => rol '.$_SESSION["rol"];
           echo'<script language="javascript">window.location="Vistas/baseIndex.php"</script>';
             //header("Location: ../Vistas/baseIndex.php");

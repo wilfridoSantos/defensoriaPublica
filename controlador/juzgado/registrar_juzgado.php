@@ -1,5 +1,5 @@
 <?php 
-    header('Content-Type: application/json');
+   
     include '../../modelo/juzgado.php';
 
     
@@ -15,21 +15,19 @@
             "num_telefono"  =>" "
         );
 
-        crear_juzgado($juzgado);
-        /*
-        if(!actualiza_egresado($egresado)){
-            echo "ERROR";
-        }*/
-//$var=listar_juzgado_x_id(1);
-   
        
-    
- //  $contenido = json_encode($var);
- // print_r($contenido);
- 
-      //  $json=json_encode($arrayDef);
-        //print_r(  json_decode($json,true));
-    //    echo json_encode($arrayDef);
-    
+      crear_juzgado($juzgado);
+       
+        if(!isset($_GET['tipo'])){
+         
+           session_start();
+            $_SESSION['mensaje'] = "registro exitoso";
+            header("location: ../../vistas/coordinador/index.php?dirigir='registrar_defensor'");
+        }
+        else{
+             header('Content-Type: application/json');
+            echo "json";
+        }
+       
 
 ?>

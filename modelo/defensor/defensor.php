@@ -1,6 +1,6 @@
 <?php
 //include '../../controlador/conexion.php';
-include '../../libreria/conexion.php';
+include_once ('../../libreria/conexion.php');
 function listar_defensores(){
         $sql="SELECT * FROM defensor inner join personal using(id_personal)
                                         inner join juzgado using(id_juzgado)
@@ -39,12 +39,12 @@ function obtenerDefensorCedula($numCedula){
   
     //Definimos la funciones sobre el objeto crear_defensor
     function crear_defensor($objetoEntidad){
-        echo $objetoEntidad[session_name()];
-        global $conexion;
-        $sql = "INSERT INTO defensor values ('";
-        $sql.= " ".$objetoEntidad['id_juzgado'].", ".$objetoEntidad['id_estudio'].", ";
-        $sql.= " ".$objetoEntidad['numero_cedula_profesional']." ";
-        return consulta($sql, $conexion);
+      
+        $sql = "INSERT INTO defensor ";
+        $sql.= " SET id_juzgado='".$objetoEntidad['id_juzgado']."', id_personal='".$objetoEntidad['id_personal']."' ";
+       // echo $sql;
+         $lista=registro($sql);
+   return $lista;
     }
     //Definimos una funcion que acutualice al actualiza_defensor
     function actualiza_defensor($clientes){
@@ -52,7 +52,7 @@ function obtenerDefensorCedula($numCedula){
         $sql = "UPDATE  proveedor ";
         $sql.= "SET id_juzgado='".$provedor['id_juzgado']."',   id_estudio='".$provedor['id_estudio']."',";
         $sql.= "numero_cedula_profesional='".$provedor['numero_cedula_profesional']."'";
-        return consulta($sql, $conexion);
+        return registro($sql, $conexion);
     }
 
     //Definimos una funcion que borrar defensor
@@ -63,7 +63,14 @@ function obtenerDefensorCedula($numCedula){
         $sql.= "numero_cedula_profesional='".$provedor['numero_cedula_profesional']."'";
         return consulta($sql, $conexion);
     }
-  
+
+    function ultimoDefensorCreatado(){
+        $sql = mysql_query("SELECT MAX(id_defensor) AS id FROM defensor");
+          $id=consulta($sql);
+          
+        return $id[0]['id']; 
+
+    }
 
 
 
