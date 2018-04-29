@@ -81,7 +81,6 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
-            
                       <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
                       <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
                       <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
@@ -142,7 +141,7 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../recursos/images/img.jpg" alt=""/><?php echo $_SESSION['usuario'] ?>
+                    <img src="../../recursos/images/img.jpg" alt=""/><?php echo $_SESSION['usuario'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -165,7 +164,7 @@ include "../../Controlador/sesion.php";
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
@@ -250,21 +249,26 @@ include "../../Controlador/sesion.php";
 
             <div class="clearfix"></div>
 
-            <div class="row" id="menuContainers">
+            <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               
                   <?php
-                     if($_SESSION['mensaje']){
+                     if(($_SESSION['mensaje']) != null || ($_SESSION['mensaje'])){
                   ?>
                     <div class="alert alert-success alert-dismissible fade in" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
-                      <strong align="center"><?php echo $_SESSION['mensaje'];
+                      <strong align="center">
+                        <?php 
+                        echo $_SESSION['mensaje'];
                                                 $_SESSION['mensaje']="";
-                      ?>  </strong>
+                        ?> 
+                     </strong>
 
                   </div>
-                <?php }?>
+                <?php
+               }
+               ?>
                 
                   <div class="x_title">
                     <h2></h2>

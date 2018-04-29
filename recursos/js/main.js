@@ -91,27 +91,55 @@ $(document).ready(function() {
 
     });
 })(jQuery);
-function verExpedientes(){
-    //alert('entro a expedientes');
-    /* console.log("entro en verInfoDefensor()");
-    var numero_cedula = document.getElementById("cedulaProfesional");
-    console.log(numero_cedula.textContent); */
-    $(".boton").click(function() {
-
-        var valores = "";
-        console.log($(this).parents("tr"));
-
-        // Obtenemos todos los valores contenidos en los <td> de la fila
-        // seleccionada
-        /* $(this).parents("tr").find(".numero").each(function() {
-          valores += $(this).html() + "\n";
-        });
-        console.log(valores);
-        alert(valores); */
-      });
-    //$('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php?cedula="+ cedula);
-};
-
+function buscarXCedula() {
+    // Declare variables
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("inputCedula");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("datatable");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[4];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          //console.log('huuuuuuuuu hkajsdkasjhd');
+        } else {
+          tr[i].style.display = "none";
+          //console.log('dosssssssss ');
+        }
+      }
+    }
+  }
+ 
+  
+  /* $(".boton").click(function() {
+    var cedula = $(this).closest('tr').find('#dataCedula').text() 
+    //console.log(cedula);
+    console.log('algoooooo');
+    //var ced = document.getElementById("cedulaProf").textContent;
+    //alert('entro a expediente num #  ' + ced);
+    
+    
+      //$('#menuContainer').load( "../../vistas/coordinador/verInfoDefensor.php?cedula="+ cedula);
+      //header('Location: ../../controlador/defensor/controlDefensor.php?cedula='+ cedula);
+     /*  $.ajax({
+        url: "../../controlador/defensor/controlDefensor.php",
+        type: "post",
+        data: "numCedula=" + cedula,
+        beforeSend: function() {
+            $('body').load('verInfoDefensor.php');
+        },
+        success: function(data) {
+            var jsonDefensores = jQuery.parseJSON(data);
+            console.log(jsonDefensores);
+            //$('#menuContainer').html(data);
+            //$('body').removeClass('loading');
+        }
+    }); 
+  });*/
 function actualizarDefensor(){
     $('#menuContainer').load( "../../vistas/coordinador/update.php");
     //console.log('HOOOOla aCTUALIZAR DEFENSOR');
@@ -267,5 +295,4 @@ function myFunction() {
       }
     }
   }
-
-
+  

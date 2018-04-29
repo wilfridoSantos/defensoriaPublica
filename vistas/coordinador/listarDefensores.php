@@ -1,5 +1,5 @@
 <?php 
-  include '../../controlador/defensor/controladorListaDef.php';
+  //include '../../controlador/defensor/controladorListaDef.php';
  // header('Content-Type: application/json');
 ?>
 <!DOCTYPE html>
@@ -10,6 +10,7 @@
       <script src="../../recursos/js/main.js"></script>
 
       <script src="../../recursos/js/Gestion.js"></script>
+      <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
 </head>
 <body>
@@ -19,14 +20,14 @@
           lista de los defensores
         </h3>
        <div class="input-group custom-search-form">
-                                <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search...">
+                                <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Cedula Profesional...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" onclick="myFunction()" type="button">
+                                <button class="btn btn-default" onclick="buscarXCedula()" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
                             </div>
-         
+        
         <table id="datatable" class="table table-striped table-bordered">
           <thead  >
             <tr class="header">
@@ -38,25 +39,8 @@
               <th>accion</th>
             </tr>
           </thead>
-          <tbody >
-            <?php
-            $defensor=json_decode($contenido);
-            foreach($defensor as $obj){
-             echo '<tr>
-              <td>'.$obj->nombre.'</td>
-              <td>'.$obj->ap_paterno.'</td>
-              <td>'.$obj->ap_materno.'</td>
-              <td>'.$obj->juzgado.'</td>
-              <td id="'.$obj->cedula_profesional.'">'.$obj->cedula_profesional.'</td>
-            <td>
-							<button type="button" class="btn btn-info boton" id="boton" name="info" onclick="verExpedientes()" ><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>
-							<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button>
-							<button type="button" class="btn btn-warning" onclick="actualizarDefensor()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-            </td> 
-            </tr>';
-            }
-            ?>
+          <tbody id='tebody' >
+            
           </tbody>
           
 

@@ -16,6 +16,7 @@ function consulta($consulta){
   $datos = $sql->fetchAll(PDO::FETCH_ASSOC);
     return $datos;
  }
+ 
  function registro($consulta){
    global $db;
    $sql=$db->prepare($consulta);

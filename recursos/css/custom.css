@@ -729,12 +729,12 @@ a:focus {
     margin-bottom: 6px
 }
 .nav.side-menu>li>a:hover {
-    color: #F2F5F7 !important
+    color: #23484c !important
 }
 .nav.side-menu>li>a:hover,
 .nav>li>a:focus {
     text-decoration: none;
-    background: transparent
+    background: #08070700;
 }
 .nav.child_menu {
     display: none

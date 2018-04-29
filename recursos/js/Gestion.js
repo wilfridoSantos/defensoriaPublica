@@ -10,7 +10,7 @@ $(document).ready(function () {
 	var registrar=document.getElementById('registrarDefensor');
 			registrar.addEventListener('click',regDefensores,false);
 			function regDefensores(){
-				$('#menuContainers').load("../usuarios/registrar.php");
+				$('#menuContainer').load("../usuarios/registrar.php");
 			};
 			
 
@@ -37,24 +37,59 @@ $(document).ready(function () {
 		function listaDefensores() {//usar THIS
 			//console.log("ACCESO A FUNCION listaDefensor ahdka");
 			//alert('entro');
-			$('#menuContainer').load("listarDefensores.php");
+			//$('#menuContainer').load("listarDefensores.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
-		/* $.ajax({
-            url: "../../controlador/defensor/controladorListaDef.php",
-			type: "post",
-			dataType: 'json',
-			data: JSON.stringify({foo:'bar'}),
-            beforeSend: function() {
-                $('body').addClass('loading');
+		$.ajax({
+			type:'GET',
+			//url:'listarDefensores.php',
+			url: '../../controlador/defensor/controladorListaDef.php',
+			data:"mensaje=holaMundo",
+			beforeSend: function() {
+                $('#menuContainer').load('listarDefensores.php');
             },
-            success: function(data) {
-				console.log('SUCCESS!!!');
-                $('#menuContainer').load(data);
-                $('body').removeClass('loading');
-            }
-        }); */
+		success:function(data){
+			var jsonDefensores = jQuery.parseJSON(data);
+			//console.log(jsonDefensores);
+			$.each(jsonDefensores, function (KEY, VALOR){
+				//console.log(VALOR.id_estudios , "BKAJBKjakd");
+			
+				$('#tebody').append('<tr> <td>'+VALOR.nombre+'</td><td>'+VALOR.ap_paterno+
+				 '</td><td>'+VALOR.ap_materno+'</td><td>'+VALOR.juzgado+
+				 '</td><td id="dataCedula">'+VALOR.cedula_profesional+
+				 '</td><td><button type="button" class=" boton" id="boton" name="info"><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'+
+				 '<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button>'+
+				 '<button type="button" class="btn btn-warning" onclick="actualizarDefensor()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'+
+				 '<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
+ 				'</td>  '); 
+
+			});
+
+
+			
+			
+			//$('#tebody').append(data);
+		  //console.log('successful to ./../controlador/defensor/controladorListaDef.php');
+		}
+	  });
 	};
 
+	function cargarDatos(){
+		$.ajax({
+			type:'GET',
+			//url:'listarDefensores.php',
+			url: '../../controlador/defensor/controladorListaDef.php',
+			data:"mensaje=holaMundo",
+			beforeSend: function() {
+                $('#menuContainer').load('listarDefensores.php');
+            },
+		success:function(data){
+			console.log(data);
+			$('#tebody').append(data);
+		  //console.log('successful to ./../controlador/defensor/controladorListaDef.php');
+		}
+	  });
+
+	}
 	var listarAudiencia=document.getElementById('listarAudiencias');
 	listarAudiencia.addEventListener('click', listarAudiencias, false);
 	function listarAudiencias() {
