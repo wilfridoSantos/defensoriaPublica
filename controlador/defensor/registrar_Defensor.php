@@ -32,6 +32,7 @@
           "id_personal"=>ultimoPersonalCreatado()
       );
       crear_defensor($defensor);
+      
         if(!isset($_GET['tipo'])){
          
            session_start();

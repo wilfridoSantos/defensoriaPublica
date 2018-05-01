@@ -15,33 +15,12 @@
 </head>
 <body>
 <div class="x_content">
-        
-            <div class="input-group custom-search-form">
-                                <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" onclick="myFunction()" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-        <table id="datatable2" class="table table-striped table-bordered">
-          <thead><h3>LISTADO DE EXPEDIENTES </h3>
-            <tr class="header">
-              <th>Numero expediente</th>
-              <th>fecha inicio</th>
-              <th>Fecha Finalizacion</th>
-              <th>Tipo Delito</th>
-              <th>Nombre Delito</th>
-              <th>Estado</th>
-             
-            </tr>
-          </thead>
-          <tbody id ="verExpDefensor">
-            
-          </tbody>
-          
 
-        </table>
+            <div id = "verInfoDef" class="w-100">
+            <h3 ><i class="fa fa-address-book"/> Detalle Informacion Defensor</h3>
+
+            </div>
+
     
         
       </div>

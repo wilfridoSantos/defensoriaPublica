@@ -1,23 +1,26 @@
-<?php 
-  //include '../../controlador/defensor/controladorListaDef.php';
- // header('Content-Type: application/json');
+
+  <?php 
+  include '../../controlador/defensor/controladorListaDef.php';
 ?>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-<title>Informe Anual </title>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Modulo Coordinador General</title>
       <script src="../../recursos/js/main.js"></script>
 
-      <script src="../../recursos/js/Gestion.js"></script>
       <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
-</head>
-<body>
 
+<body>
 <div class="x_content">
         <h3 >
-          lista de los defensores
+          LISTA DEFENSORES
         </h3>
        <div class="input-group custom-search-form">
                                 <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Cedula Profesional...">
@@ -40,7 +43,28 @@
             </tr>
           </thead>
           <tbody id='tebody' >
-            
+            <?php
+          $Defensores=json_decode($contenido);
+          foreach($Defensores as $obj){
+            echo '<tr> '.
+              '<td id="idDefensor" style="display:none;">'.$obj->id_defensor.'</td>'.
+              '<td>'.$obj->nombre.'</td>'.
+              '<td>'.$obj->ap_paterno.'</td>'.
+              '<td>'.$obj->ap_materno.'</td>'.
+              '<td>'.$obj->juzgado.'</td>'.
+              '<td id="numCedula">'.$obj->cedula_profesional.'</td>';
+
+            ?>
+                                           
+
+          <td><button type="button" class="btn btn-primary boton" id="boton" name="info"><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>
+          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button>
+          <button type="button" class="btn btn-warning botonUp" id="botonUp" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+          <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+          </td> </tr>
+            <?php
+            }
+            ?>
           </tbody>
           
 
@@ -48,8 +72,5 @@
        
         
       </div>
-      
-</body>
-
-</html>
-
+          </body>
+          </html>

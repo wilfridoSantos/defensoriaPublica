@@ -19,7 +19,8 @@ include "../../Controlador/sesion.php";
 <!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
     <link rel="stylesheet" href="../../recursos/css/style.css" />
     <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
-    
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../recursos/js/Gestion.js"></script>
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -293,12 +294,20 @@ include "../../Controlador/sesion.php";
                       </h3> -->
                       <?php 
             switch (isset($_GET['dirigir'])) {
+              case 'listar_defensor':
+              ?>
+              <script>
+                 $('#menuContainer').load('listarDefensores.php');
+                </script> 
+              <?php
+                     // require_once("listarDefensores.php");                    
+                    //('Location: listarDefensores.php');
+              break;
                 case 'registrar_defensor':
+                
                     require_once("../usuarios/registrar.php");                    
                     break;
-                
-                
-                
+
                 default:
                   //  require_once("/vista principal.php");
                     break;
@@ -364,7 +373,7 @@ include "../../Controlador/sesion.php";
     <!-- Custom Theme Scripts -->
     <script src="../../recursos/js/custom.min.js"></script>
 
-    <script src="../../recursos/js/Gestion.js"></script>
+    
     <script src="../../recursos/js/main.js"></script>
   </body>
 </html>
