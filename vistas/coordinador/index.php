@@ -254,14 +254,19 @@ include "../../Controlador/sesion.php";
                 <div class="x_panel">               
                   <?php
                      if(($_SESSION['mensaje']) != null || ($_SESSION['mensaje'])){
+                        $alert='alert alert-success';
+              
+                        if($_SESSION['mensaje']['tipo']=='error')
+                          $alert='alert alert-danger';
+                           
                   ?>
-                    <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <div class=" '<?php echo $alert; ?>"'  alert-dismissible fade in" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
                       <strong align="center">
                         <?php 
-                        echo $_SESSION['mensaje'];
-                                                $_SESSION['mensaje']="";
+                        echo $_SESSION['mensaje']['mensaje'];
+                                                $_SESSION['mensaje']=[];
                         ?> 
                      </strong>
 
@@ -297,6 +302,9 @@ include "../../Controlador/sesion.php";
                     require_once("../usuarios/registrar.php");                    
                     break;
                 
+                    case 'listar_defensor':
+                    require_once("../usuarios/registrar.php");                    
+                    break;
                 
                 
                 default:

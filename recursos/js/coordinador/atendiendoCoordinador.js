@@ -1,8 +1,39 @@
  $(document).ready(function () {
 	
-		  
+	
+	
+
+
+	/* $('#asignarAdscripcion').on('click',function(evst){
+            console.log("cambio ads");
+			var $nue=document.getElementById('nue');
+			$.ajax({
+				type:'POST',
+				//url:'listarDefensores.php',
+				url: '../../controlador/juzgado/actividad_juzgado.php',
+				data: "numCedula=" + nue,
+				beforeSend: function() {
+					
+				//	$('#menuContainer').load('listarDefensores.php');
+				
+				//	$('#datatable tbody').remove();
+				 
+				},
+			success:function(data){
+				var jsonDefensores = jQuery.parseJSON(data);
+				alert("d",data);
+				//console.log(jsonDefensores,"hola pepito");
+				
+			/* 	$.each(jsonDefensores, function (KEY, VALOR){
+					//console.log(VALOR.id_estudios , "BKAJBKjakd");
+				
+	
+				}); */
+		  //console.log('successful to ./../controlador/defensor/controladorListaDef.php');
+			/* }
+		  });
+			});  */
 		      
-	var botonVer = document.getElementsByClassName('boton');
 	
 	$('#tebody').on('click','.boton',function(evst){
 //		  var target= $(event.target);
@@ -11,18 +42,12 @@
 		   console.log(cedula);
 		   verInfo(cedula);
 	});
-	//console.log(typeof(botonVer));
-//s	console.log(botonVer['info']);
-	/* for(var i = 0; i < 5; i++){
-		//console.log(botonVer.length);
-	  botonVer[i].addEventListener('click', verInfo, false);
 	
-	} */
 	function verInfo(cedula){
 		$.ajax({
 			url: "../../controlador/defensor/controlDefensor.php",
 			type: "post",
-			data: "numCedula=" + 4,
+			data: "numCedula=" + 7,
 			beforeSend: function() {
 				$('#menuContainer').load('verInfoDefensor.php');
 			},
@@ -30,7 +55,7 @@
 
 				var jsonExpediente = jQuery.parseJSON(data);
 				console.log(jsonExpediente['id_defensor']);
-
+			
 				$.each(jsonExpediente, function (KEY, VALOR){
 					//console.log(VALOR.id_estudios , "BKAJBKjakd");
 				

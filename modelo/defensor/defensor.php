@@ -3,8 +3,7 @@
 include_once ('../../libreria/conexion.php');
 function listar_defensores(){
         $sql="SELECT * FROM defensor inner join personal using(id_personal)
-                                        inner join juzgado using(id_juzgado)
-                                        inner join estudios using (id_estudios)";			
+                        inner join juzgado using(id_juzgado)";			
 
    $lista=consulta($sql);
    return $lista;
@@ -16,6 +15,21 @@ function listar_defensor_x_id($id){
       $consulta = consulta($sql, $conexion);
       return $consulta;
   }
+  function listar_defensor_x_nue($nue){
+ 
+    $sql = "select * from defensor inner join personal using (id_personal ) where nue='".$nue."'";
+    $consulta = consulta($sql);
+   // echo $sql;
+    return $consulta;
+}
+function listar_defensor_x_nup($nup){
+ 
+    $sql = "select * from defensor inner join personal using (id_personal ) where nue='".$nup."'";
+    $consulta = consulta($sql);
+   // echo $sql;
+    return $consulta;
+}
+
 function obtenerExpedientes($id_defensor){
     $sql="SELECT * FROM expediente inner join defensor using(id_defensor) WHERE 
                     id_defensor = '".$id_defensor."'";
@@ -45,6 +59,15 @@ function obtenerDefensorCedula($cedulaProf){
         $sql = "INSERT INTO defensor ";
         $sql.= " SET id_juzgado='".$objetoEntidad['id_juzgado']."', id_personal='".$objetoEntidad['id_personal']."' ";
        // echo $sql;
+         $lista=registro($sql);
+   return $lista;
+    }
+
+    function actualizar_juzgado($id_juzgado,$id_defensor){
+      
+        $sql = "UPDATE defensor ";
+        $sql.= " SET id_juzgado='".$id_juzgado."' where id_defensor = ".$id_defensor;
+        echo $sql;
          $lista=registro($sql);
    return $lista;
     }

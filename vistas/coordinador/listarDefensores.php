@@ -36,7 +36,7 @@
               <th>Ap. Materno</th>
               <th>Lugar Adscripcion</th>
               <th>Numero Cedula</th>
-              <th>accion</th>
+              <th>acciones</th>
             </tr>
           </thead>
           <tbody id='tebody' >

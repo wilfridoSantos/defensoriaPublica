@@ -34,22 +34,24 @@ $(document).ready(function () {
 		
 	var listarDef=document.getElementById('listarDefensores');
 		listarDef.addEventListener('click', listaDefensores, false);
-		function listaDefensores() {//usar THIS
-			//console.log("ACCESO A FUNCION listaDefensor ahdka");
-			//alert('entro');
-			//$('#menuContainer').load("listarDefensores.php");
-		//window.location="../../controlador/defensor/controladorListaDef.php"
-		$.ajax({
+		function listaDefensores() {
+		       $.ajax({
 			type:'GET',
 			//url:'listarDefensores.php',
 			url: '../../controlador/defensor/controladorListaDef.php',
 			data:"mensaje=holaMundo",
 			beforeSend: function() {
-                $('#menuContainer').load('listarDefensores.php');
+				
+				$('#menuContainer').load('listarDefensores.php');
+			
+			//	$('#datatable tbody').remove();
+			 
             },
 		success:function(data){
+			console.log($('#tebody ').empty());
 			var jsonDefensores = jQuery.parseJSON(data);
-			//console.log(jsonDefensores);
+			//console.log(jsonDefensores,"hola pepito");
+			
 			$.each(jsonDefensores, function (KEY, VALOR){
 				//console.log(VALOR.id_estudios , "BKAJBKjakd");
 			
@@ -63,6 +65,7 @@ $(document).ready(function () {
  				'</td>  '); 
 
 			});
+			
 
 
 			
@@ -105,7 +108,11 @@ $(document).ready(function () {
 
 
 
-
+	var asignar=document.getElementById('cambiarAdscripcion');
+	asignar.addEventListener('click',asinar,false);
+	 function asinar(){
+		$('#menuContainer').load("../administrador/cambiarAdscripcion.php");
+	}
 
 	// Datepicker Popups calender to Choose date.
 	/*$(function() {
