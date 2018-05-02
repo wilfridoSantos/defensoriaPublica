@@ -15,7 +15,7 @@ function agrega(){
               <div class="col-md-12 col-sm-12 col-xs-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 " >Registro de defensores</label></h1>
+                    <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 " >Registro  personal de campo</label></h1>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -75,14 +75,14 @@ function agrega(){
                      
 
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >nup<span class="required">*</span></label>
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nup<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" pattern="[0-9]{5}"  min="5" class="form-control" required placeholder="nup" name="nup">
                          </div>
                       </div>
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> nue<span class="required">*</span></label>
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Nue<span class="required">*</span></label>
                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" pattern="[0-9]{5}" min="5" class="form-control" required  placeholder="nue" name="nue">
                         </div>
@@ -90,7 +90,7 @@ function agrega(){
 
 
                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12  text-uppercase">Curp<span class="required">*</span></label>
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" title=": el formato debe ser alfanumerico con 18 digitos" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                         </div>
@@ -117,21 +117,44 @@ function agrega(){
                         </div>
                       </div>
                     
-                      
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Puesto</label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <select name="puesto"  class="select2_group form-control">
+                             <option value="4">defensor</option> 
+                             <option value="2">coordinador</option> 
+                                    
+                                  
+                           
+                          </select>
+                        </div>
+                      </div>
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Genero<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
                           <div id="gender" required class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input name="genero" required value="masculino" data-parsley-multiple="gender" type="radio"> masculino
+                            <label class="btn btn-default " data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                              <input name="genero"   required value="masculino" data-parsley-multiple="gender" type="radio"> masculino
                             </label>
                             <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input name="genero" required value="femenino" data-parsley-multiple="gender" type="radio"> femenino
+                              <input name="genero"    required value="femenino" data-parsley-multiple="gender" type="radio"> femenino
                             </label>
                           </div>
                         </div>
                       </div>
+
+               
+
+
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Contraseña<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="password" min="5" max="10"  class="form-control"  required placeholder="contraseña" name="password">
+                        </div>
+                      </div>
                       
+                  
+                    
                       <!--<div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted">Cargo <span class="required">*</span>
                         </label></h4>

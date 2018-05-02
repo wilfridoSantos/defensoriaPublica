@@ -17,7 +17,6 @@ function listar_juzgado_x_id($id){
   }
 
 
-
    
   
   function crear_juzgado($objetoEntidad){

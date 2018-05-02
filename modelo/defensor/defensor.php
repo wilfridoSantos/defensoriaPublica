@@ -9,12 +9,25 @@ function listar_defensores(){
    return $lista;
 }
 
+function getDefensorById($id_defensor){
+     $sql="SELECT * FROM defensor inner join personal using(id_personal)
+                    inner join juzgado using(id_juzgado)
+                    where id_defensor='".$id_defensor."'";
+}
 function listar_defensor_x_id($id){
       global $conexion;
       $sql = "select * from defensor where id='".$id."'";
       $consulta = consulta($sql, $conexion);
       return $consulta;
   }
+
+  function listar_defensor_x_juzgado($juzgado){
+ 
+    $sql = "select * from defensor where id_juzgado='".$juzgado."'";
+    $consulta = consulta($sql);
+   // echo $sql;
+    return $consulta;
+}
   function listar_defensor_x_nue($nue){
  
     $sql = "select * from defensor inner join personal using (id_personal ) where nue='".$nue."'";

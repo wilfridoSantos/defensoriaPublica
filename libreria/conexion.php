@@ -25,6 +25,7 @@ function consulta($consulta){
    global $db;
    $sql=$db->prepare($consulta);
    $sql->execute();
+    
+    return $sql->rowCount();
  }
-
 ?>
