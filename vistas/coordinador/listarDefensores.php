@@ -1,7 +1,4 @@
 
-  <?php 
-  include '../../controlador/defensor/controladorListaDef.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +20,7 @@
           LISTA DEFENSORES
         </h3>
        <div class="input-group custom-search-form">
-                                <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Cedula Profesional...">
+                                <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Nombre Defensor...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" onclick="buscarXCedula()" type="button">
                                     <i class="fa fa-search"></i>
@@ -37,13 +34,15 @@
               <th>Nombre</th>
               <th>Ap. Paterno</th>
               <th>Ap. Materno</th>
-              <th>Lugar Adscripcion</th>
-              <th>Numero Cedula</th>
-              <th>accion</th>
+              <th>Lugar Adscripcion</th>             
+              <th>Numero Ext</th>     
+              <th>Numero Int</th>      
+              <th>acciones</th>
             </tr>
           </thead>
           <tbody id='tebody' >
-            <?php
+        <?php
+          include '../../controlador/defensor/controladorListaDef.php';
           $Defensores=json_decode($contenido);
           foreach($Defensores as $obj){
             echo '<tr> '.
@@ -51,20 +50,16 @@
               '<td>'.$obj->nombre.'</td>'.
               '<td>'.$obj->ap_paterno.'</td>'.
               '<td>'.$obj->ap_materno.'</td>'.
-              '<td>'.$obj->juzgado.'</td>'.
-              '<td id="numCedula">'.$obj->cedula_profesional.'</td>';
-
-            ?>
-                                           
-
-          <td><button type="button" class="btn btn-primary boton" id="boton" name="info"><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>
-          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button>
-          <button type="button" class="btn btn-warning botonUp" id="botonUp" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-          <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-          </td> </tr>
-            <?php
+              '<td>'.$obj->juzgado.'</td>'.                                          
+              '<td>'.$obj->numero_ext.'</td>'. 
+              '<td>'.$obj->numero_int.'</td>'. 
+          '<td><button type="button" class="btn btn-primary boton" id="boton" name="info"><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
+          '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button>'.
+          '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
+          '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
+          '</td> </tr>';            
             }
-            ?>
+        ?>
           </tbody>
           
 

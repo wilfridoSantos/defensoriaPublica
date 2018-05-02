@@ -11,10 +11,14 @@ $db = new PDO("mysql:host=".BD_SERVIDOR.";dbname=".BD_NOMBRE.";charset=utf8",BD_
 function consulta($consulta){
     global $db;
     $sql = $db->prepare($consulta);
-   $sql->execute();  
-   
-  $datos = $sql->fetchAll(PDO::FETCH_ASSOC);
-    return $datos;
+    $sql->execute();  
+    if($sql->rowCount()==0)
+       return 0;
+    
+    if($sql->rowCount()>0)
+      //$datos = $sql->fetchAll(PDO::FETCH_ASSOC);
+      return  $sql->fetchAll(PDO::FETCH_ASSOC);
+    //return $datos;
  }
  
  function registro($consulta){

@@ -1,7 +1,7 @@
 <?php 
     header('Content-Type: application/json');
-  include '../../modelo/personal.php';    
-    include '../../modelo/defensor/defensor.php';
+  include_once '../../modelo/personal.php';    
+    include_once  '../../modelo/defensor/defensor.php';
     
       $personal = Array(
            
@@ -25,21 +25,33 @@
       // crear_juzgado($juzgado);
        // echo isset($_GET['tipo']);
      //  print_r(listar_personal());
-       crear_personal($personal);
+     $mensaje=['tipo'=>"exito",
+                'mensaje'=>"registro existoso"];
+     $didigir="listar_defensor";
+     if(listar_defensor_x_nue($_POST['nue'])==0){
+        crear_personal($personal);
+        $defensor=Array(
+         "id_juzgado"=>$_POST['adscripcion'],
+         "id_personal"=>ultimoPersonalCreatado()
+        );
+        crear_defensor($defensor);
+      }
+      else{
+
+        $mensaje=['tipo'=>"error",
+        'mensaje'=>"el personal  con el nue o nup ya se encuentra registrado"];
+  
+        $didigir="registrar_defensor";
+      }
       //  ultimoPersonalCreatado();
-      $defensor=Array(
-          "id_juzgado"=>$_POST['adscripcion'],
-          "id_personal"=>ultimoPersonalCreatado()
-      );
-      crear_defensor($defensor);
-      
+ 
         if(!isset($_GET['tipo'])){
          
            session_start();
-            $_SESSION['mensaje'] = "registro exitoso";
+            $_SESSION['mensaje'] = $mensaje;
          // include "../../vistas/usuarios/registrar.html";
        
-            header("location: ../../vistas/coordinador/index.php?dirigir='registrar_defensor'");
+            header("location: ../../vistas/coordinador/index.php?dirigir=".$didigir);
         }
         else{
             echo "json";

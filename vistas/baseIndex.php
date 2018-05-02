@@ -7,21 +7,13 @@ include "../controlador/sesion.php";
     //echo"<script language='javascript'>alert( 'autentificado baseIndex=> rol ' +  ". $_SESSION['rol'].")</script>";
 
   if($_SESSION["autentificado"] == true){
-  if ($_SESSION["rol"] == 1) {//ROL -1- => ADMINISTRADOR
+  if ($_SESSION["rol"] == 1) {//ROL -1- => ADMINISTRADOR cesar aspra
       //header("Location: administrador/index.php");
       echo'<script language="javascript">window.location="administrador/index.php"</script>';
   }
-  if ($_SESSION["rol"] == 2) {//ROL -2- => COORDINADOR
+  if ($_SESSION["rol"] == 2) {//ROL -2- => COORDINADOR cordinador1 1234
       //header("Location: coordinador/index.php");
-      echo'<script language="javascript">window.location="coordinador/"</script>';
-  }
-  if ($_SESSION["rol"] == 3) {//ROL -3- => DEFENSOR
-    //header("Location: defensor/index.php");
-      echo'<script language="javascript">window.location="defensor/index.php"</script>';
-  }
-  if ($_SESSION["rol"] == 4) {//ROL -3- => DEFENSOrCoordinador
-    //header("Location: coordinadorDefensor/indexx.html");
-      echo'<script language="javascript">window.location="coordinadorDefensor/index.php"</script>';
+      echo'<script language="javascript">window.location="coordinador/index.php"</script>';
   }
 
 }else{

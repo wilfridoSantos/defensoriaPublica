@@ -17,7 +17,7 @@
 <div class="x_content">
 
             <div id = "verInfoDef" class="w-100">
-            <h3 ><i class="fa fa-address-book"/> Detalle Informacion Defensor</h3>
+            <h3 > Detalle Informacion Defensor</h3>
 
             </div>
 

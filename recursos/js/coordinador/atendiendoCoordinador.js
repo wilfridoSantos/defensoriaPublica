@@ -7,7 +7,7 @@ $(document).ready(function () {
 	$('#tebody').on('click', '.boton', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
-		var idDef = $(this).closest('tr').find('#idDefensor').text()
+		var idDef = $(this).closest('tr').find('#idDefensor').text();
 		//console.log(idDef);
 		verInfo(idDef);
 	});
@@ -23,40 +23,40 @@ $(document).ready(function () {
 
 				var jsonInfoDef = jQuery.parseJSON(data);
 				console.log(jsonInfoDef.id_defensor, 'entro   ');
-				
+
 				$.each(jsonInfoDef, function (KEY, VALOR) {
-					console.log(VALOR.id_defensor , " ID defensor");
+					console.log(VALOR.id_defensor, " ID defensor");
 
-				$('#verInfoDef').append(
+					$('#verInfoDef').append(
 
-					'<div class="row"> '+
-					'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">'+
-					'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">'+
-					  '<div class="col-sm-12">'+
-						'<div class="left col-xs-7">'+
-						  '<h2><span class="glyphicon glyphicon-user"></span>'+VALOR.nombre+' '+VALOR.ap_paterno+' '+VALOR.ap_materno+'</h2>'+
-						  
-						  '<p><span class="glyphicon glyphicon-lock"></span><strong>'+VALOR.perfil+'</strong></p>'+
-						  '<hr/>'+
-						  '<ul class="list-unstyled">'+
-							'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: '+ VALOR.calle+', '+ VALOR.numero_ext+', '+ VALOR.numero_int+', '+' </li>'+					
-							'<li><span class="glyphicon glyphicon-info-sign"></span> Curp #:'+VALOR.curp+' </li>'+							
-							'<li><span class="glyphicon glyphicon-info-sign"></span> Nup #:'+VALOR.nup+' </li>'+
-							'<li><span class="glyphicon glyphicon-info-sign"></span> Nue #:'+VALOR.nue+' </li>'+
-							'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado #:'+VALOR.juzgado+' </li>'+
-							'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional #:'+VALOR.cedula_profesional+' </li>'+
-							'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail #:'+VALOR.corre_electronico+' </li>'+
-						  '</ul>'+
-						'</div>'+
-						'<div class="right col-xs-5 ">'+
-						  '<p align="right"><img src="../../recursos/images/img.jpg" alt="" class="img-circle img-responsive">'+ VALOR.perfil+'</p>'+
-						'</div>'+
-					  '</div>'+
-					  '</div>'+
-					'</div>'+
-				  '</div>'+
-				'</div>');
-				});	
+						'<div class="row"> ' +
+						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
+						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
+						'<div class="col-sm-12">' +
+						'<div class="left col-xs-7">' +
+						'<h2><span class="glyphicon glyphicon-user"></span>' + VALOR.nombre + ' ' + VALOR.ap_paterno + ' ' + VALOR.ap_materno + '</h2>' +
+
+						'<p><span class="glyphicon glyphicon-lock"></span><strong>' + VALOR.perfil + '</strong></p>' +
+						'<hr/>' +
+						'<ul class="list-unstyled">' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: ' + VALOR.calle + ', ' + VALOR.numero_ext + ', ' + VALOR.numero_int + ', ' + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Curp #:' + VALOR.curp + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Nup #:' + VALOR.nup + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Nue #:' + VALOR.nue + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado #:' + VALOR.juzgado + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional #:' + VALOR.cedula_profesional + ' </li>' +
+						'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail #:' + VALOR.corre_electronico + ' </li>' +
+						'</ul>' +
+						'</div>' +
+						'<div class="right col-xs-5 ">' +
+						'<p align="right"><img src="../../recursos/images/img.jpg" alt="" class="img-circle img-responsive">' + VALOR.perfil + '</p>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>');
+				});
 			}
 		});
 	}
@@ -65,7 +65,7 @@ $(document).ready(function () {
 	$('#tebody').on('click', '.botonUp', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
-		var id_def = $(this).closest('tr').find('#idDefensor').text()
+		var id_def = $(this).closest('tr').find('#idDefensor').text();
 
 		updateDefensor(id_def);
 	});
@@ -80,19 +80,13 @@ $(document).ready(function () {
 			success: function (data) {
 				var jsonUpdateDef = jQuery.parseJSON(data);
 				console.log(jsonUpdateDef);
-
-				//var jsonExpediente = jQuery.parseJSON(data);
-				//console.log(jsonExpediente.id_defensor , 'wiiiiii');
-				
 				$.each(jsonUpdateDef, function (KEY, VALOR) {
-					//console.log(VALOR.id_defensor , " ID defensor");
-
 					$('#updateDefensor').append(
 						'<form  class="form-horizontal form-label-left" action ="../../controlador/defensor/controlActualizarDef.php"  method="post">' +
 						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-4"><span class="required"></span></label>' +
-						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-						'<input type="text" class="form-control" id="id_defensor" placeholder="ID Defensor" name="id_defensor"' +
+						'<label style="display:none;" class="control-label col-md-3 col-sm-3 col-xs-4"><span class="required"></span></label>' +
+						'<div style="display:none;" class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
+						'<input style="display:none;" type="text" class="form-control" id="id_defensor" placeholder="ID Defensor" name="id_defensor"' +
 						'value="' + VALOR.id_defensor + '" readonly>' +
 						'</div>' +
 						'</div>' +
@@ -209,12 +203,12 @@ $(document).ready(function () {
 						'value="' + VALOR.juzgado + '">' +
 						'</div>' +
 						'</div>		  ' +
-						'<div class="ln_solid"></div>								' +
+						'<div class="ln_solid"></div>' +
 						'<div class="form-group">' +
 						'<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">' +
 						'<!-- <input type="submit"name="cancelar" class="btn btn-primary" value="Cancelar"></button>-->' +
 						'<input class="btn btn-primary" type="submit" name="update" ' +
-						'value="Actualizar Datos"></input>									 ' +
+						'value="Actualizar Datos"></input> ' +
 						'<!--   <button type="submit" class="btn btn-success">Submit</button> -->' +
 						'</div>' +
 						'</div>' +
@@ -224,15 +218,63 @@ $(document).ready(function () {
 				});
 				//$('#menuContainer').html(data);
 				//$('body').removeClass('loading');
-				
+
 			},
-		/* 	complete:function(data) {
-                 alert("iojfiojfdsioj");
-				$('#menuContainer').load('	listarDefensores.php');
-			} */
-			
+			/* 	complete:function(data) {
+					 alert("iojfiojfdsioj");
+					$('#menuContainer').load('	listarDefensores.php');
+				} */
+
 		});
 	}
+
+	$('#tebody').on('click', '.botonDel', function (evst) {
+		//console.log('click boton del');
+		//	 var target= $(event.target);
+		//  var target= $(this.);
+		var idDef = $(this).closest('tr').find('#idDefensor').text();
+		console.log(idDef, ' beforre');
+		$("#dialogo").dialog({
+			resizable: true,
+			height: "auto",
+			width: "auto",
+			modal: true,
+			buttons: {
+				"Eliminar": function () {
+
+					eliminarDefensor(idDef);
+					$(this).dialog("close");
+				},
+				"Cancelar": function () {
+					$(this).dialog("close");
+
+				}
+			}
+		});
+
+
+	});
+	function eliminarDefensor(idDef) {
+		console.log(idDef, 'i defensor');
+		$.ajax({
+			url: "../../controlador/defensor/controlDelDefensor.php",
+			type: "get",
+			data: "id_defensor=" + idDef,
+			beforeSend: function () {
+
+				$('#menuContainer').load('listarDefensores.php');
+			},
+			success: function (data) {
+				//console.log('Success!! Eliminado defensor id = '+idDef);
+				console.log(data, ' result of query delete id: ' + idDef);
+				$('#menuContainer').load('listarDefensores.php');
+
+			}
+		});
+
+	}
+
+
 
 
 	var registroJuzgado = document.getElementById('crea_juzgado');

@@ -47,74 +47,58 @@ function listaDefensores() {//usar THIS
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
 
-	var informeA=document.getElementById('informeAnual');
-		informeA.addEventListener('click', informeAnual, false);
-		function informeAnual() {
-			$('#menuContainer').load("informeAnual.html");
-		};
+	var informeA = document.getElementById('informeAnual');
+	informeA.addEventListener('click', informeAnual, false);
+	function informeAnual() {
+		$('#menuContainer').load("informeAnual.html");
+	};
 
-		   
-		      
-	var registrar=document.getElementById('registrarDefensor');
-			registrar.addEventListener('click',regDefensores,false);
-				
-	function regDefensores(){
+
+
+	var registrar = document.getElementById('registrarDefensor');
+	registrar.addEventListener('click', regDefensores, false);
+
+	function regDefensores() {
 		$('#menuContainer').load("../usuarios/registrar.php");
 	};
-			
 
-	var informeM=document.getElementById('informeMensual');
-		informeM.addEventListener('click', informeMensual, false);
-		function informeMensual() {
-				$('#menuContainer').load("informeMensual.html");
-		};
 
-	var informeE=document.getElementById('informeEspecifico');
-		informeE.addEventListener('click', informeEspecifico, false);
-		function informeEspecifico() {
-				$('#menuContainer').load("informeEspecifico.html");
-		};
+	var informeM = document.getElementById('informeMensual');
+	informeM.addEventListener('click', informeMensual, false);
+	function informeMensual() {
+		$('#menuContainer').load("informeMensual.html");
+	};
 
-	var tarjetaI=document.getElementById('tarjetaInformativa');
-		tarjetaI.addEventListener('click', tarjetaInformativa, false);
-		function tarjetaInformativa() {
-			$('#menuContainer').load("tarjetaInformativa.html");
-		};
-		
-	var listarDef=document.getElementById('listarDefensores');
-		listarDef.addEventListener('click', listaDefensores, false);
-		function listaDefensores() {
-			$('#menuContainer').load("listarDefensores.php");
-		};
-				
+	var informeE = document.getElementById('informeEspecifico');
+	informeE.addEventListener('click', informeEspecifico, false);
+	function informeEspecifico() {
+		$('#menuContainer').load("informeEspecifico.html");
+	};
 
-	function cargarDatos(){
-		$.ajax({
-			type:'GET',
-			//url:'listarDefensores.php',
-			url: '../../controlador/defensor/controladorListaDef.php',
-			data:"mensaje=holaMundo",
-			beforeSend: function() {
-                $('#menuContainer').load('listarDefensores.php');
-            },
-		success:function(data){
-			console.log(data);
-			$('#tebody').append(data);
-		  //console.log('successful to ./../controlador/defensor/controladorListaDef.php');
-		}
-	  });
+	var tarjetaI = document.getElementById('tarjetaInformativa');
+	tarjetaI.addEventListener('click', tarjetaInformativa, false);
+	function tarjetaInformativa() {
+		$('#menuContainer').load("tarjetaInformativa.html");
+	};
 
-	}
-	var listarAudiencia=document.getElementById('listarAudiencias');
+	var listarDef = document.getElementById('listarDefensores');
+	listarDef.addEventListener('click', listaDefensores, false);
+	function listaDefensores() {
+		$('#menuContainer').load("listarDefensores.php");
+	};
+
+
+
+	var listarAudiencia = document.getElementById('listarAudiencias');
 	listarAudiencia.addEventListener('click', listarAudiencias, false);
 	function listarAudiencias() {
 		$('#menuContainer').load("listarAudiencias.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
 	};
-	var listarVisitas=document.getElementById('listarVisitas');
+	var listarVisitas = document.getElementById('listarVisitas');
 	listarVisitas.addEventListener('click', listarVisitas, false);
 	function listarVisitas() {
 		$('#menuContainer').load("listarVisitas.php");
@@ -123,7 +107,11 @@ $(document).ready(function() {
 
 
 
-
+	var asignar = document.getElementById('cambiarAdscripcion');
+	asignar.addEventListener('click', asinar, false);
+	function asinar() {
+		$('#menuContainer').load("../administrador/cambiarAdscripcion.php");
+	}
 
 	// Datepicker Popups calender to Choose date.
 	/*$(function() {
@@ -136,32 +124,32 @@ $(document).ready(function() {
 
 
 
-			
-	
-			
 
-		/*	var asignar=document.getElementById('asignarDefensor');
-			asignar.addEventListener('click',asinar,false);
-	     	function asinar(){
-				$('#menuContainer').load("/asignardefensor");
+
+
+
+	/*	var asignar=document.getElementById('asignarDefensor');
+		asignar.addEventListener('click',asinar,false);
+		  function asinar(){
+			$('#menuContainer').load("/asignardefensor");
+		}
+		 
+	var registrar=document.getElementById('registrar');
+		 registrar.addEventListener('click',registrarUsuario,false);
+	function registrarUsuario(){
+				$('#menuContainer').load("usuarios/registrar.html");
 			}
-			 
-		var registrar=document.getElementById('registrar');
-			 registrar.addEventListener('click',registrarUsuario,false);
-		function registrarUsuario(){
-					$('#menuContainer').load("usuarios/registrar.html");
-				}
-		var buscar=document.getElementById('buscar');
-			   buscar.addEventListener('click',buscarUsuario,false);
-		function buscarUsuario(){
-				$('#menuContainer').load("usuarios/buscar.html");
-				}*/
+	var buscar=document.getElementById('buscar');
+		   buscar.addEventListener('click',buscarUsuario,false);
+	function buscarUsuario(){
+			$('#menuContainer').load("usuarios/buscar.html");
+			}*/
 
-	
-/* 	var infor=document.getElementById('informacionDefensor');
-			infor.addEventListener('click',infoDefensores,false);
-			function infoDefensores(){
-			 $('#menuContainer').load("../../vistas/coordinador/verInfoDefensor.php");
-			}; */
+
+	/* 	var infor=document.getElementById('informacionDefensor');
+				infor.addEventListener('click',infoDefensores,false);
+				function infoDefensores(){
+				 $('#menuContainer').load("../../vistas/coordinador/verInfoDefensor.php");
+				}; */
 
 });
