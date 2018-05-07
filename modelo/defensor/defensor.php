@@ -2,11 +2,29 @@
 //include '../../controlador/conexion.php';
 include_once ('../../libreria/conexion.php');
 function listar_defensores(){
-        $sql="SELECT * FROM defensor inner join personal using(id_personal)
-                        inner join juzgado using(id_juzgado) where id_cargo=4" ;			
+        $sql="SELECT * FROM defensor as d inner join personal as p using(id_personal)
+                        inner join juzgado as j using(id_juzgado) where id_cargo =4";			
 
    $lista=consulta($sql);
+   //print_r($sql);
    return $lista;
+}
+function listar_defensores_estudios(){
+    $sql="SELECT * FROM defensor as d inner join personal as p using(id_personal)
+                    inner join juzgado as j using(id_juzgado)
+                    inner join estudios using(id_personal) where id_cargo =4";			
+
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
+function getDefensorById($id_defensor){
+    $sql="SELECT * FROM defensor as d inner join personal as p using(id_personal)
+    inner join juzgado as j using(id_juzgado)
+    inner join estudios using(id_personal) where id_cargo=4 and id_defensor ='".$id_defensor."' ";
+    $lista = consulta($sql);
+    //echo 'si hace consulta';
+    return $lista;
 }
 
 function getDefensorById($id_defensor){
@@ -94,8 +112,7 @@ function obtenerDefensorCedula($cedulaProf){
    return $lista;
     }
     //Definimos una funcion que acutualice al actualiza_defensor
-   
-    function actualiza_defensor($defensor){
+ function actualiza_defensor($defensor){
         
         $sql = "UPDATE  defensor as d inner join personal as p using(id_personal) inner join juzgado as j using(id_juzgado)".
         "SET p.nombre='".$defensor['nombre']."', p.ap_paterno='".$defensor['ap_paterno']."', p.ap_materno='".$defensor['ap_materno']."',".
@@ -109,16 +126,16 @@ function obtenerDefensorCedula($cedulaProf){
         //echo $sql;
         return $lista;
  }
-   
- //Definimos una funcion que borrar defensor
- function eliminar_defensor($id_defensor){
+
+    //Definimos una funcion que borrar defensor
+    function eliminar_defensor($id_defensor){
         
-    //$sql = "DELETE from  defensor where id_defensor = '".$id_defensor."'";
-    $sql = "UPDATE defensor as d  inner join personal as p using (id_personal)
-            set d.estado = false, p.estado=false where id_defensor = '".$id_defensor."'";
-    $lista = consulta($sql);
-    return $lista;
-}
+        //$sql = "DELETE from  defensor where id_defensor = '".$id_defensor."'";
+        $sql = "UPDATE defensor as d  inner join personal as p using (id_personal)
+                set d.estado = false, p.estado=false where id_defensor = '".$id_defensor."'";
+        $lista = consulta($sql);
+        return $lista;
+    }
 
     function ultimoDefensorCreatado(){
         $sql = mysql_query("SELECT MAX(id_defensor) AS id FROM defensor");

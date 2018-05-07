@@ -6,5 +6,4 @@
     $defensorX = getDefensorById($id_def);//obtenerDefensorCedula($cedulaProf);
     $defensorZ = json_encode($defensorX);
     echo $defensorZ;
-
 ?>

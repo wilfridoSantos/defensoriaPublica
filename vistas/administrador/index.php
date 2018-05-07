@@ -90,7 +90,7 @@ include "../../Controlador/sesion.php";
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
@@ -220,10 +220,7 @@ include "../../Controlador/sesion.php";
         </div>
         <!-- /top navigation -->
   <!-- page content -->
-<div>
-
-<h1 Bienvenido Coordinador </h1>
-</div>
+<div><h1 Bienvenido Coordinador </h1></div>
   
    <div class="right_col" role="main">
           <div class="">
@@ -241,10 +238,9 @@ include "../../Controlador/sesion.php";
               </div>
             </div>
 
-            <div class="clearfix">
+            <div class="clearfix"></div>
+            <div id="dialogo" title="Confirma Eliminar?"></div>
 
-            </div>
-              <div id="dialogo" title=" confirmar eliminar"></div> 
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               

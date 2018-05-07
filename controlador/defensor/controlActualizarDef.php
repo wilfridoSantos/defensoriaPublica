@@ -20,25 +20,14 @@
             "corre_electronico" =>$_POST['corre_electronico'],                
             "cedula_profesional" =>$_POST['cedula_profesional'],
             "juzgado"         =>$_POST['juzgado']
-        );
-      //  print_r($defensor['id_defensor']);
-        //print_r ($defensor);
-        $actualizaDefensor = actualiza_defensor($defensor);
-        //echo'<script language="javascript">window.location="../../vistas/coordinador/listarDefensores.php"</script>';
-        
-       
+        );        
+        $actualizaDefensor = actualiza_defensor($defensor);       
         if(!isset($_GET['tipo'])){
-         
-          session_start();
+           session_start();
            $_SESSION['mensaje'] = "Actualizacion exitoso";
-        // include "../../vistas/usuarios/registrar.html";
-         //echo '<script> window.location="../../vistas/coordinador/listarDefensores.php?dirigir=actualizar_defensor"</script>';  
-         // echo '<script>  $("#menuContainer").load("	listarDefensores.php");
-          //</script>';
-       // return 200;//  header("location: ../../vistas/administrador/index.php?dirigir=listar_defensor");
-        header("location: ../../vistas/administrador/index.php?dirigir=listar_defensor");
+          return 200; // header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
        }
        else{
            echo "json";
        }
-        ?>  
+?>

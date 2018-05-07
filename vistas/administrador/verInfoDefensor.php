@@ -1,9 +1,3 @@
-<?php 
-  
-  //$cedula = $_GET['cedula']
-  //include '../../controlador/defensor/controlDefensor.php';
-  //echo $_GET['cedula'];
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +12,9 @@
 
             <div id = "verInfoDef" class="w-100">
             <h3 > Detalle Informacion Defensor</h3>
-
             </div>
-
-    
-        
       </div>
 </body>
 
 </html>
+

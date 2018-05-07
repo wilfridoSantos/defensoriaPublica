@@ -71,33 +71,25 @@ function agrega(){
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
                               <input type="email" class="form-control" required placeholder="Email" name="email">
                             </div>
-                      </div>
-                      
-                     
-
+                      </div>                                    
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nup<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" pattern="[0-9]{5}"  min="5" class="form-control" required placeholder="nup" name="nup">
                          </div>
                       </div>
-
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Nue<span class="required">*</span></label>
                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" pattern="[0-9]{5}" min="5" class="form-control" required  placeholder="nue" name="nue">
                         </div>
                       </div>
-
-
                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" title=": el formato debe ser alfanumerico con 18 digitos" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                         </div>
                       </div>
-
-
                        <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">adscripcion</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
@@ -112,8 +104,16 @@ function agrega(){
                                                 }
                                                  echo  '</optgroup>';
                                           }
-                                  ?>
-                           
+                                  ?>                           
+                          </select>
+                        </div>
+                      </div>                    
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Puesto</label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <select name="puesto"  class="select2_group form-control">
+                             <option value="5">defensor</option> 
+                             <option value="2">coordinador</option>   
                           </select>
                         </div>
                       </div>

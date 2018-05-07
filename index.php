@@ -60,6 +60,7 @@ if (session_start()) {
                <i class="zmdi zmdi-arrow-right">&nbsp;</i>
                 Iniciar Sesion
                </button>
+<<<<<<< HEAD
              <!--   <button id="restorePassword" onclick="olvido();" class="btn btn-primary btn-sm" type="button" >
                <i class="zmdi zmdi-key"> &nbsp;</i>
                 Recuperar Contrasenia
@@ -69,6 +70,9 @@ if (session_start()) {
                                         <input name="remember" type="checkbox" value="Remember Me">Recordarme para la proxima sesion
                                     </label> -->
               </div> 
+=======
+                
+>>>>>>> 3dc8dfd531904669b6cc7fdb8c8037e41b3df460
                 <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">
                 </div>
               </div>

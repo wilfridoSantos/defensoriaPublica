@@ -32,18 +32,20 @@ $(document).ready(function () {
 			$('#menuContainer').load("tarjetaInformativa.html");
 		};
 		
-	var listarDef=document.getElementById('listarDefensores');
+		var listarDef = document.getElementById('listarDefensores');
 		listarDef.addEventListener('click', listaDefensores, false);
 		function listaDefensores() {
 			$('#menuContainer').load("listarDefensores.php");
 		};
-
+	
+			
+	
 	var listarAudiencia=document.getElementById('listarAudiencias');
 	listarAudiencia.addEventListener('click', listarAudiencias, false);
 	function listarAudiencias() {
 		$('#menuContainer').load("listarAudiencias.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
-	};
+	};	
 	var listarVisitas=document.getElementById('listarVisitas');
 	listarVisitas.addEventListener('click', listarVisitas, false);
 	function listarVisitas() {

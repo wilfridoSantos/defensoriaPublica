@@ -33,8 +33,8 @@
       if(!vericar_coordinador($_POST['puesto'])){        
         crear_personal($personal);
         $defensor=Array(
-         "id_juzgado"=>$_POST['adscripcion'],
-         "id_personal"=>ultimoPersonalCreatado()
+          "id_juzgado"=>$_POST['adscripcion'],
+          "id_personal"=>ultimoPersonalCreatado()
         );
         crear_defensor($defensor);
         $personal['username']=$_POST['nue'];
@@ -51,10 +51,8 @@
        }
       }
       else{
-
         $mensaje=['tipo'=>"error",
-        'mensaje'=>"el personal  con el nue o nup ya se encuentra registrado"];
-  
+        'mensaje'=>"el personal  con el nue o nup ya se encuentra registrado"];  
         $didigir="registrar_defensor";
       }
       //  ultimoPersonalCreatado();

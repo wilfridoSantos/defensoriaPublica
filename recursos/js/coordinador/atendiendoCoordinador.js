@@ -22,8 +22,6 @@ $(document).ready(function () {
 			success: function (data) {
 
 				var jsonInfoDef = jQuery.parseJSON(data);
-			     console.log(data);
-				 
 				console.log(jsonInfoDef.id_defensor, 'entro   ');
 
 				$.each(jsonInfoDef, function (KEY, VALOR) {
@@ -96,48 +94,48 @@ $(document).ready(function () {
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
 						'<input type="text" required pattern= "[A-Za-z]+" title = "Se aceptan solo letras" class="form-control text-uppercase" id="nombre" placeholder="Nombre" name="nombre"' +
-						'value="' + VALOR.nombre + '" >' +
+						'value="' + (VALOR.nombre).toUpperCase() + '" >' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Apellido Paterno<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
 						'<input type="text" class="form-control" id="ap_paterno" placeholder="apellido Paterno" name="ap_paterno"' +
-						'value="' + VALOR.ap_paterno + '">' +
+						'value="' + (VALOR.ap_paterno).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Apellido Materno<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
 						'<input type="text" class="form-control" id="ap_materno" placeholder="apellido materno" name="ap_materno"' +
-						'value="' + VALOR.ap_materno + '">' +
+						'value="' + (VALOR.ap_materno).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Curp<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
 						'<input type="text" class="form-control" id="curp" placeholder="curp" name="curp"' +
-						'value="' + VALOR.curp + '">' +
+						'value="' + (VALOR.curp).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Calle<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
 						'<input type="text" class="form-control" id="calle" placeholder="Calle" name="calle"' +
-						'value="' + VALOR.calle + '">' +
+						'value="' + (VALOR.calle).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Numero Exterior<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text"  title=""class="form-control" id="numero_ext" placeholder="Numero Exterior" name="numero_ext"' +
+						'<input type="number"  title"cinco digitos" class="form-control" id="numero_ext" placeholder="Numero Exterior" name="numero_ext"' +
 						'value="' + VALOR.numero_ext + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Numero Interior<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" class="form-control" id="numero_int" placeholder="Numero Interior" name="numero_int"' +
+						'<input type="number" class="form-control" id="numero_int" placeholder="Numero Interior" name="numero_int"' +
 						'value="' + VALOR.numero_int + '">' +
 						'</div>' +
 						'</div>' +
@@ -145,14 +143,14 @@ $(document).ready(function () {
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Colonia<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
 						'<input type="text" class="form-control" id="colonia" placeholder="colonia" name="colonia"' +
-						'value="' + VALOR.colonia + '">' +
+						'value="' + (VALOR.colonia).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Municipio<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
 						'<input type="text" class="form-control" id="municipio" placeholder="Municipio" name="municipio"' +
-						'value="' + VALOR.municipio + '">' +
+						'value="' + (VALOR.municipio).toUpperCase()+ '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
@@ -173,7 +171,7 @@ $(document).ready(function () {
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Genero<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">' +
 						'<input type="text" class="form-control" id="genero" placeholder="genero" name="genero"' +
-						'value="' + VALOR.genero + '">' +
+						'value="' + (VALOR.genero).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
@@ -187,14 +185,14 @@ $(document).ready(function () {
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">E-Mail<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
 						'<input type="text" class="form-control" id="corre_electronico" placeholder="Correo Electronico" name="corre_electronico"' +
-						'value="' + VALOR.corre_electronico + '">' +
+						'value="' +( VALOR.corre_electronico).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">No Cedula<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12">' +
 						'<input type="text" class="form-control"  id="cedula_profesional"  placeholder="numero cedula" name="cedula_profesional"' +
-						'value="' + VALOR.cedula_profesional + '">' +
+						'value="' + (VALOR.cedula_profesional).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
@@ -202,7 +200,7 @@ $(document).ready(function () {
 						'</label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12">' +
 						'<input class="date-picker form-control col-md-7 col-xs-4" required="required"  id="juzgado"  placeholder="Juzgado" name="juzgado" type="text"' +
-						'value="' + VALOR.juzgado + '">' +
+						'value="' + (VALOR.juzgado).toUpperCase() + '">' +
 						'</div>' +
 						'</div>		  ' +
 						'<div class="ln_solid"></div>' +
@@ -307,4 +305,3 @@ $(document).ready(function () {
 
 	}
 });
-
