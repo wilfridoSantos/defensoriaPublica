@@ -10,7 +10,7 @@
        // echo '<p class="text-danger"><strong>Aun no existen defensores agregados al sistema</strong></p>';
     }else{
         $contenido = json_encode($listaDef);
-        echo $contenido;
+       // echo 200;
         //echo 'va bienn';
         //echo '<script> $('#menuContainer').load("listarDefensores.php")</script>';
         //header('Location: ../../vistas/coordinador/listarDefensores.php');

@@ -21,8 +21,10 @@
         if(!isset($_GET['tipo'])){
          
            session_start();
-            $_SESSION['mensaje'] = "registro exitoso";
-            header("location: ../../vistas/coordinador/index.php?dirigir='registrar_defensor'");
+           $mensaje=['tipo'=>"exito",
+           'mensaje'=>"registro existoso"];
+          $_SESSION['mensaje'] = $mensaje;
+            header("location: ../../vistas/administrador/index.php?dirigir='registrar_defensor'");
         }
         else{
              header('Content-Type: application/json');

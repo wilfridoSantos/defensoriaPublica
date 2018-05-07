@@ -9,7 +9,7 @@ $num_regs = $ejecutar_consulta->num_rows;
 //echo 'USER=> '.$usuario . ' PASS=> '. $pass;
  //echo "<input type='button' onclick='alert('USER=> '.$usuario . ' PASS=> '. $pass)'/>";
 if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
-    echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a ' . $usuario . '</strong></p>';
+    echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a </strong></p>';
 } else { //encontro registro sobre un usuario y ese username
     $arrayUser = $ejecutar_consulta -> fetch_assoc();//contiene informacion del usuario en un array
     $passHashed = $arrayUser["password"];// obtiene la Contrasenia del usuario en la BD
@@ -29,17 +29,17 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
                 $_SESSION["autentificado"] = true;//queda autenticado          
                 $_SESSION["usuario"] = $nombreUsuario; // se asigna el nombre del usuario a la session
                 $_SESSION["rol"] = $id_cargo; //asignamos rol de usuario /admin =1, coordinado =2, defensor =3
-                 $_SESSION["mensaje"] = 'Bienvenido usuario: '.$nombreUsuario;
+               
                 echo'<script language="javascript">window.location="Vistas/baseIndex.php"</script>';
                 //header("Location: ../Vistas/baseIndex.php");
             }else{
                  echo '<p class="text-danger"><strong>Cuenta inactiva contacto al administrador</strong></p>';
             }
         }else{
-            echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a ' . $usuario . '</strong></p>';
+            echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a </strong></p>';
         }
     }else{
-        echo '<p class="text-danger"><strong>Contraseña incorrecta '.$pass.'</strong></p>';
+        echo '<p class="text-danger"><strong>Contraseña incorrecta </strong></p>';
     }
 }
 ?>

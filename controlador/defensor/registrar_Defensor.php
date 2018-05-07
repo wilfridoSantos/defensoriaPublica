@@ -25,7 +25,7 @@
 
       // crear_juzgado($juzgado);
        // echo isset($_GET['tipo']);
-     //  print_r(listar_personal());
+    //  print_r($personal);
     
      if(listar_defensor_x_nue($_POST['nue'])==0){ 
       $mensaje=['tipo'=>"juzgado",
@@ -37,9 +37,9 @@
          "id_personal"=>ultimoPersonalCreatado()
         );
         crear_defensor($defensor);
-        $personal['username']="juan";
+        $personal['username']=$_POST['nue'];
         $personal['password']=encriptar($_POST['password']);
-        //crear_user($personal);
+        crear_usarioSistema($personal);
         $mensaje=['tipo'=>"exito",
         'mensaje'=>"registro existoso"];
         
@@ -62,7 +62,7 @@
         if(!isset($_GET['tipo'])){
            session_start();
             $_SESSION['mensaje'] = $mensaje;
-            header("location: ../../vistas/coordinador/index.php?dirigir=".$didigir);
+            header("location: ../../vistas/administrador/index.php?dirigir=".$didigir);
         }
         else{
             echo "json";

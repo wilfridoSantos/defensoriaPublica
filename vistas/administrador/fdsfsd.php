@@ -1,7 +1,7 @@
 <?php
 include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
-  if($_SESSION["rol"] != 1 ){
+  if($_SESSION["rol"] != 2 ){
      header("Location: ../baseIndex.php");
   }
 ?>
@@ -20,8 +20,6 @@ include "../../Controlador/sesion.php";
     <link rel="stylesheet" href="../../recursos/css/style.css" />
     <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
     
-    <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -55,11 +53,11 @@ include "../../Controlador/sesion.php";
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../recursos/images/img.jpg" alt="..." class="img-circle profile_img"/>
+                <img src="../../recursos/images/defensoriav1.png" alt="..." class="img-circle profile_img"/>
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                                  <?php //echo $_SESSION['usuario'] ?>
+                                  <?php echo $_SESSION['usuario'] ?>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -92,7 +90,7 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a id="registrarDefensor">Registrar personal</a></li>
+                      <li><a id="registrarDefensor">Registrar Defensor</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
                       <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
@@ -115,7 +113,15 @@ include "../../Controlador/sesion.php";
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-             
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
               <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../index.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
@@ -135,7 +141,7 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../../recursos/images/img.jpg" alt=""/><?php// echo $_SESSION['usuario'] ?>
+                    <img src="../../recursos/images/img.jpg" alt=""/><?php echo $_SESSION['usuario'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -172,7 +178,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span><?php //echo $_SESSION['usuario'] ?></span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -184,7 +190,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span><?php// echo $_SESSION['usuario'] ?></span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -196,7 +202,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span><?php //echo $_SESSION['usuario'] ?></span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -241,42 +247,26 @@ include "../../Controlador/sesion.php";
               </div>
             </div>
 
-            <div class="clearfix">
+            <div class="clearfix"></div>
 
-            </div>
-              <div id="dialogo" title=" confirmar eliminar"></div> 
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               
                   <?php
-               // echo isset($_SESSION['mensaje']);
-                     
-                     if(isset($_SESSION['mensaje'])){
-                      if(isset($_SESSION['mensaje']['tipo'])){
-
-                        if($_SESSION['mensaje']['tipo']=='exito')
-                           $alert='alert alert-success';
-
-                        //$alert='alert alert-danger';
-                         if($_SESSION['mensaje']['tipo']=='error')
-                           $alert='alert alert-danger';
-                         
-                          if($_SESSION['mensaje']['tipo']=='juzgado')
-                            $alert='alert alert-danger';
+                     if(($_SESSION['mensaje']) != null || ($_SESSION['mensaje'])){
+                        $alert='alert alert-success';
+              
+                        if($_SESSION['mensaje']['tipo']=='error')
+                          $alert='alert alert-danger';
                            
-                          //else $alert='';
-                          
-                      }
                   ?>
-                    <div class='<?php echo $alert; ?>' alert-dismissible fade in" role="alert">
+                    <div class=" '<?php echo $alert; ?>"'  alert-dismissible fade in" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
                       <strong align="center">
                         <?php 
-                        echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");
+                        echo $_SESSION['mensaje']['mensaje'];
                                                 $_SESSION['mensaje']=[];
-                                                $_SESSION['mensaje']['tipo']='';
-                                                $_SESSION['mensaje']['mensaje']='';
                         ?> 
                      </strong>
 
@@ -297,47 +287,30 @@ include "../../Controlador/sesion.php";
                     
                       
                     <div align ="center">
-                   <img id="img_index_coord"src="../../recursos/images/LOGO_PRINCIPAL.png">
-                    <p class="text-justify">
-                      MISIÓN
-                      <br/>
-                      La misión de la Defensoría Pública es garantizar el derecho humano de acceso a la justicia a los sectores sociales que lo requieran, priorizando la atención a las personas de escasos recursos económicos y en situación de vulnerabilidad, a través de los servicios jurídicos de asesorías, patrocinio y defensa técnica, adecuada y diligente en materia penal, justicia especializada para adolescentes, civil, familiar, mercantil, agraria, administrativa y constitucional.
-                     </p>
-                     <p class="text-justify">
-                       VISIÓN
-                       <br/>
-                      Ser una institución a la vanguardia que brinde servicios jurídicos con sensibilidad humana, ética y compromiso con la sociedad oaxaqueña, a fin de consolidar el Sistema de Justicia, la democracia, y el ejercicio pleno de la libertad, en un ambiente de equidad y respeto absoluto a los derechos humanos.
+                    <!--<img id="img_index_coord"src="../../recursos/images/defensoria.png">
+                    <h3><p>
+                      La Defensoría Pública del Estado de Oaxaca tiene como objetivo coordinar,
+                       dirigir y vigilar los servicios jurídicos de asesoría, 
+                       patrocinio y defensa eficaz para todas las personas que así lo requieran,
+                        en específico a aquellas que carecen de recursos económicos para solventar una defensa 
+                        particular, así como personas en situación de vulnerabilidad.
                       </p>
-                      <p class="text-justify">
-                      PRINCIPIOS
-                      <br/>
-                      Los principios que deben regir la conducta de los servidores públicos dependientes de la Defensoría Pública del Estado de Oaxaca, serán:
-                      </p>
-                       
-                      <?php
-               if(isset($_GET['dirigir'])) {
-               switch ($_GET['dirigir']) {
+                      </h3> -->
+                      <?php 
+            switch (isset($_GET['dirigir'])) {
                 case 'registrar_defensor':
-                ?>  
-                <script>
-                 // $('#menuContainer').load("../usuario/registrar.php`");
-                </script>
-                  <?php  break;
-                   case 'listar_defensor':?>
-                    <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
-                    <?php break;
-                    case 'cambioAdscripcion':
-                    ?>
-                    <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
-                   <?php 
+                    require_once("../usuarios/registrar.php");                    
+                    break;
+                
+                    case 'listar_defensor':
+                    require_once("../usuarios/registrar.php");                    
                     break;
                 
                 
                 default:
-                require_once("../usuario/registrar.php.php");   
+                  //  require_once("/vista principal.php");
                     break;
             }
-          }
         ?>                   
                     </div>
                   </div>
@@ -369,6 +342,8 @@ include "../../Controlador/sesion.php";
         <!-- /footer content -->
 
 
+    <!-- jQuery -->
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->

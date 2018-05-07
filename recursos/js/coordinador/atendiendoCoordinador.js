@@ -14,7 +14,7 @@ $(document).ready(function () {
 	function verInfo(idDef) {
 		$.ajax({
 			url: "../../controlador/defensor/controlDefensor.php",
-			type: "post",
+			type: "GET",
 			data: "id_defensor=" + idDef,
 			beforeSend: function () {
 				$('#menuContainer').load('verInfoDefensor.php');
@@ -22,6 +22,8 @@ $(document).ready(function () {
 			success: function (data) {
 
 				var jsonInfoDef = jQuery.parseJSON(data);
+			     console.log(data);
+				 
 				console.log(jsonInfoDef.id_defensor, 'entro   ');
 
 				$.each(jsonInfoDef, function (KEY, VALOR) {

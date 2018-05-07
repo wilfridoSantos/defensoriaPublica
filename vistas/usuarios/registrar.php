@@ -22,7 +22,8 @@ function agrega(){
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#" id="agregarjuzado" onclick="agrega()"><h3><label class="control-label col-md-4 col-sm-3 col-xs-12 text-muted" >agregar Juzgado</label></h3></a>
+                          <li><a href="#" id="agregarjuzado" onclick="agrega()">
+                            <label  ><h3>agregar Juzgado</h3></label></a>
                         </li>
                    
                         </li>
@@ -40,21 +41,21 @@ function agrega(){
                         <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nombre<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text"   pattern="[A-Za-z ]+"  required class="form-control text-uppercase" title=":se acepta solo letras y en mayusculas" placeholder="Nombre" name="nombre">
+                            <input type="text"   pattern="[A-Za-z ]{3,50}"  required class="form-control text-uppercase" title=":se acepta solo letras y en mayusculas" placeholder="Nombre" name="nombre">
                           </div>
                        </div>
 
                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Apellido Paterno<span class="required">*</span></label>
                          </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" pattern="[A-Za-z]+"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
+                            <input type="text" pattern="[A-Za-z]{5,50}"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
                           </div>
                        </div>
 
                         <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
                           </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" pattern="[A-Za-z]+" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
+                            <input type="text" pattern="[A-Za-z]{5,50}" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
                            </div>
                        </div> 
                        
@@ -166,9 +167,8 @@ function agrega(){
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <button type="button" class="btn btn-primary btn btn-info btn-lg">Cancel</button>
-						   <button class="btn btn-primary btn btn-info btn-lg" type="reset">Reset</button>
-						   <input type ="submit" class="btn btn-succes btn btn-success btn-lg" value="guardar"/>
+						   <button class="btn btn-primary btn btn-info btn-lg" type="reset">Lipiar</button>
+						   <input type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Guardar"/>
                         <!--   <button type="submit" class="btn btn-success">Submit</button> -->
                         </div>
                       </div>
