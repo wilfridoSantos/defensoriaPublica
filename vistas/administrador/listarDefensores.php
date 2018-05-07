@@ -11,7 +11,6 @@
     <title>Modulo Coordinador General</title>
       <script src="../../recursos/js/main.js"></script>
       <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
-
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
 
@@ -44,27 +43,27 @@
             </tr>
           </thead>
           <tbody id='tebody' >
-        <?php
-            include '../../controlador/defensor/controladorListaDef.php';
+        <?php include '../../controlador/defensor/controladorListaDef.php';
             $Defensores=json_decode($contenido);
             foreach($Defensores as $obj){
               if($obj->estado){                
                 echo '<tr> '.
                   '<td id="idDefensor" style="display:none;">'.$obj->id_defensor.'</td>'.
-                  '<td>'.$obj->nombre.'</td>'.
-                  '<td>'.$obj->ap_paterno.'</td>'.
-                  '<td>'.$obj->ap_materno.'</td>'.
-                  '<td>'.$obj->juzgado.'</td>'.                                          
-                  '<td><button type="button" class="btn btn-primary boton" id="boton" name="info"><span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
-                  '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
-                  '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
+                  '<td>'.strtoupper($obj->nombre).'</td>'.
+                  '<td>'.strtoupper($obj->ap_paterno).'</td>'.
+                  '<td>'.strtoupper($obj->ap_materno).'</td>'.
+                  '<td>'.strtoupper($obj->juzgado).'</td>'.                                          
+                  '<td><button type="button" class="btn btn-primary boton" id="boton" name="info">'.
+                      '<span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
+                  '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp">'.
+                      '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
+                  '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel">'.
+                  '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
                   '</td> </tr>';
                 }            
               }
         ?>
-          </tbody>
-          
-
+          </tbody>  
         </table>
        
         

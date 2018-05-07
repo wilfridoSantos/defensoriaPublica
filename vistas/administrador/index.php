@@ -88,7 +88,7 @@ include "../../Controlador/sesion.php";
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
@@ -226,17 +226,11 @@ include "../../Controlador/sesion.php";
         </div>
         <!-- /top navigation -->
   <!-- page content -->
-<div>
-
-<h1 Bienvenido Coordinador </h1>
-</div>
+<div><h1 Bienvenido Coordinador </h1></div>
   
    <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3></h3>
-              </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -252,13 +246,15 @@ include "../../Controlador/sesion.php";
 
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">               
+                <div class="x_panel">                               
+                  <div class="x_title">                                     
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content" >
                   <?php
-                     if(!isset($_SESSION['mensaje'])){
-                          $alert='alert alert-success';
-                  ?><h3><?php echo $_SESSION['mensaje'] ?></h3>
-                  <?php
-                       // echo $_SESSION['mensaje'];
+                     if(($_SESSION['mensaje']) != null ){
+                        $alert='alert alert-success';
+              
                         if($_SESSION['mensaje']['tipo']=='error')
                           $alert='alert alert-danger';
                            
@@ -277,53 +273,15 @@ include "../../Controlador/sesion.php";
                 <?php
                }
                ?>
-                
-                  <div class="x_title">
-                    <h2></h2>
-                    
-                   
-                    <div class="clearfix"></div>
-                  </div>
-                  
-
-                  <div class="x_content">
-                    
-                      
-                    <div align ="center">
-                 
-                      <?php 
-            switch (isset($_GET['dirigir'])) {
-                case 'registrar_defensor':
-                    require_once("../usuarios/registrar.php");                    
-                    break;
-                
-                    case 'listar_defensor':
-                    require_once("../usuarios/registrar.php");                    
-                    break;
-                
-                
-                default:
-                  //  require_once("/vista principal.php");
-                    break;
-            }
-        ?>                   
-                    </div>
                   </div>
                 </div>
               </div>
 
-
-                   
-					
-					
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
-         
-        </div>
         <!-- /page content --> 
 
 

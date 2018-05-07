@@ -9,15 +9,22 @@ function listar_defensores(){
    //print_r($sql);
    return $lista;
 }
+function listar_defensores_estudios(){
+    $sql="SELECT * FROM defensor as d inner join personal as p using(id_personal)
+                    inner join juzgado as j using(id_juzgado)
+                    inner join estudios using(id_personal) where id_cargo =4";			
 
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
 function getDefensorById($id_defensor){
-    $sql="SELECT * FROM defensor inner join personal using(id_personal)
-                                        inner join juzgado using(id_juzgado)
-                                       where id_defensor ='".$id_defensor."' ";
+    $sql="SELECT * FROM defensor as d inner join personal as p using(id_personal)
+    inner join juzgado as j using(id_juzgado)
+    inner join estudios using(id_personal) where id_cargo=4 and id_defensor ='".$id_defensor."' ";
     $lista = consulta($sql);
     //echo 'si hace consulta';
     return $lista;
-
 }
 
 function listar_defensor_x_id($id){

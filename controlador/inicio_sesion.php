@@ -39,7 +39,7 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
             echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a ' . $usuario . '</strong></p>';
         }
     }else{
-        echo '<p class="text-danger"><strong>Contraseña incorrecta '.$pass.'</strong></p>';
+        echo '<p class="text-danger"><strong>Contraseña incorrecta ******</strong></p>';
     }
 }
 ?>
