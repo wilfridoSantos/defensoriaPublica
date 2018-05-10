@@ -92,7 +92,7 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Configuracion usurio <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a id="registrarDefensor">Registrar personal</a></li>
+                      <li><a id="registrarExpediente">Registrar usuario</a></li>
                       <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
                       <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
@@ -276,7 +276,6 @@ include "../../Controlador/sesion.php";
                 <?php
                }
                ?>
-                
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               
@@ -314,29 +313,26 @@ include "../../Controlador/sesion.php";
                       <?php
                if(isset($_GET['dirigir'])) {
                switch ($_GET['dirigir']) {
-                case 'registrar_defensor':
-                ?>  
-                <script>
-                 $('#menuContainer').children().remove();
-                  $('#menuContainer').load("../usuarios/registrar.php");
-                </script>
-                  <?php  break;
-                   case 'listar_defensor':?>
-                    <script>  
-                    $('#menuContainer').children().remove();
-                    $('#menuContainer').load("listarDefensores.php"); </script>
+                case 'registrar_usuario':
+                      ?>  
+                      <script>
+                      $('#menuContainer').children().remove();
+                      
+                      $('#menuContainer').load("registroUsuarioServicio.php");
+                      </script>
+                <?php  break;
+                case 'listar_defensor':?>
+                    <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
                     <?php break;
                     case 'cambioAdscripcion':
                     ?>
-                    <script> 
-                    $('#menuContainer').children().remove();
-                    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
+                    <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
                    <?php 
-                    break;
+                break;
                 
                 
                 default:
-               // require_once("../usuario/registrar.php.php");   
+                require_once("../usuario/registrar.php.php");   
                     break;
             }
           }

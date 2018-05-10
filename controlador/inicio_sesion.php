@@ -12,7 +12,7 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
     echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a </strong></p>';
 } else { //encontro registro sobre un usuario y ese username
     $arrayUser = consulta($sql);//$ejecutar_consulta -> fetch_assoc();//contiene informacion del usuario en un array
-    print_r( $arrayUser);
+//print_r( $arrayUser);
     $passHashed = $arrayUser[0]['password'];// obtiene la Contrasenia del usuario en la BD
     if(password_verify($pass, $passHashed)){//verifica las contraseñas si son correctas entra al if
         $sqlRol = 'select id_cargo from personal where nue ='.$usuario;

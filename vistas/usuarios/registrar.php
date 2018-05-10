@@ -48,14 +48,14 @@ function agrega(){
                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Apellido Paterno<span class="required">*</span></label>
                          </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" pattern="[A-Za-z]{5,50}"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
+                            <input type="text" pattern="[A-Za-z]{4,50}"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
                           </div>
                        </div>
 
                         <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
                           </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" pattern="[A-Za-z]{5,50}" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
+                            <input type="text" pattern="[A-Za-z]{4,50}" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
                            </div>
                        </div> 
                        

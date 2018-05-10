@@ -1,5 +1,6 @@
 <?php
-require_once("conexion.php");
+
+include_once ('../../libreria/conexion.php');
 
 function listar_expediente_x_id($id){
       global $conexion;
@@ -25,6 +26,14 @@ function listar_expediente_x_id($id){
         $sql = "select * from expediente inner join compra_proveedor using(id_expediente) inner join audiencia using(id_expediente) where nombre='".$id_expediente."'";
         $consulta = consulta($sql, $conexion);
         return $consulta;
+    }
+    function alta_expediente($objetoEntidad){
+      
+        $sql = "INSERT INTO expediente ";
+        $sql.= " SET id_usuario_servicio='".$objetoEntidad['id_usuario_servicio']."', id_personal='".$objetoEntidad['id_defensor']."' ";
+      // echo $sql;
+         $lista=registro($sql);
+   return $lista;
     }
   
     //Definimos la funciones sobre el objeto crear_expediente
