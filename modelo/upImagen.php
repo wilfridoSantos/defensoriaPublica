@@ -1,13 +1,15 @@
 <?php
-//echo count($_FILES["file0"]["name"]);exit;
+
 if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_FILES["fileToUpload"]["type"])){
-$target_dir = "recursos/upload/";
+$target_dir = "uploads";
 $carpeta=$target_dir;
 if (!file_exists($carpeta)) {
     mkdir($carpeta, 0777, true);
 }
  
 $target_file = $carpeta . basename($_FILES["fileToUpload"]["name"]);
+//echo $_FILES["fileToUpload"]["name"];
+//echo $_FILES["fileToUpload"]["tmp_name"];
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if image file is a actual image or fake image
@@ -80,8 +82,8 @@ if (isset($messages)){
 	<?php
 }
 }
-
 function getDir(){
+    echo $target_file;
 	return $target_file;
 }
 ?>

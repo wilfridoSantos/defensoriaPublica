@@ -9,27 +9,36 @@ $db = new PDO("mysql:host=".BD_SERVIDOR.";dbname=".BD_NOMBRE.";charset=utf8",BD_
 
 
 function consulta($consulta){
-    global $db;
-    $sql = $db->prepare($consulta);
-    $sql->execute();  
-    if($sql->rowCount()==0)
-       return 0;
-    
-    if($sql->rowCount()>0)
-      //$datos = $sql->fetchAll(PDO::FETCH_ASSOC);
-      return  $sql->fetchAll(PDO::FETCH_ASSOC);
-    //return $datos;
- }
+  global $db;
+  $sql = $db->prepare($consulta);
+  $sql->execute();  
+  if($sql->rowCount()==0)
+     return 0;
+  
+  if($sql->rowCount()>0)
+    //$datos = $sql->fetchAll(PDO::FETCH_ASSOC);
+    return  $sql->fetchAll(PDO::FETCH_ASSOC);
+  //return $datos;
+}
+
+function consulta_obj($consulta){
+  global $db;
+  $sql = $db->prepare($consulta);
+  $sql->execute();  
+  if($sql->rowCount()==0)
+     return 0;
+  
+  if($sql->rowCount()>0)
+    //$datos = $sql->fetchAll(PDO::FETCH_ASSOC);
+    return  $sql->fetchAll(PDO::FETCH_ARRAY);
+  //return $datos;
+}
  
  function registro($consulta){
    global $db;
    $sql=$db->prepare($consulta);
    $sql->execute();
-<<<<<<< HEAD
-    //echo 'registro devueltos= '.$sql->rowCount();
-=======
     
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
     return $sql->rowCount();
  }
 ?>

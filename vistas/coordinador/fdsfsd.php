@@ -1,7 +1,7 @@
 <?php
 include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
-  if($_SESSION["rol"] != 1 ){
+  if($_SESSION["rol"] != 2 ){
      header("Location: ../baseIndex.php");
   }
 ?>
@@ -14,8 +14,12 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>DataTables | Gentelella</title>
+    <title>Modulo Coordinador General</title>
 
+<!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../recursos/css/style.css" />
+    <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
+    
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -32,10 +36,10 @@ include "../../Controlador/sesion.php";
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="../../recursos/css/custom.min.css" rel="stylesheet"/>
+    <link href="../../recursos/css/custom.css" rel="stylesheet"/>
   </head>
 
-  <body class="nav-md">
+  <body class="nav-md" style="background-color:black;">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -59,23 +63,47 @@ include "../../Controlador/sesion.php";
             <!-- /menu profile quick info -->
 
             <br />
-
+             
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Coordinador de defensores</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Defensores <span class="fa fa-chevron-down"></span></a>
+
+                  <li><a><i class="fa fa-home"></i> Generar Informe <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a id="defensores">lista de defensores</a></li>
-                      <li><a id="verusuarios">Ver los usuarios del servicio</a></li>
-                      <li><a id="asignarDefensor">Asignar  un defensor</a></li>
-                      <li><a id="registrar">Registrar un defensor</a></li>
-                      <li><a id="buscar">Buscar</a></li>
-                       <li><a id="buscar">Cambiar de adscripcion</a></li>
+                      <li><a id="informeAnual">Generar Informe Anual</a></li>
+                      <li><a id="informeMensual">Generar Informe Mensual</a></li>
+                      <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
+                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a id="listarDefensores">Listar Defensores</a></li>
+                      <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
+                      <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
+                      <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
+                      <li><a id="asignarCaso">Asignar Un Caso</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-home"></i> Configuracion Defensores <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                      <li><a id="registrarDefensor">Registrar Defensor</a></li>
+                      <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
+                      <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
+                      <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
+                      <form action="../../action.php" method="post">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Buscar Defensor(username)" name="busqueda">
+                          <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                      </div>
+                      </form>
+                    </ul>
+                  </li>
               </ul>
               </div>
 
@@ -94,7 +122,7 @@ include "../../Controlador/sesion.php";
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Salir" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../index.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -113,7 +141,7 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../recursos/images/img.jpg" alt=""/>John Doe
+                    <img src="../../recursos/images/img.jpg" alt=""/><?php echo $_SESSION['usuario'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -124,7 +152,7 @@ include "../../Controlador/sesion.php";
                       </a>
                     </li>
 
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
+                    <li><a href="../../index.php"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
                   </ul>
                 </li>
 
@@ -136,9 +164,33 @@ include "../../Controlador/sesion.php";
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                        asignacion de caso => defensor: xxx, fecha:
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          asignacion de caso => defensor: xxx, fecha:  
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -150,31 +202,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
+                          <span><?php echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -185,7 +213,7 @@ include "../../Controlador/sesion.php";
                     <li>
                       <div class="text-center">
                         <a>
-                          <strong>See All Alerts</strong>
+                          <strong>Ver todas las notificaciones</strong>
                           <i class="fa fa-angle-right"></i>
                         </a>
                       </div>
@@ -197,9 +225,13 @@ include "../../Controlador/sesion.php";
           </div>
         </div>
         <!-- /top navigation -->
+  <!-- page content -->
+<div>
 
-        <!-- page content -->
-        <div class="right_col" role="main">
+<h1 Bienvenido Coordinador </h1>
+</div>
+  
+   <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -209,7 +241,7 @@ include "../../Controlador/sesion.php";
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-
+                  
                   </div>
                 </div>
               </div>
@@ -219,107 +251,86 @@ include "../../Controlador/sesion.php";
 
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+                <div class="x_panel">               
+                  <?php
+                     if(($_SESSION['mensaje']) != null || ($_SESSION['mensaje'])){
+                        $alert='alert alert-success';
+              
+                        if($_SESSION['mensaje']['tipo']=='error')
+                          $alert='alert alert-danger';
+                           
+                  ?>
+                    <div class=" '<?php echo $alert; ?>"'  alert-dismissible fade in" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                      </button>
+                      <strong align="center">
+                        <?php 
+                        echo $_SESSION['mensaje']['mensaje'];
+                                                $_SESSION['mensaje']=[];
+                        ?> 
+                     </strong>
+
+                  </div>
+                <?php
+               }
+               ?>
+                
                   <div class="x_title">
                     <h2></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"> 1</a>
-                          </li>
-                          <li><a href="#"> 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
+                   
                     <div class="clearfix"></div>
                   </div>
+                  
+
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      lista de los defensores
-                    </p>
-                    <table id="datatable" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Apellido Paterno</th>
-                          <th>Apellido Materno</th>
-                          <th>Direccion</th>
-                          <th>Telefono</th>
-                          <th>Cantidad de benificiarios</th>
-                        </tr>
-                      </thead>
-
-
-                      <tbody>
-                        <a href="#" ><tr >
-                          <td>Tiger Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>Edinburgh</td>
-                          <td>34</td>
-                          <td>9512345676</td>
-                        </tr></a>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td>Accountant</td>
-                          <td>Tokyo</td>
-                          <td>Tokyo</td>
-                          <td>34</td>
-                          <td>9512345676</td>
-                        </tr>
-                        <tr>
-                          <td>Ashton lkjdlkajldkjask</td>
-                          <td>Junior Technical Author</td>
-                          <td>San Francisco</td>
-                          <td>Tokyo</td>
-                          <td>43</td>
-                          <td>9512345676</td>
-                        </tr>
-
-
-
-                        <tr>
-                          <td>Michael Bruce</td>
-                          <td>Javascript Developer</td>
-                          <td>Singapore</td>
-                          <td>Singapore</td>
-                          <td>34</td>
-                          <td>9512345676</td>
-                        </tr>
-                        <tr>
-                          <td>Donna Snider</td>
-                          <td>Customer Support</td>
-                          <td>Junior</td>
-                          <td>Singapore</td>
-                          <td>24</td>
-                          <td>9512345676</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    
+                      
+                    <div align ="center">
+                    <!--<img id="img_index_coord"src="../../recursos/images/defensoria.png">
+                    <h3><p>
+                      La Defensoría Pública del Estado de Oaxaca tiene como objetivo coordinar,
+                       dirigir y vigilar los servicios jurídicos de asesoría, 
+                       patrocinio y defensa eficaz para todas las personas que así lo requieran,
+                        en específico a aquellas que carecen de recursos económicos para solventar una defensa 
+                        particular, así como personas en situación de vulnerabilidad.
+                      </p>
+                      </h3> -->
+                      <?php 
+            switch (isset($_GET['dirigir'])) {
+                case 'registrar_defensor':
+                    require_once("../usuarios/registrar.php");                    
+                    break;
+                
+                    case 'listar_defensor':
+                    require_once("../usuarios/registrar.php");                    
+                    break;
+                
+                
+                default:
+                  //  require_once("/vista principal.php");
+                    break;
+            }
+        ?>                   
+                    </div>
                   </div>
                 </div>
               </div>
 
 
-
-
-
+                   
+					
+					
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-        <div id="menuContainer">
-
+          
+         
         </div>
-        <!-- /page content -->
+        <!-- /page content --> 
+
 
         <!-- footer content -->
         <footer>
@@ -362,5 +373,6 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/js/custom.min.js"></script>
 
     <script src="../../recursos/js/Gestion.js"></script>
+    <script src="../../recursos/js/main.js"></script>
   </body>
 </html>

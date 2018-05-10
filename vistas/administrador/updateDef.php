@@ -14,13 +14,13 @@ function agrega(){
              <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">                               
-                  <div class="x_title"> Actualizar datos de defensor                                    
+                  <div class="x_title"> ACTUALIZAR INFORMACION DEFENSOR                                   
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" >
                   <form  class="form-horizontal form-label-left"
                    action ="../../controlador/defensor/controlActualizarDef.php" 
-                    method="post" id="updateDefensor">
+                    method="post" id="updateDefensor" enctype="multipart/form-data">
                   </form>
 
                   </div>

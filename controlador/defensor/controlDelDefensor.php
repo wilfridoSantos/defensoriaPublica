@@ -1,6 +1,6 @@
 <?php 
     include '../../modelo/defensor/defensor.php';
-    $id_defensor = $_GET['id_defensor'];
+    $id_defensor = $_GET['id_personal'];
     $eliminarDefensor = eliminar_defensor($id_defensor);
     $listar = listar_defensores();  
     if(!isset($_GET['tipo'])){         

@@ -1,11 +1,21 @@
 <?php 
-    //header('Content-Type: application/json');
-<<<<<<< HEAD
-    include_once('../../modelo/defensor/defensor.php');
-=======
     include '../../modelo/defensor/defensor.php';
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
-    
+
+        $nombreFoto = $_FILES["fileToUpload"]["name"];
+        $rutaFoto   = $_FILES["fileToUpload"]["tmp_name"];
+        $carpeta='../../recursos/uploads/';
+
+            if (!file_exists($carpeta)) {
+                mkdir($carpeta, 0777, true);
+            }
+
+            $destino = $carpeta.basename($nombreFoto);
+
+            if(move_uploaded_file($rutaFoto,$destino)){
+                print_r('se ha subido la imagen');
+                //copy($rutaFoto, $destino);
+             
+
       $defensor = Array(
             "id_personal"    =>$_POST['id_personal'],
             "nombre"         =>$_POST['nombre'],
@@ -17,25 +27,21 @@
             "numero_int"     =>$_POST['numero_int'],
             "colonia"        =>$_POST['colonia'],
             "municipio"      =>$_POST['municipio'],
-            "nup"            =>$_POST['nup'],
-            "nue"            =>$_POST['nue'],
             "genero"         =>$_POST['genero'],
             "telefono"       =>$_POST['telefono'],
-            "corre_electronico" =>$_POST['corre_electronico']
+            "correo_electronico" =>$_POST['correo_electronico'],
+            "foto"          => $nombreFoto
         );        
         $actualizaDefensor = actualiza_defensor($defensor);
         //print_r($actualizaDefensor);      
         if(!isset($_GET['tipo'])){
            session_start();
            $_SESSION['mensaje'] = "Actualizacion exitoso";
-<<<<<<< HEAD
           //return 200; // 
-          header("location: ../../vistas/administrador/");
-=======
-           header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
+         header("location: ../../vistas/administrador/");
        }
        else{
            echo "json";
        }
+    };
 ?>

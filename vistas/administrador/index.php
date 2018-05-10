@@ -14,7 +14,7 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Modulo Coordinador General</title>
+    <title>Modulo ADMINISTRADOR</title>
 
 <!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
     <link rel="stylesheet" href="../../recursos/css/style.css" />
@@ -246,18 +246,6 @@ include "../../Controlador/sesion.php";
                      if(isset($_SESSION['mensaje'])){
                       if(isset($_SESSION['mensaje']['tipo'])){
 
-<<<<<<< HEAD
-            <div class="row" id="menuContainer">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">               
-                  <?php
-               // echo isset($_SESSION['mensaje']);
-                     
-                     if(isset($_SESSION['mensaje'])){
-                      if(isset($_SESSION['mensaje']['tipo'])){
-
-=======
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                         if($_SESSION['mensaje']['tipo']=='exito')
                            $alert='alert alert-success';
 
@@ -289,13 +277,10 @@ include "../../Controlador/sesion.php";
                }
                ?>
                 
-<<<<<<< HEAD
-=======
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               
                  
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                   <div class="x_title">
                     <h2></h2>
                     
@@ -331,17 +316,6 @@ include "../../Controlador/sesion.php";
                 case 'registrar_defensor':
                 ?>  
                 <script>
-<<<<<<< HEAD
-                 // $('#menuContainer').load("../usuario/registrar.php`");
-                </script>
-                  <?php  break;
-                   case 'listar_defensor':?>
-                    <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
-                    <?php break;
-                    case 'cambioAdscripcion':
-                    ?>
-                    <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
-=======
                  $('#menuContainer').children().remove();
                   $('#menuContainer').load("../usuarios/registrar.php");
                 </script>
@@ -356,17 +330,12 @@ include "../../Controlador/sesion.php";
                     <script> 
                     $('#menuContainer').children().remove();
                     $('#menuContainer').load("cambiarAdscripcion.php"); </script>
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                    <?php 
                     break;
                 
                 
                 default:
-<<<<<<< HEAD
-                require_once("../usuario/registrar.php.php");   
-=======
                // require_once("../usuario/registrar.php.php");   
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                     break;
             }
           }

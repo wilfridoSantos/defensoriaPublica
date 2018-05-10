@@ -34,17 +34,17 @@
         <table id="datatable" class="table table-striped table-bordered">
           <thead  >
             <tr class="header">
-              <th>Nombre</th>
-              <th>Ap. Paterno</th>
-              <th>Ap. Materno</th>
-              <th>Lugar Adscripcion</th>                   
-              <th>acciones</th>
+              <th>NOMBRE</th>
+              <th>AP. PATERNO</th>
+              <th>AP. MATERNO</th>
+              <th>LUGAR ADSCRIPCION</th>                   
+              <th>ACCIONES</th>
             </tr>
           </thead>
           <tbody id='tebody'>
-        <?php require_once('../../controlador/defensor/controladorListaDef.php');
+        <?php include '../../controlador/defensor/controladorListaDef.php';
             $defensores=json_decode($contenido);
-            print_r($defensores);
+            //print_r($defensores);
             foreach($defensores as $obj){
               //print_r('=> '. $obj->estado);
               if($obj->estado){                
@@ -54,12 +54,15 @@
                   '<td>'.strtoupper($obj->ap_paterno).'</td>'.
                   '<td>'.strtoupper($obj->ap_materno).'</td>'.
                   '<td>'.strtoupper($obj->juzgado).'</td>'.                                          
-                  '<td><button type="button" class="btn btn-primary boton" id="boton" name="info">'.
-                      '<span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
+                 
+                  '<td><button type="button" class="btn btn-primary botonExp" id="botonExp" name="expedientes">'.
+                    '<span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span></button>'.
+                  '<button type="button" class="btn btn-primary boton" id="boton" name="info">'.
+                    '<span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
                   '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp">'.
                       '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
                   '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel">'.
-                  '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
+                      '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
                   '</td> </tr>';
                 }            
               }
