@@ -8,25 +8,44 @@
 		return $cadena;   
     }
     
+
+
+    function cadenaToMayuscula($dato){
+                      if(validarCadena($dato))
+                    return strtoupper($dato); 
+                
+                    return $dato;
+       }
  
+    function validarCadena($dato){
+        $nuevoArray =Array();
+        if(is_numeric($dato))
+          return false;
+          if(filter_var($dato, FILTER_VALIDATE_EMAIL))
+          return false;
+
+          return $dato;
+
+    }
  
     
     //funcion que envia un correo electronico
     function envio_correo($dir_email, $asunto, $mensaje){
    // ini_set('SMTP','smtp.gmail.com');
     //ini_set('smtp_port',587);
-    $cabecera = "From: <griselda.mendez@gob.mx>";
+
+     $cabecera = "From: <griselda.mendez@gob.mx>";
         $headers = "MIME-Version: 1.0/r/n";
 	   $headers.= "Content-type: text/html; charset=iso-8859-1/r/n";	
 	   $headers.= $cabecera."/r/n";
        mail($dir_email, $asunto, $mensaje, $cabecera);
             
-      
+       
 
 
 
-/* 
-$address = "othonhergar@gmail.com";
+
+/* $address = "othonhergar@gmail.com";
 $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->SMTPDebug = 2;
@@ -46,7 +65,7 @@ if(!$mail->Send()) {
 echo "no enviado";
 } else {
 echo "enviado";
-} */
+}  */
     }
   
 

@@ -25,7 +25,7 @@
         if(!isset($_GET['tipo'])){
            session_start();
            $_SESSION['mensaje'] = "Actualizacion exitoso";
-          return 200; // header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
+           header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
        }
        else{
            echo "json";

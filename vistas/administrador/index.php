@@ -240,11 +240,7 @@ include "../../Controlador/sesion.php";
 
             <div class="clearfix"></div>
             <div id="dialogo" title="Confirma Eliminar?"></div>
-
-            <div class="row" id="menuContainer">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">               
-                  <?php
+            <?php
                // echo isset($_SESSION['mensaje']);
                      
                      if(isset($_SESSION['mensaje'])){
@@ -281,6 +277,10 @@ include "../../Controlador/sesion.php";
                }
                ?>
                 
+            <div class="row" id="menuContainer">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">               
+                 
                   <div class="x_title">
                     <h2></h2>
                     
@@ -316,21 +316,26 @@ include "../../Controlador/sesion.php";
                 case 'registrar_defensor':
                 ?>  
                 <script>
-                 // $('#menuContainer').load("../usuario/registrar.php`");
+                 $('#menuContainer').children().remove();
+                  $('#menuContainer').load("../usuarios/registrar.php");
                 </script>
                   <?php  break;
                    case 'listar_defensor':?>
-                    <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
+                    <script>  
+                    $('#menuContainer').children().remove();
+                    $('#menuContainer').load("listarDefensores.php"); </script>
                     <?php break;
                     case 'cambioAdscripcion':
                     ?>
-                    <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
+                    <script> 
+                    $('#menuContainer').children().remove();
+                    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
                    <?php 
                     break;
                 
                 
                 default:
-                require_once("../usuario/registrar.php.php");   
+               // require_once("../usuario/registrar.php.php");   
                     break;
             }
           }
