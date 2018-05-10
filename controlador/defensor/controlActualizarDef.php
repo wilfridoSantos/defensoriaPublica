@@ -1,6 +1,10 @@
 <?php 
     //header('Content-Type: application/json');
+<<<<<<< HEAD
     include_once('../../modelo/defensor/defensor.php');
+=======
+    include '../../modelo/defensor/defensor.php';
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
     
       $defensor = Array(
             "id_personal"    =>$_POST['id_personal'],
@@ -24,8 +28,12 @@
         if(!isset($_GET['tipo'])){
            session_start();
            $_SESSION['mensaje'] = "Actualizacion exitoso";
+<<<<<<< HEAD
           //return 200; // 
           header("location: ../../vistas/administrador/");
+=======
+           header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
        }
        else{
            echo "json";

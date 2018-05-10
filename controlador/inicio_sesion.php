@@ -9,7 +9,11 @@ $num_regs = registro($sql); // $conexion->query($sql);
 //echo 'USER=> '.$usuario . ' PASS=> '. $pass;
  //echo "<input type='button' onclick='alert('USER=> '.$usuario . ' PASS=> '. $pass)'/>";
 if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
+<<<<<<< HEAD
     echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a '.$usuario.'  </strong></p>';
+=======
+    echo '<p class="text-danger"><strong>No existe ninguna cuenta vinculada a </strong></p>';
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
 } else { //encontro registro sobre un usuario y ese username
     $arrayUser = consulta($sql);//$ejecutar_consulta -> fetch_assoc();//contiene informacion del usuario en un array
     print_r( $arrayUser);

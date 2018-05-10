@@ -22,6 +22,15 @@ include "../../Controlador/sesion.php";
     <title>Defensoria publica</title>
 
 
+<<<<<<< HEAD
+=======
+<!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../recursos/css/style.css" />
+    <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
+    
+    <!-- jQuery -->
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -56,11 +65,15 @@ include "../../Controlador/sesion.php";
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../recursos/images/defensoriav1.png" alt="..." class="img-circle profile_img"/>
+                <img src="../../recursos/images/img.jpg" alt="..." class="img-circle profile_img"/>
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
+<<<<<<< HEAD
                 <?php echo ($_SESSION['usuario']);?>
+=======
+                                  <?php //echo $_SESSION['usuario'] ?>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -90,9 +103,29 @@ include "../../Controlador/sesion.php";
                     </ul>
                   </li>
 
+<<<<<<< HEAD
 
 
                 </ul>
+=======
+                  <li><a><i class="fa fa-home"></i> Configuracion usurio <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                      <li><a id="registrarExpediente">Registrar usuario</a></li>
+                      <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
+                      <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
+                      <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
+                      <form action="../../action.php" method="post">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Buscar Defensor(username)" name="busqueda">
+                          <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                      </div>
+                      </form>
+                    </ul>
+                  </li>
+              </ul>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
               </div>
 
 
@@ -101,6 +134,7 @@ include "../../Controlador/sesion.php";
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
+<<<<<<< HEAD
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
@@ -111,6 +145,10 @@ include "../../Controlador/sesion.php";
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+=======
+             
+              <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../index.php">
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -129,7 +167,11 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<<<<<<< HEAD
                     <img src="images/img.jpg" alt=""/>John Doe
+=======
+                    <img src="../../recursos/images/img.jpg" alt=""/><?php// echo $_SESSION['usuario'] ?>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                     <span class=" fa fa-angle-down"></span>
             	      </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -170,7 +212,11 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../Recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
+<<<<<<< HEAD
                           <span>John Smith</span>
+=======
+                          <span><?php //echo $_SESSION['usuario'] ?></span>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -182,7 +228,11 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../Recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
+<<<<<<< HEAD
                           <span>John Smith</span>
+=======
+                          <span><?php// echo $_SESSION['usuario'] ?></span>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -194,7 +244,11 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../Recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
+<<<<<<< HEAD
                           <span>John Smith</span>
+=======
+                          <span><?php //echo $_SESSION['usuario'] ?></span>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -217,9 +271,16 @@ include "../../Controlador/sesion.php";
           </div>
         </div>
         <!-- /top navigation -->
+<<<<<<< HEAD
 
         <!-- page content -->
         <div class="right_col" role="main">
+=======
+  <!-- page content -->
+<div><h1 Bienvenido Coordinador </h1></div>
+  
+   <div class="right_col" role="main">
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
           <div class="">
             <div class="page-title">
 
@@ -233,12 +294,56 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
+            <div id="dialogo" title="Confirma Eliminar?"></div>
+            <?php
+               // echo isset($_SESSION['mensaje']);
+                     
+                     if(isset($_SESSION['mensaje'])){
+                      if(isset($_SESSION['mensaje']['tipo'])){
 
+<<<<<<< HEAD
             <div class="row" id="menuContainer">
 
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
+=======
+                        if($_SESSION['mensaje']['tipo']=='exito')
+                           $alert='alert alert-success';
+
+                        //$alert='alert alert-danger';
+                         if($_SESSION['mensaje']['tipo']=='error')
+                           $alert='alert alert-danger';
+                         
+                          if($_SESSION['mensaje']['tipo']=='juzgado')
+                            $alert='alert alert-danger';
+                           
+                          //else $alert='';
+                          
+                      }
+                  ?>
+                    <div class='<?php echo $alert; ?>' alert-dismissible fade in" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                      </button>
+                      <strong align="center">
+                        <?php 
+                        echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");
+                                                $_SESSION['mensaje']=[];
+                                                $_SESSION['mensaje']['tipo']='';
+                                                $_SESSION['mensaje']['mensaje']='';
+                        ?> 
+                     </strong>
+
+                  </div>
+                <?php
+               }
+               ?>
+            <div class="row" id="menuContainer">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">               
+        
+                
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                   <div class="x_title">
 
                     <ul class="nav navbar-right panel_toolbox">
@@ -259,6 +364,7 @@ include "../../Controlador/sesion.php";
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+<<<<<<< HEAD
                     <p class="text-muted font-13 m-b-30">
                       Lista de los defensores activos
                     </p>
@@ -329,6 +435,56 @@ include "../../Controlador/sesion.php";
                         </tr>
                       </tbody>
                     </table>
+=======
+                    
+                      
+                    <div align ="center">
+                   <img id="img_index_coord"src="../../recursos/images/LOGO_PRINCIPAL.png">
+                    <p class="text-justify">
+                      MISIÓN
+                      <br/>
+                      La misión de la Defensoría Pública es garantizar el derecho humano de acceso a la justicia a los sectores sociales que lo requieran, priorizando la atención a las personas de escasos recursos económicos y en situación de vulnerabilidad, a través de los servicios jurídicos de asesorías, patrocinio y defensa técnica, adecuada y diligente en materia penal, justicia especializada para adolescentes, civil, familiar, mercantil, agraria, administrativa y constitucional.
+                     </p>
+                     <p class="text-justify">
+                       VISIÓN
+                       <br/>
+                      Ser una institución a la vanguardia que brinde servicios jurídicos con sensibilidad humana, ética y compromiso con la sociedad oaxaqueña, a fin de consolidar el Sistema de Justicia, la democracia, y el ejercicio pleno de la libertad, en un ambiente de equidad y respeto absoluto a los derechos humanos.
+                      </p>
+                      <p class="text-justify">
+                      PRINCIPIOS
+                      <br/>
+                      Los principios que deben regir la conducta de los servidores públicos dependientes de la Defensoría Pública del Estado de Oaxaca, serán:
+                      </p>
+                       
+                      <?php
+               if(isset($_GET['dirigir'])) {
+               switch ($_GET['dirigir']) {
+                case 'registrar_usuario':
+                      ?>  
+                      <script>
+                      $('#menuContainer').children().remove();
+                      
+                      $('#menuContainer').load("registroUsuarioServicio.php");
+                      </script>
+                <?php  break;
+                case 'listar_defensor':?>
+                    <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
+                    <?php break;
+                    case 'cambioAdscripcion':
+                    ?>
+                    <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
+                   <?php 
+                break;
+                
+                
+                default:
+                require_once("../usuario/registrar.php.php");   
+                    break;
+            }
+          }
+        ?>                   
+                    </div>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                   </div>
                 </div>
               </div>
@@ -357,8 +513,6 @@ include "../../Controlador/sesion.php";
         <!-- /footer content -->
 
 
-    <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -388,5 +542,10 @@ include "../../Controlador/sesion.php";
     <!-- Custom Theme Scripts -->
     <script src="../../recursos/js/custom.min.js"></script>
 
+<<<<<<< HEAD
+=======
+    <script src="../../recursos/js/coordinador/gestionCoordinador.js"></script>
+    <script src="../../recursos/js/main.js"></script>
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
   </body>
 </html>
