@@ -1,6 +1,7 @@
 <?php 
-    include '../../modelo/defensor/defensor.php';
+    include_once('../../modelo/defensor/defensor.php');
     $listaDef = listar_defensores();
+<<<<<<< HEAD
     $num_regs = count($listaDef);//$listaDef->num_rows;
     if ($num_regs == 0) { //no encontro ningun registro 
     }else{
@@ -26,4 +27,7 @@
       
     //}
 
+=======
+    $contenido = json_encode($listaDef);
+>>>>>>> 6d43e05ee7354834153a8de5bba0c476eca24175
 ?>

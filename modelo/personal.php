@@ -8,16 +8,16 @@ function listar_personal(){
                                         inner join estudios using (id_personal)";			
 
    $lista=consulta($sql);
-   return $lista;
+             return $lista;
 }
 
 
 
   
-    //Definimos la funciones sobre el objeto crear_defensor
+            //Definimos la funciones sobre el objeto crear_defensor
     function crear_personal($objetoEntidad){
 
-        $sql ="select id_cargo from cargo where cargo='defensor'";
+ $sql ="select id_cargo from cargo where cargo='defensor'";
           $idcargo= consulta($sql);
     
          $sql = "INSERT INTO personal  ";

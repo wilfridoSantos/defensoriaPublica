@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -37,17 +37,19 @@
               <th>Nombre</th>
               <th>Ap. Paterno</th>
               <th>Ap. Materno</th>
-              <th>Lugar Adscripcion</th>                  
+              <th>Lugar Adscripcion</th>                   
               <th>acciones</th>
             </tr>
           </thead>
-          <tbody id='tebody' >
-        <?php include '../../controlador/defensor/controladorListaDef.php';
-            $Defensores=json_decode($contenido);
-            foreach($Defensores as $obj){
+          <tbody id='tebody'>
+        <?php require_once('../../controlador/defensor/controladorListaDef.php');
+            $defensores=json_decode($contenido);
+            print_r($defensores);
+            foreach($defensores as $obj){
+              //print_r('=> '. $obj->estado);
               if($obj->estado){                
                 echo '<tr> '.
-                  '<td id="idDefensor" style="display:none;">'.$obj->id_defensor.'</td>'.
+                  '<td id="idPersonal" style="display:none;">'.$obj->id_personal.'</td>'.
                   '<td>'.strtoupper($obj->nombre).'</td>'.
                   '<td>'.strtoupper($obj->ap_paterno).'</td>'.
                   '<td>'.strtoupper($obj->ap_materno).'</td>'.

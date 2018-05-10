@@ -14,7 +14,7 @@ function listar_asesoria_x_id($id){
         global $conexion;
         $sql = "INSERT INTO asesoria ";
         $sql.= "SET id_expediente='".$asesoria['id_expediente']."',   fecha_asesoria='".$asesoria['fecha_asesoria']."',";
-        $sql.= "observaciones='".$asesoria['observaciones']."'";
+     $sql.= "observaciones='".$asesoria['observaciones']."'";
 
         return consulta($sql, $conexion);
     }

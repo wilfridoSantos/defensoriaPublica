@@ -59,8 +59,7 @@ if (session_start()) {
                <button id="ingresar" class="btn btn-primary btn-sm " type="button"  onclick="ingresarSistema()"  >
                <i class="zmdi zmdi-arrow-right">&nbsp;</i>
                 Iniciar Sesion
-               </button>
-                
+               </button>                
                 <div id="mensaje_index"  style="background: #fff; border-radius: 1em;" class="group-material-login text-center">
                 </div>
               </div>

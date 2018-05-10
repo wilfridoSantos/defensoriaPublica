@@ -8,6 +8,9 @@
 		return $cadena;   
     }
     
+<<<<<<< HEAD
+ 
+=======
 
 
     function cadenaToMayuscula($dato){
@@ -27,25 +30,39 @@
           return $dato;
 
     }
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
  
     
     //funcion que envia un correo electronico
     function envio_correo($dir_email, $asunto, $mensaje){
    // ini_set('SMTP','smtp.gmail.com');
     //ini_set('smtp_port',587);
+<<<<<<< HEAD
+    $cabecera = "From: <griselda.mendez@gob.mx>";
+=======
 
      $cabecera = "From: <griselda.mendez@gob.mx>";
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
         $headers = "MIME-Version: 1.0/r/n";
 	   $headers.= "Content-type: text/html; charset=iso-8859-1/r/n";	
 	   $headers.= $cabecera."/r/n";
        mail($dir_email, $asunto, $mensaje, $cabecera);
             
+<<<<<<< HEAD
+      
+
+
+
+/* 
+$address = "othonhergar@gmail.com";
+=======
        
 
 
 
 
 /* $address = "othonhergar@gmail.com";
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
 $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->SMTPDebug = 2;
@@ -65,7 +82,11 @@ if(!$mail->Send()) {
 echo "no enviado";
 } else {
 echo "enviado";
+<<<<<<< HEAD
+} */
+=======
 }  */
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
     }
   
 

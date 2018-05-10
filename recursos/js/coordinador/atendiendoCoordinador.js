@@ -7,7 +7,7 @@ $(document).ready(function () {
 	$('#tebody').on('click', '.boton', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
-		var idDef = $(this).closest('tr').find('#idDefensor').text();
+		var idDef = $(this).closest('tr').find('#idPersonal').text();
 		//console.log(idDef);
 		verInfo(idDef);
 	});
@@ -22,10 +22,10 @@ $(document).ready(function () {
 			success: function (data) {
 
 				var jsonInfoDef = jQuery.parseJSON(data);
-				console.log(jsonInfoDef.id_defensor, 'entro   ');
+				console.log(jsonInfoDef.id_personal, 'entro   ');
 
 				$.each(jsonInfoDef, function (KEY, VALOR) {
-					console.log(VALOR.id_defensor, " ID defensor");
+					console.log(VALOR.id_personal, " ID personal defe");
 
 					$('#verInfoDef').append(
 
@@ -65,15 +65,15 @@ $(document).ready(function () {
 	$('#tebody').on('click', '.botonUp', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
-		var id_def = $(this).closest('tr').find('#idDefensor').text();
-
+		var id_def = $(this).closest('tr').find('#idPersonal').text();
+		console.log('id personal atendiendo coord ' + id_def);
 		updateDefensor(id_def);
 	});
 	function updateDefensor(id_def) {
 		$.ajax({
 			url: "../../controlador/defensor/updateDefensor.php",
 			type: "post",
-			data: "id_defensor=" + id_def,
+			data: "id_personal=" + id_def,
 			beforeSend: function () {
 				$('#menuContainer').load('updateDef.php');
 			},
@@ -81,15 +81,25 @@ $(document).ready(function () {
 				var jsonUpdateDef = jQuery.parseJSON(data);
 				console.log(jsonUpdateDef);
 				$.each(jsonUpdateDef, function (KEY, VALOR) {
+					console.log('valor idpersonal-> ', VALOR.id_personal);
 					$('#updateDefensor').append(
-						'<form  class="form-horizontal form-label-left" action ="../../controlador/defensor/controlActualizarDef.php"  method="post">' +
 						'<div class="form-group">' +
 						'<label style="display:none;" class="control-label col-md-3 col-sm-3 col-xs-4"><span class="required"></span></label>' +
 						'<div style="display:none;" class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-						'<input style="display:none;" type="text" class="form-control" id="id_defensor" placeholder="ID Defensor" name="id_defensor"' +
-						'value="' + VALOR.id_defensor + '" readonly>' +
+						'<input style="display:none;" type="text" class="form-control " id="id_personal" placeholder="Id personal" name="id_personal"' +
+						'value="' + VALOR.id_personal + '" readonly>' +
 						'</div>' +
 						'</div>' +
+
+						'<div class="form-group">'+
+							'<label for="exampleInputFile" class="control-label col-md-3 col-sm-3 col-xs-12">Foto de Perfil<span class="required">*</span></label>' +
+							'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
+								 '<input type="file"  id="fileToUpload" onchange="upload_image();">'+
+						 		 '<p class="help-block">Selecciona una foto.</p>'+						
+								 '<div class="upload-msg"></div><!--Para mostrar la respuesta del archivo llamado via ajax -->	'+				   
+							'</div>'+
+						'</div>'+
+
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
@@ -100,28 +110,28 @@ $(document).ready(function () {
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Apellido Paterno<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-						'<input type="text" class="form-control" id="ap_paterno" placeholder="apellido Paterno" name="ap_paterno"' +
+						'<input type="text" class="form-control text-uppercase" id="ap_paterno" placeholder="apellido Paterno" name="ap_paterno"' +
 						'value="' + (VALOR.ap_paterno).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Apellido Materno<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" class="form-control" id="ap_materno" placeholder="apellido materno" name="ap_materno"' +
+						'<input type="text" class="form-control text-uppercase" id="ap_materno" placeholder="apellido materno" name="ap_materno"' +
 						'value="' + (VALOR.ap_materno).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Curp<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" class="form-control" id="curp" placeholder="curp" name="curp"' +
+						'<input type="text" class="form-control text-uppercase" id="curp" placeholder="curp" name="curp"' +
 						'value="' + (VALOR.curp).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Calle<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" class="form-control" id="calle" placeholder="Calle" name="calle"' +
+						'<input type="text" class="form-control text-uppercase" id="calle" placeholder="Calle" name="calle"' +
 						'value="' + (VALOR.calle).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
@@ -142,14 +152,14 @@ $(document).ready(function () {
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Colonia<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" class="form-control" id="colonia" placeholder="colonia" name="colonia"' +
+						'<input type="text" class="form-control text-uppercase" id="colonia" placeholder="colonia" name="colonia"' +
 						'value="' + (VALOR.colonia).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Municipio<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" class="form-control" id="municipio" placeholder="Municipio" name="municipio"' +
+						'<input type="text" class="form-control text-uppercase" id="municipio" placeholder="Municipio" name="municipio"' +
 						'value="' + (VALOR.municipio).toUpperCase()+ '">' +
 						'</div>' +
 						'</div>' +
@@ -188,21 +198,6 @@ $(document).ready(function () {
 						'value="' +( VALOR.corre_electronico).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
-						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-12">No Cedula<span class="required">*</span></label>' +
-						'<div class="col-md-6 col-sm-6 col-xs-12">' +
-						'<input type="text" class="form-control"  id="cedula_profesional"  placeholder="numero cedula" name="cedula_profesional"' +
-						'value="' + (VALOR.cedula_profesional).toUpperCase() + '">' +
-						'</div>' +
-						'</div>' +
-						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Juzgado <span class="required">*</span>' +
-						'</label>' +
-						'<div class="col-md-6 col-sm-6 col-xs-12">' +
-						'<input class="date-picker form-control col-md-7 col-xs-4" required="required"  id="juzgado"  placeholder="Juzgado" name="juzgado" type="text"' +
-						'value="' + (VALOR.juzgado).toUpperCase() + '">' +
-						'</div>' +
-						'</div>		  ' +
 						'<div class="ln_solid"></div>' +
 						'<div class="form-group">' +
 						'<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">' +
@@ -211,8 +206,7 @@ $(document).ready(function () {
 						'value="Actualizar Datos"></input> ' +
 						'<!--   <button type="submit" class="btn btn-success">Submit</button> -->' +
 						'</div>' +
-						'</div>' +
-						'</form>'
+						'</div>'
 					);
 
 				});

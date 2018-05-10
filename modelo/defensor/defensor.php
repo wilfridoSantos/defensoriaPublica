@@ -1,12 +1,15 @@
 <?php
-//include '../../controlador/conexion.php';
-include_once ('../../libreria/conexion.php');
+include_once('../../libreria/conexion.php');
 function listar_defensores(){
+<<<<<<< HEAD
+        $sql="SELECT * FROM personal as p inner join personal_campo as d using(id_personal)
+                    inner join juzgado as j using(id_juzgado) where id_cargo =4";			
+=======
         $sql="SELECT * FROM personal_campo as d inner join personal as p using(id_personal)
                         inner join juzgado as j using(id_juzgado) where id_cargo =4";			
 
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
    $lista=consulta($sql);
-   //print_r($sql);
    return $lista;
 }
 function listar_defensores_estudios(){
@@ -18,16 +21,30 @@ $lista=consulta($sql);
 //print_r($sql);
 return $lista;
 }
+
+function numRegistros($sql){
+    return registro($sql);
+}
 function getDefensorById($id_defensor){
     $sql="SELECT * FROM personal_campo as d inner join personal as p using(id_personal)
     inner join juzgado as j using(id_juzgado)
-    inner join estudios using(id_personal) where id_cargo=4 and id_defensor ='".$id_defensor."' ";
+    inner join escolaridad using(id_personal) where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
     $lista = consulta($sql);
     //echo 'si hace consulta';
     return $lista;
 }
+function getDefensorUpdate($id_defensor){
+    $sql="SELECT * FROM personal_campo as d inner join personal as p using(id_personal)
+             where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
+    $lista = consulta($sql);
+    //echo 'si hace consulta';
+    return $lista;
 
+<<<<<<< HEAD
+}
+=======
 
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
 function listar_defensor_x_id($id){
       global $conexion;
       $sql = "select * from personal_campo where id='".$id."'";
@@ -37,9 +54,13 @@ function listar_defensor_x_id($id){
 
   function listar_defensor_x_juzgado($juzgado){
  
+<<<<<<< HEAD
+    $sql = "select * from defensor where id_juzgado='".$juzgado."'";
+=======
     $sql = "select * from personal_campo
               inner join personal using(id_personal )
                where   id_cargo=2 and id_juzgado='".$juzgado."'";
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
     $consulta = consulta($sql);
    // echo $sql;
     return $consulta;
@@ -103,6 +124,15 @@ function obtenerDefensorCedula($cedulaProf){
     //Definimos una funcion que acutualice al actualiza_defensor
  function actualiza_defensor($defensor){
         
+<<<<<<< HEAD
+        $sql = "UPDATE personal_campo as d inner join personal as p using(id_personal) ";
+            $sql.="SET p.nombre='".$defensor['nombre']."', p.ap_paterno='".$defensor['ap_paterno']."', p.ap_materno='".$defensor['ap_materno']."',";
+        "p.curp='".$defensor['curp']."', p.calle='".$defensor['calle']."', p.numero_ext='".$defensor['numero_ext']."',".
+        "p.numero_int='".$defensor['numero_int']."',p.colonia='".$defensor['colonia']."',p.municipio='".$defensor['municipio']."',".
+        "p.nup='".$defensor['nup']."',p.nue='".$defensor['nue']."',p.genero='".$defensor['genero']."',p.telefono='".$defensor['telefono']."',".
+        "p.corre_electronico='".$defensor['corre_electronico']."',".
+        " where d.id_personal = '".$defensor['id_personal']."'";
+=======
         $sql = "UPDATE  personal_campo as d inner join personal as p using(id_personal) inner join juzgado as j using(id_juzgado)".
         "SET p.nombre='".$defensor['nombre']."', p.ap_paterno='".$defensor['ap_paterno']."', p.ap_materno='".$defensor['ap_materno']."',".
         "p.curp='".$defensor['curp']."', p.calle='".$defensor['calle']."', p.numero_ext='".$defensor['numero_ext']."',".
@@ -110,9 +140,10 @@ function obtenerDefensorCedula($cedulaProf){
         "p.nup='".$defensor['nup']."',p.nue='".$defensor['nue']."',p.genero='".$defensor['genero']."',p.telefono='".$defensor['telefono']."',".
         "p.corre_electronico='".$defensor['corre_electronico']."',j.juzgado='".$defensor['juzgado']."'".
         " where id_defensor = '".$defensor['id_defensor']."'";
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
         $lista=consulta($sql);
         //echo $defensor['id_defensor'].' => Ah sido actualizado';
-        //echo $sql;
+        print_r($sql);
         return $lista;
  }
 
@@ -120,8 +151,13 @@ function obtenerDefensorCedula($cedulaProf){
     function eliminar_defensor($id_defensor){
         
         //$sql = "DELETE from  defensor where id_defensor = '".$id_defensor."'";
+<<<<<<< HEAD
+        $sql = "UPDATE defensor as d  inner join personal as p using (id_personal)
+                set d.estado = false where id_defensor = '".$id_defensor."'";
+=======
         $sql = "UPDATE personal_campo as d  inner join personal as p using (id_personal)
                 set d.estado = false, p.estado=false where id_defensor = '".$id_defensor."'";
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
         $lista = consulta($sql);
         return $lista;
     }

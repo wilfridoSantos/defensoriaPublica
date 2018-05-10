@@ -26,12 +26,19 @@
       // crear_juzgado($juzgado);
        // echo isset($_GET['tipo']);
     //  print_r($personal);
+<<<<<<< HEAD
+    
+     if(listar_defensor_x_nue($_POST['nue'])==0){ 
+      $mensaje=['tipo'=>"juzgado",
+      'mensaje'=>"no puedes tener mas de 1 coordinaodr en un juzgado"];
+=======
     $personal =  array_map( "cadenaToMayuscula",$personal);
        
      if(listar_defensor_x_nue($_POST['nue'])==0){ 
       $mensaje=['tipo'=>"juzgado",
       'mensaje'=>"no puedes tener mas de 1 coordinaodr en un juzgado"];
       $didigir="registrar_defensor";
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
       if(!vericar_coordinador($_POST['puesto'])){        
         crear_personal($personal);
         $defensor=Array(
@@ -47,9 +54,15 @@
         
         $didigir="listar_defensor";
         $asunto = "Envio de Nip Acceso Al Sistemas ";
+<<<<<<< HEAD
+        $mensaje = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$personal['password'];
+                     
+        envio_correo($personal['correo'], $asunto, $mensaje);
+=======
         $mensaje = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$_POST['password'];
                      
        envio_correo($personal['correo'], $asunto, $mensaje);
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
        }
       }
       else{
@@ -57,6 +70,18 @@
         'mensaje'=>"el personal  con el  nup ya se encuentra registrado"];  
         $didigir="registrar_defensor";
       }
+<<<<<<< HEAD
+      //  ultimoPersonalCreatado();
+ 
+        if(!isset($_GET['tipo'])){
+           session_start();
+            $_SESSION['mensaje'] = $mensaje;
+            header("location: ../../vistas/administrador/index.php?dirigir=".$didigir);
+        }
+        else{
+            echo "json";
+        }
+=======
       //  ultimoPersonalCreatado(); 
         if(!isset($_GET['tipo'])){
            session_start();
@@ -65,15 +90,25 @@
         }
         else{
             echo "json";        }
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
     
       
      
       function vericar_coordinador($puesto){
+<<<<<<< HEAD
+        if($puesto=='2')
+           $verificador=listar_defensor_x_juzgado($_POST['adscripcion']);
+            if($verificador==0)
+               return false;
+            
+          return true;     
+=======
       //  print_r (listar_defensor_x_juzgado($_POST['adscripcion']));
         if($puesto=='2') 
             if(listar_defensor_x_juzgado($_POST['adscripcion']))
                return true;
             
           return false;     
+>>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
       }  
 ?>
