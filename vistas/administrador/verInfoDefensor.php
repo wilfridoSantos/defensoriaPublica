@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,6 @@
 </head>
 <body>
 <div class="x_content">
-
             <div id = "verInfoDef" class="w-100">
             <h3 > Detalle Informacion Defensor</h3>
             </div>

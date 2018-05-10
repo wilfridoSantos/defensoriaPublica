@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,6 @@
 </head>
 <body>
 <script>
-
 function agrega(){
 			 $('#menuContainer').load("coordinadorRegistrarJuzgado.html");
 			 }
@@ -19,7 +17,11 @@ function agrega(){
                   <div class="x_title"> Actualizar datos de defensor                                    
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" id="updateDefensor" >
+                  <div class="x_content" >
+                  <form  class="form-horizontal form-label-left"
+                   action ="../../controlador/defensor/controlActualizarDef.php" 
+                    method="post" id="updateDefensor">
+                  </form>
 
                   </div>
                 </div>

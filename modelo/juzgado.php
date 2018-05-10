@@ -1,7 +1,7 @@
 <?php
 //require_once("conexion.php");
 //include '../controlador/conexion.php';
-include '../../libreria/conexion.php';
+include_once( '../../libreria/conexion.php');
 function listar_juzgado_x_id($id){
       global $conexion;
       $sql = "select * from juzgado where id='".$id."'";
@@ -15,7 +15,6 @@ function listar_juzgado_x_id($id){
       $consulta = consulta($sql);
       return $consulta;
   }
-
 
 
    

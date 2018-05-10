@@ -25,6 +25,7 @@ function consulta($consulta){
    global $db;
    $sql=$db->prepare($consulta);
    $sql->execute();
+    //echo 'registro devueltos= '.$sql->rowCount();
+    return $sql->rowCount();
  }
-
 ?>

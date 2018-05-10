@@ -8,20 +8,20 @@ function listar_personal(){
                                         inner join estudios using (id_personal)";			
 
    $lista=consulta($sql);
-   return $lista;
+             return $lista;
 }
 
 
 
   
-    //Definimos la funciones sobre el objeto crear_defensor
+            //Definimos la funciones sobre el objeto crear_defensor
     function crear_personal($objetoEntidad){
 
-        $sql ="select id_cargo from cargo where cargo='defensor'";
+ $sql ="select id_cargo from cargo where cargo='defensor'";
           $idcargo= consulta($sql);
     
          $sql = "INSERT INTO personal  ";
-        $sql.= "SET id_cargo='".$idcargo[0]['id_cargo']."', nombre='".$objetoEntidad['nombre']."',";
+        $sql.= "SET id_cargo='".$objetoEntidad['id_cargo']."', nombre='".$objetoEntidad['nombre']."',";
         $sql.= "ap_paterno='".$objetoEntidad['ap_paterno']."', ap_materno='".$objetoEntidad['ap_materno']."',";
         $sql.= "curp='".$objetoEntidad['curp']."', calle='".$objetoEntidad['calle']."',"; 
         $sql.= "numero_ext='".$objetoEntidad['numero_ext']."', numero_int='".$objetoEntidad['numero_int']."',"; 

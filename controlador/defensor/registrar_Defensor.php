@@ -1,8 +1,11 @@
 <?php 
-  header('Content-Type: application/json');
-  include_once '../../modelo/personal.php';    
-  include_once  '../../modelo/defensor/defensor.php';    
-      $personal = Array(           
+    header('Content-Type: application/json');
+  include '../../modelo/personal.php';    
+    include '../../modelo/defensor/defensor.php';
+    include '../../modelo/usuario_sistema.php';
+    include '../../libreria/herramientas.php';
+      $personal = Array(
+            "id_cargo"       =>$_POST['puesto'], 
             "nombre"         =>$_POST['nombre'],
             "ap_paterno"     =>$_POST['apellido_paterno'],
             "ap_materno"     =>$_POST['apellido_materno'],
@@ -19,28 +22,58 @@
             "correo"         =>$_POST['email'],                
             "foto"          =>" "           
         );
-     $mensaje=['tipo'=>"exito",
-                'mensaje'=>"registro existoso"];
-     $didigir="listar_defensor";
-     if(listar_defensor_x_nue($_POST['nue'])==0){
+
+      // crear_juzgado($juzgado);
+       // echo isset($_GET['tipo']);
+    //  print_r($personal);
+    
+     if(listar_defensor_x_nue($_POST['nue'])==0){ 
+      $mensaje=['tipo'=>"juzgado",
+      'mensaje'=>"no puedes tener mas de 1 coordinaodr en un juzgado"];
+      if(!vericar_coordinador($_POST['puesto'])){        
         crear_personal($personal);
         $defensor=Array(
           "id_juzgado"=>$_POST['adscripcion'],
           "id_personal"=>ultimoPersonalCreatado()
         );
         crear_defensor($defensor);
+        $personal['username']=$_POST['nue'];
+        $personal['password']=encriptar($_POST['password']);
+        crear_usarioSistema($personal);
+        $mensaje=['tipo'=>"exito",
+        'mensaje'=>"registro existoso"];
+        
+        $didigir="listar_defensor";
+        $asunto = "Envio de Nip Acceso Al Sistemas ";
+        $mensaje = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$personal['password'];
+                     
+        envio_correo($personal['correo'], $asunto, $mensaje);
+       }
       }
       else{
         $mensaje=['tipo'=>"error",
         'mensaje'=>"el personal  con el nue o nup ya se encuentra registrado"];  
         $didigir="registrar_defensor";
       }
-        if(!isset($_GET['tipo'])){         
+      //  ultimoPersonalCreatado();
+ 
+        if(!isset($_GET['tipo'])){
            session_start();
             $_SESSION['mensaje'] = $mensaje;
-            header("location: ../../vistas/coordinador/index.php?dirigir=".$didigir);
+            header("location: ../../vistas/administrador/index.php?dirigir=".$didigir);
         }
         else{
             echo "json";
         }
+    
+      
+     
+      function vericar_coordinador($puesto){
+        if($puesto=='2')
+           $verificador=listar_defensor_x_juzgado($_POST['adscripcion']);
+            if($verificador==0)
+               return false;
+            
+          return true;     
+      }  
 ?>

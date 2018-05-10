@@ -20,6 +20,8 @@ include "../../Controlador/sesion.php";
     <link rel="stylesheet" href="../../recursos/css/style.css" />
     <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
     
+    <!-- jQuery -->
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -53,11 +55,11 @@ include "../../Controlador/sesion.php";
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../recursos/images/defensoriav1.png" alt="..." class="img-circle profile_img"/>
+                <img src="../../recursos/images/img.jpg" alt="..." class="img-circle profile_img"/>
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                                  <?php echo $_SESSION['usuario'] ?>
+                                  <?php //echo $_SESSION['usuario'] ?>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -113,15 +115,7 @@ include "../../Controlador/sesion.php";
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
+             
               <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../index.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
@@ -141,7 +135,7 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../../recursos/images/img.jpg" alt=""/><?php echo $_SESSION['usuario'] ?>
+                    <img src="../../recursos/images/img.jpg" alt=""/><?php// echo $_SESSION['usuario'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -178,7 +172,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span><?php //echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -190,7 +184,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span><?php// echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -202,7 +196,7 @@ include "../../Controlador/sesion.php";
                       <a>
                         <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span><?php echo $_SESSION['usuario'] ?></span>
+                          <span><?php //echo $_SESSION['usuario'] ?></span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -231,6 +225,9 @@ include "../../Controlador/sesion.php";
    <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
+              <div class="title_left">
+                <h3></h3>
+              </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -246,26 +243,36 @@ include "../../Controlador/sesion.php";
 
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">                               
-                  <div class="x_title">                                     
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content" >
+                <div class="x_panel">               
                   <?php
-                     if(($_SESSION['mensaje']) != null ){
-                        $alert='alert alert-success';
-              
-                        if($_SESSION['mensaje']['tipo']=='error')
-                          $alert='alert alert-danger';
+               // echo isset($_SESSION['mensaje']);
+                     
+                     if(isset($_SESSION['mensaje'])){
+                      if(isset($_SESSION['mensaje']['tipo'])){
+
+                        if($_SESSION['mensaje']['tipo']=='exito')
+                           $alert='alert alert-success';
+
+                        //$alert='alert alert-danger';
+                         if($_SESSION['mensaje']['tipo']=='error')
+                           $alert='alert alert-danger';
+                         
+                          if($_SESSION['mensaje']['tipo']=='juzgado')
+                            $alert='alert alert-danger';
                            
+                          //else $alert='';
+                          
+                      }
                   ?>
-                    <div class='" <?php echo $alert; ?>"' alert-dismissible fade in" role="alert">
+                    <div class='<?php echo $alert; ?>' alert-dismissible fade in" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
                       <strong align="center">
                         <?php 
-                        echo $_SESSION['mensaje']['mensaje'];
+                        echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");
                                                 $_SESSION['mensaje']=[];
+                                                $_SESSION['mensaje']['tipo']='';
+                                                $_SESSION['mensaje']['mensaje']='';
                         ?> 
                      </strong>
 
@@ -273,15 +280,78 @@ include "../../Controlador/sesion.php";
                 <?php
                }
                ?>
+                
+                  <div class="x_title">
+                    <h2></h2>
+                    
+                   
+                    <div class="clearfix"></div>
+                  </div>
+                  
+
+                  <div class="x_content">
+                    
+                      
+                    <div align ="center">
+                   <img id="img_index_coord"src="../../recursos/images/LOGO_PRINCIPAL.png">
+                    <p class="text-justify">
+                      MISIÓN
+                      <br/>
+                      La misión de la Defensoría Pública es garantizar el derecho humano de acceso a la justicia a los sectores sociales que lo requieran, priorizando la atención a las personas de escasos recursos económicos y en situación de vulnerabilidad, a través de los servicios jurídicos de asesorías, patrocinio y defensa técnica, adecuada y diligente en materia penal, justicia especializada para adolescentes, civil, familiar, mercantil, agraria, administrativa y constitucional.
+                     </p>
+                     <p class="text-justify">
+                       VISIÓN
+                       <br/>
+                      Ser una institución a la vanguardia que brinde servicios jurídicos con sensibilidad humana, ética y compromiso con la sociedad oaxaqueña, a fin de consolidar el Sistema de Justicia, la democracia, y el ejercicio pleno de la libertad, en un ambiente de equidad y respeto absoluto a los derechos humanos.
+                      </p>
+                      <p class="text-justify">
+                      PRINCIPIOS
+                      <br/>
+                      Los principios que deben regir la conducta de los servidores públicos dependientes de la Defensoría Pública del Estado de Oaxaca, serán:
+                      </p>
+                       
+                      <?php
+               if(isset($_GET['dirigir'])) {
+               switch ($_GET['dirigir']) {
+                case 'registrar_defensor':
+                ?>  
+                <script>
+                 // $('#menuContainer').load("../usuario/registrar.php`");
+                </script>
+                  <?php  break;
+                   case 'listar_defensor':?>
+                    <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
+                    <?php break;
+                    case 'cambioAdscripcion':
+                    ?>
+                    <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
+                   <?php 
+                    break;
+                
+                
+                default:
+                require_once("../usuario/registrar.php.php");   
+                    break;
+            }
+          }
+        ?>                   
+                    </div>
                   </div>
                 </div>
               </div>
 
+
+                   
+					
+					
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          
+         
+        </div>
         <!-- /page content --> 
 
 
@@ -295,8 +365,6 @@ include "../../Controlador/sesion.php";
         <!-- /footer content -->
 
 
-    <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
