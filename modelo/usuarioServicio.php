@@ -5,9 +5,9 @@ include_once ('../../libreria/conexion.php');
 
 
 function getUsuarioByCurp($curp){
-    $sql = "select * from usuario_servicio where correo_electronico='".$curp."'";
+    $sql = "select * from usuario_servicio where curp='".$curp."'";
     $consulta = consulta($sql);
-   // echo $sql;
+ //  echo $sql;
     return $consulta;
 }
   
