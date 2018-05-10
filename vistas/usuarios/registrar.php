@@ -48,14 +48,14 @@ function agrega(){
                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Apellido Paterno<span class="required">*</span></label>
                          </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" pattern="[A-Za-z]{5,50}"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
+                            <input type="text" pattern="[A-Za-z]{4,50}"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
                           </div>
                        </div>
 
                         <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
                           </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" pattern="[A-Za-z]{5,50}" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
+                            <input type="text" pattern="[A-Za-z]{4,50}" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
                            </div>
                        </div> 
                        
@@ -118,22 +118,7 @@ function agrega(){
                         </div>
                       </div>
                     
-<<<<<<< HEAD
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Puesto</label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <select name="puesto"  class="select2_group form-control">
-                             <option value="4">defensor</option> 
-                             <option value="2">coordinador</option> 
-                                    
-                                  
-                           
-                          </select>
-                        </div>
-                      </div>
-=======
                      
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Genero<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
@@ -171,11 +156,7 @@ function agrega(){
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-<<<<<<< HEAD
-						   <button class="btn btn-primary btn btn-info btn-lg" type="reset">Lipiar</button>
-=======
 						   <button class="btn btn-primary btn btn-info btn-lg" type="reset">Limpiar</button>
->>>>>>> acfcd337647c416ca3ae3f7b30f9b0b755ac9dfe
 						   <input type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Guardar"/>
                         <!--   <button type="submit" class="btn btn-success">Submit</button> -->
                         </div>

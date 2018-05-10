@@ -18,6 +18,7 @@ function agrega(){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" >
+                    
                   <form  class="form-horizontal form-label-left"
                    action ="../../controlador/defensor/controlActualizarDef.php" 
                     method="post" id="updateDefensor">
