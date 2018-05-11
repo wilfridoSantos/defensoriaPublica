@@ -271,6 +271,7 @@ html , body{
     border: 1px solid rgba(52, 73, 94, 0.44);
     padding: 4px
 }
+
 .profile_info {
     padding: 10px;
     width: 65%;
@@ -631,7 +632,7 @@ table.no-margin .progress {
 .col-lg-12 {
     position: relative;
     min-height: 1px;
-    float: left;
+    float: center;
     padding-right: 10px;
     padding-left: 10px
 }
@@ -1122,7 +1123,19 @@ legend {
 .profile_details .profile_view {
     display: inline-block;
     padding: 10px 0 0;
-    background: #fff
+    background: #ebecd5;
+    width: 520px;
+    border: 2px solid #43b632
+}
+.left{
+    float: left;
+    
+    background: #f7f7f7
+}
+.right{
+    float: right;
+    
+    background: #f7f7f7
 }
 .profile_details .profile_view .divider {
     border-top: 1px solid #e5e5e5;
@@ -1148,8 +1161,15 @@ legend {
     padding: 10px
 }
 .profile_details .profile_view .img-circle {
-    border: 1px solid #E6E9ED;
-    padding: 2px
+    border: 3px solid #000000;
+    padding: 2px;
+    height:200px;
+    width:200px;
+    
+}
+.profile_details .profile_view input[type=file] {
+    padding: 2px;
+    color: #e10b10
 }
 .profile_details .profile_view h2 {
     margin: 5px 0

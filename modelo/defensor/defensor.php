@@ -49,14 +49,6 @@ function getExpedientesById($id_defensor){
     $sql="SELECT * FROM personal_campo as d inner join expediente using(id_personal)
                  inner join personal using(id_personal) inner join escolaridad using(id_personal) 
                  where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
-
-/*     if(registro($sql) == 0){
-        $sql="SELECT * FROM personal_campo as d inner join expediente using(id_personal)
-                 inner join personal using(id_personal) 
-                 where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
-        $lista = consulta($sql);
-        return $lista;
-    }else */
         $lista = consulta($sql);
         return $lista;
 }

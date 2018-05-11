@@ -9,9 +9,18 @@
 </head>
 <body>
 <div class="x_content">
-            <div id = "verExpDef" class="w-100">
-            <h3 > Expedientes del Defensor</h3>
+            <center><h3><b> Expedientes del Defensor</b></h3></center>
+            
+            <div class = "left" id = "verExpDef" >
+            <center> <h3><b> izquierda</b></h3></center>
             </div>
+            
+
+             
+            <div class = "right" id = "verInfoUsuario" >
+            <center> <h3><b> derecha</b></h3></center>
+            </div>
+            
 </div>
 </body>
 

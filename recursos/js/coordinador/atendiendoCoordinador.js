@@ -13,7 +13,7 @@ $(document).ready(function () {
 			type: "GET",
 			data: "id_personal=" + idDef,
 			beforeSend: function () {
-				console.log(idDef,' => IDpERSONAL');
+				console.log(idDef, ' => IDpERSONAL');
 				$('#menuContainer').load('verExpedientes.php');
 			},
 			success: function (data) {
@@ -21,18 +21,20 @@ $(document).ready(function () {
 				console.log(jsonInfoDef.id_personal, 'entro');
 				$.each(jsonInfoDef, function (KEY, VALOR) {
 					//console.log(VALOR.foto, " =>RUTA");
-					if(VALOR.perfil == undefined && VALOR.cedula_profesional == undefined){
+					if (VALOR.perfil == undefined && VALOR.cedula_profesional == undefined) {
 						VALOR.perfil = 'Aun no tiene escolaridad registrada.';
 						VALOR.cedula_profesional = 'Aun no tiene escolaridad registrada.';
 					}
-					if(VALOR.fecha_final == '0000-00-00'){
+					if (VALOR.fecha_final == '0000-00-00') {
 						VALOR.fecha_final = 'SIN FINALIZAR';
 					}
+					if(true){
+
+					}
 					$('#verExpDef').append(
-						'<hr/>' +
 						'<div class="row"> ' +
 						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +												
+						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
 						'<ul class="list-unstyled">' +
 						'<li><span class="glyphicon glyphicon-ok-sign"></span> Numero Expediente: ' + (VALOR.num_expediente) + ' </li>' +
 						'<li><span class="glyphicon glyphicon-ok-sign"></span> Materia: ' + (VALOR.materia).toUpperCase() + ' </li>' +
@@ -43,13 +45,33 @@ $(document).ready(function () {
 						'<li><span class="glyphicon glyphicon-ok-sign"></span> Estado del Expediente: ' + (VALOR.estado).toUpperCase() + ' </li>' +
 						'<li><span class="glyphicon glyphicon-ok-sign"></span> Observaciones: ' + (VALOR.observaciones).toUpperCase() + ' </li>' +
 
-						'</ul>' +											
+						'</ul>' +
 						'</div>' +
 						'</div>' +
 						'</div>' +
 						'</div>');
 
-						//$('#verExpDef').append('<p>ahskdjhaksjdhkjashdkjashdkjsh</p>');
+						$('#verInfoUsuario').append(
+							'<div class="row"> ' +
+							'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
+							'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
+							'<ul class="list-unstyled">' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Numero Expediente: ' + (VALOR.num_expediente) + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Materia: ' + (VALOR.materia).toUpperCase() + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Fecha de Inicio: ' + (VALOR.fecha_inicio) + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Fecha de Finalizacion: ' + (VALOR.fecha_final) + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Nombre del Delito: ' + (VALOR.nombre_delito).toUpperCase() + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Grado del Delito: ' + (VALOR.grado_delito).toUpperCase() + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Estado del Expediente: ' + (VALOR.estado).toUpperCase() + ' </li>' +
+							'<li><span class="glyphicon glyphicon-ok-sign"></span> Observaciones: ' + (VALOR.observaciones).toUpperCase() + ' </li>' +
+	
+							'</ul>' +
+							'</div>' +
+							'</div>' +
+							'</div>' +
+							'</div>');
+
+					//$('#verExpDef').append('<p>ahskdjhaksjdhkjashdkjashdkjsh</p>');
 				});
 			}
 		});
@@ -69,7 +91,7 @@ $(document).ready(function () {
 			type: "GET",
 			data: "id_personal=" + idDef,
 			beforeSend: function () {
-				console.log(idDef,' => IDpERSONAL');
+				console.log(idDef, ' => IDpERSONAL');
 				$('#menuContainer').load('verInfoDefensor.php');
 			},
 			success: function (data) {
@@ -79,18 +101,20 @@ $(document).ready(function () {
 
 				$.each(jsonInfoDef, function (KEY, VALOR) {
 					console.log(VALOR.foto, " =>RUTA");
-					if(VALOR.perfil == undefined && VALOR.cedula_profesional == undefined){
+					if (VALOR.perfil == undefined && VALOR.cedula_profesional == undefined) {
 						VALOR.perfil = 'Aun no tiene escolaridad registrada.';
 						VALOR.cedula_profesional = 'Aun no tiene escolaridad registrada.';
 					}
+					if (VALOR.foto == '' || VALOR.foto == ' ') {
+						VALOR.foto = 'default.png';
+					}
 					$('#verInfoDef').append(
-
 						'<div class="row"> ' +
 						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
 						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
 						'<div class="col-sm-12">' +
 						'<div class="left col-xs-7">' +
-						'<h2><span class="glyphicon glyphicon-user"></span>' +( VALOR.nombre ).toUpperCase()+ ' ' +( VALOR.ap_paterno ).toUpperCase()+ ' ' + (VALOR.ap_materno).toUpperCase() + '</h2>' +
+						'<h2><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2>' +
 
 						'<p><span class="glyphicon glyphicon-lock"></span><strong>' + (VALOR.perfil).toUpperCase() + '</strong></p>' +
 						'<hr/>' +
@@ -105,7 +129,7 @@ $(document).ready(function () {
 						'</ul>' +
 						'</div>' +
 						'<div class="right col-xs-5 ">' +
-						'<p align="right"><img src="../../recursos/uploads/'+ VALOR.foto +'" alt="" class="img-circle img-responsive">' + (VALOR.perfil).toUpperCase() + '        </p>' +
+						'<p align="right"><img src="../../recursos/uploads/' + VALOR.foto + '" alt="" class="img-circle img-responsive">' + (VALOR.perfil).toUpperCase() + '        </p>' +
 						'</div>' +
 						'</div>' +
 						'</div>' +
@@ -113,7 +137,7 @@ $(document).ready(function () {
 						'</div>' +
 						'</div>');
 
-						//$('#verExpDef').append('<p>ahskdjhaksjdhkjashdkjashdkjsh</p>');
+					//$('#verExpDef').append('<p>ahskdjhaksjdhkjashdkjashdkjsh</p>');
 				});
 			}
 		});
@@ -140,8 +164,20 @@ $(document).ready(function () {
 				//console.log(data);
 				var jsonUpdateDef = jQuery.parseJSON(data);
 				//console.log(jsonUpdateDef,' => json Update defensor');
+				var foto;
+				console.log((jsonUpdateDef[0]['foto']).length, 'longitud valor foto');
+
 				$.each(jsonUpdateDef, function (KEY, VALOR) {
 					console.log('valor idpersonal-> ', VALOR.id_personal);
+
+					if (VALOR.foto == '' || VALOR.foto == ' ') {
+						VALOR.foto = 'default.png';
+					}
+					if (VALOR.foto == 'default.png') {
+						foto = '<input class="inputfile" type="file" required id="fileToUpload" name ="fileToUpload">';
+					} else {
+						foto = '<input class="inputfile" type="file" id="fileToUpload" name ="fileToUpload">';
+					}
 					$('#updateDefensor').append(
 						'<div class="form-group">' +
 						'<label style="display:none;" class="control-label col-md-3 col-sm-3 col-xs-4"><span class="required"></span></label>' +
@@ -150,15 +186,17 @@ $(document).ready(function () {
 						'value="' + VALOR.id_personal + '" readonly>' +
 						'</div>' +
 						'</div>' +
-						'<div class="form-group">'+
-							'<label for="exampleInputFile" class="control-label col-md-3 col-sm-3 col-xs-12">Foto de Perfil<span class="required">*</span></label>' +
-							'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-							'<p align="center"><img src="../../recursos/uploads/'+VALOR.foto +'" alt="" class="img-circle img-responsive"> </p>' +
-								 '<input type="file"  id="fileToUpload" name ="fileToUpload">'+
-						 		 '<p class="help-block">Selecciona una foto.</p>'+						
-								 '<div class="upload-msg"></div><!--Para mostrar la respuesta del archivo llamado via ajax -->	'+				   
-							'</div>'+
-						'</div>'+
+						'<div class="form-group profile_details ">' +
+						'<label for="exampleInputFile" class="control-label col-md-3 col-sm-3 col-xs-12">Foto de Perfil<span class="required">*</span></label>' +
+						'<div class="col-md-6 col-sm-6 col-xs-12 well profile_view form-group has-feedback">' +
+						'<p align="center"><img src="../../recursos/uploads/' + VALOR.foto + '"  alt="Imagen responsive" class="img-circle img-responsive"> </p>' +
+						foto +
+						'<input style="display:none;" type="text" class="form-control " id="imagen" placeholder="imagen" name="imagen" value="' + VALOR.foto + '" >' +
+
+						'<p class="help-block"><center>Selecciona una foto.</center></p>' +
+						'<div class="upload-msg"></div>	' +
+						'</div>' +
+						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
@@ -184,7 +222,21 @@ $(document).ready(function () {
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Curp<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
 						'<input type="text" required pattern= "[A-Z|a-z|0-9]+" title = "Se aceptan solo letras y numeros" class="form-control text-uppercase" id="curp" placeholder="curp" name="curp"' +
-						'value="' + (VALOR.curp).toUpperCase() + '">' +
+						'value="' + (VALOR.curp).toUpperCase() + '" readonly>' +
+						'</div>' +
+						'</div>' +
+						'<div class="form-group">' +
+						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Municipio<span class="required">*</span></label>' +
+						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
+						'<input type="text" required pattern= "[A-Z |a-z ]+" title = "solo se aceptan letras" class="form-control text-uppercase" id="municipio" placeholder="Municipio" name="municipio"' +
+						'value="' + (VALOR.municipio).toUpperCase() + '">' +
+						'</div>' +
+						'</div>' +
+						'<div class="form-group">' +
+						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Colonia<span class="required">*</span></label>' +
+						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
+						'<input type="text" required pattern= "[A-Za-z|0-9]+" title="solo se aceptan letras y numeros" class="form-control text-uppercase" id="colonia" placeholder="colonia" name="colonia"' +
+						'value="' + (VALOR.colonia).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
@@ -197,29 +249,15 @@ $(document).ready(function () {
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Numero Exterior<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="number"  title"solo se acepta 5 digitos" required pattern="[0-9]" min="1" max = "9999" class="form-control" id="numero_ext" placeholder="Numero Exterior" name="numero_ext"' +
+						'<input type="text"  title"solo se acepta 5 digitos" required pattern="[1-9]+([0-9]*)" maxlength="4" class="form-control" id="numero_ext" placeholder="Numero Exterior" name="numero_ext"' +
 						'value="' + VALOR.numero_ext + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Numero Interior<span class="required">*</span></label>' +
+						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Numero Interior</label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="number" title"solo se acepta cinco digitos" required pattern="[0-9]+" min="1" max ="9999" class="form-control" id="numero_int" placeholder="Numero Interior" name="numero_int"' +
+						'<input type="text" title"solo se acepta cinco digitos"  pattern="[1-9]+([0-9]*)" maxlength="4" class="form-control" id="numero_int" placeholder="Numero Interior" name="numero_int"' +
 						'value="' + VALOR.numero_int + '">' +
-						'</div>' +
-						'</div>' +
-						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Colonia<span class="required">*</span></label>' +
-						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" required pattern= "[A-Za-z|0-9]+" title="solo se aceptan letras y numeros" class="form-control text-uppercase" id="colonia" placeholder="colonia" name="colonia"' +
-						'value="' + (VALOR.colonia).toUpperCase() + '">' +
-						'</div>' +
-						'</div>' +
-						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Municipio<span class="required">*</span></label>' +
-						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" required pattern= "[A-Z |a-z ]+" title = "solo se aceptan letras" class="form-control text-uppercase" id="municipio" placeholder="Municipio" name="municipio"' +
-						'value="' + (VALOR.municipio).toUpperCase()+ '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
@@ -240,16 +278,16 @@ $(document).ready(function () {
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">E-Mail<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
 						'<input type="text" class="form-control" id="correo_electronico" placeholder="Correo Electronico" name="correo_electronico"' +
-						'value="' +( VALOR.correo_electronico) + '">' +
+						'value="' + (VALOR.correo_electronico) + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="ln_solid"></div>' +
 						'<div class="form-group">' +
 						'<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">' +
 						'<!-- <input type="submit"name="cancelar" class="btn btn-primary" value="Cancelar"></button>-->' +
-						'<input class="btn btn-primary" type="submit" name="update" ' +
+						'<input class="btn btn-primary" type="submit" name="botonUpdate" id="botonUpdate" ' +
 						'value="Actualizar Datos"></input> ' +
-						'<!--   <button type="submit" class="btn btn-success">Submit</button> -->' +
+						'<!--   <button  type="submit" class="btn btn-success">Submit</button> -->' +
 						'</div>' +
 						'</div>'
 					);
