@@ -1,5 +1,4 @@
 <?php 
-<<<<<<< HEAD
     include '../../modelo/defensor/defensor.php';
 
         $nombreFoto = $_FILES["fileToUpload"]["name"];
@@ -17,11 +16,6 @@
                 //copy($rutaFoto, $destino);
              
 
-=======
-    //header('Content-Type: application/json');
-    include_once('../../modelo/defensor/defensor.php');
-    
->>>>>>> 9d9acbccfc78c818e14c9a2b6b907456de52259c
       $defensor = Array(
             "id_personal"    =>$_POST['id_personal'],
             "nombre"         =>$_POST['nombre'],
@@ -45,12 +39,7 @@
         if(!isset($_GET['tipo'])){
            session_start();
            $_SESSION['mensaje'] = "Actualizacion exitoso";
-<<<<<<< HEAD
-          //return 200; // 
-         header("location: ../../vistas/administrador/");
-=======
-          // header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
->>>>>>> 9d9acbccfc78c818e14c9a2b6b907456de52259c
+          header("location: ../../vistas/administrador/index.php?dirigir=listar_defensores");
        }
        else{
            echo "json";

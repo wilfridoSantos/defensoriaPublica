@@ -47,9 +47,9 @@
         
         $didigir="listar_defensor";
         $asunto = "Envio de Nip Acceso Al Sistemas ";
-        $mensaje = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$_POST['password'];
+        $email = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$_POST['password'];
                      
-       envio_correo($personal['correo'], $asunto, $mensaje);
+       envio_correo($personal['correo'], $asunto, $email);
        }
       }
       else{

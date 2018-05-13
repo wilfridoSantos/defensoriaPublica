@@ -1981,6 +1981,7 @@ table.tile_info span.right {
 a.star {
     color: #428bca !important
 }
+/* aqui vista para las validaciones */
 .mail_content {
     background: none repeat scroll 0 0 #FFFFFF;
     border-radius: 4px;
@@ -1989,8 +1990,21 @@ a.star {
     padding: 10px 11px;
     width: 100%
 }
+input:invalid ~ .with-errors {
+    display: inline;
+    }
+     
+    input:valid ~ .with-errors {
+    display: none;
+    }
+
 .list-btn-mail {
     margin-bottom: 15px
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    font-size: 12px;
 }
 .list-btn-mail.active {
     border-bottom: 1px solid #39B3D7;
@@ -2266,9 +2280,9 @@ select.parsley-error {
     transition: 0.42s
 }
 .item .alert {
-    float: left;
+    float: right;
     margin: 0 0 0 20px;
-    padding: 3px 10px;
+    padding: 1px 1px;
     color: #FFF;
     border-radius: 3px 4px 4px 3px;
     background-color: #CE5454;
@@ -2294,7 +2308,8 @@ select.parsley-error {
 }
 .item.bad .alert {
     left: 0;
-    opacity: 1
+    opacity: 1;
+    font-size: 15px;
 }
 .inl-bl {
     display: inline-block

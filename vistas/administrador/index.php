@@ -14,7 +14,7 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Modulo ADMINISTRADOR</title>
+    <title>Modulo Coordinador General</title>
 
 <!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
     <link rel="stylesheet" href="../../recursos/css/style.css" />
@@ -242,7 +242,8 @@ include "../../Controlador/sesion.php";
             <div id="dialogo" title="Confirma Eliminar?"></div>
             <?php
                // echo isset($_SESSION['mensaje']);
-                     
+              
+
                      if(isset($_SESSION['mensaje'])){
                       if(isset($_SESSION['mensaje']['tipo'])){
 
