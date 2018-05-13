@@ -22,6 +22,7 @@ include "../../Controlador/sesion.php";
     
     <!-- jQuery -->
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../recursos/js/file.js"></script>
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->

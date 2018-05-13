@@ -113,7 +113,8 @@ function buscarXCedula() {
       }
     }
   }
- 
+
+
   
   /* $(".boton").click(function() {
     var cedula = $(this).closest('tr').find('#dataCedula').text() 

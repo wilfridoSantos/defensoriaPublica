@@ -5,7 +5,7 @@
 <title>ACTUALIZAR DEFENSOR</title>
 <script src="../../recursos/js/main.js"></script>
 </head>
-<body>
+<body >
 <script>
 function agrega(){
 			 $('#menuContainer').load("coordinadorRegistrarJuzgado.html");
