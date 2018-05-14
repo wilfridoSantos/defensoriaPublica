@@ -13,10 +13,7 @@
             
             <div class = "left" id = "verExpDef" >
             <center> <h3><b> izquierda</b></h3></center>
-            </div>
-            
-
-             
+            </div>                         
             <div class = "right" id = "verInfoUsuario" >
             <center> <h3><b> derecha</b></h3></center>
             </div>

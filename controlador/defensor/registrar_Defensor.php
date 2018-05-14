@@ -47,9 +47,9 @@
         
         $didigir="listar_defensor";
         $asunto = "Envio de Nip Acceso Al Sistemas ";
-        $mensaje = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$_POST['password'];
+        $email = " accede a la siguiente pagina http://localhost/defensoriaPublica/  con tu contraseña: ".$_POST['password'];
                      
-       envio_correo($personal['correo'], $asunto, $mensaje);
+       envio_correo($personal['correo'], $asunto, $email);
        }
       }
       else{
@@ -64,10 +64,9 @@
            header("location: ../../vistas/administrador/index.php?dirigir=".$didigir);
         }
         else{
-            echo "json";        }
-    
-      
-     
+            echo "json";  
+        }
+
       function vericar_coordinador($puesto){
       //  print_r (listar_defensor_x_juzgado($_POST['adscripcion']));
         if($puesto=='2') 

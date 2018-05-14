@@ -1123,19 +1123,16 @@ legend {
 .profile_details .profile_view {
     display: inline-block;
     padding: 10px 0 0;
-    background: #ebecd5;
-    width: 520px;
-    border: 2px solid #43b632
+    background: #ffffff;
+    border: 2px solid #d50571  
 }
 .left{
     float: left;
-    
-    background: #f7f7f7
+    width: 520px;
 }
 .right{
     float: right;
-    
-    background: #f7f7f7
+    width: 520px;
 }
 .profile_details .profile_view .divider {
     border-top: 1px solid #e5e5e5;

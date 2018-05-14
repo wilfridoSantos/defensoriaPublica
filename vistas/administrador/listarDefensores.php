@@ -11,27 +11,26 @@
       <script src="../../recursos/js/main.js"></script>
       <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-
       <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
 
 <body>
 <div class="x_content">
-        <h3 >
+        <h3 ><b>
           LISTA DEFENSORES
+          </b>
         </h3>
-       <div class="input-group custom-search-form">
+       <div class="input-group" style="width:70%;">
                                 <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Nombre Defensor...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" onclick="buscarXCedula()" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
                             </div>
         
-        <table id="datatable" class="table table-striped table-bordered">
+        <table id="datatable" class="table table-striped table-bordered  dt-responsive nowrap">
           <thead  >
             <tr class="header">
               <th>NOMBRE</th>

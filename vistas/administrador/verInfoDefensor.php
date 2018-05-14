@@ -9,10 +9,9 @@
 </head>
 <body>
 <div class="x_content">
-            <div id = "verInfoDef" class="w-100">
-            <h3 ><b> Detalle Informacion Defensor</b></h3>
+            <div id = "verInfoDef" >
+                  <h3 ><b> Detalle Informacion Defensor</b></h3>
             </div>
-
 </div>
 </body>
 
