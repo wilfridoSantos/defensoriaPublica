@@ -14,16 +14,7 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<<<<<<< HEAD
     <title>Modulo ADMINISTRADOR</title>
-=======
-    <title>Modulo Coordinador General</title>
-
-<!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
-    <link rel="stylesheet" href="../../recursos/css/style.css" />
-    <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
-    
->>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
     <!-- jQuery -->
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
