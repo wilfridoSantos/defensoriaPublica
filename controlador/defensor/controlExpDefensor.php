@@ -8,5 +8,5 @@ $defensorX = getExpedientesById($id_def);//obtenerDefensorCedula($cedulaProf);
 //header( 'Content-type: image/jpg');
 //echo $content;
 $defensorZ = json_encode($defensorX);
-echo $defensorZ; 
+print_r( $defensorZ); 
 ?>

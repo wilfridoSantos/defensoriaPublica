@@ -15,16 +15,16 @@ var validator = (function($){
     /* general text messages
     */
     message = {
-        invalid         : 'invalid input',
+        invalid         : 'datos invalidos',
         checked         : 'must be checked',
-        empty           : 'please put something here',
+        empty           : 'no puede estar vacio',
         min             : 'input is too short',
         max             : 'input is too long',
         number_min      : 'too low',
         number_max      : 'too high',
         url             : 'invalid URL',
         number          : 'not a number',
-        email           : 'email address is invalid',
+        email           : 'correo no valido',
         email_repeat    : 'emails do not match',
         password_repeat : 'passwords do not match',
         repeat          : 'no match',
