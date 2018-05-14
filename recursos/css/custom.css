@@ -2016,7 +2016,7 @@ input:invalid ~ .with-errors {
      
     input:valid ~ .with-errors {
     display: none;
-    }
+    }/* ///---------------------------------- */
 
 .list-btn-mail {
     margin-bottom: 15px

@@ -355,6 +355,7 @@ $(document).ready(function () {
 
 
 	var registroJuzgado = document.getElementById('crea_juzgado');
+	
 	if (registroJuzgado != null) {
 		registroJuzgado.addEventListener('click', registrarJuzgado, false);
 

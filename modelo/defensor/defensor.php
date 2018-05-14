@@ -12,11 +12,6 @@ function listar(){
     $sql="SELECT * FROM personal_campo as d inner join personal as p using(id_personal)
                         inner join juzgado as j using(id_juzgado) where p.id_cargo =4";			
 
-<<<<<<< HEAD
-=======
-        $sql="SELECT * FROM personal as p inner join personal_campo as d using(id_personal)
-                    inner join juzgado as j using(id_juzgado) where id_cargo =4";			
->>>>>>> a05e837c99fd66770c52e73620bedf5b1bf496b6
    $lista=consulta($sql);
    return $lista;
 }
@@ -71,13 +66,8 @@ function getDefensorUpdate($id_defensor){
     $lista = consulta($sql);
    
     return $lista;
-<<<<<<< HEAD
 }
 
-=======
-
-}
->>>>>>> a05e837c99fd66770c52e73620bedf5b1bf496b6
 function listar_defensor_x_id($id){
       global $conexion;
       $sql = "select * from personal_campo where id='".$id."'";
@@ -159,11 +149,7 @@ function obtenerDefensorCedula($cedulaProf){
         "p.numero_int='".$defensor['numero_int']."',p.colonia='".$defensor['colonia']."',p.municipio='".$defensor['municipio']."',".
         "p.telefono='".$defensor['telefono']."',".
         "p.correo_electronico='".$defensor['correo_electronico']."', p.foto='".$defensor['foto']."'".
-<<<<<<< HEAD
         " where d.id_personal = '".$defensor['id_personal']."'";
-=======
-        " where d.id_personal= '".$defensor['id_personal']."'";
->>>>>>> a05e837c99fd66770c52e73620bedf5b1bf496b6
         $lista=consulta($sql);
         //echo $defensor['id_defensor'].' => Ah sido actualizado';
         print_r($sql);
