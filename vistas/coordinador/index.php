@@ -80,13 +80,13 @@ include "../../Controlador/sesion.php";
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Servicios y actividad  <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a id="listarDefensores">Listar Defensores</a></li>
+                      <li><a id="registrarActividad">Registrar actividad</a></li>
                       <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
                       <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
                       <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
-                      <li><a id="asignarCaso">Asignar Un Caso</a></li>
+                      <li><a id="asignarCaso">Crear Un Caso</a></li>
                     </ul>
                   </li>
 
@@ -241,7 +241,7 @@ include "../../Controlador/sesion.php";
             <div class="clearfix"></div>
             <div id="dialogo" title="Confirma Eliminar?"></div>
             <?php
-               // echo isset($_SESSION['mensaje']);
+              //  print_r ($_SESSION['mensaje']) ;
                      
                      if(isset($_SESSION['mensaje'])){
                       if(isset($_SESSION['mensaje']['tipo'])){
@@ -252,15 +252,15 @@ include "../../Controlador/sesion.php";
                         //$alert='alert alert-danger';
                          if($_SESSION['mensaje']['tipo']=='error')
                            $alert='alert alert-danger';
-                         
+
                           if($_SESSION['mensaje']['tipo']=='juzgado')
                             $alert='alert alert-danger';
                            
                           //else $alert='';
                           
                       }
-                  ?>
-                    <div class='<?php echo $alert; ?>' alert-dismissible fade in" role="alert">
+                  ?> <!-- class='alert-dismissible fade in  -->
+                    <div  class='alert-dismissible fade in <?php echo $alert; ?>'  role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
                       <strong align="center">
@@ -311,28 +311,45 @@ include "../../Controlador/sesion.php";
                       </p>
                        
                       <?php
-               if(isset($_GET['dirigir'])) {
-               switch ($_GET['dirigir']) {
+                //echo $_SESSION['dirigir'];
+                if(isset($_SESSION['dirigir'])) {
+                switch ($_SESSION['dirigir']) {
                 case 'registrar_usuario':
+                $_SESSION['dirigir']="";
                       ?>  
                       <script>
                       $('#menuContainer').children().remove();
                       
                       $('#menuContainer').load("registroUsuarioServicio.php");
+                     
                       </script>
+                      
                 <?php  break;
                 case 'listar_defensor':?>
                     <script>//    $('#menuContainer').load("listarDefensores.php"); </script>
-                    <?php break;
-                    case 'cambioAdscripcion':
+                    <?php 
+                break;
+                case 'cambioAdscripcion':
                     ?>
                     <script>//    $('#menuContainer').load("cambiarAdscripcion.php"); </script>
                    <?php 
                 break;
                 
+                case 'asignar_defensor':  $_SESSION['dirigir']="";?>
+                    <script>
+                        $('#menuContainer').load("asignarDefensor.php"); </script>
+                        
+                    <?php
+                 break;
+                 case 'listar_Expediente':  $_SESSION['dirigir']="";?>
+                   <script>
+                     $('#menuContainer').load("../administrador/verExpediente.php"); </script>
+                     
+                    <?php
+                 break;
                 
                 default:
-                require_once("../usuario/registrar.php.php");   
+                //require_once("../usuario/registrar.php.php");   
                     break;
             }
           }

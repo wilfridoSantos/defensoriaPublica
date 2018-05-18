@@ -1,5 +1,6 @@
 <?php
-require_once("conexion.php");
+
+include_once('../../libreria/conexion.php');
 
 function listar_asesoria_x_id($id){
       global $conexion;
@@ -11,12 +12,12 @@ function listar_asesoria_x_id($id){
 
     //Definimos la funciones sobre el objeto crear_asesoria
     function crear_asesoria($asesoria){
-        global $conexion;
-        $sql = "INSERT INTO asesoria ";
-        $sql.= "SET id_expediente='".$asesoria['id_expediente']."',   fecha_asesoria='".$asesoria['fecha_asesoria']."',";
-     $sql.= "observaciones='".$asesoria['observaciones']."'";
-
-        return consulta($sql, $conexion);
+        $sql = "INSERT INTO asesorias ";
+        $sql.= "SET id_actividad='".$asesoria['id_actividad']."',   foto='".$asesoria['foto']."',";
+        $sql.= " latitud='".$asesoria['latitud']."',   longitud='".$asesoria['longitud']."'";
+        echo $sql;
+     $lista=registro($sql);
+     return $lista;
     }
 
 

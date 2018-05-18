@@ -31,6 +31,10 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
                 $_SESSION["usuario"] = $nombreUsuario; // se asigna el nombre del usuario a la session
                 $_SESSION["rol"] = $id_cargo; //asignamos rol de usuario /admin =1, coordinado =2, defensor =3
                  $_SESSION["mensaje"] = ' ';
+                 $sqlPersonal = 'select id_personal,nombre,ap_paterno,ap_materno,curp,nup,nue from personal where nue ='.$usuario;
+                 $arrayPersonal = consulta($sqlPersonal);
+                 $_SESSION["personal"] = $arrayPersonal;
+                  
                 echo'<script language="javascript">window.location="Vistas/baseIndex.php"</script>';
                 //header("Location: ../Vistas/baseIndex.php");
             }else{

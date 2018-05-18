@@ -95,6 +95,30 @@
 </script>
 
 <script>
+function verificarCargo(e, elemento){
+    if(elemento.selectedIndex===2){
+       $("#materia").hide();
+       $("#instancia").hide();
+        
+      }
+   
+     if(elemento.selectedIndex===1){
+        $("#materia").show();
+        $("#instancia").show();
+      }
+    }
+ 
+    function verificarMateria(evento, elemento){
+       console.log("holas instancia",elemento.selectedIndex);
+    if((elemento.selectedIndex==1)||(elemento.selectedIndex==2)||(elemento.selectedIndex==3))
+       $("#instancia").show();
+   else 
+      $("#instancia").hide();
+         
+     
+    }
+
+
 
 
 function agrega(){
@@ -208,27 +232,15 @@ $(document).ready(function () {
                      
 
                     
+                    <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
+                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                              <input type="text" title"correo invalido"  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="" placeholder="Email" name="email">
+                              <div  class="help-block with-errors"></div>  </div> 
+                      </div>  
 
 
-                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Adscripción</label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <select name="adscripcion"  class="select2_group form-control">
-                          <option value="">- Seleccione -</option> 
-                              <?php
-                                $juzgadosRegion=json_decode($contenidojuzgado);
-                                            foreach($juzgadosRegion as $obj=>$valores){
-                                             // echo $obj."fsdfwegfwefwefwef";  
-                                               echo ' <optgroup label="'.$obj.'">';
-                                              foreach($valores as $valor){
-                                                  echo '<option value='.$valor->id_juzgado.'>'.$valor->nombre.'</option> ';
-                                                }
-                                                 echo  '</optgroup>';
-                                          }
-                                  ?>                           
-                          </select>
-                        </div>
-                      </div>                    
+                                        
                       
                     
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -250,30 +262,11 @@ $(document).ready(function () {
                                 <option value="GR">GUERRERO</option> <option value="HG">HIDALGO</option> <option value="JC">JALISCO</option> <option value="MC">MEXICO</option> <option value="MN">MICHOACAN DE OCAMPO</option> <option value="MS">MORELOS</option> <option value="NT">NAYARIT</option> <option value="NL">NUEVO LEON</option> <option value="OC">OAXACA</option> <option value="PL">PUEBLA</option> <option value="QT">QUERETARO DE ARTEAGA</option> <option value="QR">QUINTANA ROO</option> <option value="SP">SAN LUIS POTOSI</option> <option value="SL">SINALOA</option> <option value="SR">SONORA</option> <option value="TC">TABASCO</option> <option value="TS">TAMAULIPAS</option> <option value="TL">TLAXCALA</option> <option value="VZ">VERACRUZ</option> <option value="YN">YUCATAN</option> <option value="ZS">ZACATECAS</option> <option value="NE">NACIDO EN EL EXTRANJERO</option></select>
                                 </div>
                       </div>
-                      <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
-                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
-                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input type="text" title"correo invalido"  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="" placeholder="Email" name="email">
-                              <div  class="help-block with-errors"></div>  </div> 
-                      </div>  
-
-                     
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-
-                       <select required id="genero" onkeyup="validarCurps()" onblur="validarCurps()" name="genero"  class="select2_group form-control">
-                             <option value="">- Seleccione -</option> 
-                             <option value="masculino">masculino</option> 
-                             <option value="masculino">femenino</option>   
-                          </select>
-
-                        </div>
-                      </div>
+                    
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Puesto</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <select name="puesto"  class="select2_group form-control">
+                          <select onkeyup="verificarCargo(event,this)" onblur="verificarCargo(event,this)" name="puesto"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="4">defensor</option> 
                              <option value="2">coordinador</option>   
@@ -281,12 +274,81 @@ $(document).ready(function () {
                           </select>
                         </div>
                       </div>
+
+                
+                     
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+
+                       <select  required id="genero" onkeyup="validarCurps()" onblur="validarCurps()"  name="genero"  class="select2_group form-control">
+                             <option value="">- Seleccione -</option> 
+                             <option value="masculino">masculino</option> 
+                             <option value="masculino">femenino</option>   
+                          </select>
+
+                        </div>
+                      </div>
+                      
+
+                            <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Adscripción</label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <select name="adscripcion"  class="select2_group form-control">
+                          <option value="">- Seleccione -</option> 
+                              <?php
+                                $juzgadosRegion=json_decode($contenidojuzgado);
+                                            foreach($juzgadosRegion as $obj=>$valores){
+                                             // echo $obj."fsdfwegfwefwefwef";  
+                                               echo ' <optgroup label="'.$obj.'">';
+                                              foreach($valores as $valor){
+                                                  echo '<option value='.$valor->id_juzgado.'>'.$valor->nombre.'</option> ';
+                                                }
+                                                 echo  '</optgroup>';
+                                          }
+                                  ?>                           
+                          </select>
+                        </div>
+                      </div> 
+
+                      
+
+                   
                 <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="validarCurps()" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
+                      
+                      <div id="materia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Materia <span class="required">*</span>
+                        </label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                          <select name="materia"onkeyup="verificarMateria(event,this)" onblur="verificarMateria(event,this)" class="select2_group form-control ">
+                          <option value="">- Seleccione -</option> 
+                             <option value="Civil">Civil</option> 
+                             <option value="Familiar">Familiar</option>  
+                             <option value="Penal">Penal</option>  
+                             <option value="Agrario">Agrario</option>  
+                             <option value="Mercantil">Mercantil</option>  
+                             <option value="Amparo">Amparo</option>  
+                           
+                            
+                            
+                          </select>
+                          </div></div>
+
+                          <div id="instancia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Instancia <span class="required">*</span>
+                        </label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                          <select name="instancia"  class="select2_group form-control ">
+                           
+                            <option value="1">1 Instancia</option>  
+                             <option value="2">2 Instancia</option>  
+                          </select>
+                          </div></div>
 
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -339,16 +401,6 @@ $(document).ready(function () {
 <script>
 
 $('#myform').validator()
-
-var curp = generaCurp({
-  nombre            : 'Juan',
-  apellido_paterno  : 'Perez',
-  apellido_materno  : 'Ramirez',
-  sexo              : 'H',
-  estado            : 'DF',
-  fecha_nacimiento  : [31, 1, 1981]
-});
-console.log(curp);
 
 
 var curp2 = generaCurp({

@@ -3,9 +3,9 @@
 //include '../controlador/conexion.php';
 include_once( '../../libreria/conexion.php');
 function listar_juzgado_x_id($id){
-      global $conexion;
-      $sql = "select * from juzgado where id='".$id."'";
-      $consulta = consulta($sql, $conexion);
+    
+      $sql = "select * from juzgado where id_juzgado='".$id."'";
+      $consulta = consulta($sql);
       return $consulta;
   }
 

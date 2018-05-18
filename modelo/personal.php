@@ -30,7 +30,7 @@ function listar_personal(){
         $sql.= "genero='".$objetoEntidad['genero']."', telefono='".$objetoEntidad['telefono']."',"; 
         $sql.= "correo_electronico='".$objetoEntidad['correo']."', foto='".$objetoEntidad['foto']."'";
         //return consulta($sql, $conexion);
-    //echo $sql;
+    //  echo $sql;
      registro($sql); 
     }
     //Definimos una funcion que acutualice al actualiza_defensor
