@@ -36,14 +36,14 @@ $(document).ready(function () {
 						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
 						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
 						'<ul class="list-unstyled">' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Numero Expediente: ' + (VALOR.num_expediente) + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Materia: ' + (VALOR.materia).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Fecha de Inicio: ' + (VALOR.fecha_inicio) + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Fecha de Finalizacion: ' + (VALOR.fecha_final) + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Nombre del Delito: ' + (VALOR.nombre_delito).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Grado del Delito: ' + (VALOR.grado_delito).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Estado del Expediente: ' + (VALOR.estado).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span> Observaciones: ' + (VALOR.observaciones).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Numero Expediente: </b> ' + (VALOR.num_expediente) + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Materia: </b> ' + (VALOR.materia).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Inicio: </b> ' + (VALOR.fecha_inicio) + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Finalizacion: </b>' + (VALOR.fecha_final) + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre del Delito: </b>' + (VALOR.nombre_delito).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Grado del Delito: </b>' + (VALOR.grado_delito).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Estado del Expediente: </b>' + (VALOR.estado).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Observaciones: </b>' + (VALOR.observaciones).toUpperCase() + ' </li>' +
 
 						'</ul>' +
 						'</div>' +
@@ -56,14 +56,15 @@ $(document).ready(function () {
 							'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
 							'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
 							'<ul class="list-unstyled">' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Numero Expediente: ' + (VALOR.num_expediente) + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Materia: ' + (VALOR.materia).toUpperCase() + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Fecha de Inicio: ' + (VALOR.fecha_inicio) + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Fecha de Finalizacion: ' + (VALOR.fecha_final) + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Nombre del Delito: ' + (VALOR.nombre_delito).toUpperCase() + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Grado del Delito: ' + (VALOR.grado_delito).toUpperCase() + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Estado del Expediente: ' + (VALOR.estado).toUpperCase() + ' </li>' +
-							'<li><span class="glyphicon glyphicon-ok-sign"></span> Observaciones: ' + (VALOR.observaciones).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Nombre de usuario: </b>' + (VALOR.nombre).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido paterno: </b>' + (VALOR.ap_paterno).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido materno: </b>' + (VALOR.ap_materno).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Municipio: </b>' + (VALOR.municipio).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Colonia: </b>' + (VALOR.colonia).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Telefono: </b>' + (VALOR.telefono) + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Email: </b>' + (VALOR.correo_electronico)+ ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Etnia:</b>' + (VALOR.etnia).toUpperCase() + ' </li>' +
+							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Idioma:</b>' + (VALOR.idioma).toUpperCase() + ' </li>' +
 	
 							'</ul>' +
 							'</div>' +

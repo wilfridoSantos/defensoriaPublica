@@ -10,7 +10,7 @@
     <title>Modulo Coordinador General</title>
       <script src="../../recursos/js/main.js"></script>
       <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
     <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -30,8 +30,8 @@
                                 <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Nombre Defensor...">
                             </div>
         
-        <table id="datatable" class="table table-striped table-bordered  dt-responsive nowrap">
-          <thead  >
+        <table id="datatable" class="table table-striped ">
+          <thead>
             <tr class="header">
               <th>NOMBRE</th>
               <th>AP. PATERNO</th>

@@ -1,3 +1,6 @@
+<?php
+include '../../controlador/defensor/controladorListarExp.php';
+ ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -22,27 +25,7 @@
 
       <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
-      <script>
-function showUser(str) {
-  if (str=="") {
-    document.getElementById("txtHint").innerHTML="";
-    return;
-  } 
-  if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  } else { // code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      document.getElementById("txtHint").innerHTML=this.responseText;
-    }
-  }
-  xmlhttp.open("GET","getuser.php?q="+str,true);
-  xmlhttp.send();
-}
-</script>
+
 <body>
 <div class="x_content">
         <h3 ><b>
@@ -57,7 +40,8 @@ function showUser(str) {
                                   
                                 </div>
                                 <div class="right" >
-                                  <select  class="mySelectFiltro"  name="users" onchange="showUser(this.value)">
+                                  <select  class="mySelectFiltro"  name="users" onchange="showUser(this.value)" >
+                                    
                                     <option value="">Listar Expedientes por estado</option>
                                     <option value="1">Activos</option>
                                     <option value="2">Inactivos</option>
@@ -77,28 +61,7 @@ function showUser(str) {
             </tr>
           </thead>
           <tbody id='tebody'>
-        <?php include '../../controlador/defensor/controladorListarExp.php';
-            $defensores=json_decode($contenido);
-            //print_r($defensores);
-            foreach($defensores as $obj){
-              //print_r('=> '. $obj->estado);
-              //if($obj->estado){      
-                $nomBoton;
-                if($obj->id_personal < 0) {
-                  $nomBoton = '<button type="button" class="btn btn-danger botonCambioDefensor" id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';                  
-                }else{
-                  $nomBoton = '<button type="button" class="btn btn-primary botonCambioDefensor" id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
-                }          
-                echo '<tr> '.
-                  '<td id="idPersonal" style="display:none;">'.$obj->id_personal.'</td>'.
-                  '<td>'.strtoupper($obj->num_expediente).'</td>'.
-                  '<td>'.strtoupper($obj->materia).'</td>'.
-                  '<td>'.strtoupper($obj->fecha_inicio).'</td>'.
-                  '<td>'.strtoupper($obj->nombre).'</td>'.                                                           
-                  '<td> '.$nomBoton.'</td> </tr>';
-                }            
-              //}
-        ?>
+        
           </tbody>  
         </table>
 
@@ -106,9 +69,6 @@ function showUser(str) {
        
         
       </div>
-
-      <br>
-<div id="txtHint"><b>Person info will be listed here.</b></div>
 
           </body>
           </html>

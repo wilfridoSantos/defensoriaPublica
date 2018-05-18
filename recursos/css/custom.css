@@ -496,7 +496,7 @@ body {
     color: #000000;
     background: #25d018;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
     line-height: 1.471
 }
@@ -632,9 +632,9 @@ table.no-margin .progress {
 .col-lg-12 {
     position: relative;
     min-height: 1px;
-    float: center;
-    padding-right: 10px;
-    padding-left: 10px
+    float: left;
+    padding-right: 1px;
+    padding-left: 1px
 }
 .row {
     margin-right: -10px;
@@ -1124,15 +1124,16 @@ legend {
     display: inline-block;
     padding: 10px 0 0;
     background: #ffffff;
-    border: 2px solid #d50571  
+    border: 2px solid #d50571;
+    margin-left: 23px;
 }
 .left{
     float: left;
-    width: 520px;
+    width: 50%;
 }
 .right{
     float: right;
-    width: 520px;
+    width: 50%;
 }
 .profile_details .profile_view .divider {
     border-top: 1px solid #e5e5e5;
@@ -2021,7 +2022,10 @@ input:invalid ~ .with-errors {
 .list-unstyled {
     padding-left: 0;
     list-style: none;
-    font-size: 12px;
+    font-size: 16px;
+}
+.textoo{
+    color: #2b002b
 }
 .list-btn-mail.active {
     border-bottom: 1px solid #39B3D7;

@@ -70,7 +70,9 @@ include "../../Controlador/sesion.php";
                       <li><a id="informeAnual">Generar Informe Anual</a></li>
                       <li><a id="informeMensual">Generar Informe Mensual</a></li>
                       <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
+                      <li><a id="informeActividades">Generar Informe de Actividades</a></li>
                       <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>
+                      
                     </ul>
                   </li>
 
@@ -359,6 +361,11 @@ include "../../Controlador/sesion.php";
           <div class="pull-right">
             <a href="https://colorlib.com"></a>
           </div>
+<!--           <div class="col-md-4">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                          <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                        </div>  -->
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->

@@ -6,12 +6,10 @@
    if($_FILES['fileToUpload']['size'] != 0){
         $nombreFoto = $_FILES["fileToUpload"]["name"];
         $rutaFoto   = $_FILES["fileToUpload"]["tmp_name"];
-        $carpeta='../../recursos/uploads/';
-        
+        $carpeta='../../recursos/uploads/';        
         if (!file_exists($carpeta)) {
                 mkdir($carpeta, 0777, true);
-        }
-         
+        }         
         $destino = $carpeta.basename($nombreFoto);
         move_uploaded_file($rutaFoto,$destino);
     }else{        

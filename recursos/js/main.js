@@ -333,3 +333,41 @@ function myFunction() {
     });
 }, 4000);
   
+
+function showUser(str) {
+    console.log(str,' VALOR DEL SELECT');
+  if (str=="") {
+        $('#tebody').empty();
+    return;
+  } 
+        $.ajax({
+            url: "../../controlador/defensor/controlFiltroListarExpediente.php",
+            type: "GET",
+            data: "q=" + str,
+            success: function(data) {
+                console.log(data);
+                var jsonExpDef = jQuery.parseJSON(data);
+                console.log(jsonExpDef[0].id_personal, ' id personal en listar exp');
+                $('#tebody').empty();
+                $.each(jsonExpDef, function (KEY, VALOR) {
+                    var nomBoton;
+                    if(VALOR.id_personal < 0) {
+                        nomBoton = '<button type="button" class="btn btn-danger botonCambioDefensor" id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';                  
+                    }else{
+                        nomBoton = '<button type="button" class="btn btn-primary botonCambioDefensor" id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
+                    } 
+                    
+                     $('#tebody').append(
+                        '<tr> '+
+                        '<td id="idPersonal" style="display:none;">'+VALOR.id_personal+' </td>'+
+                        '<td>'+VALOR.num_expediente+'</td>'+
+                        '<td>'+VALOR.materia+'</td>'+
+                        '<td>'+VALOR.fecha_inicio+'</td>'+
+                        '<td>'+VALOR.nombre+'</td>'+                                                     
+                        '<td>'+nomBoton+'</td> </tr>'
+                    ); 
+                });
+            
+            }
+        });
+}
