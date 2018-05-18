@@ -33,7 +33,6 @@ function consulta_obj($consulta){
     return  $sql->fetchAll(PDO::FETCH_ARRAY);
   //return $datos;
 }
- 
  function registro($consulta){
    global $db;
    $sql=$db->prepare($consulta);

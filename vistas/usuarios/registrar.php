@@ -175,9 +175,14 @@ $(document).ready(function () {
                         <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nombre<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
+<<<<<<< HEAD
+                            <input type="text"  pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni mánimo de 4" placeholder="Nombre" name="nombre">
+                            <div  class="help-block with-errors"></div></div>
+=======
                             <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni mánimo de 4" placeholder="Nombre" name="nombre">
                               <div  class="help-block with-errors"></div>
                             </div>
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
                        </div>
                        <div class="item form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nup<span class="required">*</span></label>
@@ -188,7 +193,11 @@ $(document).ready(function () {
                       <div class="item form-group  col-md-6 col-sm-6 col-xs-12 ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Apellido Paterno<span class="required">*</span></label>
                          </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+<<<<<<< HEAD
+                            <input type="text" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+" data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
+=======
                             <input type="text" id="aPaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+" data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
                             <div  class="help-block with-errors"></div></div>
                        </div>
                       <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -203,7 +212,11 @@ $(document).ready(function () {
                         <div class="item form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
                           </h4><div class="col-md-8 col-sm-9 col-xs-12">
+<<<<<<< HEAD
+                            <input type="text" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
+=======
                             <input type="text" id="aMaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
                            </div>
                        </div> 
                     <!--    <div class="item form-group">
@@ -217,8 +230,29 @@ $(document).ready(function () {
                        <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Teléfono<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12"  >
+<<<<<<< HEAD
+                          <input type="tel" pattern="(?[0-9]{3})([0-9]{10})"  maxlength="13" minlength="10" class="form-control " data-error=" solo numero telefonico" required placeholder="Telefono" name="telefono">
+                          <div  class="help-block with-errors"/></div>
+                      </div>
+
+                      <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
+                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                              <input type="text" title"correo invalido" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="" placeholder="Email" name="email">
+                              <div  class="help-block with-errors"></div>  </div> 
+                      </div>  
+
+            
+
+                     <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" tidata-error=": el formato debe ser alfanumerico con 18 digitos" maxlength="18" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <div  class="help-block with-errors"></div> </div>
+=======
                           <input type="tel" pattern="([0-9]{13})|([0-9]{10})"  maxlength="13" minlength="10" class="form-control " data-error=" solo numero telefonico" required placeholder="Telefono" name="telefono">
                           <div  class="help-block with-errors"/></div>
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
                       </div>
                       <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
@@ -240,7 +274,33 @@ $(document).ready(function () {
                       </div>  
 
 
+<<<<<<< HEAD
                                         
+=======
+                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+<<<<<<< HEAD
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Adscripció  n</label>
+=======
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Adscripción</label>
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <select name="adscripcion"  class="select2_group form-control">
+                          <option value="">- Seleccione -</option> 
+                              <?php
+                                $juzgadosRegion=json_decode($contenidojuzgado);
+                                            foreach($juzgadosRegion as $obj=>$valores){
+                                             // echo $obj."fsdfwegfwefwefwef";  
+                                               echo ' <optgroup label="'.$obj.'">';
+                                              foreach($valores as $valor){
+                                                  echo '<option value='.$valor->id_juzgado.'>'.$valor->nombre.'</option> ';
+                                                }
+                                                 echo  '</optgroup>';
+                                          }
+                                  ?>                           
+                          </select>
+                        </div>
+                      </div>                    
+>>>>>>> 65af769caa359e79b2910072008e82cf4df918da
                       
                     
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -309,16 +369,38 @@ $(document).ready(function () {
                                   ?>                           
                           </select>
                         </div>
+<<<<<<< HEAD
                       </div> 
 
                       
 
                    
+=======
+                      </div>
+<<<<<<< HEAD
+                    
+                     
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+
+                       <select required name="genero"  class="select2_group form-control">
+                             <option value="masculino">masculino</option> 
+                             <option value="masculino">femenino</option>   
+                          </select>
+
+                          <div id="gender" required class="btn-group" data-toggle="buttons">
+                           
+                           </div>
+                        </div>
+=======
+>>>>>>> 65af769caa359e79b2910072008e82cf4df918da
                 <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="validarCurps()" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> </div>
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
                       </div>
                       
                       <div id="materia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
@@ -391,6 +473,65 @@ $(document).ready(function () {
 
 
     <!-- jQuery -->
+<<<<<<< HEAD
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../recursos/vendors/nprogress/nprogress.js"></script>
+    <!-- validator -->
+    <!-- <script src="../../recursos/vendors/validator/validator.js"></script>
+ -->
+    <!-- Custom Theme Scripts -->
+    <script src="../../recursos/js/custom.min.js"></script>
+    <script src="../../recursos/js/jquery-validator.js"></script>
+<!-- Google Analytics -->
+<script>
+$('#myform').validator()
+/* ar validator = new FormValidator('example_form', [{
+  /*   name: 'req',
+    display: 'required',
+    rules: 'required'
+}, {
+    name: 'alphanumeric',
+    rules: 'alpha_numeric'
+}, {
+    name: 'password',
+    rules: 'required'
+}, {
+    name: 'password_confirm',
+    display: 'password confirmation',
+    rules: 'required|matches[password]'
+},  {
+    name: 'email',
+    rules: 'valid_email',
+    depends: function() {
+        return Math.random() > .5;
+    }
+}, {
+    name: 'minlength',
+    display: 'min length',
+    rules: 'min_length[8]'
+}], function(errors, event) {
+    if (errors.length > 0) {
+        // Show the errors
+    }
+});
+
+ */
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-23581568-13', 'auto');
+ga('send', 'pageview');
+
+
+=======
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     
@@ -412,6 +553,7 @@ var curp2 = generaCurp({
   fecha_nacimiento  : [16, 1, 1992]
 });
 console.log(curp2);
+>>>>>>> 6f0ee65e1ea1c074f57c92361b8ad72ebb735c9e
 
 </script>
 	

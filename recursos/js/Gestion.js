@@ -3,9 +3,7 @@ $(document).ready(function () {
 		informeA.addEventListener('click', informeAnual, false);
 		function informeAnual() {
 			$('#menuContainer').load("informeAnual.html");
-		};
-
-		  
+		};		  
 		      
 	var registrar=document.getElementById('registrarDefensor');
 			registrar.addEventListener('click',regDefensores,false);
@@ -38,7 +36,11 @@ $(document).ready(function () {
 			$('#menuContainer').load("listarDefensores.php");
 		};
 	
-			
+		var listarExp = document.getElementById('listarExpedientes');
+		listarExp.addEventListener('click', listarExpedientes, false);
+		function listarExpedientes() {
+			$('#menuContainer').load("listarExpedientes.php");
+		};	
 	
 	var listarAudiencia=document.getElementById('listarAudiencias');
 	listarAudiencia.addEventListener('click', listarAudiencias, false);
@@ -60,7 +62,7 @@ $(document).ready(function () {
 	 function asinar(){
 		$('#menuContainer').load("../administrador/cambiarAdscripcion.php");
 	}
-
+// 
 	// Datepicker Popups calender to Choose date.
 	/*$(function() {
 		$("#datepicker").datepicker();

@@ -15,8 +15,13 @@ include "../../Controlador/sesion.php";
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Modulo ADMINISTRADOR</title>
+
+<!--     <link rel="stylesheet" href="../../recursos/vendors/jquery/src/css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../recursos/css/style.css" />
+    <script src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
+    
     <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
@@ -77,7 +82,6 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Servicios Defensores <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
-                      <li><a id="listarExpedientes">Listar Expedientes</a></li>
                       <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
                       <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
                       <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
@@ -234,11 +238,10 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
-            <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
+            <div id="dialogo" title="Confirma Eliminar?"></div>
             <?php
                // echo isset($_SESSION['mensaje']);
-              
-
+                     
                      if(isset($_SESSION['mensaje'])){
                       if(isset($_SESSION['mensaje']['tipo'])){
 
@@ -250,18 +253,15 @@ include "../../Controlador/sesion.php";
                            $alert='alert alert-danger';
                          
                           if($_SESSION['mensaje']['tipo']=='juzgado')
-                            $alert='alert alert-danger';                           
+                            $alert='alert alert-danger';
+                           
+                          //else $alert='';
                           
                       }
                   ?>
-<<<<<<< HEAD
-                    <div class='alert-dismissible fade in <?php echo $alert; ?>' role="alert">
-                   
-=======
-                    <div class='<?php echo $alert; ?>' " role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span></button>
->>>>>>> 65af769caa359e79b2910072008e82cf4df918da
+                    <div class='<?php echo $alert; ?>' alert-dismissible fade in" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                      </button>
                       <strong align="center">
                         <?php 
                         echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");
@@ -309,34 +309,28 @@ include "../../Controlador/sesion.php";
                       Los principios que deben regir la conducta de los servidores públicos dependientes de la Defensoría Pública del Estado de Oaxaca, serán:
                       </p>
                        
-                <?php
-               // echo $_SESSION['dirigir'];
-               if(isset($_SESSION['dirigir'])) {
-               switch ($_SESSION['dirigir']) {
+                      <?php
+               if(isset($_GET['dirigir'])) {
+               switch ($_GET['dirigir']) {
                 case 'registrar_defensor':
-                $_SESSION['dirigir']="";?>  
-                    <script>
-                     $('#menuContainer').children().remove();
-                     $('#menuContainer').load("../usuarios/registrar.php");
-                     
-                     </script>
-                 <?php 
-               break;
-              case 'listar_defensor':$_SESSION['dirigir']="";?>
+                ?>  
+                <script>
+                 $('#menuContainer').children().remove();
+                  $('#menuContainer').load("../usuarios/registrar.php");
+                </script>
+                  <?php  break;
+                   case 'listar_defensor':?>
                     <script>  
                     $('#menuContainer').children().remove();
-                   // $('#menuContainer').load("listarDefensores.php");/// probar con window.load o algo asi
-                     </script>
-                    
-                 <?php
-              break;
-              case 'cambioAdscripcion':
-              $_SESSION['dirigir']="";?>
+                    $('#menuContainer').load("listarDefensores.php"); </script>
+                    <?php break;
+                    case 'cambioAdscripcion':
+                    ?>
                     <script> 
                     $('#menuContainer').children().remove();
                     $('#menuContainer').load("cambiarAdscripcion.php"); </script>
-                  <?php 
-              break;
+                   <?php 
+                    break;
                 
                 
                 default:
@@ -374,7 +368,7 @@ include "../../Controlador/sesion.php";
         </footer>
         <!-- /footer content -->
 
-
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -400,10 +394,12 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script>
 
+   
+    <script src="../../recursos/js/jquery-validator.js"></script>
+
     <!-- Custom Theme Scripts -->
-    
     <script src="../../recursos/js/custom.min.js"></script>
-    <!-- <script src="../../recursos/js/jquery-validator.js"></script> -->
+
     <script src="../../recursos/js/Gestion.js"></script>
     <script src="../../recursos/js/main.js"></script>
   </body>

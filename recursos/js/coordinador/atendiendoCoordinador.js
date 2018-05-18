@@ -110,34 +110,29 @@ $(document).ready(function () {
 					}
 					$('#verInfoDef').append(
 						'<div class="row"> ' +
-						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
-						'<div class="col-sm-12">' +
-						'<div class="left col-xs-7">' +
-						'<h2><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2>' +
-
-						'<p><span class="glyphicon glyphicon-lock"></span><strong>' + (VALOR.perfil).toUpperCase() + '</strong></p>' +
-						'<hr/>' +
-						'<ul class="list-unstyled">' +
-						'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: ' + (VALOR.calle).toUpperCase() + ', ' + VALOR.numero_ext + ', ' + VALOR.numero_int + ', ' + ' </li>' +
-						'<li><span class="glyphicon glyphicon-info-sign"></span> Curp :' + (VALOR.curp).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-info-sign"></span> Nup :' + VALOR.nup + ' </li>' +
-						'<li><span class="glyphicon glyphicon-info-sign"></span> Nue :' + VALOR.nue + ' </li>' +
-						'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado :' + (VALOR.juzgado).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional :' + (VALOR.cedula_profesional).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail :' + (VALOR.correo_electronico).toUpperCase() + ' </li>' +
-						'</ul>' +
-						'</div>' +
-						'<div class="right col-xs-5 ">' +
-						'<p align="right"><img src="../../recursos/uploads/' + VALOR.foto + '" alt="" class="img-circle img-responsive">' + (VALOR.perfil).toUpperCase() + '        </p>' +
-						'</div>' +
-						'</div>' +
-						'</div>' +
-						'</div>' +
-						'</div>' +
+							'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
+								'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
+									'<center><h2 ><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2></center>' +									
+									
+								
+										'<div class="left">'+
+											'<ul class="list-unstyled">' +
+												'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: ' + (VALOR.calle).toUpperCase() + ', ' + VALOR.numero_ext + ', ' + VALOR.numero_int + ', ' + ' </li>' +
+												'<li><span class="glyphicon glyphicon-info-sign"></span> Curp :' + (VALOR.curp).toUpperCase() + ' </li>' +
+												'<li><span class="glyphicon glyphicon-info-sign"></span> Nup :' + VALOR.nup + ' </li>' +
+												'<li><span class="glyphicon glyphicon-info-sign"></span> Nue :' + VALOR.nue + ' </li>' +
+												'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado :' + (VALOR.juzgado).toUpperCase() + ' </li>' +
+												'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional :' + (VALOR.cedula_profesional).toUpperCase() + ' </li>' +
+												'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail :' + (VALOR.correo_electronico).toUpperCase() + ' </li>' +
+											'</ul>' +						
+										'</div>'+
+										'<div class="right ">'+																					
+											'<p align="right"><img src="../../recursos/uploads/' + VALOR.foto + '" alt="" class="img-circle img-responsive"><span class="glyphicon glyphicon-lock"></span>' + (VALOR.perfil).toUpperCase() + '        </p>' +
+										'</div>'+
+									
+								'</div>' +
+							'</div>' +
 						'</div>');
-
-					//$('#verExpDef').append('<p>ahskdjhaksjdhkjashdkjashdkjsh</p>');
 				});
 			}
 		});
@@ -274,13 +269,13 @@ $(document).ready(function () {
 						'value="' + VALOR.telefono + '">' +
 						'</div>' +
 						'</div>' +
-						'<div class="form-group">' +
-						'<label class="control-label col-md-3 col-sm-3 col-xs-12">E-Mail<span class="required">*</span></label>' +
-						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-						'<input type="text" class="form-control" id="correo_electronico" placeholder="Correo Electronico" name="correo_electronico"' +
-						'value="' + (VALOR.correo_electronico) + '">' +
-						'</div>' +
-						'</div>' +
+						'<div class=" form-group">'+
+						'<label for= "inputMail" class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span></label>' +
+						'<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">' +
+						   '<input type="text" id= "correo_electronico" title"correo invalido" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="required" placeholder="Email" name="email"'+
+						   ' value="' + VALOR.correo_electronico + '">' +
+						   '<div  class="help-block with-errors"></div>  </div> '+
+				   		'</div>'+
 						'<div class="ln_solid"></div>' +
 						'<div class="form-group">' +
 						'<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">' +
@@ -304,32 +299,41 @@ $(document).ready(function () {
 
 		});
 	}
-
 	$('#tebody').on('click', '.botonDel', function (evst) {
 		//console.log('click boton del');
 		//	 var target= $(event.target);
 		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
-		console.log(idDef, ' beforre');
-		$("#dialogo").dialog({
-			resizable: true,
-			height: "auto",
-			width: "auto",
-			modal: true,
-			buttons: {
-				"Eliminar": function () {
-
+		
+		console.log(idDef, ' before');
+		$.ajax({
+			url: "../../controlador/defensor/consultaRapida.php",
+			type: "get",
+			data: "id_personal=" + idDef,
+			success: function (data) {	
+				console.log(data, ' expedientes del id_Defensor-> '+idDef);								
+				if(data != 0){
+					$("#dialogo").dialog({
+						resizable: true,
+						height: "auto",
+						width: "auto",
+						modal: true,
+						buttons: {
+							"Eliminar": function () {
+								eliminarDefensor(idDef);
+								$(this).dialog("close");
+							},
+							"Cancelar": function () {
+								$(this).dialog("close");
+			
+							}
+						}
+					});
+				}else{
 					eliminarDefensor(idDef);
-					$(this).dialog("close");
-				},
-				"Cancelar": function () {
-					$(this).dialog("close");
-
 				}
 			}
 		});
-
-
 	});
 	function eliminarDefensor(idDef) {
 		console.log(idDef, 'i defensor');
@@ -343,7 +347,6 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				//console.log('Success!! Eliminado defensor id = '+idDef);
-				console.log(data, ' result of query delete id: ' + idDef);
 				$('#menuContainer').load('listarDefensores.php');
 
 			}

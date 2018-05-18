@@ -20,13 +20,19 @@ function listar_defensores_estudios(){
                     inner join juzgado as j using(id_juzgado)
                     inner join estudios using(id_personal) where id_cargo =4";			
 
-$lista=consulta($sql);
+ $lista=consulta($sql);
 //print_r($sql);
 return $lista;
 }
+/*
 
 function numRegistros($sql){
     return registro($sql);
+} */
+function getNumExpedientes($id_defensor){
+    $sql = 'SELECT * from expediente inner join personal_campo using(id_personal) where id_personal = "'.$id_defensor.'"';
+    $lista = registro($sql);
+    return $lista;
 }
 function getDefensorById($id_defensor){
     $sql="SELECT p.nombre,p.ap_paterno,p.ap_materno, p.municipio, p.colonia, p.calle,p.numero_int,p.numero_ext, p.genero,p.telefono,p.correo_electronico,p.curp,p.foto, nup,nue,juzgado,perfil,cedula_profesional FROM personal_campo as d inner join personal as p using(id_personal)
@@ -98,7 +104,11 @@ function listar_defensor_x_nup($nup){
    // echo $sql;
     return $consulta;
 }
-
+function listar_expedientes(){
+    $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) inner join personal using(id_personal)";
+    $lista=consulta($sql);
+    return $lista;
+}
 function obtenerExpedientes($id_defensor){
     $sql="SELECT * FROM expediente inner join personal_campo using(id_defensor) WHERE 
                     id_defensor = '".$id_defensor."'";
@@ -167,19 +177,20 @@ return $lista;
         " where d.id_personal = '".$defensor['id_personal']."'";
         $lista=consulta($sql);
         //echo $defensor['id_defensor'].' => Ah sido actualizado';
-        print_r($sql);
+        //print_r($sql);
         return $lista;
  }
 
     //Definimos una funcion que borrar defensor
     function eliminar_defensor($id_defensor){
-        
+        $newId= -1 * $id_defensor;
         //$sql = "DELETE from  defensor where id_defensor = '".$id_defensor."'";
         $sql = "UPDATE personal_campo as d  inner join personal as p using (id_personal)
-                set d.estado = false where id_personal = '".$id_defensor."'";
-        $lista = consulta($sql);
-        return $lista;
+                set d.estado = false, d.id_personal ='".$newId."',p.id_personal ='".$newId."' where d.id_personal = '".$id_defensor."'";                                
+        $listaExp = consulta($sql);
+        return $listaExp;
     }
+
 
     function ultimoDefensorCreatado(){
         $sql = mysql_query("SELECT MAX(id_defensor) AS id FROM defensor");

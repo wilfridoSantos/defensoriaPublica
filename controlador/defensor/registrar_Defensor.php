@@ -6,9 +6,9 @@
     include '../../libreria/herramientas.php';
 ///verifica si el puesto es de defensor
     $materia=($_POST["puesto"]==2)?"coordinador":$_POST["materia"];
-echo $_POST["materia"];  
-echo $_POST["instancia"];  
-echo $_POST["nue"];  
+//echo $_POST["materia"];  
+//echo $_POST["instancia"];  
+//echo $_POST["nue"];  
 $personal = Array(
             "id_cargo"       =>$_POST['puesto'], 
             "nombre"         =>$_POST['nombre'],
@@ -74,10 +74,9 @@ $personal = Array(
           header("location: ../../vistas/administrador/index.php");
         }
         else{
-            echo "json";        }
-    
-      
-     
+            echo "json";  
+        }
+
       function vericar_coordinador($puesto){
       //  print_r (listar_defensor_x_juzgado($_POST['adscripcion']));
         if($puesto=='2') 
