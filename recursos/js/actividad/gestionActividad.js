@@ -6,8 +6,11 @@ function getJuzgado() {
         beforeSend: function () {
         },
         success: function (data) {
-         console.log(data);
-         localizar(data[0]['juzgado']);
+       //  console.log(data);
+        var juzgado=jQuery.parseJSON(data);
+        console.log(juzgado);
+        
+         localizar(juzgado[0]['juzgado']);
            /*  $.each(json,function(key, valor) {
             console.log(valor);
                 }); */
@@ -23,6 +26,7 @@ function getJuzgado() {
       scrollwheel: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }); */
+    console.log(cadena);
     
     geocoder.geocode({'address': cadena}, function(results, status) {
         if (status === 'OK') {
@@ -55,7 +59,8 @@ $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDidf3W8T4sLPLH1sh
    // $("#buscar").click(function() {
         var direccion = $("#").val();
        // if (direccion !== "") {
-            localizar();
+            //localizar();
+            getJuzgado();
       //  }
    // });
 });

@@ -221,6 +221,6 @@ var ul=document.createElement('li');
 $('#myform').validator()
 $('#actividad').hide()
 $('#personal').hide()
-getJuzgado(<?php $id_personal?>);
+//getJuzgado(<?php $id_personal?>);
 
 </script>
