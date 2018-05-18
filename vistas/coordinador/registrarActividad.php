@@ -6,7 +6,7 @@
 // print_r($_SESSION['personal']);
   $id_personal = $_SESSION['personal'][0]['id_personal'];
   $nombre = $_SESSION['personal'][0]['nombre'];
-  echo $id_personal;
+  //echo $id_personal;
   //echo $nombre;
 
  
@@ -189,7 +189,7 @@ var ul=document.createElement('li');
                        <div id="personal" sclass=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
                             </h4><div class="col-md-6   col-sm-6 col-xs-12">
-                            <input type="text" name="id_personal"  required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $id_personal?>">
+                            <input id="id_personal" type="text" name="id_personal"  required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $id_personal?>">
                       
                               </div> 
                       </div>  </div> 

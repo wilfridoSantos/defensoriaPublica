@@ -1,19 +1,13 @@
-function getJuzgado(id_personal) {	
-    console.log( $("#personal").value(),"valor personal en ajax")
+function getJuzgado() {	
     $.ajax({
         url: "../../controlador/defensor/controlDefensor.php",
         type: "GET",
-        data: "id_personal="+$("#personal").value,
+        data: "id_personal="+$("#id_personal").val(),
         beforeSend: function () {
-
-    //	$('#menuContainer').load('listarDefensores.php');
         },
         success: function (data) {
-            //console.log('Success!! Eliminado defensor id = '+idDef);
-  //  console.log(data);
-       // var json=jQuery.parseJSON(data)
          console.log(data);
-         
+         localizar(data[0]['juzgado']);
            /*  $.each(json,function(key, valor) {
             console.log(valor);
                 }); */
@@ -21,7 +15,7 @@ function getJuzgado(id_personal) {
                 }
             });
     }
-  function localizar() {
+  function localizar(cadena) {
     var geocoder = new google.maps.Geocoder();
 
    /*  var map = new google.maps.Map(document.getElementById(elemento), {
@@ -30,12 +24,13 @@ function getJuzgado(id_personal) {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }); */
     
-    geocoder.geocode({'address': "instituto tecnologico de oaxaca"}, function(results, status) {
+    geocoder.geocode({'address': cadena}, function(results, status) {
         if (status === 'OK') {
             var resultados = results[0].geometry.location,
                 resultados_lat = resultados.lat(),
                 resultados_long = resultados.lng();
             console.log(resultados_lat);
+            console.log(resultados_long);
             
             /* map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
