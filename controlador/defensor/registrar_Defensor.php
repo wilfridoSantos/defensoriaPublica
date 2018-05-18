@@ -4,7 +4,12 @@
     include '../../modelo/defensor/defensor.php';
     include '../../modelo/usuario_sistema.php';
     include '../../libreria/herramientas.php';
-      $personal = Array(
+///verifica si el puesto es de defensor
+    $materia=($_POST["puesto"]==2)?"coordinador":$_POST["materia"];
+//echo $_POST["materia"];  
+//echo $_POST["instancia"];  
+//echo $_POST["nue"];  
+$personal = Array(
             "id_cargo"       =>$_POST['puesto'], 
             "nombre"         =>$_POST['nombre'],
             "ap_paterno"     =>$_POST['apellido_paterno'],
@@ -17,6 +22,7 @@
             "municipio"      =>"",
             "nup"            =>$_POST['nup'],
             "nue"            =>$_POST['nue'],
+           
             "genero"         =>$_POST['genero'],
             "telefono"       =>$_POST['telefono'],
             "correo"         =>$_POST['email'],                
@@ -25,8 +31,8 @@
 
       // crear_juzgado($juzgado);
        // echo isset($_GET['tipo']);
-    //  print_r($personal);
-    $personal =  array_map( "cadenaToMayuscula",$personal);
+     print_r($personal);
+    $personal =  array_map( "cadenaToMayuscula",$personal);/// convierte todo a mayusculas
        
      if(listar_defensor_x_nue($_POST['nue'])==0){ 
       $mensaje=['tipo'=>"juzgado",
@@ -36,6 +42,8 @@
         crear_personal($personal);
         $defensor=Array(
           "id_juzgado"=>$_POST['adscripcion'],
+          "materia"        =>$materia,          
+          "instancia"       =>$_POST['instancia'],
           "id_personal"=>ultimoPersonalCreatado()
         );
         crear_defensor($defensor);
@@ -61,7 +69,9 @@
         if(!isset($_GET['tipo'])){
            session_start();
             $_SESSION['mensaje'] = $mensaje;
-           header("location: ../../vistas/administrador/index.php?dirigir=".$didigir);
+            $_SESSION['dirigir']=$didigir;
+
+          header("location: ../../vistas/administrador/index.php");
         }
         else{
             echo "json";  

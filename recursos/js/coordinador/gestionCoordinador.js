@@ -12,6 +12,12 @@ $(document).ready(function () {
            
 			 $('#menuContainer').load("asignarDefensor.php");
 		};
-  
+		var actividad=document.getElementById('registrarActividad');
+		actividad.addEventListener('click', registrarActividad, false);
+		function registrarActividad() {
+           
+			 $('#menuContainer').load("registrarActividad.php");
+		};
+		
 });
 

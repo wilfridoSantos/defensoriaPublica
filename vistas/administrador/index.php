@@ -306,28 +306,34 @@ include "../../Controlador/sesion.php";
                       Los principios que deben regir la conducta de los servidores públicos dependientes de la Defensoría Pública del Estado de Oaxaca, serán:
                       </p>
                        
-                      <?php
-               if(isset($_GET['dirigir'])) {
-               switch ($_GET['dirigir']) {
+                <?php
+               // echo $_SESSION['dirigir'];
+               if(isset($_SESSION['dirigir'])) {
+               switch ($_SESSION['dirigir']) {
                 case 'registrar_defensor':
-                ?>  
-                <script>
-                 $('#menuContainer').children().remove();
-                  $('#menuContainer').load("../usuarios/registrar.php");
-                </script>
-                  <?php  break;
-                   case 'listar_defensor':?>
+                $_SESSION['dirigir']="";?>  
+                    <script>
+                     $('#menuContainer').children().remove();
+                     $('#menuContainer').load("../usuarios/registrar.php");
+                     
+                     </script>
+                 <?php 
+               break;
+              case 'listar_defensor':$_SESSION['dirigir']="";?>
                     <script>  
                     $('#menuContainer').children().remove();
-                    $('#menuContainer').load("listarDefensores.php"); </script>
-                    <?php break;
-                    case 'cambioAdscripcion':
-                    ?>
+                   // $('#menuContainer').load("listarDefensores.php");/// probar con window.load o algo asi
+                     </script>
+                    
+                 <?php
+              break;
+              case 'cambioAdscripcion':
+              $_SESSION['dirigir']="";?>
                     <script> 
                     $('#menuContainer').children().remove();
                     $('#menuContainer').load("cambiarAdscripcion.php"); </script>
-                   <?php 
-                    break;
+                  <?php 
+              break;
                 
                 
                 default:

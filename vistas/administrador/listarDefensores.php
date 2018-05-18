@@ -29,9 +29,21 @@
        <div class="input-group" style="width:70%;">
                                 <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Nombre Defensor...">
                             </div>
+<<<<<<< HEAD
+                            
+        <div id="mData"></div>
+
+        <table id="datatable" class="table table-striped table-bordered">
+=======
         
+<<<<<<< HEAD
         <table id="datatable" class="table table-striped ">
           <thead>
+=======
+        <table id="datatable" class="table table-striped table-bordered  dt-responsive nowrap">
+>>>>>>> 65af769caa359e79b2910072008e82cf4df918da
+          <thead  >
+>>>>>>> b2f9a75f9afd4fa390a17964c6886647dc8b1154
             <tr class="header">
               <th>NOMBRE</th>
               <th>AP. PATERNO</th>

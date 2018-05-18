@@ -2,12 +2,26 @@
 
 include_once ('../../libreria/conexion.php');
 
-function listar_expediente_x_id($id){
-      global $conexion;
-      $sql = "select * from defensor where id='".$id."'";
-      $consulta = consulta($sql, $conexion);
-      return $consulta;
+function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia){
+  
+      $sql = " select * from expediente inner join personal_campo
+                 using(id_personal) where materia='".$materia."' 
+                 and id_usuario_servicio='".$id_usuario_servicio."'";
+   // echo $sql;
+         $lista=consulta($sql);
+       //  print_r($lista);
+         return $lista;
   }
+  function listar_x_num_expediente_($num_expediente){
+   
+    $sql = "select * from expediente  inner join 
+                          usuario_servicio using(id_usuario_servicio)
+                           where num_expediente='".$num_expediente."'";
+   // echo $sql;
+    $lista=consulta($sql);
+  //  print_r($lista);
+    return $lista;
+}
   
   function listar_expediente_asesoria($id_expediente){
         global $conexion;
@@ -30,20 +44,15 @@ function listar_expediente_x_id($id){
     function alta_expediente($objetoEntidad){
       
         $sql = "INSERT INTO expediente ";
-        $sql.= " SET id_usuario_servicio='".$objetoEntidad['id_usuario_servicio']."', id_personal='".$objetoEntidad['id_defensor']."' ";
+        $sql.= " SET id_usuario_servicio='".$objetoEntidad['id_usuario_servicio']."', id_personal='".$objetoEntidad['id_defensor']."' ,";
+        $sql.= " num_expediente='".$objetoEntidad['num_expediente']."' ";
       // echo $sql;
          $lista=registro($sql);
    return $lista;
     }
   
     //Definimos la funciones sobre el objeto crear_expediente
-    function crear_expediente($provedor){
-        global $conexion;
-        $sql = "INSERT INTO expediente ";
-        $sql.= "SET fecha_inicia'".$provedor['fecha_inicio']."', estado='".$provedor['estado']."',  nombre_delito='".$provedor['nombre_delito']."'";
-
-        return consulta($sql, $conexion);
-    }
+    
    
 
 

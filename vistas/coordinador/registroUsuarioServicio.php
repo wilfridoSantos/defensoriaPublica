@@ -5,7 +5,7 @@
 <script>
 
 function agrega(){
-			 $('#menuContainer').load("coordinadorRegistrarJuzgado.php");
+		//	 $('#menuContainer').load("coordinadorRegistrarJuzgado.php");
       }
       
 
@@ -167,18 +167,18 @@ function agrega(){
                             <input type="text" id="aMaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
                             <div  class="help-block with-errors"></div></div>
                        </div> 
-                       
-                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Numero<span class="required">*</span></label>
-                        </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[1-9][0-9]*" maxlength="5" minlength="1" data-error="solo numero intero con maxicmo 5 digito" class="form-control" required  placeholder="" name="numero">
+                      
+                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >calle<span class="required">*</span></label>
+                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" required placeholder="" name="calle">
                           <div  class="help-block with-errors"></div></div>
                       </div>
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Entidad federativa</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                      <select id="entidad" name="strEntidadNacimiento" class="select2_group form-control textbox">
+                      <select id="entidad" name="estado" class="select2_group form-control textbox">
                       <option value="">- Seleccione -</option> 
                       <option value="AS">AGUASCALIENTES</option>
                        <option value="BC">BAJA CALIFORNIA</option>
@@ -194,17 +194,17 @@ function agrega(){
                                 <option value="GR">GUERRERO</option> <option value="HG">HIDALGO</option> <option value="JC">JALISCO</option> <option value="MC">MEXICO</option> <option value="MN">MICHOACAN DE OCAMPO</option> <option value="MS">MORELOS</option> <option value="NT">NAYARIT</option> <option value="NL">NUEVO LEON</option> <option value="OC">OAXACA</option> <option value="PL">PUEBLA</option> <option value="QT">QUERETARO DE ARTEAGA</option> <option value="QR">QUINTANA ROO</option> <option value="SP">SAN LUIS POTOSI</option> <option value="SL">SINALOA</option> <option value="SR">SONORA</option> <option value="TC">TABASCO</option> <option value="TS">TAMAULIPAS</option> <option value="TL">TLAXCALA</option> <option value="VZ">VERACRUZ</option> <option value="YN">YUCATAN</option> <option value="ZS">ZACATECAS</option> <option value="NE">NACIDO EN EL EXTRANJERO</option></select>
                                 </div>
                       </div>
-                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >calle<span class="required">*</span></label>
-                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" required placeholder="" name="calle">
+                     
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Numero<span class="required">*</span></label>
+                        </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" pattern="[1-9][0-9]*" maxlength="5" minlength="1" data-error="solo numero intero con maxicmo 5 digito" class="form-control" required  placeholder="" name="numero">
                           <div  class="help-block with-errors"></div></div>
                       </div>
-
                        <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input id="fechaNacimiento" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fecha">
+                              <input id="fechaNacimiento" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaNacimiento">
                                  <div  class="help-block with-errors"></div>
                               </div> 
                       </div>  
@@ -253,19 +253,19 @@ function agrega(){
                      <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" onkeyup="validarCurps()" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
                
 
                        
                      
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                     <!--  <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Edad<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" data-error=": solo numero mayor a 14 no maxicmo a 100 años" pattern="(1(00|[5-9])|([2-9]([0|1-9])))"class="form-control "  required placeholder="" name="edad">
                         </div>
-                      </div>
+                      </div> -->
                       
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -305,9 +305,9 @@ function agrega(){
                   </div>
                 </div>
 
-<script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
+
     
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <script src="../../recursos/js/custom.min.js"></script>
     <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>

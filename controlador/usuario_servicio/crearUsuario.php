@@ -3,8 +3,11 @@
     include '../../modelo/personal.php';    
     include '../../modelo/usuarioServicio.php';
     include '../../libreria/herramientas.php';
-   
-    $usuario = Array(
+
+    $hoy = getdate();
+      $edadNumero=$hoy['year']-intval($_POST['fechaNacimiento']);
+
+      $usuario = Array(
            
             "nombre"         =>$_POST['nombre'],
             "ap_paterno"     =>$_POST['apellido_paterno'],
@@ -18,7 +21,7 @@
             "municipio"      =>$_POST['municipio'],         
             "curp"           =>$_POST['curp'],
             "estado"           =>$_POST['estado'],
-            "edad"            =>$_POST['edad'],
+            "edad"            =>$edadNumero,
             "etnia"            =>$_POST['etnia'],
             "idioma"          =>$_POST['idioma'],         
             "fecha"          =>"",         
@@ -28,20 +31,22 @@
         $usuario =  array_map( "cadenaToMayuscula",$usuario);
         $mensaje=['tipo'=>"error",
         'mensaje'=>"este usuario ya se encuentra registrado"];
-      
+         $dirigir="registrar_usuario";
        //sprint_r (getDefensorByCurp($_POST['curp']));
         if(getUsuarioByCurp($_POST['curp'])==0){
             crear_usuarioSevicio($usuario); //regresa 1 si regristro para validar tambien par validar si ya exite o res regisro correctamente
-              $mensaje=['tipo'=>"exito",
-        'mensaje'=>"registro existoso"];
-      
+            $mensaje=['tipo'=>"exito",
+                      'mensaje'=>"registro existoso"
+                    ];
+            $dirigir="asignar_defensor";
         } 
      //print_r($usuario);
 
         if(!isset($_GET['tipo'])){
            session_start();
             $_SESSION['mensaje'] = $mensaje;
-          header("location: ../../vistas/coordinador/index.php?dirigir=registrar_usuario");
+            $_SESSION['dirigir']=$dirigir;
+          header("location: ../../vistas/coordinador/index.php");
         }
         else{
             echo "json";
