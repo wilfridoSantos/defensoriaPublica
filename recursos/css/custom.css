@@ -1256,6 +1256,20 @@ td span {
 .sidebar-widget {
     overflow: hidden
 }
+.infor{
+    color: #400040
+}
+.errors{
+    color: #ff0000;
+    background-color:#eeeeee;
+    border-color: #eee
+}
+.succss{
+
+    color: #358d25;
+    background-color:#eeeeee;
+    border-color: #eee
+}
 .error-number {
     font-size: 90px;
     line-height: 90px;
@@ -2023,6 +2037,12 @@ input:invalid ~ .with-errors {
     padding-left: 0;
     list-style: none;
     font-size: 16px;
+}
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
 }
 .textoo{
     color: #2b002b
@@ -4125,10 +4145,11 @@ ul.verticle_bars li {
 }
 .alert-danger,
 .alert-error {
-    color: #E9EDEF;
-    background-color: rgba(231, 76, 60, 0.88);
-    border-color: rgba(231, 76, 60, 0.88)
+    color: #ff0000;
+    background-color:#eeeeee;
+    border-color: #eee
 }
+
 .ui-pnotify.dark .ui-pnotify-container {
     color: #E9EDEF;
     background-color: rgba(52, 73, 94, 0.88);

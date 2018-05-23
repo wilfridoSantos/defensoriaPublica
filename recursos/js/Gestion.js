@@ -1,34 +1,6 @@
-$(document).ready(function () {
-	$("input[name=radioInforme]").click(function () {
-		console.log('hola');
-		$("#infoPersonal").empty();
-		
-	});
-	$("input[name=radioPersonal]").click(function () {
-		console.log('adios');
-		$("#infoPersonal").empty();
-		$("#infoPersonal").append(
-			'<div class="form-group ">'+
-			'<label class="control-label col-md-3 col-sm-3 col-xs-4">Puesto<span class="required">*</span></label>' +
-			'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-			'<select name="puesto" id="puesto"  required class="select2_group form-control">'+
-				 '<option value="">- Seleccione -</option> '+
-				 '<option value="4">defensor</option> '+
-				 '<option value="2">coordinador</option> '+  
-			  '</select>'+
-			'</div>'+
-		 ' </div>'
-		);
-		$("#infoPersonal").append(
-			'<div class="form-group ">'+
-			'<label class="control-label col-md-3 col-sm-3 col-xs-4">Nue<span class="required">*</span></label>' +
-			'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-		   '<input type="text" title"solo se acepta cinco digitos" required pattern="[1-9]+([0-9]{4})" maxlength="5" class="form-control" id="nue" placeholder="Nue" name="nue">' +
 
-			'</div>'+
-		 ' </div>'
-		);
-	});
+		
+
 	var informeA=document.getElementById('informeAnual');
 		informeA.addEventListener('click', informeAnual, false);
 		function informeAnual() {
@@ -136,5 +108,5 @@ $(document).ready(function () {
 			function infoDefensores(){
 			 $('#menuContainer').load("../../vistas/coordinador/verInfoDefensor.php");
 			}; */
-});
-
+			
+				

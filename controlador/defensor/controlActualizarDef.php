@@ -33,11 +33,12 @@
         $actualizaDefensor = actualiza_defensor($defensor);
         $mensaje=['tipo'=>"exito",
         'mensaje'=>"Se ha actualizado satisfactoriamente"];
-        $didigir="listar_defensor";
+       // $dirigir="listar_defensor";
         //print_r($actualizaDefensor);      
         if(!isset($_GET['tipo'])){
            session_start();
-           $_SESSION['mensaje'] = "Actualizacion exitoso";
+           $_SESSION['mensaje'] = $mensaje;
+          // $_SESSION['dirigir'] = $dirigir;
           //return 200; // 
          header("location: ../../vistas/administrador/");
         }else{

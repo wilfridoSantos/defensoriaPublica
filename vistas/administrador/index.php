@@ -16,6 +16,9 @@ include "../../Controlador/sesion.php";
 
     <title>Modulo ADMINISTRADOR</title>
     <!-- jQuery -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      <link href="../../recursos/css/style.css" rel="stylesheet"/>
+
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -237,6 +240,7 @@ include "../../Controlador/sesion.php";
 
             <div class="clearfix"></div>
             <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
+            
             <?php
                // echo isset($_SESSION['mensaje']);
               
@@ -405,7 +409,6 @@ include "../../Controlador/sesion.php";
     <!-- Custom Theme Scripts -->
     
     <script src="../../recursos/js/custom.min.js"></script>
-    <!-- <script src="../../recursos/js/jquery-validator.js"></script> -->
     <script src="../../recursos/js/Gestion.js"></script>
     <script src="../../recursos/js/main.js"></script>
   </body>

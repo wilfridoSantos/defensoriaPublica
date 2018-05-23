@@ -6,5 +6,5 @@
     $defensor = getDefensorUpdate($id_defensor);//obtenerDefensorCedula($cedulaProf);
     //print_r( $defensor);
     $defensorEncode = json_encode($defensor);
-    echo $defensorEncode;
+    echo  $defensorEncode;
 ?>

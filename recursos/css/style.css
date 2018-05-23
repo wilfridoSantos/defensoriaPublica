@@ -18,7 +18,7 @@ border: 1px solid#000; /* Add a grey border */
 #datatable tr {
     /* Add a bottom border to all table rows */
     border-bottom: 1px solid #4CAF50;
-    font-size: 15px; /* Increase font-size */
+    font-size: 10px; /* Increase font-size */
 }
 
 #datatable tr.header, #datatable tr:hover {
@@ -47,6 +47,13 @@ border: 1px solid#000; /* Add a grey border */
     text-align: left;
     background-color: #4CAF50;
     color: white;
+
+}
+#mapa {
+ 
+    width: 620px;
+    height: 400px;
+    margin-top: 10px;
 
 }
 .mySelectFiltro {
