@@ -15,9 +15,9 @@ function listar_personal(){
 
   
             //Definimos la funciones sobre el objeto crear_defensor
-    function crear_personal($objetoEntidad){
+ function crear_personal($objetoEntidad){
 
- $sql ="select id_cargo from cargo where cargo='defensor'";
+        $sql ="select id_cargo from cargo where cargo='defensor'";
           $idcargo= consulta($sql);
     
          $sql = "INSERT INTO personal  ";
@@ -28,9 +28,10 @@ function listar_personal(){
         $sql.= "colonia='".$objetoEntidad['colonia']."', municipio='".$objetoEntidad['municipio']."',"; 
         $sql.= "nup='".$objetoEntidad['nup']."', nue='".$objetoEntidad['nue']."',"; 
         $sql.= "genero='".$objetoEntidad['genero']."', telefono='".$objetoEntidad['telefono']."',"; 
-        $sql.= "correo_electronico='".$objetoEntidad['correo']."', foto='".$objetoEntidad['foto']."'";
+        $sql.= "correo_electronico='".$objetoEntidad['correo']."', foto='".$objetoEntidad['foto']."',";
+        $sql.= "rfc='".$objetoEntidad['rfc']."'";
         //return consulta($sql, $conexion);
-    //  echo $sql;
+     // echo $sql;
      registro($sql); 
     }
     //Definimos una funcion que acutualice al actualiza_defensor

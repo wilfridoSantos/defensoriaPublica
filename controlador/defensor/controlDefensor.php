@@ -20,8 +20,9 @@
     }
 
     ////carga el personal_campo por juzgado
-    if(isset($_GET["id_personal"])){   
-        $id_personal=$_GET["id_personal"];
+    if(isset($_GET["id_personalPorJuzgado"])){   
+      //  header('Content-type: application/json');
+        $id_personal=$_GET["id_personalPorJuzgado"];
         //echo "el idpersonal es igual a ".$id_personal;
         $defensorPorJuzgado= getDefensorPorJuzgado($id_personal);
         echo json_encode($defensorPorJuzgado);

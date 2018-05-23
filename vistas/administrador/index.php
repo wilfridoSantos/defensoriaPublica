@@ -254,14 +254,9 @@ include "../../Controlador/sesion.php";
                           
                       }
                   ?>
-<<<<<<< HEAD
-                    <div class='alert-dismissible fade in <?php echo $alert; ?>' role="alert">
-                   
-=======
-                    <div class='<?php echo $alert; ?>' " role="alert">
+                    <div class='<?php echo $alert; ?>'  role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span></button>
->>>>>>> 65af769caa359e79b2910072008e82cf4df918da
                       <strong align="center">
                         <?php 
                         echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");

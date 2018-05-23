@@ -136,14 +136,15 @@ function obtenerDefensorCedula($cedulaProf){
 function getDefensorPorMateria($materia){
     $sql="SELECT id_personal, nombre, ap_paterno, ap_materno FROM personal inner join personal_campo using(id_personal) WHERE 
     materia = '".$materia."'";
-$lista=consulta($sql);
+$lista=consulta($sql);//print_r( $lista);
 return $lista;
 }
 
 function getDefensorPorJuzgado($id_personal){
-    $sql="SELECT * FROM personal_campo inner join juzgado using(id_juzgado) WHERE 
-    id_personal = '".$id_personal."'";
+    $sql="SELECT id_juzgado,id_personal,instancia,juzgado,region,municipio,calle,cp FROM personal_campo inner join juzgado using(id_juzgado) WHERE 
+            id_personal = '".$id_personal."'";
 $lista=consulta($sql);
+//print_r( $lista);
 return $lista;
 }
     //Definimos la funciones sobre el objeto crear_defensor
@@ -152,7 +153,7 @@ return $lista;
         $sql = "INSERT INTO personal_campo ";        
         $sql.= "SET id_juzgado='".$objetoEntidad['id_juzgado']."', id_personal='".$objetoEntidad['id_personal']."',";
         $sql.= "materia='".$objetoEntidad['materia']."', instancia='".$objetoEntidad['instancia']."'"; 
-        echo $sql;
+      //  echo $sql;
          $lista=registro($sql);
    return $lista;
     }

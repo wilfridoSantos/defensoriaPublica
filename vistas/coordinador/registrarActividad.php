@@ -16,7 +16,7 @@
  <script>
   function cargaDefensorPorMateria(e, elemento) {
     
-    $.ajax({
+   /*  $.ajax({
 			url: "../../controlador/defensor/controlDefensor.php",
 			type: "GET",
 			data: "materia="+elemento.options[elemento.selectedIndex].value,
@@ -35,14 +35,14 @@
             });
 		
 			}
-		});
+		}); */
     
    
 }
 
 
 function validarFecha(e, elemento) {
- var fechas= document.getElementById("fechaNacimiento").value;
+ var fechas= document.getElementById("fecha_registro").value;
   
   //console.log(fechas);
   var ano=fechas.split('-')[0];
@@ -65,9 +65,7 @@ var ul=document.createElement('li');
     ul.setAttribute("class", "errors");
         ul.innerText="solo 4 digito";
          error.appendChild(ul);
-   // $(".with-errors").append("<ul class='list-unstyled'><li>solo 4 digito en el a</li></ul>");
-    console.log("joijoiuiu");
-    
+  
           return false;
       }   
   
@@ -147,12 +145,13 @@ var ul=document.createElement('li');
 
                    
                       
-                     <div class="form-horizontal form-label-left">                     <div class="form-group ">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Curp de usuario<span class="required">*</span>
+                     <div class="form-horizontal form-label-left">     <div class="form-group ">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="curp">Curp de usuario<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" minlength="18" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)">
-                        </div>
+                          <input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)">
+                          <div  class="help-block with-errors"></div></div> 
+                      </div>
                       </div>
                       
                       <div class=" form-horizontal form-label-left form-group  "><div class="form-group ">
@@ -161,6 +160,7 @@ var ul=document.createElement('li');
                               <input id="fecha_registro" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaRegistro">
                                  <div  class="help-block with-errors"></div>
                               </div> 
+                      </div>
                       </div>  
                    
         
@@ -173,10 +173,10 @@ var ul=document.createElement('li');
                          <!--  <input type="textArea" name="resultado"  minlength="10" maxlength="200" name="expediente" id="expediente"  class="form-control col-md-7 col-xs-12">
                           --> <textarea name="resultado" pattern="([a-z0-9 ]+)" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describre el resultado u observaciones"></textarea>
                           <div  class="help-block with-errors"></div>
-                      </div>
-                    
-                      
-                      <div id="actividad" sclass=" form-horizontal form-label-left form-group  "><div class="form-group ">
+                      </div></div></div>
+
+                      <!-- se requiere para identificar el tipo de actividad -->
+                      <div   id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
                             </h4><div class="col-md-6   col-sm-6 col-xs-12">
                             <select required=""  name="actividad"  class="form-control ">
@@ -185,16 +185,25 @@ var ul=document.createElement('li');
                               </div> 
                       </div>  </div> 
                       
-
-                       <div id="personal" sclass=" form-horizontal form-label-left form-group  "><div class="form-group ">
+                            <!--// se requiere para identificar al personal  -->
+                       <div id="personal" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
                             </h4><div class="col-md-6   col-sm-6 col-xs-12">
                             <input id="id_personal" type="text" name="id_personal"  required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $id_personal?>">
                       
                               </div> 
                       </div>  </div> 
+                      
 
-                    
+                          <!--// se requiere para la ubicacion  -->
+                     <!--      <div id="myubica`  cion" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
+                           <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
+                            </h4><div class="col-md-6   col-sm-6 col-xs-12">
+                            <input id="ubicacion" type="text" name="ubicacion"  required="required" class="form-control col-md-7 col-xs-12" value="hola1" >
+                      
+                              </div> 
+                      </div>  </div>  -->
+                      
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -221,6 +230,6 @@ var ul=document.createElement('li');
 $('#myform').validator()
 $('#actividad').hide()
 $('#personal').hide()
-//getJuzgado(<?php $id_personal?>);
+
 
 </script>

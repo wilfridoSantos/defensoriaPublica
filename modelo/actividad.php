@@ -15,8 +15,8 @@ function listar_actividad_x_id($id){
         
         $sql = "INSERT INTO actividad ";
         $sql.= "SET id_usuario_servicio='".$asesoria['id_usuario_servicio']."',   id_personal_campo='".$asesoria['id_personal_campo']."',";
-        $sql.= " dia_registro='".$asesoria['dia_registro']."',   mes_registro='".$asesoria['mes_registro']."',";
-        $sql.= " anio_registro='".$asesoria['anio_registro']."',   observacion='".$asesoria['observacion']."'";
+       // $sql.= " dia_registro='".$asesoria['dia_registro']."',   mes_registro='".$asesoria['mes_registro']."',";
+        $sql.= " fecha_registro='".$asesoria['fecha_registro']."',   observacion='".$asesoria['observacion']."'";
             echo $sql;
         $lista=registro($sql);
         return $lista;
