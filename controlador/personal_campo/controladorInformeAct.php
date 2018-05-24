@@ -7,7 +7,7 @@
         if($_POST['R1'] === true ){
             $informeGeneralAct = getActividadesByRangoFecha($fechaInicio, $fechaFinal);
             $informeEncode = json_encode($informeGeneralAct);
-            //echo $informeEncode;
+            echo $informeEncode;
         }
         if($_POST['R2'] === true){
 
@@ -15,13 +15,13 @@
             $informeGeneralAct = getActividadesByFiltroPersonal($fechaInicio, $fechaFinal,$puesto);
             $informeEncode = json_encode($informeGeneralAct);
            // echo $_POST['puesto'];
-            //echo $informeEncode;
+            echo $informeEncode;
         }
         if($_POST['R3'] === true){
             $nue = $_POST['nue'];           
             $informeGeneralAct = getActividadesByFiltroNue($fechaInicio, $fechaFinal, $nue);
             $informeEncode = json_encode($informeGeneralAct);
-            //echo $informeEncode;
+            echo $informeEncode;
         }  
           
 ?>
