@@ -1,4 +1,48 @@
 $(document).ready(function() {
+  
+    $("input[name=radio]").click(function () {
+		if(this.id == 'inputR1'){
+            $('#inputR2')['0'].checked=false;
+            $('#inputR3')['0'].checked=false;
+			console.log(this.checked, ' valor Propio r1');
+			$("#infoPersonal").empty();
+		}
+		if(this.id == 'inputR2'){
+            $('#inputR1')['0'].checked=false;
+            $('#inputR3')['0'].checked=false;
+			console.log(this.checked, ' valor Propio r2');
+			$("#infoPersonal").empty();
+			$("#infoPersonal").append(
+				'<div class="form-group ">'+
+				'<label class="control-label col-md-3 col-sm-3 col-xs-4">Puesto<span class="required">*</span></label>' +
+				'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
+				'<select name="puesto" id="puesto"  required class="select2_group form-control">'+
+					 '<option value="">- Seleccione -</option> '+
+					 '<option value="4">defensor</option> '+
+					 '<option value="2">coordinador</option> '+  
+				  '</select>'+
+				'</div>'+
+			 ' </div>'
+			);
+			
+        }
+        if(this.id == 'inputR3'){
+            $('#inputR1')['0'].checked=false;
+            $('#inputR2')['0'].checked=false;
+			console.log(this.checked, ' valor Propio r3');
+			$("#infoPersonal").empty();
+			$("#infoPersonal").append(
+				'<div class="form-group ">'+
+				'<label class="control-label col-md-3 col-sm-3 col-xs-4">Nue<span class="required">*</span></label>' +
+				'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
+			   '<input type="text" title"solo se acepta cinco digitos" required pattern="[1-9]+([0-9]{4})" maxlength="5" class="form-control" id="nue" placeholder="Nue" name="nue">' +
+	
+				'</div>'+
+			 ' </div>'
+			);
+		}	
+    });
+
     $('#principal').load('form/inicio.php');
     $('.tooltips-general').tooltip('hide');
     $('.mobile-menu-button').on('click', function() {
@@ -13,78 +57,13 @@ $(document).ready(function() {
         var dropMenu = $(this).next('ul');
         dropMenu.slideToggle('slow');
     });
-    $('.exit-system-button').on('click', function(e) {
-        e.preventDefault();
-        var LinkExitSystem = $(this).attr("data-href");
-        swal({
-            title: "¿Estás seguro?",
-            text: "Quieres salir del sistema y cerrar la sesión actual",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#5cb85c",
-            confirmButtonText: "Si, salir",
-            cancelButtonText: "No, cancelar",
-            animation: "slide-from-top",
-            closeOnConfirm: false
-        }, function() {
-            window.location = LinkExitSystem;
-        });
-    });
-    /*$('.search-book-button').click(function (e) {
-     e.preventDefault();
-     var LinkSearchBook = $(this).attr("data-href");
-     swal({
-     title: "¿Qué libro estás buscando?",
-     text: "Por favor escribe el nombre del libro",
-     type: "input",
-     showCancelButton: true,
-     closeOnConfirm: false,
-     animation: "slide-from-top",
-     cancelButtonText: "Cancelar",
-     confirmButtonText: "Buscar",
-     confirmButtonColor: "#3598D9",
-     inputPlaceholder: "Escribe aquí el nombre de libro"},
-     function (inputValue) {
-     if (inputValue === false)
-     return false;
 
-     if (inputValue === "") {
-     swal.showInputError("Debes escribir el nombre del libro");
-     return false;
-     }
-     window.location = LinkSearchBook + "?bookName=" + inputValue;
-     });
-     });*/
     $('.btn-help').on('click', function() {
         $('#ModalHelp').modal({
             show: true,
             backdrop: "static"
         });
-    });
-    $('#inicio').click(function() {
-        $('#principal').load('form/inicio.php');
-    });
-    $('#clientes').click(function() {
-        $('#principal').load('form/clientes.php');
-    });
-    $('#catalogos').click(function() {
-        $('#principal').load('form/catalogos.php');
-    });
-    $('#mensajes').click(function() {
-        $('#principal').load('form/mensajes.php');
-    });
-    $('#sembrados').click(function() {
-        $('#principal').load('form/sembrados.php');
-    });
-    $('#configuraciones').click(function() {
-        $('#principal').load('form/configuraciones.php');
-    });
-    $('#reportes').click(function() {
-        $('#principal').load('form/reportesEstadisticas.php');
-    });
-    $('#referidos').click(function() {
-        $('#principal').load('form/referidos.php');
-    });
+    });        
 });
 (function($) {
     $(window).load(function() {
@@ -333,3 +312,41 @@ function myFunction() {
     });
 }, 4000);
   
+
+function showUser(str) {
+    console.log(str,' VALOR DEL SELECT');
+  if (str=="") {
+        $('#tebody').empty();
+    return;
+  } 
+        $.ajax({
+            url: "../../controlador/defensor/controlFiltroListarExpediente.php",
+            type: "GET",
+            data: "q=" + str,
+            success: function(data) {
+                console.log(data);
+                var jsonExpDef = jQuery.parseJSON(data);
+                console.log(jsonExpDef[0].id_personal, ' id personal en listar exp');
+                $('#tebody').empty();
+                $.each(jsonExpDef, function (KEY, VALOR) {
+                    var nomBoton;
+                    if(VALOR.id_personal < 0) {
+                        nomBoton = '<button type="button" class="btn btn-danger botonCambioDefensor" id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';                  
+                    }else{
+                        nomBoton = '<button type="button" class="btn btn-primary botonCambioDefensor" id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
+                    } 
+                    
+                     $('#tebody').append(
+                        '<tr> '+
+                        '<td id="idPersonal" style="display:none;">'+VALOR.id_personal+' </td>'+
+                        '<td>'+VALOR.num_expediente+'</td>'+
+                        '<td>'+VALOR.materia+'</td>'+
+                        '<td>'+VALOR.fecha_inicio+'</td>'+
+                        '<td>'+VALOR.nombre+'</td>'+                                                     
+                        '<td>'+nomBoton+'</td> </tr>'
+                    ); 
+                });
+            
+            }
+        });
+}

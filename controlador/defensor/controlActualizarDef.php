@@ -6,12 +6,10 @@
    if($_FILES['fileToUpload']['size'] != 0){
         $nombreFoto = $_FILES["fileToUpload"]["name"];
         $rutaFoto   = $_FILES["fileToUpload"]["tmp_name"];
-        $carpeta='../../recursos/uploads/';
-        
+        $carpeta='../../recursos/uploads/';        
         if (!file_exists($carpeta)) {
                 mkdir($carpeta, 0777, true);
-        }
-         
+        }         
         $destino = $carpeta.basename($nombreFoto);
         move_uploaded_file($rutaFoto,$destino);
     }else{        
@@ -35,11 +33,12 @@
         $actualizaDefensor = actualiza_defensor($defensor);
         $mensaje=['tipo'=>"exito",
         'mensaje'=>"Se ha actualizado satisfactoriamente"];
-        $didigir="listar_defensor";
+       // $dirigir="listar_defensor";
         //print_r($actualizaDefensor);      
         if(!isset($_GET['tipo'])){
            session_start();
-           $_SESSION['mensaje'] = "Actualizacion exitoso";
+           $_SESSION['mensaje'] = $mensaje;
+          // $_SESSION['dirigir'] = $dirigir;
           //return 200; // 
          header("location: ../../vistas/administrador/");
         }else{

@@ -85,6 +85,7 @@ include "../../Controlador/sesion.php";
                       <li><a id="registrarActividad">Registrar actividad</a></li>
                     
                       <li><a id="asignarCaso">Crear Un Caso</a></li>
+                      <li><a id="listarUser">Listar Usuarios</a></li>
                     </ul>
                   </li>
 

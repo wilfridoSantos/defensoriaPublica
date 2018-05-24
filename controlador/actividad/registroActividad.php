@@ -25,7 +25,7 @@
      if($usuario_servicio)
      {  
       
-
+        crear_actividad($actividad);
      // if($_POST["actividad"]=="asesoria"||$_POST["actividad"]=="visita"){
         $id_actividadRegistrado=ultimoActividadRegistrado();
        // echo "ACTIVIDAD". $id_actividadRegistrado;
@@ -71,7 +71,7 @@
             "foto"       =>$nombreFoto
            
         );
-        echo $_POST["actividad"];
+     //   echo $_POST["actividad"];
         if($_POST["actividad"]=="asesoria")
            crear_asesoria($actividadRealizada);
 

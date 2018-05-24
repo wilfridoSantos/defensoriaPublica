@@ -9,8 +9,17 @@
 </head>
 <body>
 <div class="x_content">
+      <div>
             <center><h3><b> Expedientes del Defensor</b></h3></center>
-            
+            <div align="center" >
+                  <select  class="myFiltroExp"  name="Filtro" onchange="showExp(this.value)">
+                        <option value="">Listar Expedientes por estado</option>
+                        <option value="1">Activos</option>
+                        <option value="2">Inactivos</option>
+                        <option value="3">Todos</option>                                  \
+                  </select>
+            </div>
+      </div>      
             <div class = "left" id = "verExpDef" >
             <center> <h3><b> izquierda</b></h3></center>
             </div>                         
@@ -19,6 +28,7 @@
             </div>
             
 </div>
+     
 </body>
 
 </html>

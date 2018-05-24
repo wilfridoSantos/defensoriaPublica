@@ -16,6 +16,9 @@ include "../../Controlador/sesion.php";
 
     <title>Modulo ADMINISTRADOR</title>
     <!-- jQuery -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      <link href="../../recursos/css/style.css" rel="stylesheet"/>
+
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -67,10 +70,13 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Generar Informe <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a id="informeAnual">Generar Informe Anual</a></li>
+                    <li><a id="informeActividades">Generar Informe de Actividades</a></li>  
+                    <!-- <li><a id="informeAnual">Generar Informe Anual</a></li>
                       <li><a id="informeMensual">Generar Informe Mensual</a></li>
                       <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
-                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>
+
+                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>-->
+                      
                     </ul>
                   </li>
 
@@ -78,18 +84,14 @@ include "../../Controlador/sesion.php";
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
                       <li><a id="listarExpedientes">Listar Expedientes</a></li>
-                      <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
-                      <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
-                      <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
-                      <li><a id="asignarCaso">Asignar Un Caso</a></li>
+                      
+          
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
-                      <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
-                      <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
                       <form action="../../action.php" method="post">
                       <div class="input-group">
@@ -235,6 +237,7 @@ include "../../Controlador/sesion.php";
 
             <div class="clearfix"></div>
             <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
+            
             <?php
                // echo isset($_SESSION['mensaje']);
               
@@ -365,6 +368,11 @@ include "../../Controlador/sesion.php";
           <div class="pull-right">
             <a href="https://colorlib.com"></a>
           </div>
+<!--           <div class="col-md-4">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                          <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                        </div>  -->
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
@@ -398,7 +406,6 @@ include "../../Controlador/sesion.php";
     <!-- Custom Theme Scripts -->
     
     <script src="../../recursos/js/custom.min.js"></script>
-    <!-- <script src="../../recursos/js/jquery-validator.js"></script> -->
     <script src="../../recursos/js/Gestion.js"></script>
     <script src="../../recursos/js/main.js"></script>
   </body>

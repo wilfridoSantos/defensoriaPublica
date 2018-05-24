@@ -120,14 +120,14 @@
         },
 			success: function (data) {
          var rfc=data.response.data.rfc;
-         var claseCurp=document.getElementById("rfc");
-      claseCurp.setAttribute("pattern",rfc);
+         var claserfc=document.getElementById("rfc");
+      claserfc.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9]{3}");
 
       }
     });  
      // console.log(curp.substr(0,13));
       var claseCurp=document.getElementById("rfc");
-      claseCurp.setAttribute("pattern",rfc);
+     // claseCurp.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9]{3}");
      
  }
 </script>

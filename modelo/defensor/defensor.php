@@ -29,10 +29,39 @@ return $lista;
 function numRegistros($sql){
     return registro($sql);
 } */
+function listar_expedientes(){
+    $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) inner join personal using(id_personal)";
+    $lista=consulta($sql);
+    return $lista;
+}
+function listar_expedientes_activos(){
+    $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) inner join personal using(id_personal) where id_personal>0";
+    $lista=consulta($sql);
+    return $lista;
+}
+function listar_expedientes_inactivos(){
+    $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) inner join personal using(id_personal) where id_personal<0";
+    $lista=consulta($sql);
+    return $lista;
+}
 function getNumExpedientes($id_defensor){
     $sql = 'SELECT * from expediente inner join personal_campo using(id_personal) where id_personal = "'.$id_defensor.'"';
     $lista = registro($sql);
     return $lista;
+}
+function getExpedientesById($id_defensor){
+    $sql="SELECT e.num_expediente, pc.materia,e.fecha_inicio, e.fecha_final,e.nombre_delito,
+    e.grado_delito,e.estado, e.incidente,e.observaciones, u.nombre,u.ap_paterno,u.ap_materno,
+    u.municipio,u.colonia, u.telefono, u.correo_electronico, u.etnia,u.idioma  
+    FROM personal_campo as d inner join expediente as e using(id_personal)
+                inner join usuario_servicio as u using(id_usuario_servicio)
+                inner join personal as p using(id_personal)
+                inner join escolaridad using(id_personal) 
+                inner join personal_campo as pc using(id_personal) 
+                
+                where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
+        $lista = consulta($sql);
+        return $lista;
 }
 function getDefensorById($id_defensor){
     $sql="SELECT p.nombre,p.ap_paterno,p.ap_materno, p.municipio, p.colonia, p.calle,p.numero_int,p.numero_ext, p.genero,p.telefono,p.correo_electronico,p.curp,p.foto, nup,nue,juzgado,perfil,cedula_profesional FROM personal_campo as d inner join personal as p using(id_personal)
@@ -49,13 +78,7 @@ function getDefensorById($id_defensor){
         $lista = consulta($sql);
         return $lista;
 }
-function getExpedientesById($id_defensor){
-    $sql="SELECT * FROM personal_campo as d inner join expediente using(id_personal)
-                 inner join personal using(id_personal) inner join escolaridad using(id_personal) 
-                 where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
-        $lista = consulta($sql);
-        return $lista;
-}
+
 
 function getImagenById($id_defensor){
     $sql="SELECT foto FROM personal_campo as d inner join personal as p using(id_personal)
@@ -104,11 +127,7 @@ function listar_defensor_x_nup($nup){
    // echo $sql;
     return $consulta;
 }
-function listar_expedientes(){
-    $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) inner join personal using(id_personal)";
-    $lista=consulta($sql);
-    return $lista;
-}
+
 function obtenerExpedientes($id_defensor){
     $sql="SELECT * FROM expediente inner join personal_campo using(id_defensor) WHERE 
                     id_defensor = '".$id_defensor."'";

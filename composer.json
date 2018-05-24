@@ -1,13 +1,6 @@
 {
-<<<<<<< HEAD
-  "require-dev": {
-    "phpunit/phpunit": "5"
-  }
-
-=======
     "require-dev": {
         "codeception/codeception": "^2.4",
         "codeception/base": "^2.4"
     }
->>>>>>> 3dc8dfd531904669b6cc7fdb8c8037e41b3df460
 }
