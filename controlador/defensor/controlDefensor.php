@@ -7,7 +7,7 @@
         $defensorZ = json_encode($defensorX);
         echo $defensorZ;
     }
- /*    ////carga el defensor por materia
+    ////carga el defensor por materia
     if(isset($_GET["materia"])){   
       $materia=$_GET["materia"];
       
@@ -15,11 +15,12 @@
       echo json_encode($defensorPormateria);
     }
     ////carga el personal_campo por juzgado
-    if(isset($_GET["id_personal"])){   
-        $id_personal=$_GET["id_personal"];
+    if(isset($_GET["id_personalPorJuzgado"])){   
+      //  header('Content-type: application/json');
+        $id_personal=$_GET["id_personalPorJuzgado"];
         //echo "el idpersonal es igual a ".$id_personal;
         $defensorPorJuzgado= getDefensorPorJuzgado($id_personal);
         echo json_encode($defensorPorJuzgado);
         
-      } */
+      } 
 ?>

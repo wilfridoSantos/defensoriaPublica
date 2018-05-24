@@ -46,7 +46,7 @@
            session_start();
             $_SESSION['mensaje'] = $mensaje;
             $_SESSION['dirigir']=$dirigir;
-          header("location: ../../vistas/coordinador/index.php");
+          header("location: ../../vistas/defensor/index.php");
         }
         else{
             echo "json";

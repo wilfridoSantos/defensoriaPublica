@@ -70,11 +70,12 @@ include "../../Controlador/sesion.php";
 
                   <li><a><i class="fa fa-home"></i> Generar Informe <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a id="informeAnual">Generar Informe Anual</a></li>
+                    <li><a id="informeActividades">Generar Informe de Actividades</a></li>  
+                    <!-- <li><a id="informeAnual">Generar Informe Anual</a></li>
                       <li><a id="informeMensual">Generar Informe Mensual</a></li>
                       <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
-                      <li><a id="informeActividades">Generar Informe de Actividades</a></li>
-                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>
+
+                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>-->
                       
                     </ul>
                   </li>
@@ -83,18 +84,14 @@ include "../../Controlador/sesion.php";
                     <ul class="nav child_menu">
                       <li><a id="listarDefensores">Listar Defensores</a></li>
                       <li><a id="listarExpedientes">Listar Expedientes</a></li>
-                      <li><a id="listarAudiencias">Listar Audiencias Defensores Por Fecha</a></li>
-                      <li><a id="listarVisitas">Listar Visitas Carcelarias Por Fecha</a></li>
-                      <li><a id="listarAsesoria">Listar Asesorias Por Fecha</a></li>
-                      <li><a id="asignarCaso">Asignar Un Caso</a></li>
+                      
+          
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
-                      <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
-                      <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
                       <form action="../../action.php" method="post">
                       <div class="input-group">
@@ -260,7 +257,7 @@ include "../../Controlador/sesion.php";
                           
                       }
                   ?>
-                    <div class='<?php echo $alert; ?>' " role="alert">
+                    <div class='<?php echo $alert; ?>'  role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span></button>
                       <strong align="center">

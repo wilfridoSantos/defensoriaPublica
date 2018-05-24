@@ -446,7 +446,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 						'<td>'+VALOR.Defensor+'</td>'+
 						'<td>'+VALOR.Usuario+'</td>'+
 						'<td>'+VALOR.fecha_registro+'</td>'+			
-						'<td>'+VALOR.observaciones+'</td>'+
+						'<td>'+VALOR.observacion+'</td>'+
 						'<td>'+boton+'</td>'+
 						'<td id="idlatitud" style="display:none;">'+VALOR.latitud+'</td>'+
 						'<td id="idlongitud" style="display:none;">'+VALOR.longitud+'</td>'+
@@ -520,7 +520,7 @@ function initialize() {
 	 
 	var mapOptions = {
 		center: new google.maps.LatLng(40.413740, -3.6921), 
-		zoom: 18,
+		zoom: 10,
 		mapTypeId: google.maps.MapTypeId.ROADMAP	
 	  }
 	  var mapa = new google.maps.Map($('#Mapa'), mapOptions);
@@ -531,10 +531,9 @@ function initialize() {
  function verMapaDir(){
 	//initialize();
 	 $("#dialogoI").dialog({
-		resizable: true,
 		title: "Location",
 		height: "600",
-		width: "450",
+		width: "700",
 		show: "blind",
 		hide: "explode",
 		modal: true,

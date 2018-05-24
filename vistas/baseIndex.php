@@ -15,7 +15,10 @@ include "../controlador/sesion.php";
       //header("Location: coordinador/index.php");
       echo'<script language="javascript">window.location="coordinador/index.php"</script>';
   }
-
+  if ($_SESSION["rol"] == 4) {//ROL -4- => defensor
+    //header("Location: coordinador/index.php");
+    echo'<script language="javascript">window.location="defensor/index.php"</script>';
+}
 }else{
     header("Location: ../index.php");
   }

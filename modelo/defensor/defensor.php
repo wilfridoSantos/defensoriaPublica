@@ -50,13 +50,16 @@ function getNumExpedientes($id_defensor){
     return $lista;
 }
 function getExpedientesById($id_defensor){
-    $sql="SELECT e.num_expediente, e.materia,e.fecha_inicio, e.fecha_final,e.nombre_delito,
-     e.grado_delito,e.estado, e.incidente,e.observaciones, u.nombre,u.ap_paterno,u.ap_materno,
-     u.municipio,u.colonia, u.telefono, u.correo_electronico, u.etnia,u.idioma  
-     FROM personal_campo as d inner join expediente as e using(id_personal)
-                 inner join usuario_servicio as u using(id_usuario_servicio)
-                 inner join personal using(id_personal) inner join escolaridad using(id_personal) 
-                 where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
+    $sql="SELECT e.num_expediente, pc.materia,e.fecha_inicio, e.fecha_final,e.nombre_delito,
+    e.grado_delito,e.estado, e.incidente,e.observaciones, u.nombre,u.ap_paterno,u.ap_materno,
+    u.municipio,u.colonia, u.telefono, u.correo_electronico, u.etnia,u.idioma  
+    FROM personal_campo as d inner join expediente as e using(id_personal)
+                inner join usuario_servicio as u using(id_usuario_servicio)
+                inner join personal as p using(id_personal)
+                inner join escolaridad using(id_personal) 
+                inner join personal_campo as pc using(id_personal) 
+                
+                where id_cargo=4 and d.id_personal ='".$id_defensor."' ";
         $lista = consulta($sql);
         return $lista;
 }
@@ -152,14 +155,15 @@ function obtenerDefensorCedula($cedulaProf){
 function getDefensorPorMateria($materia){
     $sql="SELECT id_personal, nombre, ap_paterno, ap_materno FROM personal inner join personal_campo using(id_personal) WHERE 
     materia = '".$materia."'";
-$lista=consulta($sql);
+$lista=consulta($sql);//print_r( $lista);
 return $lista;
 }
 
 function getDefensorPorJuzgado($id_personal){
-    $sql="SELECT * FROM personal_campo inner join juzgado using(id_juzgado) WHERE 
-    id_personal = '".$id_personal."'";
+    $sql="SELECT id_juzgado,id_personal,instancia,juzgado,region,municipio,calle,cp FROM personal_campo inner join juzgado using(id_juzgado) WHERE 
+            id_personal = '".$id_personal."'";
 $lista=consulta($sql);
+//print_r( $lista);
 return $lista;
 }
     //Definimos la funciones sobre el objeto crear_defensor
@@ -168,7 +172,7 @@ return $lista;
         $sql = "INSERT INTO personal_campo ";        
         $sql.= "SET id_juzgado='".$objetoEntidad['id_juzgado']."', id_personal='".$objetoEntidad['id_personal']."',";
         $sql.= "materia='".$objetoEntidad['materia']."', instancia='".$objetoEntidad['instancia']."'"; 
-        echo $sql;
+      //  echo $sql;
          $lista=registro($sql);
    return $lista;
     }

@@ -88,8 +88,46 @@
       });
 
       console.log(curp.substr(0,13));
+      console.log("el rfc",validarRfc());
+      
       var claseCurp=document.getElementById("curp");
       claseCurp.setAttribute("pattern",curp.substr(0,13)+'[A-Za-z]{3}[0-9]{2}');
+     
+ }
+
+
+ 
+ function validarRfc() {
+                        
+   var rfcNombre=document.getElementById("nombre").value;
+   var rfcApaterno=document.getElementById('aPaterno').value;
+   var rfcAmaterno=document.getElementById('aMaterno').value;
+   var rfcFecha= document.getElementById("fechaNacimiento").value.split('-');
+   
+    var query="apellido_materno="+rfcAmaterno+"&apellido_paterno="+rfcApaterno+"&fecha="+rfcFecha.join('-')+"&nombre="+rfcNombre+"&solo_homoclave="+0
+    url="https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?"+ query;//apellido_materno=GARCIA&apellido_paterno=HERNANDEZ&fecha=1988-03-17&nombre=OTHON&solo_homoclave=0"
+   
+   
+    $.ajax({
+			url: url,
+			type: "GET",
+		//	data: "cveCurp=SALW941012HOCNPL04",
+      beforeSend: function(xhrObj){
+                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Accept","application/json");
+                xhrObj.setRequestHeader("X-Mashape-Key","p1y5uv5OzAmshsT2As9lNDKQnONZp15VuBJjsnBGrbwX8XO0qY");
+
+        },
+			success: function (data) {
+         var rfc=data.response.data.rfc;
+         var claserfc=document.getElementById("rfc");
+      claserfc.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9]{3}");
+
+      }
+    });  
+     // console.log(curp.substr(0,13));
+      var claseCurp=document.getElementById("rfc");
+     // claseCurp.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9]{3}");
      
  }
 </script>
@@ -204,15 +242,9 @@ $(document).ready(function () {
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
                           </h4><div class="col-md-8 col-sm-9 col-xs-12">
                             <input type="text" id="aMaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
-                           </div>
+                            <div  class="help-block with-errors"></div> </div>
                        </div> 
-                    <!--    <div class="item form-group">
-                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="emails" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div> -->
+                   
 
                        <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Teléfono<span class="required">*</span></label>
@@ -220,6 +252,7 @@ $(document).ready(function () {
                           <input type="tel" pattern="([0-9]{13})|([0-9]{10})"  maxlength="13" minlength="10" class="form-control " data-error=" solo numero telefonico" required placeholder="Telefono" name="telefono">
                           <div  class="help-block with-errors"/></div>
                       </div>
+
                       <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
@@ -246,31 +279,30 @@ $(document).ready(function () {
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Entidad federativa</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                      <select id="entidad" name="strEntidadNacimiento" class="select2_group form-control textbox">
-                      <option value="">- Seleccione -</option> 
-                      <option value="AS">AGUASCALIENTES</option>
-                       <option value="BC">BAJA CALIFORNIA</option>
-                        <option value="BS">BAJA CALIFORNIA SUR</option>
-                         <option value="CC">CAMPECHE</option> 
-                         <option value="CL">COAHUILA DE ZARAGOZA</option>
-                          <option value="CM">COLIMA</option>
-                           <option value="CS">CHIAPAS</option>
-                            <option value="CH">CHIHUAHUA</option>
+                           <select id="entidad" name="strEntidadNacimiento" class="select2_group form-control textbox">
+                             <option value="">- Seleccione -</option> 
+                             <option value="AS">AGUASCALIENTES</option>
+                             <option value="BC">BAJA CALIFORNIA</option>
+                             <option value="BS">BAJA CALIFORNIA SUR</option>
+                             <option value="CC">CAMPECHE</option> 
+                             <option value="CL">COAHUILA DE ZARAGOZA</option>
+                             <option value="CM">COLIMA</option>
+                             <option value="CS">CHIAPAS</option>
+                             <option value="CH">CHIHUAHUA</option>
                              <option value="DF">DISTRITO FEDERAL</option>
-                              <option value="DG">DURANGO</option>
-                               <option value="GT">GUANAJUATO</option>
-                                <option value="GR">GUERRERO</option> <option value="HG">HIDALGO</option> <option value="JC">JALISCO</option> <option value="MC">MEXICO</option> <option value="MN">MICHOACAN DE OCAMPO</option> <option value="MS">MORELOS</option> <option value="NT">NAYARIT</option> <option value="NL">NUEVO LEON</option> <option value="OC">OAXACA</option> <option value="PL">PUEBLA</option> <option value="QT">QUERETARO DE ARTEAGA</option> <option value="QR">QUINTANA ROO</option> <option value="SP">SAN LUIS POTOSI</option> <option value="SL">SINALOA</option> <option value="SR">SONORA</option> <option value="TC">TABASCO</option> <option value="TS">TAMAULIPAS</option> <option value="TL">TLAXCALA</option> <option value="VZ">VERACRUZ</option> <option value="YN">YUCATAN</option> <option value="ZS">ZACATECAS</option> <option value="NE">NACIDO EN EL EXTRANJERO</option></select>
-                                </div>
+                             <option value="DG">DURANGO</option>
+                             <option value="GT">GUANAJUATO</option>
+                             <option value="GR">GUERRERO</option> <option value="HG">HIDALGO</option> <option value="JC">JALISCO</option> <option value="MC">MEXICO</option> <option value="MN">MICHOACAN DE OCAMPO</option> <option value="MS">MORELOS</option> <option value="NT">NAYARIT</option> <option value="NL">NUEVO LEON</option> <option value="OC">OAXACA</option> <option value="PL">PUEBLA</option> <option value="QT">QUERETARO DE ARTEAGA</option> <option value="QR">QUINTANA ROO</option> <option value="SP">SAN LUIS POTOSI</option> <option value="SL">SINALOA</option> <option value="SR">SONORA</option> <option value="TC">TABASCO</option> <option value="TS">TAMAULIPAS</option> <option value="TL">TLAXCALA</option> <option value="VZ">VERACRUZ</option> <option value="YN">YUCATAN</option> <option value="ZS">ZACATECAS</option> <option value="NE">NACIDO EN EL EXTRANJERO</option></select>
+                           </div>
                       </div>
                     
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Puesto</label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <select onkeyup="verificarCargo(event,this)" onblur="verificarCargo(event,this)" name="puesto"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="4">defensor</option> 
                              <option value="2">coordinador</option>   
-
                           </select>
                         </div>
                       </div>
@@ -278,26 +310,40 @@ $(document).ready(function () {
                 
                      
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-
-                       <select  required id="genero" onkeyup="validarCurps()" onblur="validarCurps()"  name="genero"  class="select2_group form-control">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label> </h4>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select  required id="genero" onkeyup="validarCurps()" onblur="validarCurps()"  name="genero"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="masculino">masculino</option> 
                              <option value="masculino">femenino</option>   
                           </select>
-
                         </div>
                       </div>
                       
-
-                            <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Adscripción</label>
+                      <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Rfc<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" id="rfc" tidata-error="El rfc es invalido"   onkeyup="mayusculas(event, this)" onblur="validarRfc()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="rfc">
+                          <div  class="help-block with-errors"></div> </div>
+                      </div>
+
+
+                       <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label></h4>
+                        <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="validarCurps()" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <div  class="help-block with-errors"></div> 
+                        </div>
+                      </div>
+
+
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Adscripción</label> </h4> 
+                        <div class="col-md-8 col-sm-9 col-xs-12">
                           <select name="adscripcion"  class="select2_group form-control">
                           <option value="">- Seleccione -</option> 
                               <?php
-                                $juzgadosRegion=json_decode($contenidojuzgado);
+                                    $juzgadosRegion=json_decode($contenidojuzgado);
                                             foreach($juzgadosRegion as $obj=>$valores){
                                              // echo $obj."fsdfwegfwefwefwef";  
                                                echo ' <optgroup label="'.$obj.'">';
@@ -307,84 +353,83 @@ $(document).ready(function () {
                                                  echo  '</optgroup>';
                                           }
                                   ?>                           
-                          </select>
+                          </select> 
                         </div>
                       </div> 
 
                       
-
-                   
-                <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="validarCurps()" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
-                          <div  class="help-block with-errors"></div> </div>
-                      </div>
+                     
                       
-                      <div id="materia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
+                     
+
+                  
+                       
+                      
+                    
+                           
+                 
+                    
+
+                    <div id="materia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Materia <span class="required">*</span>
                         </label>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                           <select name="materia"onkeyup="verificarMateria(event,this)" onblur="verificarMateria(event,this)" class="select2_group form-control ">
-                          <option value="">- Seleccione -</option> 
+                             <option value="">- Seleccione -</option> 
                              <option value="Civil">Civil</option> 
                              <option value="Familiar">Familiar</option>  
                              <option value="Penal">Penal</option>  
                              <option value="Agrario">Agrario</option>  
                              <option value="Mercantil">Mercantil</option>  
                              <option value="Amparo">Amparo</option>  
-                           
-                            
-                            
                           </select>
-                          </div></div>
+                          </div>
+                      </div>
+                                          
+                      
+                   
 
-                          <div id="instancia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
-                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Instancia <span class="required">*</span>
-                        </label>
-                        <div class="col-md-8 col-sm-6 col-xs-12">
-                          <select name="instancia"  class="select2_group form-control ">
-                           
-                            <option value="1">1 Instancia</option>  
-                             <option value="2">2 Instancia</option>  
-                          </select>
-                          </div></div>
+                     
 
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Contraseña<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" data-error="debe contener al menos  una mayúscula y número con minimo 8 carácter"  min="8" max="20"  class="form-control"  required placeholder="contraseña" name="password">
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Contraseña<span class="required">*</span></label></h4> 
+                          <div class="col-md-8 col-sm-9 col-xs-12">
+                            <input type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" data-error="debe contener al menos  una mayúscula y número con minimo 8 carácter"  min="8" max="20"  class="form-control"  required placeholder="contraseña" name="password">
                           <div  class="help-block with-errors"></div>
+                         </div>
                       </div>
-                      
-                  
+                    
+                      <div id="instancia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
+                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Instancia <span class="required">*</span>
+                         </label>
+                         <div class="col-md-8 col-sm-6 col-xs-12">
+                          <select name="instancia"  class="select2_group form-control ">
+                             <option value="1">1 Instancia</option>  
+                             <option value="2">2 Instancia</option>  
+                          </select>
+                         </div>
+                     </div>
+                   
                     
 
                           <div id="gender" required class="btn-group" data-toggle="buttons">
                            
                            </div>
+
+                      
+
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-						   <button class="btn btn-primary btn btn-info btn-lg" type="reset">Limpiar</button>
-						   <input type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Guardar"/>
+						                 <button class="btn btn-primary btn btn-info btn-lg" type="reset">Limpiar</button>
+						                  <input type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Guardar"/>
                         </div>
                       </div>
 
                     </form>
                   </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 

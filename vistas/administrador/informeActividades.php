@@ -35,7 +35,7 @@
         <span class="required">*</span>
       </label>
     	<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">
-        <input type="date" id="inputInicio" name="inputInicio"  onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" required min="2018-03-25" max="2018-05-25" step="1">
+        <input type="date" id="inputInicio" name="inputInicio"  onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" required step="1">
         <div id ="labelInicio" class='block-help with-errors'></div>
       </div>     
     </div>    

@@ -1256,20 +1256,8 @@ td span {
 .sidebar-widget {
     overflow: hidden
 }
-.infor{
-    color: #400040
-}
-.errors{
-    color: #ff0000;
-    background-color:#eeeeee;
-    border-color: #eee
-}
-.succss{
 
-    color: #358d25;
-    background-color:#eeeeee;
-    border-color: #eee
-}
+
 .error-number {
     font-size: 90px;
     line-height: 90px;
@@ -2040,7 +2028,7 @@ input:invalid ~ .with-errors {
 }
 .alert {
     padding: 20px;
-    background-color: #f44336; /* Red */
+    background-color: #eee; /* Red */
     color: white;
     margin-bottom: 15px;
 }

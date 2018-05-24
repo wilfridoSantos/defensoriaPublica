@@ -128,20 +128,12 @@ var ul=document.createElement('li');
                 <div class="x_panel">
                   <div class="x_title">
                     <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 " >Registro Actividad</label></h1>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br/>
-                    <form  id="myform"  data-toggle="validator" role="form" class="" action ="../../controlador/actividad/registroActividad.php?tipo=html" object="defensor" method="post">
+                    <form  id="myform"  data-toggle="validator"enctype="multipart/form-data" role="form" class="" action ="../../controlador/actividad/registroActividad.php?tipo=html" object="defensor" method="post">
 
                    
                       
@@ -162,7 +154,18 @@ var ul=document.createElement('li');
                               </div> 
                       </div>
                       </div>  
-                   
+
+                       <!-- se requiere para identificar el tipo de actividad -->
+                       <div   id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
+                           <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " >Actividad <span class="required">*</span></label>
+                            </h4><div class="col-md-6   col-sm-6 col-xs-12">
+                            <select id="miactividad" required=""  name="actividad"  class="form-control " onblur="verificacionActividad(event,this)">
+                                <option value="asesoria"> Asesoría</option>
+                                <option value="visita">Visita carcelaria</option>
+                                <option value="audiencia"> Audiencia</option>
+                            </select>
+                              </div> 
+                      </div>  </div> 
         
 
 
@@ -171,20 +174,21 @@ var ul=document.createElement('li');
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                          <!--  <input type="textArea" name="resultado"  minlength="10" maxlength="200" name="expediente" id="expediente"  class="form-control col-md-7 col-xs-12">
-                          --> <textarea name="resultado" pattern="([a-z0-9 ]+)" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describre el resultado u observaciones"></textarea>
+                          --> <textarea id="resultado" name="resultado" onclick="verificacionActividad()" pattern="[a-z0-9.,:áéíóú ]+" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describre el resultado u observaciones"></textarea>
                           <div  class="help-block with-errors"></div>
                       </div></div></div>
 
-                      <!-- se requiere para identificar el tipo de actividad -->
-                      <div   id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
-                           <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
+                  <div id="mycomprobante" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
+                           <h4> <label for="comprobante" class="control-label col-md-3 col-sm-3 col-xs-12 " >Comprobante <span class="required">*</span></label>
                             </h4><div class="col-md-6   col-sm-6 col-xs-12">
-                            <select required=""  name="actividad"  class="form-control ">
-                                <option value="asesoria"></option>
-                            </select>
+                            <!--   <input  data-error=""  data-error="fecha invalida" maxlength="50" class="form-control"  placeholder="cargar archivo" name="comprobante">
+                               <input id="comprobante" class="inputfile" type="file" id="comprobante" name ="comprobante">
+                            -->  <input type="file" name="archivo" id="archivo"></input>
+
+                                 <div  class="help-block with-errors"></div>
                               </div> 
-                      </div>  </div> 
-                      
+                      </div>
+                      </div>
                             <!--// se requiere para identificar al personal  -->
                        <div id="personal" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
@@ -196,13 +200,13 @@ var ul=document.createElement('li');
                       
 
                           <!--// se requiere para la ubicacion  -->
-                     <!--      <div id="myubica`  cion" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
+                          <div id="myubicacion" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
                             </h4><div class="col-md-6   col-sm-6 col-xs-12">
-                            <input id="ubicacion" type="text" name="ubicacion"  required="required" class="form-control col-md-7 col-xs-12" value="hola1" >
+                            <input id="ubicacion" type="text" name="ubicacion"   class="form-control col-md-7 col-xs-12" value="" >
                       
                               </div> 
-                      </div>  </div>  -->
+                      </div>  </div> 
                       
 
                       <div class="ln_solid"></div>
@@ -228,8 +232,33 @@ var ul=document.createElement('li');
     <script>
 
 $('#myform').validator()
-$('#actividad').hide()
+$('#myubicacion').hide()
 $('#personal').hide()
+$('#mycomprobante').hide()
 
+$('#resultado').keyup(validateTextarea);
 
+function validateTextarea() {
+    var errorMsg = "Please match the format requested.";
+    var textarea = this;
+    var pattern = new RegExp('^' + $(textarea).attr('pattern') + '$');
+    // check each line of text
+    $.each($(this).val().split("\n"), function () {
+        // check if the line matches the pattern
+        var hasError = !this.match(pattern);
+        if (typeof textarea.setCustomValidity === 'function') {
+            textarea.setCustomValidity(hasError ? errorMsg : '');
+        } else {
+            // Not supported by the browser, fallback to manual error display...
+            $(textarea).toggleClass('error', !!hasError);
+            $(textarea).toggleClass('ok', !hasError);
+            if (hasError) {
+                $(textarea).attr('title', errorMsg);
+            } else {
+                $(textarea).removeAttr('title');
+            }
+        }
+        return !hasError;
+    });
+}
 </script>

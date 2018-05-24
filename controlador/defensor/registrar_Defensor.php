@@ -22,8 +22,8 @@ $personal = Array(
             "municipio"      =>"",
             "nup"            =>$_POST['nup'],
             "nue"            =>$_POST['nue'],
-           
-            "genero"         =>$_POST['genero'],
+            "rfc"            =>$_POST['rfc'],
+           "genero"         =>$_POST['genero'],
             "telefono"       =>$_POST['telefono'],
             "correo"         =>$_POST['email'],                
             "foto"          =>" "           
