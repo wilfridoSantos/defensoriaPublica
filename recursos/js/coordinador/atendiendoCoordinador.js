@@ -434,7 +434,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 		$.ajax({			
 			url: "../../controlador/personal_campo/controladorInformeAct.php",
 			type: "POST",
-			data: "fechaI="+fechaI+"&fechaF="+fechaF+"&R1="+inputR1+"&R2="+inputR2+"&R3="+inputR3,
+			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3},
 			success: function (data) {
 				var jsonInforme = jQuery.parseJSON(data);
 			
@@ -477,12 +477,13 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 		$.ajax({			
 			url: "../../controlador/personal_campo/controladorInformeAct.php",
 			type: "POST",
-			data: "fechaI="+fechaI + "&fechaF="+fechaF+"&R1="+inputR1+"&puesto="+puesto+"&R2="+inputR2+"&R3="+inputR3,
+			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3, "puesto":puesto},
 			success: function (data) {
+				console.log(data, 'valor de la data');
 				var jsonInforme = jQuery.parseJSON(data);
 				console.log(jsonInforme[0],' VALOR R2');
 				$('#resultadoInforme').empty();					
-				$.each(jsonInforme, function (KEY, VALOR) {
+				/* $.each(jsonInforme, function (KEY, VALOR) {
 					$('#resultadoInforme').append(
 						'<tr>'+
 						'<td>'+VALOR.id_personal+'</td>'+
@@ -493,7 +494,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 						'<td></td>'+
 						'</tr>'
 					);
-				});
+				}); */
 				
 				//$('#resultadoInforme').load('verInformeActividad.php');
 			}
@@ -504,12 +505,13 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 		$.ajax({			
 			url: "../../controlador/personal_campo/controladorInformeAct.php",
 			type: "POST",
-			data: "fechaI="+fechaI + "&fechaF="+fechaF+"&R1="+inputR1+"&nue="+nue+"&R2="+inputR2+"&R3="+inputR3,
+			//data: "fechaI="+fechaI + "&fechaF="+fechaF+"&R1="+inputR1+"&nue="+nue+"&R2="+inputR2+"&R3="+inputR3,
+			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3,"nue":nue},
 			success: function (data) {
 				var jsonInforme = jQuery.parseJSON(data);
 				console.log(' INPUT R3 JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
 				$('#resultadoInforme').empty();					
-				$.each(jsonInforme, function (KEY, VALOR) {
+				/* $.each(jsonInforme, function (KEY, VALOR) {
 					$('#resultadoInforme').append(
 						'<tr>'+
 						'<td>'+VALOR.id_personal+'</td>'+
@@ -520,7 +522,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 						'</tr>'
 					);
 				});
-				
+				 */
 				//$('#resultadoInforme').load('verInformeActividad.php');
 			}
 		});
