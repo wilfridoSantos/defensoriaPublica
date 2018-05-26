@@ -21,14 +21,11 @@ function getJuzgado() {
                 }
             });
     }
-  function localizarPorGeocoder(cadena) {   
+
+  /* function localizarPorGeocoder(cadena) {   
     var geocoder = new google.maps.Geocoder();
 
-   /*  var map = new google.maps.Map(document.getElementById(elemento), {
-      zoom: 16,
-      scrollwheel: true,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }); */
+   
     console.log(cadena);
     
     geocoder.geocode({'address': cadena}, function(results, status) {
@@ -39,11 +36,7 @@ function getJuzgado() {
             console.log(resultados_lat);
             console.log(resultados_long);
             
-            /* map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            }); */
+          
         } else {
             var mensajeError = "";
             if (status === "ZERO_RESULTS") {
@@ -56,9 +49,9 @@ function getJuzgado() {
             alert(mensajeError);
         }
     });
-}
+} */
 
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDidf3W8T4sLPLH1shON1Wue4_FcSXLm3Q", function() {
+/* $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDidf3W8T4sLPLH1shON1Wue4_FcSXLm3Q", function() {
    // $("#buscar").click(function() {
         var direccion = $("#").val();
        // if (direccion !== "") {
@@ -67,7 +60,7 @@ $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDidf3W8T4sLPLH1sh
       //  }
    // });
 });
-
+ */
 function miUbicacion() {
     console.log("mi ubicacion");
     

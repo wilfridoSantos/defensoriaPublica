@@ -11,7 +11,9 @@
 <div class="x_content">
             <div id = "verInfoDef" >
                   <h3 ><b> Detalle Informacion Defensor</b></h3>
+                  
             </div>
+            <div id="cambio"></div> 
 </div>
 </body>
 

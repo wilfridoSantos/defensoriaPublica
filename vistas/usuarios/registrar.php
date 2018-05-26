@@ -121,7 +121,7 @@
 			success: function (data) {
          var rfc=data.response.data.rfc;
          var claserfc=document.getElementById("rfc");
-      claserfc.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9]{3}");
+      claserfc.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9][A-Z0-9][A-Z0-9]");
 
       }
     });  
@@ -163,23 +163,7 @@ function agrega(){
 			 $('#menuContainer').load("coordinadorRegistrarJuzgado.php");
       }
 
-   /*     $.ajax({
-			url: "https://consultas.curp.gob.mx//CurpSP/gobmx/consultaXCurp.do",
-			type: "GET",
-			data: "cveCurp=SALW941012HOCNPL04",
-			beforeSend: function () {
-				
-			},
-			success: function (data) {
 
-			 alert(data);
-      }
-    }); 
- */
-
-$(document).ready(function () {
-
-});
 </script>
 
 
@@ -302,7 +286,7 @@ $(document).ready(function () {
                           <select onkeyup="verificarCargo(event,this)" onblur="verificarCargo(event,this)" name="puesto"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="4">defensor</option> 
-                             <option value="2">coordinador</option>   
+                           <!--   <option value="2">coordinador</option>  -->  
                           </select>
                         </div>
                       </div>
@@ -315,7 +299,7 @@ $(document).ready(function () {
                         <select  required id="genero" onkeyup="validarCurps()" onblur="validarCurps()"  name="genero"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="masculino">masculino</option> 
-                             <option value="masculino">femenino</option>   
+                             <option value="femenino">femenino</option>   
                           </select>
                         </div>
                       </div>
@@ -323,7 +307,7 @@ $(document).ready(function () {
                       <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Rfc<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="rfc" tidata-error="El rfc es invalido"   onkeyup="mayusculas(event, this)" onblur="validarRfc()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="rfc">
+                          <input type="text" id="rfc" tidata-error="El rfc es invalido"   onkeyup="mayusculas(event, this)" onblur="validarRfc()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="Rfc" name="rfc">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
 
@@ -449,12 +433,12 @@ $('#myform').validator()
 
 
 var curp2 = generaCurp({
-  nombre            : 'Othon',
-  apellido_paterno  : 'Hernandez',
-  apellido_materno  : 'Garcia',
-  sexo              : 'H',
+  nombre            : 'Griselda',
+  apellido_paterno  : 'Mendez',
+  apellido_materno  : 'Cortes',
+  sexo              : 'M',
   estado            : 'OC',
-  fecha_nacimiento  : [16, 1, 1992]
+  fecha_nacimiento  : [17, 03, 1993]
 });
 console.log(curp2);
 

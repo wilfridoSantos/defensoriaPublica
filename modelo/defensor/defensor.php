@@ -99,7 +99,7 @@ function getDefensorUpdate($id_defensor){
 
 function listar_defensor_x_id($id){
       global $conexion;
-      $sql = "select * from personal_campo where id='".$id."'";
+      $sql = "select * from personal_campo where id_personal='".$id."'";
       $consulta = consulta($sql, $conexion);
       return $consulta;
   }
@@ -129,8 +129,8 @@ function listar_defensor_x_nup($nup){
 }
 
 function obtenerExpedientes($id_defensor){
-    $sql="SELECT * FROM expediente inner join personal_campo using(id_defensor) WHERE 
-                    id_defensor = '".$id_defensor."'";
+    $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) WHERE 
+                    id_personal = '".$id_defensor."'";
 $lista=consulta($sql);
 return $lista;
 
@@ -180,7 +180,7 @@ return $lista;
     function actualizar_juzgado($id_juzgado,$id_defensor){
       
         $sql = "UPDATE personal_campo ";
-        $sql.= " SET id_juzgado='".$id_juzgado."' where id_defensor = ".$id_defensor;
+        $sql.= " SET id_juzgado='".$id_juzgado."' where id_personal = ".$id_defensor;
         echo $sql;
          $lista=registro($sql);
    return $lista;

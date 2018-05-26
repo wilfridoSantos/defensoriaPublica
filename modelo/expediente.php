@@ -21,7 +21,17 @@ function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia){
     $lista=consulta($sql);
   //  print_r($lista);
     return $lista;
-}
+ }
+ function listar_expediente_x_defensor($idDefensor){
+   
+    $sql = "select exp.estado,exp.fecha_final,exp.fecha_inicio, exp.num_expediente, exp.materia,exp.id_usuario_servicio,defensor.id_juzgado   defensor.estado from expediente as exp inner join 
+                          personal_campo  ad defensor using(id_personal)
+                           where id_personal='".$idDefensor."'";
+   // echo $sql;
+    $lista=consulta($sql);
+  //  print_r($lista);
+    return $lista;
+ }
   
   function listar_expediente_asesoria($id_expediente){
         global $conexion;

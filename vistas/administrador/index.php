@@ -92,7 +92,7 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
-                      <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
+                     <!--  <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li> -->
                       <form action="../../action.php" method="post">
                       <div class="input-group">
                           <input type="text" class="form-control" placeholder="Buscar Defensor(username)" name="busqueda">
@@ -408,5 +408,6 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/js/custom.min.js"></script>
     <script src="../../recursos/js/Gestion.js"></script>
     <script src="../../recursos/js/main.js"></script>
+    <script src="../../recursos/js/herramienta.js"></script>
   </body>
 </html>

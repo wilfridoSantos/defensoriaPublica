@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Modulo Coordinador General</title>
-      <script src="../../recursos/js/main.js"></script>
-      <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
- <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
+    <script src="../../recursos/js/main.js"></script>
+    <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
     <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-      <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+      <script src="../../recursos/js/defensor/atendiendoDefensor.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
 
 <body>
@@ -43,7 +43,7 @@
               <th>AP. MATERNO</th>
               <th>ETNIA</th> 
               <th>CURP</th>                  
-  
+              <th>ACCIONES</th>
             </tr>
           </thead>
           <tbody id='tebody'>
@@ -54,19 +54,24 @@
               //print_r('=> '. $obj->estado);
                             
                 echo '<tr> '.
-                  '<td id="idPersonal" style="display:none;">'.$obj->id_usuario_servicio.'</td>'.
+                  
                   '<td>'.strtoupper($obj->nombre).'</td>'.
                   '<td>'.strtoupper($obj->ap_paterno).'</td>'.
                   '<td>'.strtoupper($obj->ap_materno).'</td>'.
                   '<td>'.strtoupper($obj->etnia).'</td>'.
-                  '<td>'.strtoupper($obj->curp).'</td>'.                                          
-                ' </tr>';
+                  '<td   id="curp" >'.strtoupper($obj->curp).'</td>'.        
+                  '<td><button type="button" class="btn btn-primary botonAsignarCaso" id="asignarCaso" name="expedientes">'.
+                  '<span class="glyphicon glyphicon-folder-open" aria-hidden="true"> </span></button>'.
+               
+                '</td>
+                  
+                 </tr>';
                            
               }
         ?>
           </tbody>  
         </table>
-       
+       <div id="mostrarCrearExpediente"></div>
         
       </div>
           </body>

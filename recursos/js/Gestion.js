@@ -23,10 +23,10 @@
 			$('#menuContainer').load("listarExpedientes.php");
 		};	
 
-	var asignar=document.getElementById('cambiarAdscripcion');
+	/* var asignar=document.getElementById('cambiarAdscripcion');
 	asignar.addEventListener('click',asinar,false);
 	 function asinar(){
 		$('#menuContainer').load("../administrador/cambiarAdscripcion.php");
-	}
+	} */
 
 				

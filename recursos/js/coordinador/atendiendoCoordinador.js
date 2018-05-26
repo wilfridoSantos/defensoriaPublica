@@ -133,8 +133,21 @@ $(document).ready(function () {
 										'</div>'+
 									
 								'</div>' +
-							'</div>' +
+							'</div> <input id="cambiarAdscripcion" type ="button" class="btn btn-succes btn btn-success btn-lg" value="Cambiar de adscripcón"/>' +
 						'</div>');
+
+						var asignar=document.getElementById('cambiarAdscripcion');
+						asignar.addEventListener('click',asinar,false);
+						function asinar(){
+							//$('#cambio').load("../administrador/cambiarAdscripcion.php");
+								$("#cambio").load("../administrador/cambiarAdscripcion.php",{valor1:'primer valor', valor2:'segundo valor'}, function(response, status, xhr) {
+							
+							        $("#cambio").html(replazarParametro(response,[{nue:VALOR.nue}]));
+							
+						  });
+						}
+					
+						
 				});
 			}
 		});
