@@ -40,8 +40,27 @@
                         </div>
                       </div>
         
+                      <div class="form-horizontal form-label-left">   <div class="form-group ">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Estado Inicial<span class=""></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="estado" id="estado"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div></div>
 
-                     <div class="form-group">
+                        <div class="form-horizontal form-label-left">   <div class="form-group ">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Acción a implementar<span class=""></span>
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="accionImplementar" id="accionImplementar"  class="form-control col-md-7 col-xs-12">
+                         </div>
+                      </div></div>
+
+               
+                          <input type="text" name="defensor" id="defensor" style="display:none;" value="<?php session_start(); echo $_SESSION['personal'][0]["id_personal"]?>"  class="form-control col-md-7 col-xs-12"/>
+                          <input type="text" name="materia" id="materia" style="display:none;" value="<?php session_start(); echo $_SESSION['personal'][0]["materia"]?>"  class="form-control col-md-7 col-xs-12"/>
+               
+                  <!--    <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Materia <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -54,7 +73,7 @@
                             
                             
                           </select>
-                          </div></div>
+                          </div></div> -->
 
 
                       <!--  <div class="form-group  ">
@@ -80,7 +99,7 @@
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                          
-						   <input id="asignarAdscripcion" type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Cambiar"/>
+						   <input id="asignarAdscripcion" type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Crear Expediente"/>
                         <!--   <button type="submit" class="btn btn-success">Submit</button> -->
                         </div>
                       </div>

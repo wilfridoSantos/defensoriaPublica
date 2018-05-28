@@ -1,9 +1,12 @@
 <?php
 include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
+  //session_start();
   if($_SESSION["rol"] != 4 ){
      header("Location: ../baseIndex.php");
   }
+  $personal=$_SESSION['personal'];
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,11 +58,11 @@ include "../../Controlador/sesion.php";
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../recursos/images/img.jpg" alt="..." class="img-circle profile_img"/>
+                <img src="../../recursos/uploads/<?php echo $personal[0]['foto'] ?>" alt="..." class="img-circle profile_img"/>
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                                  <?php //echo $_SESSION['usuario'] ?>
+                                  <?php echo  $personal[0]['nombre'] ?>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -127,14 +130,14 @@ include "../../Controlador/sesion.php";
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../../recursos/images/img.jpg" alt=""/><?php// echo $_SESSION['usuario'] ?>
+                    <img src="../../recursos/uploads/<?php echo $personal[0]['foto'] ?> " alt=""/><?php// echo $_SESSION['usuario'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Perfil</a></li>
+                   <!--  <li><a href="javascript:;"> Perfil</a></li> -->
                     <li>
                       <a href="javascript:;">
-                        <span>Configuracion</span>
+                       <!--  <span>Configuracion</span> -->
                       </a>
                     </li>
 
@@ -143,68 +146,7 @@ include "../../Controlador/sesion.php";
                 </li>
 
                 <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                        asignacion de caso => defensor: xxx, fecha:
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php //echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          asignacion de caso => defensor: xxx, fecha:  
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php// echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php //echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>Ver todas las notificaciones</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
+                
                 </li>
               </ul>
             </nav>

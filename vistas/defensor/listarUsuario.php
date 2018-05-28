@@ -27,13 +27,13 @@
           </b>
         </h3>
        <div class="input-group" style="width:70%;">
-                                <input type="text" id="inputCedula" onkeyup="buscarXCedula()" class="form-control" placeholder="Nombre Defensor...">
+                                <input type="text" id="columna1" onkeyup="buscarXPrimerCampo()" class="form-control" placeholder="Nombre Defensor...">
                             </div>
 
                             
         <div id="mData"></div>
 
-        <table id="datatable" class="table table-striped ">
+        <table id="example" class="table table-striped ">
          
           <thead>
 
@@ -55,7 +55,7 @@
                             
                 echo '<tr> '.
                   
-                  '<td>'.strtoupper($obj->nombre).'</td>'.
+                  '<td id="nombre">'.strtoupper($obj->nombre).'</td>'.
                   '<td>'.strtoupper($obj->ap_paterno).'</td>'.
                   '<td>'.strtoupper($obj->ap_materno).'</td>'.
                   '<td>'.strtoupper($obj->etnia).'</td>'.
