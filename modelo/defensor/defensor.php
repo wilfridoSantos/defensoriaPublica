@@ -42,7 +42,7 @@ function getExpedientesById($id_defensor){
     e.grado_delito,e.estado, e.incidente,e.observaciones,u.id_usuario_servicio,
     u.nombre,u.ap_paterno,u.ap_materno, u.municipio,u.colonia, u.telefono,
     u.correo_electronico, u.etnia,u.idioma 
-    from personal_campo as d inner join expediente as e using(id_personal)
+    from personal_campo as d inner join expediente as e using(id_personal) inner join detalle_usuario_expediente using(id_expediente)
     inner join usuario_servicio as u using(id_usuario_servicio)
     inner join personal as p using(id_personal)
     inner join materia as m using(id_materia)
@@ -85,18 +85,11 @@ function getDefensorUpdate($id_defensor){
 }
 
 function listar_defensor_x_id($id){
-<<<<<<< HEAD
-      global $conexion;
-      $sql = "select * from personal_campo where id_personal='".$id."'";
-      $consulta = consulta($sql, $conexion);
-      return $consulta;
-=======
    //   global $conexion;
       $sql = "select * from personal_campo where id_personal='".$id."'";
       $lista = consulta($sql);
    
     return $lista;
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
   }
 
   function listar_defensor_x_juzgado($juzgado){

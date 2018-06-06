@@ -169,7 +169,6 @@ $(document).ready(function () {
 					}
 					$('#verInfoDef').append(
 						'<div class="row"> ' +
-<<<<<<< HEAD
 						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
 						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view verInfoDef" class="col-xl-12">' +
 						'<center><h2 ><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2></center>' +
@@ -196,44 +195,6 @@ $(document).ready(function () {
 						'</div>');
 
 
-=======
-							'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-								'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
-									'<center><h2 ><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2></center>' +									
-									
-								
-										'<div class="left">'+
-											'<ul class="list-unstyled">' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: ' + (VALOR.calle).toUpperCase() + ', ' + VALOR.numero_ext + ', ' + VALOR.numero_int + ', ' + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Curp :' + (VALOR.curp).toUpperCase() + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Nup :' + VALOR.nup + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Nue :' + VALOR.nue + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado :' + (VALOR.juzgado).toUpperCase() + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional :' + (VALOR.cedula_profesional).toUpperCase() + ' </li>' +
-												'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail :' + (VALOR.correo_electronico).toUpperCase() + ' </li>' +
-											'</ul>' +						
-										'</div>'+
-										'<div class="right ">'+																					
-											'<p align="right"><img src="../../recursos/uploads/' + VALOR.foto + '" alt="" class="img-circle img-responsive"><span class="glyphicon glyphicon-lock"></span>' + (VALOR.perfil).toUpperCase() + '        </p>' +
-										'</div>'+
-									
-								'</div>' +
-							'</div> <input id="cambiarAdscripcion" type ="button" class="btn btn-succes btn btn-success btn-lg" value="Cambiar de adscripcón"/>' +
-						'</div>');
-
-						var asignar=document.getElementById('cambiarAdscripcion');
-						asignar.addEventListener('click',asinar,false);
-						function asinar(){
-							//$('#cambio').load("../administrador/cambiarAdscripcion.php");
-								$("#cambio").load("../administrador/cambiarAdscripcion.php",{valor1:'primer valor', valor2:'segundo valor'}, function(response, status, xhr) {
-							
-							        $("#cambio").html(replazarParametro(response,[{nue:VALOR.nue}]));
-							
-						  });
-						}
-					
-						
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
 				});
 			}
 		});
@@ -675,7 +636,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 
 	var desc = $('#botonDesc').get(0);
 	
-	//console.log(labelInicio, 'es label?');
+	//console.log(desc, 'es label?');
 	//var ul=document.createElement('li');
 
 
@@ -689,6 +650,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 			var fechaI = ini.toISOString().split('T')[0];
 			$(".alert").remove();
 			//$('input[name=generar]')[0].disabled=false;
+			//console.log('antes de generar Informe()');
 			generarInformeAct();
 			desc.disabled=false;
 			return true;
@@ -755,7 +717,7 @@ function generarInformeAct2(nue) {
 function generarInformeAct() {
 	var fechaI = document.getElementById('inputInicio').value;
 	var fechaF = document.getElementById('inputFinal').value;
-	
+	//console.log(fechaI, fechaF);
 
 	$.ajax({
 		url: "../../controlador/personal_campo/controladorInformeAct.php",
@@ -763,13 +725,10 @@ function generarInformeAct() {
 		data: "fechaI=" + fechaI + "&fechaF=" + fechaF,
 		success: function (data) {
 			var jsonInforme = jQuery.parseJSON(data);
-
-
 			$('#resultadoInforme').empty();
 			$.each(jsonInforme, function (KEY, VALOR) {
 				if (VALOR.latitud == '' || VALOR.latitud == ' ') {
 					VALOR.latitud = '16.909759';
-
 				}
 				if (VALOR.longitud == '' || VALOR.longitud == ' ') {
 					VALOR.longitud = '-96.722320';
@@ -862,7 +821,6 @@ function generarPDFActividades(){
 	console.log('perras');
 	var fechaI = document.getElementById('inputInicio').value;
 	var fechaF = document.getElementById('inputFinal').value;
-<<<<<<< HEAD
 	
 
 	$.ajax({
@@ -870,19 +828,6 @@ function generarPDFActividades(){
 		type: "POST",
 		data: "fechaI=" + fechaI + "&fechaF=" + fechaF,
 		success: function (data) {
-=======
-	var inputR1 = $('#inputR1')['0'].checked;//RADIO1 INFORME GENERAL only fecha inicial y final
-	var inputR2 = $('#inputR2')['0'].checked;
-	var inputR3 = $('#inputR3')['0'].checked;
-	console.log(inputR1+" R1", inputR2+" R2", inputR3+" R3");
-	if(inputR1){// informe general
-		$.ajax({			
-			url: "../../controlador/personal_campo/controladorInformeAct.php",
-			type: "POST",
-			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3},
-			success: function (data) {
-				var jsonInforme = jQuery.parseJSON(data);
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
 			
 			var jsonInforme = jQuery.parseJSON(data);
 			console.log(jsonInforme);
@@ -1012,7 +957,6 @@ function showUser(str) {
 		$('#tebody').empty();
 		$('#tebody').append('SELECCIONE UN FILTRO');
 		
-<<<<<<< HEAD
 	} else {
 		$.ajax({
 			url: "../../controlador/defensor/controlFiltroListarExpediente.php",
@@ -1100,62 +1044,6 @@ function showMateria(str) {
 					botonDess.disabled = true;
 				}
 
-=======
-	}else if(inputR2){ //informe por filtro cargo y nue personal de campo
-				
-		var puesto = document.getElementById('puesto').value;
-		console.log('puesto:'+puesto);
-		$.ajax({			
-			url: "../../controlador/personal_campo/controladorInformeAct.php",
-			type: "POST",
-			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3, "puesto":puesto},
-			success: function (data) {
-				console.log(data, 'valor de la data');
-				var jsonInforme = jQuery.parseJSON(data);
-				console.log(jsonInforme[0],' VALOR R2');
-				$('#resultadoInforme').empty();					
-				/* $.each(jsonInforme, function (KEY, VALOR) {
-					$('#resultadoInforme').append(
-						'<tr>'+
-						'<td>'+VALOR.id_personal+'</td>'+
-						'<td>'+VALOR.id_usuario_servicio+'</td>'+
-						'<td>'+VALOR.latitud+'</td>'+
-						'<td>'+VALOR.longitud+'</td>'+
-						'<td>'+VALOR.observaciones+'</td>'+
-						'<td></td>'+
-						'</tr>'
-					);
-				}); */
-				
-				//$('#resultadoInforme').load('verInformeActividad.php');
-			}
-		});
-	}else if(inputR3){ //informe por filtro cargo y nue personal de campo
-		var nue = document.getElementById('nue').value;				
-		console.log('nue: '+nue);
-		$.ajax({			
-			url: "../../controlador/personal_campo/controladorInformeAct.php",
-			type: "POST",
-			//data: "fechaI="+fechaI + "&fechaF="+fechaF+"&R1="+inputR1+"&nue="+nue+"&R2="+inputR2+"&R3="+inputR3,
-			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3,"nue":nue},
-			success: function (data) {
-				var jsonInforme = jQuery.parseJSON(data);
-				console.log(' INPUT R3 JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
-				$('#resultadoInforme').empty();					
-				/* $.each(jsonInforme, function (KEY, VALOR) {
-					$('#resultadoInforme').append(
-						'<tr>'+
-						'<td>'+VALOR.id_personal+'</td>'+
-						'<td>'+VALOR.id_usuario_servicio+'</td>'+
-						'<td>'+VALOR.latitud+'</td>'+
-						'<td>'+VALOR.longitud+'</td>'+
-						'<td>'+VALOR.observaciones+'</td>'+
-						'</tr>'
-					);
-				});
-				 */
-				//$('#resultadoInforme').load('verInformeActividad.php');
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
 			}
 		});
 	}

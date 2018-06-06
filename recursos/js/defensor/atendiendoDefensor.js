@@ -57,9 +57,6 @@ $(document).ready(function () {
 			});
 		  
 		}
-<<<<<<< HEAD
-	
-=======
 
           //MUESTRA LA INFORMACION DE UN USUARIO DEL SERVICIO DE DICHO EXPEDIENTE
 		
@@ -192,11 +189,9 @@ function cargarMisExpedientes(idpersonal) {
 				});	
 			
        // console.log(jsonMisExp);
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
 });
 }
 
-<<<<<<< HEAD
 
 
 function cargaDefensorPorMateria(e, elemento) {
@@ -224,6 +219,3 @@ function cargaDefensorPorMateria(e, elemento) {
     
     //asignarDefensor
 }
-=======
-/* <textarea  rows="10" cols="150" minlength="10" maxlength="250"  ></textarea> */
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e

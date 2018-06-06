@@ -285,8 +285,5 @@ function showMateria(str){
 
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e

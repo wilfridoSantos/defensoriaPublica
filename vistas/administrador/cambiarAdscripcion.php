@@ -39,11 +39,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Nue <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-<<<<<<< HEAD
                           <input type="text" value="<?php echo $_GET['nue']?>" readonly pattern="[0-9]{5}" title="solo numero de 5 digito" required name="nue" id="nue" required="required" class="form-control col-md-7 col-xs-12"/>
-=======
-                          <input type="text" value={{nue}} readonly pattern="[0-9]{5}" title="solo numero de 5 digito" required name="nue" id="nue" required="required" class="form-control col-md-7 col-xs-12"/>
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
                         </div>
                       </div>
                        <div class="form-group  ">

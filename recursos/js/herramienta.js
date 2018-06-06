@@ -13,9 +13,6 @@ function mayusculas(e, elemento) {
                                                //console.log(n);
                                               return t[n][r]})
           }
-<<<<<<< HEAD
-return res}
-=======
 return res}
 
 function buscarXPrimerCampo() {
@@ -40,4 +37,3 @@ function buscarXPrimerCampo() {
       }
     }
   }
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
