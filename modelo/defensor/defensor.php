@@ -99,9 +99,9 @@ function getDefensorUpdate($id_defensor){
 
 function listar_defensor_x_id($id){
    //   global $conexion;
-      $sql = "select * from personal_campo where id_personal='".$id."'";
+      $sql = "select * from personal_campo  INNER JOIN materia using(id_materia) where id_personal='".$id."'";
       $lista = consulta($sql);
-   
+   // echo $sql;
     return $lista;
   }
 
@@ -172,7 +172,7 @@ return $lista;
        
         $sql = "INSERT INTO personal_campo ";        
         $sql.= "SET id_juzgado='".$objetoEntidad['id_juzgado']."', id_personal='".$objetoEntidad['id_personal']."',";
-        $sql.= "materia='".$objetoEntidad['materia']."', instancia='".$objetoEntidad['instancia']."'"; 
+        $sql.= "id_materia='".$objetoEntidad['id_materia']."'"; 
       //  echo $sql;
          $lista=registro($sql);
    return $lista;
@@ -214,10 +214,15 @@ return $lista;
 
 
     function ultimoDefensorCreatado(){
-        $sql = mysql_query("SELECT MAX(id_defensor) AS id FROM defensor");
+      /*   $sql = mysql_query("SELECT MAX(id_defensor) AS id FROM defensor");
           $id=consulta($sql);
           
-        return $id[0]['id']; 
+        return $id[0]['id'];  */
+
+        $sql = "SELECT MAX(id_personal_campo) AS id FROM defensor";
+        $id=consulta($sql);
+        // print_r($id);
+      return $id[0]['id']; 
 
     }
 

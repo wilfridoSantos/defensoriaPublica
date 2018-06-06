@@ -65,7 +65,7 @@ function getUsuarioByCurp($curp){
 
     }
     function listar_usuarios(){
-        $sql="SELECT id_usuario_servicio, nombre, ap_paterno,ap_materno,curp,etnia FROM usuario_servicio as u;";			
+        $sql="SELECT id_usuario_servicio, nombre, ap_paterno,ap_materno,curp,etnia,colonia,municipio FROM usuario_servicio as u;";			
 
    $lista=consulta($sql);
    return $lista;

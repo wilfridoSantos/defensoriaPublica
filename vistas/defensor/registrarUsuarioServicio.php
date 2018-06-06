@@ -158,7 +158,7 @@ function agrega(){
                            <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
                               <input type="text"  data-error="correo invalido" class="form-control" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" required placeholder="Email" name="email">
-                            </div>
+                              <div  class="help-block with-errors"></div></div>
                       </div>   
 
                          <div class="item form-group  col-md-6 col-sm-6 col-xs-12 form-group">
@@ -271,7 +271,7 @@ function agrega(){
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                       <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="etnia">
+                       <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  novalidate placeholder="" name="etnia">
                         </div>
                       </div>
                                       
@@ -306,8 +306,8 @@ function agrega(){
                 </div>
 
 
-    
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- 
+    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> -->
     <script src="../../recursos/js/custom.min.js"></script>
     <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>

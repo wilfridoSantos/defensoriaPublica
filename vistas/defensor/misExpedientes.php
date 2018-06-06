@@ -17,8 +17,9 @@ $idpersonal=$_SESSION['personal'];
 
     <title>Modulo Coordinador General</title>
       <script src="../../recursos/js/main.js"></script>
-      <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
-      <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+      <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
+      <!-- <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+       --><link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../../recursos/css/custom.css" rel="stylesheet"/>
@@ -37,6 +38,9 @@ $idpersonal=$_SESSION['personal'];
       </script>
 
 <body onload="">
+
+
+
 <div class="x_content">
         <h3 ><b>
           <center>
@@ -78,13 +82,14 @@ $idpersonal=$_SESSION['personal'];
                   </div>
                   <div class="x_content">
                   
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <table id="example" class="table ui table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr > 
                         <th >    Num. Expediente     </th>
                         <th >    Estado   </th>
-                        <th >    Acción a implementar   </th>
-                        <th >    Observaciones     </th>
+                        <th >   Delito </th>
+                        <th >    Gravedad del delito    </th>
+                        <th >    Accion     </th>
                         </thead>
                       <tbody id='tebody' >
                       
@@ -92,17 +97,22 @@ $idpersonal=$_SESSION['personal'];
                     
                       </tbody>
                     </table>
-                    <div id="miUsuarioServicio" class="x_content" title="infomación">
-                    <table  class="table table-hover">
-                      <thead>
-                        
-                      </thead>
+                  <!--   <div id="miUsuarioServicio" class="x_content" title="infomación">
+                    <table  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr > 
+                        <th >    Nombre    </th>
+                        <th >     Apellido paterno </th>
+                        <th >     Apellido Materno </th>
+                        <th >    Correo     </th>
+                        <th >    Teléfono     </th></tr>
+                        </thead>
                       <tbody id="datosUsuarioServicio">
                         
                       </tbody>
                     </table>
 
-                  </div>
+                  </div> -->
                  
                     </div></div>
                      
@@ -113,11 +123,48 @@ $idpersonal=$_SESSION['personal'];
                 </div>
               </div>
 
+<!-- Button trigger modal -->
+
+ 
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Usuario(s)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div id="miUsuarioServicio" class="table-responsive x_content" title="infomación">
+          <!--  <table id="exampleuser" lass="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+           --> <table id="exampleuser" class="table  dt-responsive ui table" cellspacing="0" width="100%">
+            
+                    <thead>
+                        <tr > 
+                        <th >    Nombre    </th>
+                        <th >     Apellido paterno </th>
+                        <th >     Apellido Materno </th>
+                        <th >    Correo     </th>
+                        <th >    Teléfono     </th></tr>
+                        </thead>
+                      <tbody id="datosUsuarioServicio">
+                        
+                      </tbody>
+                    </table>
+
+                  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div> 
 
 
-
-
-     
      </body>
           </html>
 
@@ -127,25 +174,8 @@ $idpersonal=$_SESSION['personal'];
 
 
 
-
-
           
-<script>	$("#miUsuarioServicio").hide();</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>//	$("#miUsuarioServicio").hide();</script>
 
               <script>
 					// $('#miUsuarioServicio').dataTable();</script>

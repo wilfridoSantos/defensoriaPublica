@@ -37,3 +37,29 @@ function buscarXPrimerCampo() {
       }
     }
   }
+
+
+  // estos son datos de tipo variables globales
+  var Global_usuarios_servicios;
+  $(document).ready(function () {
+
+    function data(){
+  
+  $.ajax({
+    type: 'GET',
+    //data: {cod_sec: cod_sec,mes: mes, ano: ano},
+    url: '../../controlador/usuario_servicio/listaUsuario.php?term=busqueda',
+    success: function (data) {
+        Global_usuarios_servicios = data;//parsedData[0].NUMERO;
+//        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
+    },
+    error: function () {
+        alert('Error peticion Ajax ');
+    }
+    });
+  }
+
+  data();// llamao a la funcion para almacenar estos datos
+
+  });
+  
