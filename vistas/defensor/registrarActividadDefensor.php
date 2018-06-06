@@ -223,8 +223,8 @@ var ul=document.createElement('li');
                   </div>
                 </div>
 
-<script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
-    <script src="../../recursos/js/custom.min.js"></script>
+<!-- <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> -->
+  <!--   <script src="../../recursos/js/custom.min.js"></script> -->
     <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>
     <script src="../../recursos/js/actividad/gestionActividad.js"></script>

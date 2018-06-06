@@ -40,7 +40,7 @@ if(isset($_POST['nue'])){
   if($defensor!=0){ 
     $mensaje=['tipo'=>"exito",
     'mensaje'=>"cambio existoso"];
-    actualizar_juzgado($juzgado,$defensor[0]['id_defensor']);
+    actualizar_juzgado($juzgado,$defensor[0]['id_personal']);
    }  
   
 }

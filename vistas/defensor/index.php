@@ -71,20 +71,13 @@ include "../../Controlador/sesion.php";
               <div class="menu_section">
                 <ul class="nav side-menu">
 
-                  <li><a><i class="fa fa-home"></i> Generar Informe <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a id="informeAnual">Generar Informe Anual</a></li>
-                      <li><a id="informeMensual">Generar Informe Mensual</a></li>
-                      <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
-                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>
-                    </ul>
-                  </li>
+                  
 
                   <li><a><i class="fa fa-home"></i> Servicios y actividad  <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="registrarActividad">Registrar actividad</a></li>
                     
-                      <li><a id="asignarCaso">Crear Un Caso</a></li>
+                       <li><a id="verMisExpediente">Mis expedientes</a></li> 
                       <li><a id="listarUser">Listar Usuarios</a></li>
                     </ul>
                   </li>
@@ -407,10 +400,11 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/vendors/jszip/dist/jszip.min.js"></script>
     <script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script>
-
+    <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
     <!-- Custom Theme Scripts -->
     <script src="../../recursos/js/custom.min.js"></script>
-
+    <script src="../../recursos/js/herramienta.js"></script>
     <script src="../../recursos/js/defensor/atendiendoDefensor.js"></script>
     <script src="../../recursos/js/main.js"></script>
   </body>

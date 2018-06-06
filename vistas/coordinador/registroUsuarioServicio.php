@@ -228,7 +228,7 @@ function agrega(){
                        <select required id="genero" onkeyup="validarCurps()" onblur="validarCurps()" name="genero"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="masculino">masculino</option> 
-                             <option value="masculino">femenino</option>   
+                             <option value="femenino">femenino</option>   
                           </select>
 
                         </div>

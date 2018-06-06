@@ -2,7 +2,11 @@
  include_once( '../../controlador/juzgado/actividad_juzgado.php');
 ?>
    <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-   
+   <script>
+     function cerrarCambio(){
+							$('#cambio').children().remove();
+						}
+   </script>
      <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12 ">
                 <div class="x_panel">
@@ -20,7 +24,7 @@
                         </li>
                         </ul>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fa fa-close" onclick="cerrarCambio()"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -35,14 +39,12 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Nue <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text"  pattern="[0-9]{5}" title="solo numero de 5 digito" required name="nue" id="nue" required="required" class="form-control col-md-7 col-xs-12"/>
+                          <input type="text" value="<?php echo $_GET['nue']?>" readonly pattern="[0-9]{5}" title="solo numero de 5 digito" required name="nue" id="nue" required="required" class="form-control col-md-7 col-xs-12"/>
                         </div>
                       </div>
-
-
                        <div class="form-group  ">
                         <h4><label class="control-label col-md-3 col-sm-3 col-xs-12 ">adscripcion</label>
-                       </h4> <div class="col-md-6 col-sm-6 col-xs-12">
+                        </h4> <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="adscripcion"  class="select2_group form-control">
                               <?php
                                 $juzgadosRegion=json_decode($contenidojuzgado);
@@ -68,7 +70,7 @@
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                          
-						   <input id="asignarAdscripcion" type ="submit" class="btn btn-succes btn btn-success btn-lg" value="cambiar"/>
+						         <input id="asignarAdscripcion" type ="submit" class="btn btn-succes btn btn-success btn-lg" value="cambiar"/>
                         <!--   <button type="submit" class="btn btn-success">Submit</button> -->
                         </div>
                       </div>
