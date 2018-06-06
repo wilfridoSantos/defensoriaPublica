@@ -85,10 +85,18 @@ function getDefensorUpdate($id_defensor){
 }
 
 function listar_defensor_x_id($id){
+<<<<<<< HEAD
       global $conexion;
       $sql = "select * from personal_campo where id_personal='".$id."'";
       $consulta = consulta($sql, $conexion);
       return $consulta;
+=======
+   //   global $conexion;
+      $sql = "select * from personal_campo where id_personal='".$id."'";
+      $lista = consulta($sql);
+   
+    return $lista;
+>>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
   }
 
   function listar_defensor_x_juzgado($juzgado){

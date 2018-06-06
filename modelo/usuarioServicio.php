@@ -76,5 +76,11 @@ function getUsuarioByCurp($curp){
    return $lista;
 }
 
+function listar_usuarios_id($id_usuario_servicio){
+    $sql="SELECT *  FROM usuario_servicio where id_usuario_servicio=".$id_usuario_servicio;			
+// echo $sql;
+$lista=consulta($sql);
+return $lista;
+}
 
 ?>
