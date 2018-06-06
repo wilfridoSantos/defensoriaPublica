@@ -28,9 +28,7 @@
         crear_actividad($actividad);
      // if($_POST["actividad"]=="asesoria"||$_POST["actividad"]=="visita"){
         $id_actividadRegistrado=ultimoActividadRegistrado();
-       // echo "ACTIVIDAD". $id_actividadRegistrado;
-  //     $ubicacion=" ";
-//       if(isset($_POST['ubicacion']))
+     
         $ubicacion=split(',',$_POST['ubicacion']);
        
         //print_r($ubicacion);

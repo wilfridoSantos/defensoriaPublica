@@ -55,11 +55,7 @@
                             
                 echo '<tr> '.
                   
-<<<<<<< HEAD
-                  '<td>'.strtoupper($obj->nombre).'</td>'.
-=======
                   '<td id="nombre">'.strtoupper($obj->nombre).'</td>'.
->>>>>>> 7a163bc29d90b8ba8ea055e596c8ecaf3b37044e
                   '<td>'.strtoupper($obj->ap_paterno).'</td>'.
                   '<td>'.strtoupper($obj->ap_materno).'</td>'.
                   '<td>'.strtoupper($obj->etnia).'</td>'.

@@ -85,10 +85,10 @@ include "../../Controlador/sesion.php";
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-home"></i> Configuracion usurio <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Configuracion <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarUsuarioServicio">Registrar usuario</a></li>
-                      <li><a id="eliminarDefensor">Eliminar (E.logica) Defensor</a></li>
+                      <li><a id="crearExpediente">Crear Expediente</a></li>
                       <li><a id="actualizarDefensor">Actualizar Datos Defensor</a></li> <!-- Editar Defensor -->
                       <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li>
                       <form action="../../action.php" method="post">
@@ -341,13 +341,14 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     <script src="../../recursos/vendors/jszip/dist/jszip.min.js"></script>
     <script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script>
-    <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+    <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script><!-- 
+    <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
     <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
     <!-- Custom Theme Scripts -->
     <script src="../../recursos/js/custom.min.js"></script>
     <script src="../../recursos/js/herramienta.js"></script>
     <script src="../../recursos/js/defensor/atendiendoDefensor.js"></script>
+    <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
     <script src="../../recursos/js/main.js"></script>
   </body>
 </html>

@@ -4,6 +4,7 @@
     include '../../modelo/defensor/defensor.php';
     include '../../modelo/usuario_sistema.php';
     include '../../libreria/herramientas.php';
+    include '../../modelo/materia.php';
 ///verifica si el puesto es de defensor
     $materia=($_POST["puesto"]==2)?"coordinador":$_POST["materia"];
 //echo $_POST["materia"];  
@@ -40,10 +41,11 @@ $personal = Array(
       $didigir="registrar_defensor";
       if(!vericar_coordinador($_POST['puesto'])){        
         crear_personal($personal);
+        $id_materia= get_materia_materia_instancia($_POST["materia"],$_POST["instancia"]);
+       //  print_r($id_materia);
         $defensor=Array(
           "id_juzgado"=>$_POST['adscripcion'],
-          "materia"        =>$materia,          
-          "instancia"       =>$_POST['instancia'],
+          "id_materia"        =>$id_materia[0]['id_materia'],          
           "id_personal"=>ultimoPersonalCreatado()
         );
         crear_defensor($defensor);

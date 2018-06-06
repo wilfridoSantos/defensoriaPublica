@@ -14,31 +14,47 @@
    <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
 <script src="../../recursos/js/herramienta.js"></script>
  <script>
-  function cargaDefensorPorMateria(e, elemento) {
+  
     
-   /*  $.ajax({
-			url: "../../controlador/defensor/controlDefensor.php",
-			type: "GET",
-			data: "materia="+elemento.options[elemento.selectedIndex].value,
-			beforeSend: function () {
-
-		//	$('#menuContainer').load('listarDefensores.php');
-			},
-			success: function (data) {
-				//console.log('Success!! Eliminado defensor id = '+idDef);
-      //  console.log(data);
-      var json=jQuery.parseJSON(data)
-      $("#asignarDefensor").children().remove();
-        $.each(json,function(key, valor) {
-          $("#asignarDefensor").append("<option value="+valor.id_personal+">"+valor.nombre+" "+valor.ap_paterno+" "+valor.ap_materno+" </option>");
-          console.log(valor);
-            });
-		
-			}
-		}); */
-    
+    var varUsuario=[];
+    var datos = jQuery.parseJSON(window.Global_usuarios_servicios);
+    $.each(datos, function (KEY, VALOR) {
+                var temp={};
+                  temp['label']=VALOR.nombre;
+                  temp['apellidos']=VALOR.ap_paterno+" "+VALOR.ap_materno;
+                  temp['desc']=VALOR.colonia+", "+VALOR.municipio;
+                  temp['id_usuario']=VALOR.id_usuario_servicio;
+                  temp['curp']=VALOR.curp;
+                  // console.log(VALOR);
+                   varUsuario.push(temp);
+                });
+ $( function() {
+      
+  
+    $( "#project" ).autocomplete({
+      minLength: 0,
+      source: varUsuario,
+      focus: function( event, ui ) {
+        $( "#project" ).val(ui.item.label+" "+ ui.item.apellidos );
+       
+      // console.log(ui);
+        return false;
+      },
+      select: function( event, ui ) {
+        var usuario=ui.item.label+" "+ui.item.apellidos;
+        $( "#project" ).val(ui.item.label+" "+ ui.item.apellidos );
+      
+        $( "#curp" ).val(ui.item.curp );
+        return false;
+      }
+    })
+    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .append( "<div>" + item.label +" "+item.apellidos+ "<br>" + item.desc + "</div>" )
+        .appendTo( ul );
+    };
+  } );
    
-}
 
 
 function validarFecha(e, elemento) {
@@ -136,12 +152,22 @@ var ul=document.createElement('li');
                     <form  id="myform"  data-toggle="validator"enctype="multipart/form-data" role="form" class="" action ="../../controlador/actividad/registroActividad.php?tipo=html" object="defensor" method="post">
 
                    
-                      
+                   <div class="form-horizontal form-label-left">                     <div class="form-group ">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Nombre de usuario(s)<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <!-- <input type="text" value="{{curp}}"minlength="18" maxlength="18" name="curp" data-error="debe ser un formato de curp correcto" id="curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required="required" class="form-control col-md-7 col-xs-12">
+                           --><input data-error="Seleccione al menos un usuario" type="text"  id="project"  required class="form-control col-md-7 col-xs-12">
+                          
+                          <div  class="help-block with-errors"></div></div>
+                      </div></dib>
+
                      <div class="form-horizontal form-label-left">     <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="curp">Curp de usuario<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)">
+                          <!-- <input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)">
+                           --><input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" >
                           <div  class="help-block with-errors"></div></div> 
                       </div>
                       </div>
@@ -213,7 +239,7 @@ var ul=document.createElement('li');
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                          
-						   <input id="asignarAdscripcion" type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Registrar Actividad"/>
+						             <input id="asignarAdscripcion" type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Registrar Actividad"/>
                         <!--   <button type="submit" class="btn btn-success">Submit</button> -->
                         </div>
                       </div>

@@ -724,31 +724,41 @@ function generarInformeAct() {
 		type: "POST",
 		data: "fechaI=" + fechaI + "&fechaF=" + fechaF,
 		success: function (data) {
-			var jsonInforme = jQuery.parseJSON(data);
-			$('#resultadoInforme').empty();
-			$.each(jsonInforme, function (KEY, VALOR) {
-				if (VALOR.latitud == '' || VALOR.latitud == ' ') {
-					VALOR.latitud = '16.909759';
-				}
-				if (VALOR.longitud == '' || VALOR.longitud == ' ') {
-					VALOR.longitud = '-96.722320';
-				}
-				var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';
+			if(data!=0){
+					var jsonInforme = jQuery.parseJSON(data);
 
-				$('#resultadoInforme').append(
-					'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"
-					'<td tabindex="0" class="sorting_1">' + VALOR.Defensor + '</td>' +
-					'<td tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
-					'<td tabindex="0" class="sorting_1">' + VALOR.fecha_registro + '</td>' +
-					'<td tabindex="0" class="sorting_1">' + VALOR.observacion + '</td>' +
-					'<td tabindex="0" class="sorting_1">' + boton + '</td>' +
-					'<td tabindex="0" class="sorting_1" id="idlatitud" style="display:none;">' + VALOR.latitud + '</td>' +
-					'<td tabindex="0" class="sorting_1" id="idlongitud" style="display:none;">' + VALOR.longitud + '</td>' +
-					'</tr>'
-				);
-			});
-			console.log('JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
-		}
+
+					$('#resultadoInforme').empty();
+					$.each(jsonInforme, function (KEY, VALOR) {
+						if (VALOR.latitud == '' || VALOR.latitud == ' ') {
+							VALOR.latitud = '16.909759';
+
+						}
+						if (VALOR.longitud == '' || VALOR.longitud == ' ') {
+							VALOR.longitud = '-96.722320';
+						}
+						var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';
+
+						$('#resultadoInforme').append(
+							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"
+							'<td tabindex="0" class="sorting_1">' + VALOR.Defensor + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.fecha_registro + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.observacion + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + boton + '</td>' +
+							'<td tabindex="0" class="sorting_1" id="idlatitud" style="display:none;">' + VALOR.latitud + '</td>' +
+							'<td tabindex="0" class="sorting_1" id="idlongitud" style="display:none;">' + VALOR.longitud + '</td>' +
+							'</tr>'
+						);
+					});
+					console.log('JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
+				}
+				else{
+					$('#resultadoInforme').empty();
+					$('#resultadoInforme').append('<h3>no se encotrarón datos en esas fechas</h3>');
+				}
+			}
+			
 	});
 
 
