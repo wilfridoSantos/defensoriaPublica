@@ -26,7 +26,4 @@
     <!-- <script src="../../recursos/js/jquery-validator.js"></script> -->
     <script src="../../recursos/js/custom.min.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>
-    <!-- validator -->
-     <!-- <script src="../../recursos/vendors/validator/validator.js"></script> -->
-    <!-- Custom Theme Scripts -->
     

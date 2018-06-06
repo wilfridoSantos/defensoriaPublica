@@ -1,8 +1,13 @@
 <?php
 //include '../../controlador/conexion.php';
-include_once ('../../libreria/conexion.php');
+include_once '../../libreria/conexion.php';
 
-
+function getUsuarioServicioById($id_usuario){
+    $sql = "select * from usuario_servicio where id_usuario_servicio='".$id_usuario."'";
+    $lista = consulta($sql);
+ //  echo $sql;
+    return $lista;
+}
 
 function getUsuarioByCurp($curp){
     $sql = "select * from usuario_servicio where curp='".$curp."'";

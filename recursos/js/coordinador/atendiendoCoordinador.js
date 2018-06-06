@@ -1,14 +1,16 @@
 $(document).ready(function () {
-	
 
+	var numExp;
 	$('#tebody').on('click', '.botonExp', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
-		//console.log(idDef);
+		console.log(idDef, ' id del defensor');
 		verExpedientes(idDef);
 	});
 	function verExpedientes(idDef) {
+		var id;
+
 		$.ajax({
 			url: "../../controlador/defensor/controlExpDefensor.php",
 			type: "GET",
@@ -19,62 +21,117 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				var jsonInfoDef = jQuery.parseJSON(data);
-				console.log(jsonInfoDef.id_personal, 'entro');
-				$.each(jsonInfoDef, function (KEY, VALOR) {
-					//console.log(VALOR.foto, " =>RUTA");
-					if (VALOR.perfil == undefined && VALOR.cedula_profesional == undefined) {
-						VALOR.perfil = 'Aun no tiene escolaridad registrada.';
-						VALOR.cedula_profesional = 'Aun no tiene escolaridad registrada.';
-					}
-					if (VALOR.fecha_final == '0000-00-00') {
-						VALOR.fecha_final = 'SIN FINALIZAR';
-					}
-					if(true){
+				console.log(data, ' expedientes');
+				//console.log(jsonInfoDef.length, ' tam de array');
 
-					}
-					$('#verExpDef').append(
-						'<div class="row"> ' +
-						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
-						'<ul class="list-unstyled">' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Numero Expediente: </b> ' + (VALOR.num_expediente) + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Materia: </b> ' + (VALOR.materia).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Inicio: </b> ' + (VALOR.fecha_inicio) + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Finalizacion: </b>' + (VALOR.fecha_final) + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre del Delito: </b>' + (VALOR.nombre_delito).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Grado del Delito: </b>' + (VALOR.grado_delito).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Estado del Expediente: </b>' + (VALOR.estado).toUpperCase() + ' </li>' +
-						'<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Observaciones: </b>' + (VALOR.observaciones).toUpperCase() + ' </li>' +
+				var fechac = new Date();
+				var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+				var fechaF = fechac.toLocaleDateString("es-ES", options);
+				if (data != 0) {
+					$('#infoGeneral').empty();
+					$('#verInfoUsuario').empty();
+					var content = '';
+					var botonDetalle = '';
+					$.each(jsonInfoDef, function (KEY, VALOR) {
+						//console.log(KEY, ' valor del llave');
+						id = VALOR.id_usuario_servicio;
+						numExp = VALOR.num_expediente;
+						content += 							//dentro de div row
+							'				<tr role="row"><td><div style="width:100%;"  class="col-md-6 col-sm-12 col-xs-12 form-group">' +//COL 1 INFO EXPEDIENTE
+							'					<div style="width:100%;"   class="col-md-4 col-sm-12 col-xs-12 well profile_view><ul class=" list-unstyled"="">' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Numero Expediente: </b> ' + VALOR.num_expediente + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Materia: </b>' + VALOR.materia + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Inicio: </b>' + VALOR.fecha_inicio + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Finalizacion: </b>' + VALOR.fecha_final + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre del Delito: </b>' + VALOR.nombre_delito + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Grado del Delito: </b>' + VALOR.grado_delito + ' </li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Estado del Expediente: </b>' + VALOR.estado + ' </li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Observaciones: </b>' + VALOR.observaciones + ' </li>' +
+							'	<li><button class="btn btn-success" onclick="verInfoUsuario(' + id + ')" name="botonVerUser" type="button" ><span class="glyphicon glyphicon-ok-sign"></span></button>' +
+							'	<button class="btn btn-warning" onclick="verDetalleExp(' + KEY + ')" name="botonVerDetalleExp" type="button" ><span class="glyphicon glyphicon-ok-sign"></span></button></li>' +
 
-						'</ul>' +
-						'</div>' +
-						'</div>' +
-						'</div>' +
-						'</div>');
-
-						$('#verInfoUsuario').append(
-							'<div class="row"> ' +
-							'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-							'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
-							'<ul class="list-unstyled">' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Nombre de usuario: </b>' + (VALOR.nombre).toUpperCase() + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido paterno: </b>' + (VALOR.ap_paterno).toUpperCase() + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido materno: </b>' + (VALOR.ap_materno).toUpperCase() + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Municipio: </b>' + (VALOR.municipio).toUpperCase() + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Colonia: </b>' + (VALOR.colonia).toUpperCase() + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Telefono: </b>' + (VALOR.telefono) + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Email: </b>' + (VALOR.correo_electronico)+ ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Etnia:</b>' + (VALOR.etnia).toUpperCase() + ' </li>' +
-							'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Idioma:</b>' + (VALOR.idioma).toUpperCase() + ' </li>' +
-	
-							'</ul>' +
 							'</div>' +
+							'			  	</div></td>' +
+							'				<td><div style="width:100%;" class="col-md-6 col-sm-12 col-xs-12 form-group">' +//COL 2 INFO USUARIO SERVICIO
+							'					<div style="width:95%;" class="col-md-4 col-sm-12 col-xs-12 well profile_view><ul class=" list-unstyled"="">' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre de usuario: </b>' + VALOR.nombre + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Apellidos: </b>' + VALOR.ap_paterno + ' ' + VALOR.ap_materno + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Etnia: </b>' + VALOR.etnia + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Lengua o Idioma: </b> ' + VALOR.idioma + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Municipio: </b>' + VALOR.municipio + ' </li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Colonia: </b>' + VALOR.colonia + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Telefono: </b>' + VALOR.telefono + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Correo electronico: </b>' + VALOR.correo_electronico + '</li>' +
 							'</div>' +
-							'</div>' +
-							'</div>');
+							'			  	</div><td></tr>';
 
-					//$('#verExpDef').append('<p>ahskdjhaksjdhkjashdkjashdkjsh</p>');
-				});
+
+
+
+						//console.log(VALOR.foto, " =>RUTA");
+						if (VALOR.perfil == undefined && VALOR.cedula_profesional == undefined) {
+							VALOR.perfil = 'Aun no tiene escolaridad registrada.';
+							VALOR.cedula_profesional = 'Aun no tiene escolaridad registrada.';
+						}
+						if (VALOR.fecha_final == '0000-00-00') {
+							VALOR.fecha_final = 'SIN FINALIZAR';
+						}
+					});
+					$('#infoGeneral').append(
+						'<div class="row">' +
+						'   <div id="partePDF" class="col-md-12">' +
+						'     <div class="x_panel">' +
+						'           <div class="row no-print">' +
+						'             <div class="col-xs-12">' +
+						'               <button class="btn btn-primary pull-right" onclick="generarPDF2();" style="margin-right: 5px;">' +
+						'<i class="fa fa-download"></i> Generar PDF</button>' +
+						'             </div>' +
+						'           </div>' +
+						'       <div class="x_content">' +
+						'         <section class="content invoice">' +
+						'           <div class="row">' +
+						'             <div class="col-xs-12 invoice-header">' +
+						'               				<center><h3>' +
+						'                               <i class="fa fa-globe"></i><b> DEFENSORÍA PÚBLICA DEL ESTADO DE OAXACA.</b>' +
+						'                           </h3></center>' +
+						'                               <h3><small class="pull-right">Fecha: ' + fechaF + '; A las ' + fechac.getHours() + ':' + fechac.getMinutes() + ':' + fechac.getSeconds() + ' Horas</small></h3>' +
+						'             </div>' +//div cols xs-12 invoice-header						
+						'           <div class="row invoice-info">' +
+						'			  <div class="col-sm-2 invoice-col">' +
+						'				<p align="left"><img src="../../recursos/uploads/' + jsonInfoDef[0].foto + '" alt="" class="img-circle img-responsive"><span class="glyphicon glyphicon-lock"></span>Lic. en derecho</p>' +
+						'			  </div>' +
+						'             <div class="col-sm-10 invoice-col">' +
+						'               <address>' +
+						'                       <strong><i class="glyphicon glyphicon-ok-sign"></i>' + jsonInfoDef[0].nomDef + ' ' + jsonInfoDef[0].appDef + ' ' + jsonInfoDef[0].apmDef + ' ' + '</strong>' +
+						'                       <br><i class="glyphicon glyphicon-ok-sign"></i>' + jsonInfoDef[0].calleDef + ', #' + jsonInfoDef[0].numDef + ', Col:' + jsonInfoDef[0].coloniaDef + ' ' +
+						'                       <br><i class="glyphicon glyphicon-ok-sign"></i>' + jsonInfoDef[0].muniDef +
+						'                       <br><i class="glyphicon glyphicon-ok-sign"></i>Telefono:' + jsonInfoDef[0].telDef +
+						'                       <br><i class="glyphicon glyphicon-ok-sign"></i>Email:' + jsonInfoDef[0].emailDef +
+						'               </address>' +
+						'             </div>' +//col-sm-10 invoice-col
+						'           </div>' +//row invoice-info
+						'           </div>' +//class row
+						'           <div id = "rowContenidoExp" class="row">' +
+						'           </div>' +
+						'         </section>' +
+						'       </div>' +
+						'     </div>' +
+						'   </div>' +
+						' </div>'
+					);
+					$('#rowContenidoExp').append(
+						'<table id="datatable-responsive" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">' +
+						'	<tbody>' +
+						content +
+						'	</tbody>' +
+						'</table>'
+					);
+				} else {
+					$('#infoGeneral').empty();
+					$('#verInfoUsuario').empty();
+					$('#infoGeneral').append("<h3><b>NO TIENE EXPEDIENTE(S) REGISTRADO(S)</b></h3>");
+					$('#verInfoUsuario').append("<h3><b>NO TIENE USUARIO(S) REGISTRADO(S)</b></h3>");
+				}
 			}
 		});
 	}
@@ -112,42 +169,32 @@ $(document).ready(function () {
 					}
 					$('#verInfoDef').append(
 						'<div class="row"> ' +
-							'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-								'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view" class="col-xl-12">' +
-									'<center><h2 ><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2></center>' +									
-									
-								
-										'<div class="left">'+
-											'<ul class="list-unstyled">' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: ' + (VALOR.calle).toUpperCase() + ', ' + VALOR.numero_ext + ', ' + VALOR.numero_int + ', ' + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Curp :' + (VALOR.curp).toUpperCase() + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Nup :' + VALOR.nup + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Nue :' + VALOR.nue + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado :' + (VALOR.juzgado).toUpperCase() + ' </li>' +
-												'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional :' + (VALOR.cedula_profesional).toUpperCase() + ' </li>' +
-												'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail :' + (VALOR.correo_electronico).toUpperCase() + ' </li>' +
-											'</ul>' +						
-										'</div>'+
-										'<div class="right ">'+																					
-											'<p align="right"><img src="../../recursos/uploads/' + VALOR.foto + '" alt="" class="img-circle img-responsive"><span class="glyphicon glyphicon-lock"></span>' + (VALOR.perfil).toUpperCase() + '        </p>' +
-										'</div>'+
-									
-								'</div>' +
-							'</div> <input id="cambiarAdscripcion" type ="button" class="btn btn-succes btn btn-success btn-lg" value="Cambiar de adscripcón"/>' +
+						'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
+						'<div class="col-md-10 col-sm-10 col-xs-12 well profile_view verInfoDef" class="col-xl-12">' +
+						'<center><h2 ><span class="glyphicon glyphicon-user"></span> <b>' + (VALOR.nombre).toUpperCase() + ' ' + (VALOR.ap_paterno).toUpperCase() + ' ' + (VALOR.ap_materno).toUpperCase() + '</b></h2></center>' +
+						'<div class="left">' +
+						'<ul class="list-unstyled">' +
+						'<li id="idNueLi" style="display:none;">' + (VALOR.nue) + '</li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Direccion: ' + (VALOR.calle).toUpperCase() + ', ' + VALOR.numero_ext + ', ' + VALOR.numero_int + ', ' + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Curp :' + (VALOR.curp).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Nup :' + VALOR.nup + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Nue :' + VALOR.nue + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Juzgado :' + (VALOR.juzgado).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-info-sign"></span> Cedula Profesional :' + (VALOR.cedula_profesional).toUpperCase() + ' </li>' +
+						'<li><span class="glyphicon glyphicon-envelope"></span> E-Mail :' + (VALOR.correo_electronico).toUpperCase() + ' </li>' +
+						'</ul>' +
+						'</div>' +
+						'<div class="right ">' +
+						'<p align="right"><img src="../../recursos/uploads/' + VALOR.foto + '" alt="" class="img-circle img-responsive"><span class="glyphicon glyphicon-lock"></span>' + (VALOR.perfil).toUpperCase() + '        </p>' +
+						'</div>' +
+						'<div><input type ="button" class="btn btn-succes btn btn-success" onclick="cambiarAdscripcion()" value="Cambiar de adscripcón"/>' +
+						'<input type="button" class="btn btn-succes btn btn-success" onclick="generaInformeByNue()"  value="Generar Informe" id="generarInfoActByNue"/> ' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
 						'</div>');
 
-						var asignar=document.getElementById('cambiarAdscripcion');
-						asignar.addEventListener('click',asinar,false);
-						function asinar(){
-							//$('#cambio').load("../administrador/cambiarAdscripcion.php");
-								$("#cambio").load("../administrador/cambiarAdscripcion.php",{valor1:'primer valor', valor2:'segundo valor'}, function(response, status, xhr) {
-							
-							        $("#cambio").html(replazarParametro(response,[{nue:VALOR.nue}]));
-							
-						  });
-						}
-					
-						
+
 				});
 			}
 		});
@@ -159,7 +206,7 @@ $(document).ready(function () {
 		//  var target= $(this.);
 		var id_def = $(this).closest('tr').find('#idPersonal').text();
 		console.log('id personal atendiendo defensor id ' + id_def);
-			//$('#menuContainer').load('updateDef.php?id='+id_def);
+		//$('#menuContainer').load('updateDef.php?id='+id_def);
 		updateDefensor(id_def);
 	});
 	function updateDefensor(id_def) {
@@ -195,14 +242,14 @@ $(document).ready(function () {
 						'<div style="display:none;" class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
 						'<input style="display:none;" type="text" class="form-control " id="id_personal" placeholder="Id personal" name="id_personal"' +
 						'value="' + VALOR.id_personal + '" readonly>' +
-						'<span class ="help-block"> Nombre<span	>'+
+						'<span class ="help-block"> Nombre<span	>' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group profile_details ">' +
 						'<label for="exampleInputFile" class="control-label col-md-3 col-sm-3 col-xs-12">Foto de Perfil<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12 well profile_view form-group has-feedback">' +
 						'<p align="center"><img src="../../recursos/uploads/' + VALOR.foto + '"  alt="Imagen responsive" class="img-circle img-responsive"> </p>' +
-						 foto +
+						foto +
 						'<input style="display:none;" type="text" class="form-control " id="imagen" placeholder="imagen" name="imagen" value="' + VALOR.foto + '" >' +
 
 						'<p class="help-block"><center>Selecciona una foto.</center></p>' +
@@ -212,9 +259,9 @@ $(document).ready(function () {
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-						'<input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni minimo de 4" placeholder="Nombre" name="nombre"'+
+						'<input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni minimo de 4" placeholder="Nombre" name="nombre"' +
 						'value="' + (VALOR.nombre).toUpperCase() + '" >' +
-						'<div class="help-block "></div>'+
+						'<div class="help-block "></div>' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
@@ -285,16 +332,16 @@ $(document).ready(function () {
 						'<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">' +
 						'<input type="text" required pattern="[0-9]{10}" class="form-control " title="solo numero telefonico"  id="telefono" placeholder="Numero Telefonico" name="telefono"' +
 						'value="' + VALOR.telefono + '">' +
-						'<div class="help-block with-errors"></div>'+
+						'<div class="help-block with-errors"></div>' +
 						'</div>' +
 						'</div>' +
-						'<div class=" form-group">'+
+						'<div class=" form-group">' +
 						'<label for= "inputMail" class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">' +
-						   '<input type="text" id="correo_electronico" title"correo invalido" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="required" placeholder="Email" name="correo_electronico"'+
-						   ' value="' + VALOR.correo_electronico + '">' +
-						   '<div  class="help-block with-errors"></div>  </div> '+
-				   		'</div>'+
+						'<input type="text" id="correo_electronico" title"correo invalido" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="required" placeholder="Email" name="correo_electronico"' +
+						' value="' + VALOR.correo_electronico + '">' +
+						'<div  class="help-block with-errors"></div>  </div> ' +
+						'</div>' +
 						'<div class="ln_solid"></div>' +
 						'<div class="form-group">' +
 						'<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">' +
@@ -305,13 +352,13 @@ $(document).ready(function () {
 						'</div>' +
 						'</div>'
 					);
-					
+
 
 				});
-				
-				
+
+
 				$('#myform').validator();
-				console.log($('#myform').validator(),'  ');
+
 				//$('#menuContainer').html(data);
 				//$('body').removeClass('loading');
 
@@ -328,15 +375,15 @@ $(document).ready(function () {
 		//	 var target= $(event.target);
 		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
-		
+
 		console.log(idDef, ' before');
 		$.ajax({
 			url: "../../controlador/defensor/consultaRapida.php",
 			type: "get",
 			data: "id_personal=" + idDef,
-			success: function (data) {	
-				console.log(data, ' expedientes del id_Defensor-> '+idDef);								
-				if(data != 0){
+			success: function (data) {
+				console.log(data, ' expedientes del id_Defensor-> ' + idDef);
+				if (data != 0) {
 					$("#dialogo").dialog({
 						resizable: true,
 						height: "auto",
@@ -349,11 +396,11 @@ $(document).ready(function () {
 							},
 							"Cancelar": function () {
 								$(this).dialog("close");
-			
+
 							}
 						}
 					});
-				}else{
+				} else {
 					eliminarDefensor(idDef);
 				}
 			}
@@ -366,13 +413,15 @@ $(document).ready(function () {
 			type: "get",
 			data: "id_personal=" + idDef,
 			success: function (data) {
-				var mensaje={'tipo' :  "exito",
-							 'mensaje':"Se ha eliminado satisfactoriamente."};
-				var xx = '<?php '+
-				'session_start(); '+
-				'$_SESSION["mensaje"] ='+mensaje+ '?>';
-			  
-				console.log('Success!! Eliminado defensor id = '+idDef);
+				var mensaje = {
+					'tipo': "exito",
+					'mensaje': "Se ha eliminado satisfactoriamente."
+				};
+				var xx = '<?php ' +
+					'session_start(); ' +
+					'$_SESSION["mensaje"] =' + mensaje + '?>';
+
+				console.log('Success!! Eliminado defensor id = ' + idDef);
 				$('#menuContainer').load('listarDefensores.php');
 
 			}
@@ -380,189 +429,744 @@ $(document).ready(function () {
 
 	}
 
-	
+
+
 }); // fin documente ready
-function myFunctionDate(val) { //this.value from input date vista informeActividades.php
+function generaInformeByNue() {
+	var nue = $('#idNueLi').get(0).textContent;
+	$("#dialogoAds").dialog({
+		resizable: true,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#verInfoDef')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			//var nue = $('#nuePersonal')[0].textContent;
+			//var nue = $('#idNueLi')[0].textContent;
+
+			//console.log(nue,' dentro del dialog');
+			$(this).empty();
+			//$(this).append(data);
+			$(this).load('listarActividadesByNue.php?nue=' + nue);
+		}
+	});
+}
+function cambiarAdscripcion() {
+	var nue = $('#idNueLi').get(0).textContent;
+	console.log(nue, 'entroo valorrrr');
+	$("#dialogoAds").dialog({
+
+		height: 500,
+		width: 600,
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#verInfoDef')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			//var nue = $('#nuePersonal')[0].textContent;
+			//var nue = $('#idNueLi')[0].textContent;
+
+			//console.log(nue,' dentro del dialog');
+			$(this).empty();
+			//$(this).append(data);
+			$(this).load('cambiarAdscripcion.php?nue=' + nue);
+		}
+	});
+}
+function verInfoUsuario(id) {
+	/* 
+		$('#verInfoUsuario').append(
+			'<div class="row"> ' +
+			'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
+			'<div class="col-md-12 col-sm-12 col-xs-12 well profile_view>' +
+			'<ul class="list-unstyled">' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Nombre de usuario: </b>' + (VALOR.nombre).toUpperCase() + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido paterno: </b>' + (VALOR.ap_paterno).toUpperCase() + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido materno: </b>' + (VALOR.ap_materno).toUpperCase() + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Municipio: </b>' + (VALOR.municipio).toUpperCase() + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Colonia: </b>' + (VALOR.colonia).toUpperCase() + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Telefono: </b>' + (VALOR.telefono) + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Email: </b>' + (VALOR.correo_electronico) + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Etnia:</b>' + (VALOR.etnia).toUpperCase() + ' </li>' +
+			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Idioma:</b>' + (VALOR.idioma).toUpperCase() + ' </li>' +
+	
+			'</ul>' +
+			'</div>' +
+			'</div>' +
+			'</div>'); */
+	$.ajax({
+		url: "../../controlador/usuario_servicio/consultasUsuario.php",
+		type: "get",
+		data: "id_usuario_servicio=" + id,
+		success: function (data) {
+			var jsonInformacion = jQuery.parseJSON(data);
+			console.log(data, ' info del usuario con id ' + id);
+			//console.log(jsonInformacion, ' json Informacion');
+			$("#dialogoExp").dialog({
+				resizable: true,
+				height: "auto",
+				width: "auto",
+				modal: true,
+				show: {
+					effect: "blind",
+					duration: 1000
+				},
+				hide: {
+					effect: "explode",
+					duration: 1000
+				},
+				position: {
+					my: "left top",
+					at: "left bottom",
+					of: $('#home-tab')
+				},
+				buttons: {
+					"Cancelar": function () {
+						$(this).dialog("close");
+					}
+				},
+				open: function () {
+					$(this).empty();
+					//$(this).append(data);					
+					$(this).append(
+						'<div class="x_panel">' +
+						' <div class="x_title">' +
+						' <h2><b>' + jsonInformacion[0].nombre + ' ' + jsonInformacion[0].ap_paterno + ' ' + jsonInformacion[0].ap_materno + '</b></h2>' +
+						'   <div class="clearfix"></div>' +
+						' </div>' +
+						' <div class="x_content">' +
+						'   <div><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Etnia:</b>' + jsonInformacion[0].etnia + ', Idioma hablada: ' + jsonInformacion[0].idioma + '</div>' +
+						'   <div>' +
+						'	<b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Municipio: </b>' + (jsonInformacion[0].municipio).toUpperCase() +
+						'   </div> <div>' +
+						'	<b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Colonia: </b>' + (jsonInformacion[0].colonia).toUpperCase() +
+						'   </div>' +
+						'<div>' +
+						'<b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Telefono: </b>' + (jsonInformacion[0].telefono) +
+						'</div>' +
+						'<div> <b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Email: </b>' + (jsonInformacion[0].correo_electronico) +
+						'</div>' +
+						' </div>' +
+						'</div>'
+					);
+				}
+			});
+
+		}
+	});
+}
+function myFunctionDate2(val, nue) { //this.value from input date vista informeActividades.php
+	console.log(nue, 'en function DAte NUE');
 	var inicio = $('#inputInicio')[0].value;
-	var final  = $('#inputFinal' )[0].value;
-	console.log(inicio,' longitud ', inicio.length);
-	console.log(final, ' longitud ',final.length );
-	var parent = val.parentElement;//el div
+	var final = $('#inputFinal')[0].value;
 	var labelInicio = document.getElementById('labelInicio');//val.parentElement.children[1];//label dentro del div
 	var labelFinal = document.getElementById('labelFinal');
 	//console.log(labelInicio, 'es label?');
 	//var ul=document.createElement('li');
-	
-	
-	if(inicio != '' && final != ''){
-		//$(".infor").remove();
+
+
+	//console.log(inicio, ' longitud ', inicio.length);
+	//console.log(final, ' longitud ', final.length);
+
+	if (inicio != '' && final != '') {
 		var ini = new Date(inicio);
 		var fin = new Date(final);
-		if(ini < fin){
+		if ((ini < fin) || (ini == fin)) {
 			var fechaI = ini.toISOString().split('T')[0];
-			//console.log( fechaI, 'fecha inicial');
-			$(".errors").remove();
-			$('input[name=generar]')[0].disabled=false;
+			$(".alert").remove();
+			//$('input[name=generar]')[0].disabled=false;
+			generarInformeAct2(nue);
 			return true;
-		}else{
-			$('input[name=generar]')[0].disabled=true;
+		} else {
+
 			var fechaI = 'la fecha es mayor a la final';
 			//console.log( fechaI, 'fecha inicial');				
 			$(".errors").remove();
-			  labelFinal.setAttribute("class", "errors");
-			  labelFinal.innerText="la fecha Final debe ser Mayor";
-				//parent.appendChild(labelInicio);
+			labelFinal.setAttribute("class", "alert alert-danger");
+
+			labelFinal.innerText = "la fecha Final debe ser Mayor";
+			//parent.appendChild(labelInicio);
 			return false;
 		}
 		//$.datepicker.formatDate('dd M yy');
 
-	}else{
-			  return false;
+	} else {
+		return false;
 	}
 
+
+}
+function myFunctionDate(val) { //this.value from input date vista informeActividades.php
+	var inicio = $('#inputInicio')[0].value;
+	var final = $('#inputFinal')[0].value;
+	var labelInicio = document.getElementById('labelInicio');//val.parentElement.children[1];//label dentro del div
+	var labelFinal = document.getElementById('labelFinal');
+
+	var desc = $('#botonDesc').get(0);
 	
- }
+	//console.log(labelInicio, 'es label?');
+	//var ul=document.createElement('li');
 
- function generarInformeAct() {
-	var fechaI = document.getElementById('inputInicio').value;			
-	var fechaF = document.getElementById('inputFinal').value;
-	var inputR1 = $('#inputR1')['0'].checked;//RADIO1 INFORME GENERAL only fecha inicial y final
-	var inputR2 = $('#inputR2')['0'].checked;
-	var inputR3 = $('#inputR3')['0'].checked;
-	console.log(inputR1+" R1", inputR2+" R2", inputR3+" R3");
-	if(inputR1){// informe general
-		$.ajax({			
-			url: "../../controlador/personal_campo/controladorInformeAct.php",
-			type: "POST",
-			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3},
-			success: function (data) {
-				var jsonInforme = jQuery.parseJSON(data);
-			
-				console.log(' INPUT R1 JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
-				$('#resultadoInforme').empty();					
-				$.each(jsonInforme, function (KEY, VALOR) {
-					if (VALOR.latitud == '') {
-						VALOR.latitud = '40.413740';
-					}
-					if (VALOR.longitud == '') {
-						VALOR.latitud = '-3.6921';
-					}
-					if (VALOR.latitud == '40.413740' || VALOR.longitud=='-3.6921') {
-						var boton = '<button type="button" class="btn btn-default botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';                  
-						//botonVerMapa classe para ir a ver mapa
-					} else {
-                        var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';                  
 
-					}
-					$('#resultadoInforme').append(
-						'<tr>'+
-						'<td>'+VALOR.Defensor+'</td>'+
-						'<td>'+VALOR.Usuario+'</td>'+
-						'<td>'+VALOR.fecha_registro+'</td>'+			
-						'<td>'+VALOR.observacion+'</td>'+
-						'<td>'+boton+'</td>'+
-						'<td id="idlatitud" style="display:none;">'+VALOR.latitud+'</td>'+
-						'<td id="idlongitud" style="display:none;">'+VALOR.longitud+'</td>'+
-						'</tr>'
-					);
-				});				
-				//$('#resultadoInforme').load('verInformeActividad.php');
-			}
-		});
-		
-	}else if(inputR2){ //informe por filtro cargo y nue personal de campo
-				
-		var puesto = document.getElementById('puesto').value;
-		console.log('puesto:'+puesto);
-		$.ajax({			
-			url: "../../controlador/personal_campo/controladorInformeAct.php",
-			type: "POST",
-			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3, "puesto":puesto},
-			success: function (data) {
-				console.log(data, 'valor de la data');
-				var jsonInforme = jQuery.parseJSON(data);
-				console.log(jsonInforme[0],' VALOR R2');
-				$('#resultadoInforme').empty();					
-				/* $.each(jsonInforme, function (KEY, VALOR) {
-					$('#resultadoInforme').append(
-						'<tr>'+
-						'<td>'+VALOR.id_personal+'</td>'+
-						'<td>'+VALOR.id_usuario_servicio+'</td>'+
-						'<td>'+VALOR.latitud+'</td>'+
-						'<td>'+VALOR.longitud+'</td>'+
-						'<td>'+VALOR.observaciones+'</td>'+
-						'<td></td>'+
-						'</tr>'
-					);
-				}); */
-				
-				//$('#resultadoInforme').load('verInformeActividad.php');
-			}
-		});
-	}else if(inputR3){ //informe por filtro cargo y nue personal de campo
-		var nue = document.getElementById('nue').value;				
-		console.log('nue: '+nue);
-		$.ajax({			
-			url: "../../controlador/personal_campo/controladorInformeAct.php",
-			type: "POST",
-			//data: "fechaI="+fechaI + "&fechaF="+fechaF+"&R1="+inputR1+"&nue="+nue+"&R2="+inputR2+"&R3="+inputR3,
-			data:{"fechaI":fechaI, "fechaF":fechaF, "R1":inputR1, "R2":inputR2, "R3":inputR3,"nue":nue},
-			success: function (data) {
-				var jsonInforme = jQuery.parseJSON(data);
-				console.log(' INPUT R3 JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
-				$('#resultadoInforme').empty();					
-				/* $.each(jsonInforme, function (KEY, VALOR) {
-					$('#resultadoInforme').append(
-						'<tr>'+
-						'<td>'+VALOR.id_personal+'</td>'+
-						'<td>'+VALOR.id_usuario_servicio+'</td>'+
-						'<td>'+VALOR.latitud+'</td>'+
-						'<td>'+VALOR.longitud+'</td>'+
-						'<td>'+VALOR.observaciones+'</td>'+
-						'</tr>'
-					);
-				});
-				 */
-				//$('#resultadoInforme').load('verInformeActividad.php');
-			}
-		});
+	console.log(inicio, ' longitud ', inicio.length);
+	console.log(final, ' longitud ', final.length);
+
+	if (inicio != '' && final != '') {
+		var ini = new Date(inicio);
+		var fin = new Date(final);
+		if ((ini < fin) || (ini == fin)) {
+			var fechaI = ini.toISOString().split('T')[0];
+			$(".alert").remove();
+			//$('input[name=generar]')[0].disabled=false;
+			generarInformeAct();
+			desc.disabled=false;
+			return true;
+		} else {
+			desc.disabled=true;
+			var fechaI = 'la fecha es mayor a la final';
+			//console.log( fechaI, 'fecha inicial');				
+			$(".errors").remove();
+			labelFinal.setAttribute("class", "alert alert-danger");
+
+			labelFinal.innerText = "la fecha Final debe ser Mayor";
+			//parent.appendChild(labelInicio);
+			return false;
+		}
+		//$.datepicker.formatDate('dd M yy');
+
+	} else {
+		return false;
 	}
+
+
+}
+function generarInformeAct2(nue) {
+	var fechaI = document.getElementById('inputInicio').value;
+	var fechaF = document.getElementById('inputFinal').value;
+	console.log('antes del ajax', fechaI, fechaF, nue)
+	$.ajax({
+		url: "../../controlador/personal_campo/controladorInformeAct.php",
+		type: "POST",
+		data: { "fechaI": fechaI, "fechaF": fechaF, "nue": nue },
+		success: function (data) {
+			console.log(data);
+			var jsonInforme = jQuery.parseJSON(data);
+
+
+			$('#resultadoInformeByNue').empty();
+			$.each(jsonInforme, function (KEY, VALOR) {
+				if (VALOR.latitud == '' || VALOR.latitud == ' ') {
+					VALOR.latitud = '17.909889';
+				}
+				if (VALOR.longitud == '' || VALOR.longitud == ' ') {
+					VALOR.longitud = '-96.7222278';
+				}
+				var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';
+
+				$('#resultadoInformeByNue').append(
+					'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"
+					'<td tabindex="0" class="sorting_1">' + VALOR.Defensor + '</td>' +
+					'<td tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
+					'<td tabindex="0" class="sorting_1">' + VALOR.fecha_registro + '</td>' +
+					'<td tabindex="0" class="sorting_1">' + VALOR.observacion + '</td>' +
+					'<td tabindex="0" class="sorting_1">' + boton + '</td>' +
+					'<td tabindex="0" class="sorting_1" id="idlatitud" style="display:none;">' + VALOR.latitud + '</td>' +
+					'<td tabindex="0" class="sorting_1" id="idlongitud" style="display:none;">' + VALOR.longitud + '</td>' +
+					'</tr>'
+				);
+			});
+			console.log('lo que regresa', jsonInforme);
+		}
+	});
+
 
 };
-function initialize() {	
-	 
-	var mapOptions = {
-		center: new google.maps.LatLng(40.413740, -3.6921), 
-		zoom: 10,
-		mapTypeId: google.maps.MapTypeId.ROADMAP	
-	  }
-	  var mapa = new google.maps.Map($('#Mapa'), mapOptions);
-	  console.log(mapa, ' VALOR DEL MAPA');
-	 
-}
+function generarInformeAct() {
+	var fechaI = document.getElementById('inputInicio').value;
+	var fechaF = document.getElementById('inputFinal').value;
+	
 
- function verMapaDir(){
-	//initialize();
-	 $("#dialogoI").dialog({
-		title: "Location",
-		height: "600",
-		width: "700",
-		show: "blind",
-		hide: "explode",
-		modal: true,
-		buttons: {
-			"Cancelar": function () {
-				$(this).dialog("close");
-			}			
-		},
-		open: function(){	
-			console.log('entro');		
-				initialize();
+	$.ajax({
+		url: "../../controlador/personal_campo/controladorInformeAct.php",
+		type: "POST",
+		data: "fechaI=" + fechaI + "&fechaF=" + fechaF,
+		success: function (data) {
+			if(data!=0){
+					var jsonInforme = jQuery.parseJSON(data);
+
+
+					$('#resultadoInforme').empty();
+					$.each(jsonInforme, function (KEY, VALOR) {
+						if (VALOR.latitud == '' || VALOR.latitud == ' ') {
+							VALOR.latitud = '16.909759';
+
+						}
+						if (VALOR.longitud == '' || VALOR.longitud == ' ') {
+							VALOR.longitud = '-96.722320';
+						}
+						var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';
+
+						$('#resultadoInforme').append(
+							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"
+							'<td tabindex="0" class="sorting_1">' + VALOR.Defensor + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.fecha_registro + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.observacion + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + boton + '</td>' +
+							'<td tabindex="0" class="sorting_1" id="idlatitud" style="display:none;">' + VALOR.latitud + '</td>' +
+							'<td tabindex="0" class="sorting_1" id="idlongitud" style="display:none;">' + VALOR.longitud + '</td>' +
+							'</tr>'
+						);
+					});
+					console.log('JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
+				}
+				else{
+					$('#resultadoInforme').empty();
+					$('#resultadoInforme').append('<h3>no se encotrarón datos en esas fechas</h3>');
+				}
+			}
 			
-			  //google.maps.event.addDomListener(window, 'load', initialize);
-			  //
-		}
+	});
 
-	}); 
+
+};
+
+function verMapaDir() {
+	var lat = parseFloat($('#idlatitud')[0].textContent);
+	var lon = parseFloat($('#idlongitud')[0].textContent);
+
+	//console.log(typeOf 72.83624970000005);
+	initialize(lat, lon);
 }
- 
+function initialize(lat, lon) {
+
+	$("#dialogoI").dialog({
+		modal: true,
+		title: "Google Map",
+		resizable: true,
+		height: "auto",
+		width: "auto",
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		buttons: {
+			Close: function () {
+				$(this).dialog('close');
+			}
+		},
+		open: function () {
+			console.log('entro en dialog de map');
+			var myLatLng = { lat: lat, lng: lon };
+
+			var map = new google.maps.Map(document.getElementById('mapa'), {
+				zoom: 16,
+				center: myLatLng,
+				mapTypeId: google.maps.MapTypeId.SATELLITE
+			});
+
+			var marker = new google.maps.Marker({
+				position: myLatLng,
+				map: map,
+				title: 'Hello World!'
+			});
+			var panorama = new google.maps.StreetViewPanorama(
+				document.getElementById('pano'), {
+					position: myLatLng,
+					pov: {
+						heading: 34,
+						pitch: 10
+					}
+				});
+			map.setStreetView(panorama);
+		}
+	});
+}
+function convertirParrafo(str) {
+	var numPalabras = str.split(/\b[\s,\.\-:;]*/).length;
+	console.log(numPalabras, ' numero de palabras en STR');
+	if (numPalabras > 2) {
+
+	}
+	return str;
+}
+function generarPDFActividades(){
+	console.log('perras');
+	var fechaI = document.getElementById('inputInicio').value;
+	var fechaF = document.getElementById('inputFinal').value;
+	
+
+	$.ajax({
+		url: "../../controlador/personal_campo/controladorInformeAct.php",
+		type: "POST",
+		data: "fechaI=" + fechaI + "&fechaF=" + fechaF,
+		success: function (data) {
+			
+			var jsonInforme = jQuery.parseJSON(data);
+			console.log(jsonInforme);
+			var contenido = '';
+			$.each(jsonInforme, function (KEY, VALOR) {
+				contenido += 'NOMBRE DEFENSOR: ' + VALOR.Defensor+ '\n';
+				contenido += 'NOMBRE USUARIO SERVICIO: ' + VALOR.Usuario + '\n';
+				contenido += 'FECHA DE REGISTRO: ' + VALOR.fecha_registro + '\n';
+				contenido += 'OBSERVACIONES: ' + VALOR.observacion + '\n\n';
+			});
+			var docDefinition = {
+				// a string or { width: number, height: number }
+				pageSize: 'A4',
+
+				// by default we use portrait, you can change it to landscape if you wish
+				pageOrientation: 'landscape',
+
+				// [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+				pageMargins: [40, 60, 40, 60],
+				content: [
+					// using a { text: '...' } object lets you set styling properties
+					{ text: 'SE ENCONTRARON: ' + jsonInforme.length + ' REGISTROS DE ACTIVIDAD', style: 'header' },
+					{ text: contenido, style: 'anotherStyle' }
+				], styles: {
+					header: {
+						fontSize: 22,
+						bold: true,
+						alignment: 'center'
+					},
+					anotherStyle: {
+						italic: true,
+						alignment: 'justify',
+						fontSize: 12
+					}
+				}
+			};
+
+			// print the PDF
+			//pdfMake.createPdf(docDefinition).print();
+
+			// download the PDF
+			//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+			pdfMake.createPdf(docDefinition).open();
+		}
+	});
+
+}
+function generarPDF2() {
+	var content = [];
+	var simpleHtm = $('#partePDF').get(0).innerHTML;
+	console.log(simpleHtm);
+	ParseHtml(content, simpleHtm);
+	pdfMake.createPdf({ content: content }).open()
+}
+function descargarPDF() {
+	//$('#menuContainer').load("listarDefensores.php");
+	//console.log(myFuncionZX());
+	var i1 = $('#filtro1').get(0).value;
+	var i2 = $('#filtro2').get(0).value;
+
+	if (i1 == "" && i2 == "") {
+
+	} else {
+		$.ajax({
+			url: "../../controlador/defensor/controlFiltroListarExpediente.php",
+			type: "GET",
+			data: "q=" + i1 + "&q2=" + i2,
+			success: function (data) {
+				var jsonExpDef = jQuery.parseJSON(data);
+				// open the PDF in a new window
+				var contenido = '';
+				$.each(jsonExpDef, function (KEY, VALOR) {
+					contenido += 'NOMBRE COMPLETO: ' + VALOR.nombre + ' ' + VALOR.ap_paterno + ' ' + VALOR.ap_materno + '\n';
+					contenido += 'EXPEDIENTE NUMERO: ' + VALOR.num_expediente + '\n';
+					contenido += 'COLONIA: ' + VALOR.colonia + '\n';
+					contenido += 'MATERIA: ' + VALOR.materia + '\n';
+					contenido += 'MUNICIPIO: ' + VALOR.municipio + '\n';
+					contenido += 'TELEFONO: ' + VALOR.telefono + '\n\n';
+				});
+				var docDefinition = {
+					// a string or { width: number, height: number }
+					pageSize: 'A4',
+
+					// by default we use portrait, you can change it to landscape if you wish
+					pageOrientation: 'landscape',
+
+					// [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+					pageMargins: [40, 60, 40, 60],
+					content: [
+						// using a { text: '...' } object lets you set styling properties
+						{ text: 'SE ENCONTRARON: ' + jsonExpDef.length + ' EXPEDIENTES', style: 'header' },
+						{ text: contenido, style: 'anotherStyle' }
+					], styles: {
+						header: {
+							fontSize: 22,
+							bold: true,
+							alignment: 'center'
+						},
+						anotherStyle: {
+							italic: true,
+							alignment: 'justify',
+							fontSize: 12
+						}
+					}
+				};
+
+				// print the PDF
+				//pdfMake.createPdf(docDefinition).print();
+
+				// download the PDF
+				//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+				pdfMake.createPdf(docDefinition).open();
+			}
+		});
+	}
+
+
+};
+
+
+function showUser(str) {
+	var filtro2 = $('#filtro2')[0].value;
+	var botonDess = $('#botonDesc').get(0);
+	if (str == "" && filtro2 == "") {
+
+		botonDess.disabled = true;
+		$('#tebody').empty();
+		$('#tebody').append('SELECCIONE UN FILTRO');
+		
+	} else {
+		$.ajax({
+			url: "../../controlador/defensor/controlFiltroListarExpediente.php",
+			type: "GET",
+			data: "q=" + str + "&q2=" + filtro2,
+			success: function (data) {
+
+				if (data != 0) {
+					botonDess.disabled = false;
+					var jsonExpDef = jQuery.parseJSON(data);
+					//descarga.on("click", function(){ descargarPDF(jsonExpDef); });
+					//console.log(data,' resultado de data');
+					$('#tebody').empty();
+					$.each(jsonExpDef, function (KEY, VALOR) {
+						//console.log(VALOR.nue, 'valor nue');
+						var nomBoton;
+						if (VALOR.id_personal < 0) {
+							nomBoton = '<button type="button" class="btn btn-danger"  id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';
+						} else {
+							nomBoton = '<button type="button" class="btn btn-primary " id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
+						}
+
+						$('#tebody').append(
+							'<tr> ' +
+							'<td id="nuePersonal" style="display:none;">' + VALOR.nue + ' </td>' +
+							'<td>' + VALOR.num_expediente + '</td>' +
+							'<td>' + VALOR.materia + '</td>' +
+							'<td>' + VALOR.fecha_inicio + '</td>' +
+							'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
+							'<td>' + nomBoton +
+							'<br><button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp">DetalleExpediente</button></td> </tr>'
+						);
+					});
+
+				} else {
+					$('#tebody').empty();
+					botonDess.disabled = true;
+				}
+			}
+		});
+	}
+
+}
+function showMateria(str) {
+	//var descarga = $('#botonDescargar');
+	var filtro1 = $('#filtro1')[0].value;
+	//console.log(filtro1 + " =>filtro1 " + str + " =>filtro2");
+	var botonDess = $('#botonDesc').get(0);
+	if (filtro1 == "" && str == "") {
+		//por materia
+		//descarga[0].disabled = true;
+		$('#tebody').empty();
+		botonDess.disabled = true;
+	} else {
+		$.ajax({
+			url: "../../controlador/defensor/controlFiltroListarExpediente.php",
+			type: "GET",
+			data: "q=" + filtro1 + "&q2=" + str,
+			success: function (data) {
+				if (data != 0) {
+					botonDess.disabled = false;
+					var jsonExpDef = $.parseJSON(data);
+					$('#tebody').empty();
+					var nomBoton;
+					$.each(jsonExpDef, function (KEY, VALOR) {
+						if (VALOR.id_personal < 0) {
+							nomBoton = '<button type="button" class="btn btn-danger "  id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';
+						} else {
+							nomBoton = '<button type="button" class="btn btn-primary "  id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
+						}
+						VALOR.observaciones = convertirParrafo(VALOR.observaciones);
+						$('#tebody').append(
+							'<tr> ' +
+							'<td id="idPersonal" style="display:none;">' + VALOR.id_personal + ' </td>' +
+							'<td>' + VALOR.num_expediente + '</td>' +
+							'<td>' + VALOR.materia + '</td>' +
+							'<td>' + VALOR.fecha_inicio + '</td>' +
+							'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
+							'<td>' + nomBoton +
+							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp">DetalleExpediente</button></td> </tr>'
+						);
+					});
+				} else {
+					$('#tebody').empty();
+					botonDess.disabled = true;
+				}
+
+			}
+		});
+	}
+
+}
+function verDetalleExp(llave) {//llave -> 0 exp1, 1 exp2 ....
+
+	var lis = document.getElementsByName('myclasse');//[0].textContent;
+
+	console.log(lis[llave].textContent, ' ver detall', llave);
+	var numExp = lis[llave].textContent;
+	//$(this).closest('tr').find('#idPersonal').text();	
+	$.ajax({
+		url: "../../controlador/expediente/obtenerDetalleExpediente.php",
+		type: "GET",
+		data: "numExp=" + numExp,
+		success: function (data) {
+			console.log(data, ' datos de data response   ');
+			var jsonExpDef = $.parseJSON(data);
+
+			//for(var i in data){
+			//console.log(data[i].pregunta);
+			//}
+			/* 
+			$.each(data, function( index, value ) {
+				alert( index + ": " + value.pregunta );
+			
+			  }); */
+			/* 	var preguntaResp =
+					'	<div class="item form-group">' +
+					'    <label  class="control-label col-md-12 col-sm-3 col-xs-12" for="name">PREGUNTA1 <span class="required">*</span>' +
+					'    </label>' +
+					'    <div class="col-md-6 col-sm-6 col-xs-12">' +
+					'      <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">' +
+					'    </div>' +
+					'  </div>'; */
+
+
+			$("#dialogoDetalleExp").dialog({
+				resizable: true,
+				height: "auto",
+				width: "auto",
+				modal: true,
+				show: {
+					effect: "blind",
+					duration: 1000
+				},
+				hide: {
+					effect: "explode",
+					duration: 1000
+				},
+				position: {
+					my: "left top",
+					at: "left bottom",
+					of: $('#home-tab')
+				},
+				buttons: {
+					"Cancelar": function () {
+						$(this).dialog("close");
+					}
+				},
+				open: function () {
+
+					$(this).empty();
+					$(this).append(
+						'<div style="height:600px;width:550px; overflow: scroll;" class="x_panel">' +
+						'    <div class="x_title">' +
+						'        <h2><b>Detalle Expediente</b></h2>' +
+						'        <div class="clearfix"></div>' +
+						'    </div>' +
+						'    <div class="x_content">' +
+						'        <form id="idFormPreguntas" class="form-horizontal " novalidate="">' +
+						'	<div class="item form-group">' +
+						'    <label  class="control-label col-md-12 col-sm-3 col-xs-12" for="name">PREGUNTA1 <span class="required">*</span>' +
+						'    </label>' +
+						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
+						'      <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">' +
+						'    </div>' +
+						'  </div>' +
+						'  <div class="item form-group">' +
+						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="email">PREGUNTA2 <span class="required">*</span>' +
+						'    </label>' +
+						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
+						'      <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">' +
+						'    </div>' +
+						'  </div>' +
+						'  <div class="item form-group">' +
+						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="email">PREGUNTA3 <span class="required">*</span>' +
+						'    </label>' +
+						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
+						'      <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12">' +
+						'    </div>' +
+						'  </div>' +
+						'  <div class="item form-group">' +
+						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="number">PREGUNTA4 <span class="required">*</span>' +
+						'    </label>' +
+						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
+						'      <input type="number" id="number" name="number" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">' +
+						'    </div>' +
+						'  </div>' +
+						'  <div class="item form-group">' +
+						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="website">PREGUNTA5 <span class="required">*</span>' +
+						'    </label>' +
+						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
+						'      <input type="url" id="website" name="website" required="required" placeholder="www.website.com" class="form-control col-md-7 col-xs-12">' +
+						'    </div>' +
+						'  </div>' +
+						'        </form>' +
+						'    </div>' +
+						'</div>'
+					);
+				}
+			});
+
+		}
+	});
+}

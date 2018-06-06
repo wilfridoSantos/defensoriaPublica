@@ -1,118 +1,157 @@
+
+<script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
+ 	<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-<link href="../../recursos/css/custom.css" rel="stylesheet"/>
+<link href="../../recursos/css/custom.css" rel="stylesheet" />
+
 <script src="../../recursos/js/jquery-validator.js"></script>
-<script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
-<script src="../../recursos/vendors/pdfmake/build/pdfmake.js"></script>
-<script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
-<script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
- <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
+<script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+<link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
 
-<div class="x_content">
-<center><h3><b>Generar Informe de actividades</b><h3/></center>
-<form id="myform" action="#" class="form-horizontal form-label-left" >
-  <div align="center">
-      <label class="radio-inline" for= "radioInforme">
-        <input id="inputR1" type="radio"id="radioInforme"  name="radio" value="option1" checked >
-        <b>Informe General</b>
-      </label>
-      <label class="radio-inline " for= "radioPersonal">
-        <input id="inputR2" type="radio" id="radioInforme"  name="radio" value="option2">
-        <b>Informe por personal</b>
-      </label>
-      <label class="radio-inline " for= "radioUnico">
-        <input id="inputR3" type="radio" id="radioUnico"  name="radio" value="option3">
-        <b>Informe por nue</b>
-      </label>
-  </div>
-    <div class="form-group ">  
-      <div id="infoPersonal">
-      </div>
-    </div>
-    <div class="form-group ">
-      <label class="control-label col-md-3 col-sm-3 col-xs-4">
-        Fecha Inicial
-        <span class="required">*</span>
-      </label>
-    	<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">
-        <input type="date" id="inputInicio" name="inputInicio"  onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" required step="1">
-        <div id ="labelInicio" class='block-help with-errors'></div>
-      </div>     
-    </div>    
-    <div class="form-group ">
-			<label class="control-label col-md-3 col-sm-3 col-xs-4">
-        Fecha Final
-        <span class="required">*</span>
-      </label>
-    	<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">
-        <input type="date" id="inputFinal" name="inputFinal"  onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" required step="1">
-        <div id ="labelFinal" class='block-help with-errors'></div>
-      </div>           
-    </div>
-    <div class="center ">
-      <input  id="generarInforme" class="btn btn-primary btn-sm " type="button" value="Generar Informe" name="generar" onclick="generarInformeAct()" disabled=true >
-      <div id ="botonGenerar" class='block-help with-errors'></div>
-    </div>
-</form>      
-</div>
 
-   <div class="form-group ">  
-   <div id="dialogoI" >
-          <div id='mapa'></div>
-      </div>  
-      <table id="datatable" class="table table-striped ">         
-         <thead>
-           <tr class="header">
-             <th>Defensor</th>  
-             <th>Usuario</th>
-             <th>Fecha Registro</th>
-             <th>observaciones</th>                  
-             <th>Accion</th>
-           </tr>
-         </thead>
-         <tbody id='resultadoInforme'>
-         </tbody>  
-       </table> 
-   
-       
-      </div>
-    </div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><b>Generar Informe de actividades<b></h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br>
+                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
-<script>
-function verMapaDir(){
-  var lat = parseFloat($('#idlatitud')[0].textContent);
-  var lon = parseFloat($('#idlongitud')[0].textContent);
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                          
+                         
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fecha Final <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="date" id="inputFinal" name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
+                          <div id="labelFinal" class='block-help with-errors'></div>
+
+                        </div>
+                      </div>  
+
+                    </form>
+                    <div class="row no-print">
+						             <div class="col-xs-12">
+						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFActividades();" style="margin-right: 5px;">
+						<i class="fa fa-download"></i> Generar PDF</button>
+					             </div>
+						           </div>
+                  </div>
+                </div>
+              </div>
+
+<div class="col-md-12 col-sm-12 col-xs-12" id="tablaPanel">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><b>Lista de Actividades </b></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_length" id="datatable-responsive_length">
+                            <label>Mostrar
+                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> Entradas</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="datatable-responsive_filter" class="dataTables_filter">
+                            <label>Buscar por Defensor:
+                                <input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-responsive">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+         
+                </div>
+                    <div class="col-sm-12">
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                            cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                        style="width: 71px;" aria-label="Defensor: activate to sort column descending" aria-sort="ascending">Defensor</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                        rowspan="1" colspan="1" style="width: 70px;" aria-label="Usuario: activate to sort column ascending">Usuario</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
+                                        colspan="1" style="width: 155px;" aria-label="Fecha registro: activate to sort column ascending">Fecha registro</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
+                                        colspan="1" style="width: 66px;" aria-label="Observaciones: activate to sort column ascending">Observaciones</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
+                                        colspan="1" style="width: 28px;" aria-label="Acciones: activate to sort column ascending">Acciones</th>
+                                    </tr>
+                            </thead>
+                            <tbody id='resultadoInforme' >
+
+                            </tbody>
+                        </table>
+                     
+                    </div>
+
       
-  //console.log(typeOf 72.83624970000005);
-  initialize(lat, lon);
- }
- function initialize(lat, lon) {    
-            
-                $("#dialogoI").dialog({
-                    modal: true,
-                    title: "Google Map",
-                    width: 650,
-                    height: 450,
-                    buttons: {
-                        Close: function () {
-                            $(this).dialog('close');
-                        }
-                    },
-                    open: function () {
-                      var myLatLng = {lat: lat, lng: lon};
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous disabled" id="datatable-responsive_previous">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="0" tabindex="0">Previous</a>
+                                </li>
+                                <li class="paginate_button active">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">1</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="2" tabindex="0">2</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="3" tabindex="0">3</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="4" tabindex="0">4</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="5" tabindex="0">5</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="6" tabindex="0">6</a>
+                                </li>
+                                <li class="paginate_button next" id="datatable-responsive_next">
+                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                      
+<div id="dialogoI">
+                            <div id='mapa'>                      
+                            </div>             
+                            <div id="pano" style="position: relative;">
+                                
+                            </div>
 
-                        var map = new google.maps.Map(document.getElementById('mapa'), {
-                          zoom: 18,
-                          center: myLatLng,
-                          mapTypeId: google.maps.MapTypeId.ROADMAP
-                        });
-
-                        var marker = new google.maps.Marker({
-                          position: myLatLng,
-                          map: map,
-                          title: 'Hello World!'
-                        });                         
-                    }
-                });            
-        }
-</script>
+                        </div>

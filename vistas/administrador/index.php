@@ -15,27 +15,28 @@ include "../../Controlador/sesion.php";
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Modulo ADMINISTRADOR</title>
-    <!-- jQuery -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/>
+    
+
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      <link href="../../recursos/css/style.css" rel="stylesheet"/> 
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <!-- Font Awesome -->
+    
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
-    <!-- NProgress -->
+
     <link href="../../recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
-    <!-- iCheck -->
+
     <link href="../../recursos/vendors/iCheck/skins/flat/green.css" rel="stylesheet"/>
-    <!-- Datatables -->
+
     <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
     <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet"/>
     <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet"/>
     <link href="../../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet"/>
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Custom Theme Style -->
-    <link href="../../recursos/css/custom.css" rel="stylesheet"/>
+
+    <link href="../../recursos/css/custom.css" rel="stylesheet"/> 
   </head>
 
   <body class="nav-md" style="background-color:black;">
@@ -376,17 +377,14 @@ include "../../Controlador/sesion.php";
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
-
-    <!-- Bootstrap -->
+  
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
+    
     <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
+    
     <script src="../../recursos/vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
+   
     <script src="../../recursos/vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
     <script src="../../recursos/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../recursos/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="../../recursos/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -403,7 +401,6 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script>
 
-    <!-- Custom Theme Scripts -->
     
     <script src="../../recursos/js/custom.min.js"></script>
     <script src="../../recursos/js/Gestion.js"></script>

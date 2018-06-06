@@ -420,12 +420,10 @@ function agrega(){
 
 
     <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    
-    <script src="../../recursos/js/custom.min.js"></script>
-    <script src="../../recursos/js/curp.js"></script>
+ <!--    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+     -->
     <script src="../../recursos/js/jquery-validator.js"></script>
+    <script src="../../recursos/js/curp.js"></script>
 <!-- Google Analytics -->
 <script>
 

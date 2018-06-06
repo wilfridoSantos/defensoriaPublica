@@ -1069,7 +1069,7 @@ h2 {
     padding: 10px 17px;
     display: inline-block;
     background: #fff;
-    border: 1px solid #E6E9ED;
+    border: 2px solid #c0c0c0;
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
@@ -1122,9 +1122,23 @@ legend {
 }
 .profile_details .profile_view {
     display: inline-block;
+    width: 100%;
     padding: 10px 0 0;
     background: #ffffff;
-    border: 2px solid #d50571;
+      
+}
+.profile_details .profile_view .verInfoDef {
+    display: inline-block;
+    padding: 10px 0 0;
+    background: #ffffff;
+    border: 2px solid #0000ff;
+    margin-left: 23px;
+}
+.profile_view .verInfoDef {
+    display: inline-block;
+    padding: 10px 0 0;
+    background: #ffffff;
+    border: 2px solid #0000ff;
     margin-left: 23px;
 }
 .left{
@@ -1371,10 +1385,12 @@ table.jambo_table tbody tr.selected td {
     width: 40%;
     float: left
 }
+
 .dataTables_filter {
     width: 50%;
     float: right;
-    text-align: right
+    text-align: right;
+    margin-right: 109px;
 }
 .dataTables_info {
     width: 60%;
@@ -2028,8 +2044,8 @@ input:invalid ~ .with-errors {
 }
 .alert {
     padding: 20px;
-    background-color: #eee; /* Red */
-    color: white;
+    background-color: transparent; /* Red */
+    color: black;
     margin-bottom: 15px;
 }
 .textoo{
@@ -2220,6 +2236,10 @@ span.section {
 .form-control {
     border-radius: 0;
     width: 100%
+}
+
+.form-control.controlFecha{
+    width: 50%;
 }
 .form-horizontal .control-label {
     padding-top: 8px
@@ -4134,7 +4154,7 @@ ul.verticle_bars li {
 .alert-danger,
 .alert-error {
     color: #ff0000;
-    background-color:#eeeeee;
+    background-color: transparent;
     border-color: #eee
 }
 
