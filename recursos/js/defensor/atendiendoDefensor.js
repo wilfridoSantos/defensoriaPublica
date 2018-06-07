@@ -128,10 +128,14 @@ $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
 		}); */
 	});
 
-	///MUESTRA PARA DAR SEGUIMIENTO DE  UN CASO
+	///ABRE LA VISTA PARA DAR DE ALTA A UN USARIO DE SERVICIO
+
+
 	
 
 	
+
+
 
 });///fin de document.ready
 
@@ -204,6 +208,7 @@ console.log($("#usuarioSeleccionados").children())
 
 
 $(document).ready(function () {
+	
 function muestraSeguimiento(evst) {
    var target= $(this);
 	var id_usuario_servicio = $(this).closest('tr').find('#idPersonal').text();
@@ -238,10 +243,15 @@ function muestraSeguimiento(evst) {
  }
 });
 
-
+var num_expedienteGlobal=90;
+function funcionExpediente(num){
+	console.log("daos son");
+	console.log(this);
+}
 function cargarMisExpedientes(idpersonal) {
 // alert("atendiendoDef");
 //  $('#tebody').children().remove();
+
 $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idpersonal,function(data){
 	var jsonMisExp = jQuery.parseJSON(data);
 	$('#tebody').children().remove();
@@ -253,11 +263,15 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 				 
 				var nuevoBoton = document.createElement('button');
 				 materia=VALOR.materia;
+				 if (VALOR.num_expediente!="") {
+					 
+				 
+				 
 				 $('#tebody').append(
 					'<tr role="row" class="odd gradeA" > '+
 					'<td id="idPersonal" style="display:none;">'+VALOR.id_personal+' </td>'+
 					'<td id="id_expediente" style="display:none;">'+VALOR.id_expediente+' </td>'+
-					'<td > <textarea    rows="1%"  disabled cols="10" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.num_expediente+'</textarea></td>'+
+					'<td > <textarea id="num_expediente"   rows="1%"  disabled cols="10" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.num_expediente+'</textarea></td>'+
 					'<td > <textarea    rows="1%"  disabled cols="30" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.nombre_delito+'</textarea></td>'+
 					'<td> <textarea 	rows="1%"  disabled cols="35" minlength="10" maxlength="250" style="background-color:transparent; border:none; auto; color:#000000;resize: none;" readonly class="form-control col-md-5 col-xs-12" >'+VALOR.grado_delito+'</textarea></td>'+
 					'<td> <textarea 	rows="1%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+VALOR.observaciones+'</textarea></td>'+                                                     
@@ -268,21 +282,45 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 				 
 				);   
 						 
-				
+					}//FIN DEL IF 	
 
 			});		
+								
+			
 			var array=document.getElementsByName("botonSeguimiento");
 					 for( i=0;i<array.length;i=i+1){
-						  array[i].addEventListener("click",function(){
-
+					//	array[i].addEventListener("click",funcionExpediente,false)
+						   array[i].addEventListener("click",function(){
+							//console.log("varlor en funcion  ",this);
+							//funcionExpediente
+							
+				  var id_usuario_expedienteGlobal = $(this).closest('tr').find('#num_expediente').text();
+			
 							if(materia==="EJECUCION"){
 								console.log("holaEjecucion");
-								$('#menuContainer').load("materia/ejecucionSanciones.php");
+								 $.ajax({
+									url: "materia/ejecucionSanciones.php",
+									type: "GET",
+																			
+									success: function (data) {
+										
+										
+										$( "#menuContainer" ).html(data);	
+										$("#numExpedienteGlobal").text("valor "+id_usuario_expedienteGlobal);
+										//console.log($("#numExpedienteGlobal"));
+											
+										//console.log("el numero de exp es ",id_usuario_expedienteGlobal);
+										
+									   }
+									   
+									}); 
+
+									
 								} 
 							
-						  },false)
+						  },false) 
 					 }
-					 
+	 
 					
    // console.log(jsonMisExp);
 }); $('#example').DataTable({

@@ -222,7 +222,7 @@ function agrega(){
                       </div>
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label>
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Sexo<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
 
                        <select required id="genero" onkeyup="validarCurps()" onblur="validarCurps()" name="genero"  class="select2_group form-control">

@@ -20,7 +20,7 @@ function getUsuarioByCurp($curp){
     function crear_usuarioSevicio($objetoEntidad){
       
         $sql = "INSERT INTO usuario_servicio ";
-        $sql.= "SET nombre='".$objetoEntidad['nombre']."', ap_materno='".$objetoEntidad['ap_paterno']."',";
+        $sql.= "SET nombre='".$objetoEntidad['nombre']."', ap_materno='".$objetoEntidad['ap_materno']."',";
         $sql.= "ap_paterno='".$objetoEntidad['ap_paterno']."', genero='".$objetoEntidad['genero']."',";
         $sql.= "edad='".$objetoEntidad['edad']."', idioma='".$objetoEntidad['idioma']."',";
         $sql.= "etnia='".$objetoEntidad['etnia']."', curp='".$objetoEntidad['curp']."',"; 
