@@ -38,14 +38,10 @@ function getExpedientesById($id_defensor){
     $sql="select p.foto,p.nombre as nomDef, p.ap_paterno as appDef, p.ap_materno as apmDef, 
     p.calle as calleDef,p.numero_int as numDef, p.telefono as telDef, p.correo_electronico as emailDef,
     p.colonia as coloniaDef, p.municipio as muniDef,p.id_personal,
-     e.num_expediente, m.materia,e.fecha_inicio, e.fecha_final,e.nombre_delito,
-    e.grado_delito,e.estado, e.incidente,e.observaciones,u.id_usuario_servicio,
-    u.nombre,u.ap_paterno,u.ap_materno, u.municipio,u.colonia, u.telefono,
-    u.correo_electronico, u.etnia,u.idioma 
+     e.num_expediente, m.materia,e.fecha_inicio, e.id_expediente,e.fecha_final,e.nombre_delito,
+    e.grado_delito,e.estado, e.incidente,e.observaciones
     from personal_campo as d inner join expediente as e using(id_personal)
-    inner join detalle_usuario_expediente using(id_expediente)
     inner join usuario_servicio as u using(id_usuario_servicio)
-    inner join personal as p using(id_personal)
     inner join materia as m using(id_materia)
     where id_cargo=4 and id_personal='".$id_defensor."' ";    
         $lista = consulta($sql);

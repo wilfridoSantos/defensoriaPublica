@@ -12,12 +12,12 @@ $(document).ready(function () {
 	   
 		 $('#menuContainer').load("registrarUsuarioServicio.php");
 	};
-	var listarUser=document.getElementById('listarUser');
+	var listarAct=document.getElementById('listarActividades');
 //	console.log(listarUser);
-	listarUser.addEventListener('click', listarUsuario, false);
-	function listarUsuario() {
+	listarAct.addEventListener('click', listarActividades, false);
+	function listarActividades() {
 		//console.log('entro en la fun listaUser');
-		$('#menuContainer').load("listarUsuario.php");
+		$('#menuContainer').load("listarActividades.php");
 		//window.location="../../controlador/defensor/controladorListaDef.php"
 	};
 	
@@ -360,5 +360,173 @@ language: {
 
 });
 }
+function filtroActividades(str) {
+	console.log(str, ' str del filtro');
+	//var filtro2 = $('#filtro2')[0].value;
+	//var botonDess = $('#botonDesc').get(0);
+	var fotoVis='';
+	var active =false;
+	 if (str == "" ) {
+		$('#resultadoInforme').empty();
+		$('#resultadoInforme').append('SELECCIONE UNA OPCION DEL FILTRO');
+		
+	} else {
+		$.ajax({
+			url: "../../controlador/actividad/listarActividades.php",
+			type: "GET",
+			data: "q=" + str ,
+			success: function (data) {
+				
+				if (data != 0) {
+					var actividad = '';
+					var es_visita='';	
+					var idAct;	
 
-/* <textarea  rows="10" cols="150" minlength="10" maxlength="250"  ></textarea> */
+					var botonObservacion= '';				
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log(jsonInforme, ' data de actividades');
+					//descarga.on("click", function(){ descargarPDF(jsonExpDef); });
+					//console.log(data,' resultado de data');
+					$('#resultadoInforme').empty();
+					$.each(jsonInforme, function (KEY, VALOR) {
+						idAct = VALOR.idAct;
+						
+						botonObservacion ='<button type="button" onclick="editarObservaciones('+idAct+')"class="btn btn-default">	<span class="glyphicon glyphicon-ok"></span></button>';
+						if(VALOR.latAse != null || VALOR.longAse != undefined){
+							actividad = 'ASESORÍA';
+						}
+						if(VALOR.latAud != null || VALOR.longAud != undefined){
+							actividad = 'AUDIENCIA';
+						}
+						if(VALOR.fotoVis != null || VALOR.fotoVis != undefined){
+							actividad = 'VISITA CARCELARÍA';
+							fotoVis = VALOR.fotoVis;
+							console.log(fotoVis, 'valor fotoVis');
+						}						
+						if(actividad == 'VISITA CARCELARÍA'){
+							es_visita = '<td tabindex="0"  class="sorting_1"> <a id="verFotoVisita">'+actividad+'</a>'+
+							'<button type="button" onclick="verFotoVisita(this)" value = "'+fotoVis+'" class="btn btn-success">	<span class="glyphicon glyphicon-ok"></span></button>';
+							active=true;
+						}else{
+							es_visita = '<td tabindex="0" class="sorting_1"> '+actividad+'';
+						}
+						$('#resultadoInforme').append(
+							
+							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"							
+							'<td id="verDialog" tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.fechaR + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.observaciones + '</td>' +
+							es_visita+botonObservacion+'</td>'+
+							'</tr>'
+						);
+
+					});
+					
+				} else {
+					$('#resultadoInforme').empty();
+					$('#resultadoInforme').append('NO EXISTEN DATOS AÚN');
+				}
+			}
+		});
+	}
+/* 	if(active == true){
+		console.log(active, $('#verFotoVisita'));
+		$('#verFotoVisita').addEventListener('click', verFotoVisita, false);
+	} */
+}
+function saveObservacion(idAct){
+	
+	var textA  = $('#textArea').get(0);
+	console.log(idAct, 'id kllaksj');
+	var obs= textA.value;
+	$.ajax({
+		url: "../../controlador/actividad/cambiarObservacion.php",
+		type: "GET",
+		data: "observacion=" +  obs+ "&idAct="+idAct ,
+		success: function (data) {
+			console.log(data);
+			if (data != 0) {
+				//$('#menuContainer').load('listarActividades.php');
+				window.location="index.php"
+			} else {
+				console.log('ERROR REGRESO 0000');
+			}
+		}
+	});
+}
+function verFotoVisita(botn) {
+	var fotoVis = botn.value;
+	console.log(botn.value, ' valor foto verFoto ');
+	$("#dialogoV").dialog({
+		resizable: true,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#verDialog')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			$(this).empty();
+			//$(this).append(data);					
+				var foto='<div class="col-sm-6 invoice-col">' +
+					'<img src="../../recursos/uploads/'+fotoVis+'" alt="" class="img-quad ">' +
+				'</div>';
+			
+			 $(this).append(foto); 
+		}
+	});
+
+}
+
+function editarObservaciones(idAct) {
+	$("#dialogoV").dialog({
+		resizable: true,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#verDialog')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			$(this).empty();
+			var textArea='<div class="col-sm-6 invoice-col"><textarea id="textArea" name="resultado" pattern="[a-z0-9.,:áéíóú ]+" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150" minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12" placeholder="describre el resultado u observaciones"></textarea>'+
+			'<div>'+
+				'<button type="button" onclick="saveObservacion('+idAct+')" class="btn btn-success">Guardar Observaciones</button>'+
+			'</div>'+
+			'</div>';			
+			 $(this).append(
+				 textArea
+			); 
+		}
+	});
+}
