@@ -2,6 +2,61 @@
 
 include_once('../../libreria/conexion.php');
 
+function getActividades(){
+    $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,act.id_actividad as idAct,
+    ase.latitud as latAse, ase.longitud as longAse,
+    aud.latitud as latAud, aud.longitud as longAud,
+    vis.foto as fotoVis,
+    usu.nombre as Usuario
+     from actividad as act 
+                     left join asesoria as ase using(id_actividad)
+                     left join audiencias as aud using(id_actividad)
+                     left JOIN visitas_carcelarias as vis using(id_actividad)
+                     inner join usuario_servicio as usu using(id_usuario_servicio)
+                     order by id_actividad;";
+    $consulta = consulta($sql);
+    return $consulta;
+}
+function getActividadesAsesorias(){
+    $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,act.id_actividad as idAct,
+    ase.latitud as latAse, ase.longitud as longAse,
+    usu.nombre as Usuario
+     from actividad as act 
+                     inner join asesoria as ase using(id_actividad)                     
+                     inner join usuario_servicio as usu using(id_usuario_servicio)
+                     order by id_actividad;";
+    $consulta = consulta($sql);
+    return $consulta;
+}
+function getActividadesAudiencias(){
+    $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,act.id_actividad as idAct,    
+    aud.latitud as latAud, aud.longitud as longAud,
+    usu.nombre as Usuario
+     from actividad as act 
+                     
+                     inner join audiencias as aud using(id_actividad)
+                     
+                     inner join usuario_servicio as usu using(id_usuario_servicio)
+                     order by id_actividad;";
+    $consulta = consulta($sql);
+    return $consulta;
+}
+function updateObservacion($obs, $id_act){
+    $sql = "update actividad set observacion='".$obs."' where id_actividad='".$id_act."' ";
+    $consulta = consulta($sql);
+    return $consulta;
+}
+function getActividadesVisitas(){
+        $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,
+        vis.foto as fotoVis,
+        usu.nombre as Usuario
+        from actividad as act                     
+                        inner JOIN visitas_carcelarias as vis using(id_actividad)
+                        inner join usuario_servicio as usu using(id_usuario_servicio)
+                        order by id_actividad;";
+    $consulta = consulta($sql);
+    return $consulta;
+}
 function listar_actividad_x_id($id){
       global $conexion;
       $sql = "select * from defensor where id='".$id."'";

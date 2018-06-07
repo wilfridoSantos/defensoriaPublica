@@ -8,7 +8,7 @@
       <script src="../../recursos/js/Gestion.js"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
       <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
- <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
+      <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
 
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">

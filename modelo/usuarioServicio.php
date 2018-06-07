@@ -2,10 +2,9 @@
 //include '../../controlador/conexion.php';
 include_once '../../libreria/conexion.php';
 
-function getUsuarioServicioById($id_usuario){
-    $sql = "select * from usuario_servicio where id_usuario_servicio='".$id_usuario."'";
+function getUsuarioServicioById($id_expediente){
+    $sql = "select * from usuario_servicio inner join detalle_usuario_expediente using(id_usuario_servicio) where id_expediente='".$id_expediente."'";
     $lista = consulta($sql);
- //  echo $sql;
     return $lista;
 }
 

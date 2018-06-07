@@ -10,7 +10,6 @@ $(document).ready(function () {
 	});
 	function verExpedientes(idDef) {
 		var id;
-
 		$.ajax({
 			url: "../../controlador/defensor/controlExpDefensor.php",
 			type: "GET",
@@ -21,7 +20,7 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				var jsonInfoDef = jQuery.parseJSON(data);
-				console.log(data, ' expedientes');
+				//console.log(data, ' expedientes');
 				//console.log(jsonInfoDef.length, ' tam de array');
 
 				var fechac = new Date();
@@ -34,7 +33,8 @@ $(document).ready(function () {
 					var botonDetalle = '';
 					$.each(jsonInfoDef, function (KEY, VALOR) {
 						//console.log(KEY, ' valor del llave');
-						id = VALOR.id_usuario_servicio;
+						id = VALOR.id_expediente;
+						console.log(id, ' id expediente');
 						numExp = VALOR.num_expediente;
 						content += 							//dentro de div row
 							'				<tr role="row"><td><div style="width:100%;"  class="col-md-6 col-sm-12 col-xs-12 form-group">' +//COL 1 INFO EXPEDIENTE
@@ -52,18 +52,7 @@ $(document).ready(function () {
 
 							'</div>' +
 							'			  	</div></td>' +
-							'				<td><div style="width:100%;" class="col-md-6 col-sm-12 col-xs-12 form-group">' +//COL 2 INFO USUARIO SERVICIO
-							'					<div style="width:95%;" class="col-md-4 col-sm-12 col-xs-12 well profile_view><ul class=" list-unstyled"="">' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre de usuario: </b>' + VALOR.nombre + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Apellidos: </b>' + VALOR.ap_paterno + ' ' + VALOR.ap_materno + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Etnia: </b>' + VALOR.etnia + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Lengua o Idioma: </b> ' + VALOR.idioma + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Municipio: </b>' + VALOR.municipio + ' </li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Colonia: </b>' + VALOR.colonia + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Telefono: </b>' + VALOR.telefono + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Correo electronico: </b>' + VALOR.correo_electronico + '</li>' +
-							'</div>' +
-							'			  	</div><td></tr>';
+							'				<td>CERO PREGUNTAS POR AHORA<td></tr>';
 
 
 
@@ -506,33 +495,29 @@ function cambiarAdscripcion() {
 	});
 }
 function verInfoUsuario(id) {
-	/* 
-		$('#verInfoUsuario').append(
-			'<div class="row"> ' +
-			'<div  class="col-md-12 col-sm-12 col-xs-12  profile_details">' +
-			'<div class="col-md-12 col-sm-12 col-xs-12 well profile_view>' +
-			'<ul class="list-unstyled">' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Nombre de usuario: </b>' + (VALOR.nombre).toUpperCase() + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido paterno: </b>' + (VALOR.ap_paterno).toUpperCase() + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Apellido materno: </b>' + (VALOR.ap_materno).toUpperCase() + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Municipio: </b>' + (VALOR.municipio).toUpperCase() + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Colonia: </b>' + (VALOR.colonia).toUpperCase() + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Telefono: </b>' + (VALOR.telefono) + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Email: </b>' + (VALOR.correo_electronico) + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Etnia:</b>' + (VALOR.etnia).toUpperCase() + ' </li>' +
-			'<li><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Idioma:</b>' + (VALOR.idioma).toUpperCase() + ' </li>' +
-	
-			'</ul>' +
-			'</div>' +
-			'</div>' +
-			'</div>'); */
+	console.log(id, ' id expediente');
 	$.ajax({
 		url: "../../controlador/usuario_servicio/consultasUsuario.php",
-		type: "get",
-		data: "id_usuario_servicio=" + id,
+		type: "GET",
+		data: "id_expediente=" + id,
 		success: function (data) {
 			var jsonInformacion = jQuery.parseJSON(data);
-			console.log(data, ' info del usuario con id ' + id);
+			var usuarios='';
+			$.each(jsonInformacion, function (KEY, VALOR) {
+				usuarios+='<div style="width:100%;" class="col-md-6 col-sm-12 col-xs-12 form-group">' +//COL 2 INFO USUARIO SERVICIO
+				'					<div style="width:95%;" class="col-md-4 col-sm-12 col-xs-12 well profile_view><ul class=" list-unstyled"="">' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre usuario: </b>' + VALOR.nombre + '</li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Apellidos: </b>' + VALOR.ap_paterno + ' ' + VALOR.ap_materno + '</li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Etnia: </b>' + VALOR.etnia + '</li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Lengua o Idioma: </b> ' + VALOR.idioma + '</li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Municipio: </b>' + VALOR.municipio + ' </li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Colonia: </b>' + VALOR.colonia + '</li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Telefono: </b>' + VALOR.telefono + '</li>' +
+				'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Correo electronico: </b>' + VALOR.correo_electronico + '</li>' +
+				'</div>' +
+				'			  	</div>'
+			});
+			console.log(jsonInformacion, ' info del usuario con id ' + id);
 			//console.log(jsonInformacion, ' json Informacion');
 			$("#dialogoExp").dialog({
 				resizable: true,
@@ -550,7 +535,7 @@ function verInfoUsuario(id) {
 				position: {
 					my: "left top",
 					at: "left bottom",
-					of: $('#home-tab')
+					of: $('#myTabContent')
 				},
 				buttons: {
 					"Cancelar": function () {
@@ -560,27 +545,7 @@ function verInfoUsuario(id) {
 				open: function () {
 					$(this).empty();
 					//$(this).append(data);					
-					$(this).append(
-						'<div class="x_panel">' +
-						' <div class="x_title">' +
-						' <h2><b>' + jsonInformacion[0].nombre + ' ' + jsonInformacion[0].ap_paterno + ' ' + jsonInformacion[0].ap_materno + '</b></h2>' +
-						'   <div class="clearfix"></div>' +
-						' </div>' +
-						' <div class="x_content">' +
-						'   <div><b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Etnia:</b>' + jsonInformacion[0].etnia + ', Idioma hablada: ' + jsonInformacion[0].idioma + '</div>' +
-						'   <div>' +
-						'	<b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Municipio: </b>' + (jsonInformacion[0].municipio).toUpperCase() +
-						'   </div> <div>' +
-						'	<b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Colonia: </b>' + (jsonInformacion[0].colonia).toUpperCase() +
-						'   </div>' +
-						'<div>' +
-						'<b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Telefono: </b>' + (jsonInformacion[0].telefono) +
-						'</div>' +
-						'<div> <b class="textoo"><span class="glyphicon glyphicon-ok-sign"></span> Email: </b>' + (jsonInformacion[0].correo_electronico) +
-						'</div>' +
-						' </div>' +
-						'</div>'
-					);
+					 $(this).append(usuarios); 
 				}
 			});
 
@@ -715,6 +680,7 @@ function generarInformeAct2(nue) {
 
 };
 function generarInformeAct() {
+	var desc = $('#botonDesc').get(0);
 	var fechaI = document.getElementById('inputInicio').value;
 	var fechaF = document.getElementById('inputFinal').value;
 	//console.log(fechaI, fechaF);
@@ -725,6 +691,7 @@ function generarInformeAct() {
 		data: "fechaI=" + fechaI + "&fechaF=" + fechaF,
 		success: function (data) {
 			if(data!=0){
+				desc.disabled=false;
 					var jsonInforme = jQuery.parseJSON(data);
 
 
@@ -754,6 +721,7 @@ function generarInformeAct() {
 					console.log('JJJJJJJJAAAAAAAASZZZZZ :#', jsonInforme[0]);
 				}
 				else{
+					desc.disabled=true;
 					$('#resultadoInforme').empty();
 					$('#resultadoInforme').append('<h3>no se encotrarón datos en esas fechas</h3>');
 				}
