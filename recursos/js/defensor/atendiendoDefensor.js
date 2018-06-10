@@ -484,7 +484,7 @@ function verFotoVisita(botn) {
 			$(this).empty();
 			//$(this).append(data);					
 				var foto='<div class="col-sm-6 invoice-col">' +
-					'<img src="../../recursos/uploads/'+fotoVis+'" alt="" class="img-quad ">' +
+					'<img class="img-quad img-responsive" src="../../recursos/archivo/vistas'+fotoVis+'" alt="" class="img-quad ">' +
 				'</div>';
 			
 			 $(this).append(foto); 

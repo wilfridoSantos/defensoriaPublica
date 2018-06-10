@@ -1,9 +1,10 @@
 <?php
 include_once('../../libreria/conexion.php');
 
-function get_materia_materia_instancia($materia,$instancia){
-        $sql="SELECT id_materia,materia,instancia FROM materia  where materia ='".$materia."' and instancia =".$instancia;			
-     
+function get_materia_instancia_sistema($materia,$instancia,$sistema){
+        $sql="SELECT id_materia,materia,instancia FROM materia 
+                where materia ='".$materia."' and instancia =".$instancia." and sistema='".$sistema."'";			
+   //  echo $sql;
    $lista=consulta($sql);
    return $lista;
 }

@@ -108,7 +108,7 @@ function agrega(){
               <div class="col-md-12 col-sm-12 col-xs-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 " >Registro   usuario del servicio</label></h1>
+                    <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 " >Registro   usuario de contraparte</label></h1>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -195,12 +195,8 @@ function agrega(){
                                 </div>
                       </div>
                      
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Numero<span class="required">*</span></label>
-                        </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[1-9][0-9]*" maxlength="5" minlength="1" data-error="solo numero intero con maxicmo 5 digito" class="form-control" required  placeholder="" name="numero">
-                          <div  class="help-block with-errors"></div></div>
-                      </div>
+                      
+
                        <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
@@ -214,12 +210,6 @@ function agrega(){
                       
                       
 
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Colonia<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="colonia">
-                        </div>
-                      </div>
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Sexo<span class="required">*</span></label>
@@ -234,41 +224,16 @@ function agrega(){
                         </div>
                       </div>
 
-                  <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Municipio<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="municipio">
-<!--                           <input type="text" data-error=":  solo letras de maximo 50 caracter"pattern="+[A-Za-z ]{3,50}" class="form-control  text-uppercase"  required placeholder="" name="municipio">
- -->
-                        </div>
-                      </div>
-
-                    <!--  <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" data-error=": el formato debe ser alfanumerico con 18 digitos" pattern="" class="form-control  text-uppercase"  required placeholder="curp" name="curp">
-                        </div>
-                      </div> -->
+             
+                 
 
                      <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" onkeyup="mayusculas(event, this)
-                          
-                          " onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" onkeyup="validarCurps()" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
                
-
-                       
-                     
-                     <!--  <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Edad<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" data-error=": solo numero mayor a 14 no maxicmo a 100 años" pattern="(1(00|[5-9])|([2-9]([0|1-9])))"class="form-control "  required placeholder="" name="edad">
-                        </div>
-                      </div> -->
-                      
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia</label>
@@ -280,18 +245,10 @@ function agrega(){
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-<!--                           <select name="idioma"  class="select2_group form-control">
-                             <option value="zapoteco">zapoteco</option> 
-                             <option value="zapoteco 2">zapoteco 2</option>   
-                          </select>
- -->                         <input type="text" data-error=":  solo letras de maximo 50 caracter"  pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="idioma">
+                    <input type="text" data-error=":  solo letras de maximo 50 caracter"  pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="idioma">
                          </div>
                       </div>
                     
-                     
-                     
-               
-
 
                     
                       <div class="ln_solid"></div>
@@ -318,16 +275,7 @@ function agrega(){
 
 $('#myform').validator()
 
-var curp = generaCurp({
-  nombre            : 'Juan',
-  apellido_paterno  : 'Perez',
-  apellido_materno  : 'Ramirez',
-  sexo              : 'H',
-  estado            : 'DF',
-  fecha_nacimiento  : [31, 1, 1981]
-});
-console.log(curp);
 
 
 
-</script>
+</script>s
