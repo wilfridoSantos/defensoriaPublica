@@ -23,6 +23,7 @@ include "../../Controlador/sesion.php";
       <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../recursos/js/administrador/notificarAdmin.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
@@ -239,7 +240,7 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
-            <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
+            <div id="dialogoNotificacion" title="Revisión Notificación?" ></div>
             
             <?php
                // echo isset($_SESSION['mensaje']);

@@ -124,6 +124,12 @@ function updateExpediente($id_defensor, $id_expediente){
   return $lista;
 
 }
+function checkNoti(){
+  $sql = "select count(id_expediente) as numeroExps from notificaciones";//num notis
+  $nums = consulta($sql)[0]['numeroExps'];
+  
+  return $nums;
+}
 function bajaExpediente($id_expediente, $motivacion){
     $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
           where id_expediente='".$id_expediente."'";

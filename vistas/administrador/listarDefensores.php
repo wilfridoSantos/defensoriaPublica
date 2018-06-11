@@ -44,6 +44,7 @@
                 </div>
                 <div class="row">      
                     <div class="col-sm-12">
+                    <div id="dialogo" title="Confirma Eliminar?"><span id="msnDialog" style="display:none;">tiene al menos 1 expediente</span></div>
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
                             cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
                             <thead>
@@ -61,6 +62,7 @@
                                     </tr>
                             </thead>
                             <tbody id="tebody" >
+
                             <?php include '../../controlador/defensor/controladorListaDef.php';
                               $defensores=json_decode($contenido);
                               //print_r($defensores);

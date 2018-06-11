@@ -1,5 +1,7 @@
+
 $(document).ready(function () {
-	
+
+
 	$('#tebody').on('click', '.botonExp', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
@@ -354,9 +356,6 @@ $(document).ready(function () {
 		});
 	};
 	$('#tebody').on('click', '.botonDel', function (evst) {
-		//console.log('click boton del');
-		//	 var target= $(event.target);
-		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
 
 		console.log(idDef, ' before');
@@ -367,6 +366,7 @@ $(document).ready(function () {
 			success: function (data) {
 				console.log(data, ' expedientes del id_Defensor-> ' + idDef);
 				if (data != 0) {
+					$('#msnDialog').removeAttr("style");
 					$("#dialogo").dialog({
 						resizable: true,
 						height: "auto",
@@ -390,23 +390,16 @@ $(document).ready(function () {
 		});
 	});
 	function eliminarDefensor(idDef) {
-		console.log(idDef, 'i defensor');
+		//console.log(idDef, 'i defensor');
 		$.ajax({
 			url: "../../controlador/defensor/controlDelDefensor.php",
 			type: "get",
 			data: "id_personal=" + idDef,
 			success: function (data) {
-				var mensaje = {
-					'tipo': "exito",
-					'mensaje': "Se ha eliminado satisfactoriamente."
-				};
-				var xx = '<?php ' +
-					'session_start(); ' +
-					'$_SESSION["mensaje"] =' + mensaje + '?>';
+				console.log(data);
+				$('#msnDialog').attr('style', 'display:none');
 
-				console.log('Success!! Eliminado defensor id = ' + idDef);
 				$('#menuContainer').load('listarDefensores.php');
-
 			}
 		});
 
@@ -853,8 +846,7 @@ function generarPDFActividades(){
 						table: {
 							widths: ['*', 100],
 							body: [
-								[
-									
+								[									
 									{text: 'Página ' + pageCount+' de '+currentPage+'   ', alignment: 'center', bold:true}
 								]
 							]
@@ -866,12 +858,12 @@ function generarPDFActividades(){
 				pageMargins: [40, 60, 40, 60],
 				content: [
 					// using a { text: '...' } object lets you set styling properties
-					{ text: 'SE ENCONTRARON: ' + jsonInforme.length + ' REGISTROS DE ACTIVIDAD\n\n', style: 'header' },
+					{ text: '\n\nSE ENCONTRARON: ' + jsonInforme.length + ' REGISTROS DE ACTIVIDAD\n\n', style: 'header' },
 					{ text: contenido, style: 'anotherStyle' }
 					
 				], styles: {
 					header: {
-						fontSize: 22,
+						fontSize: 16,
 						bold: true,
 						alignment: 'center'
 					},
@@ -881,7 +873,7 @@ function generarPDFActividades(){
 						fontSize: 12
 					},
 					rightme:{
-						alignment: 'center'
+						alignment: 'right'
 					}
 				}
 			};
@@ -1245,3 +1237,4 @@ function validarSelect(str){
 	}
 	
 }	
+
