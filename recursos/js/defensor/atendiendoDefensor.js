@@ -61,6 +61,7 @@ $(document).ready(function () {
 $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
 //		  var target= $(event.target);
   var target= $(this);
+  console.log(target);
   var eliminar = $(this).closest('tr');
   var id_usuarioEliminar = $(this).closest('tr')[0].children[0].getAttribute("id_usuario_eliminar");;
    console.log("id",id_usuarioEliminar);
@@ -377,7 +378,7 @@ function filtroActividades(str) {
 							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"							
 							'<td id="verDialog" tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
 							'<td tabindex="0" class="sorting_1">' + VALOR.fechaR + '</td>' +
-							'<td tabindex="0" class="sorting_1">' + VALOR.observaciones + '</td>' +
+							'<td id="tdObservaciones" tabindex="0" class="sorting_1">' + VALOR.observaciones + '</td>' +
 							es_visita+botonObservacion+'</td>'+
 							'</tr>'
 						);
@@ -401,6 +402,8 @@ function saveObservacion(idAct){
 	var textA  = $('#textArea').get(0);
 	console.log(idAct, 'id kllaksj');
 	var obs= textA.value;
+	var dialog = $('#dialogoV');
+
 	$.ajax({
 		url: "../../controlador/actividad/cambiarObservacion.php",
 		type: "GET",
@@ -408,8 +411,10 @@ function saveObservacion(idAct){
 		success: function (data) {
 			console.log(data);
 			if (data != 0) {
+				console.log(data, ' data');
 				//$('#menuContainer').load('listarActividades.php');
-				window.location="index.php"
+				dialog.dialog("close");
+				//window.location="index.php"
 			} else {
 				console.log('ERROR REGRESO 0000');
 			}
@@ -421,8 +426,8 @@ function verFotoVisita(botn) {
 	console.log(botn.value, ' valor foto verFoto ');
 	$("#dialogoV").dialog({
 		resizable: true,
-		height: "auto",
-		width: "auto",
+		height: 500,
+		width: 500,
 		modal: true,
 		show: {
 			effect: "blind",
@@ -445,7 +450,7 @@ function verFotoVisita(botn) {
 		open: function () {
 			$(this).empty();
 			//$(this).append(data);					
-				var foto='<div class="col-sm-6 invoice-col">' +
+				var foto='<div class="col-sm-6">' +
 					'<img src="../../recursos/uploads/'+fotoVis+'" alt="" class="img-quad ">' +
 				'</div>';
 			
@@ -456,10 +461,13 @@ function verFotoVisita(botn) {
 }
 
 function editarObservaciones(idAct) {
-	$("#dialogoV").dialog({
+	
+	//console.log(obs);
+	var dialog;
+	dialog=$("#dialogoV").dialog({
 		resizable: true,
 		height: "auto",
-		width: "auto",
+		width: 500,
 		modal: true,
 		show: {
 			effect: "blind",
@@ -481,7 +489,8 @@ function editarObservaciones(idAct) {
 		},
 		open: function () {
 			$(this).empty();
-			var textArea='<div class="col-sm-6 invoice-col"><textarea id="textArea" name="resultado" pattern="[a-z0-9.,:áéíóú ]+" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150" minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12" placeholder="describre el resultado u observaciones"></textarea>'+
+			
+			var textArea='<div class="col-md-12"><textarea id="textArea" value="" name="resultado" pattern="[a-z0-9.,:áéíóú ]+" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150" minlength="10" maxlength="250" class="form-control col-md-4 col-xs-12" placeholder="describre el resultado u observaciones"></textarea>'+
 			'<div>'+
 				'<button type="button" onclick="saveObservacion('+idAct+')" class="btn btn-success">Guardar Observaciones</button>'+
 			'</div>'+
@@ -489,6 +498,7 @@ function editarObservaciones(idAct) {
 			 $(this).append(
 				 textArea
 			); 
+			$('#textArea').append($('#tdObservaciones').text());
 		}
 	});
 }

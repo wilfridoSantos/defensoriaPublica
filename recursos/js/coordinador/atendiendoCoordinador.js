@@ -1,6 +1,5 @@
 $(document).ready(function () {
-
-	var numExp;
+	
 	$('#tebody').on('click', '.botonExp', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
@@ -10,6 +9,7 @@ $(document).ready(function () {
 	});
 	function verExpedientes(idDef) {
 		var id;
+		
 		$.ajax({
 			url: "../../controlador/defensor/controlExpDefensor.php",
 			type: "GET",
@@ -20,9 +20,6 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				var jsonInfoDef = jQuery.parseJSON(data);
-				//console.log(data, ' expedientes');
-				//console.log(jsonInfoDef.length, ' tam de array');
-
 				var fechac = new Date();
 				var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 				var fechaF = fechac.toLocaleDateString("es-ES", options);
@@ -35,10 +32,11 @@ $(document).ready(function () {
 						//console.log(KEY, ' valor del llave');
 						id = VALOR.id_expediente;
 						console.log(id, ' id expediente');
-						numExp = VALOR.num_expediente;
+						
 						content += 							//dentro de div row
 							'				<tr role="row"><td><div style="width:100%;"  class="col-md-6 col-sm-12 col-xs-12 form-group">' +//COL 1 INFO EXPEDIENTE
 							'					<div style="width:100%;"   class="col-md-4 col-sm-12 col-xs-12 well profile_view><ul class=" list-unstyled"="">' +
+							'	<li style="display:none;" name="myclasse">'+VALOR.num_expediente+'</li>'+
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Numero Expediente: </b> ' + VALOR.num_expediente + '</li>' +
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Materia: </b>' + VALOR.materia + '</li>' +
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Inicio: </b>' + VALOR.fecha_inicio + '</li>' +
@@ -123,9 +121,7 @@ $(document).ready(function () {
 				}
 			}
 		});
-	}
-
-
+	};
 	$('#tebody').on('click', '.boton', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
@@ -187,9 +183,7 @@ $(document).ready(function () {
 				});
 			}
 		});
-	}
-
-
+	};
 	$('#tebody').on('click', '.botonUp', function (evst) {
 		//		  var target= $(event.target);
 		//  var target= $(this.);
@@ -358,7 +352,7 @@ $(document).ready(function () {
 				} */
 
 		});
-	}
+	};
 	$('#tebody').on('click', '.botonDel', function (evst) {
 		//console.log('click boton del');
 		//	 var target= $(event.target);
@@ -416,11 +410,9 @@ $(document).ready(function () {
 			}
 		});
 
-	}
+	};
+}); // fin document ready -------------------------------------------------------------------------------------------------
 
-
-
-}); // fin documente ready
 function generaInformeByNue() {
 	var nue = $('#idNueLi').get(0).textContent;
 	$("#dialogoAds").dialog({
@@ -456,7 +448,7 @@ function generaInformeByNue() {
 			$(this).load('listarActividadesByNue.php?nue=' + nue);
 		}
 	});
-}
+};
 function cambiarAdscripcion() {
 	var nue = $('#idNueLi').get(0).textContent;
 	console.log(nue, 'entroo valorrrr');
@@ -493,7 +485,7 @@ function cambiarAdscripcion() {
 			$(this).load('cambiarAdscripcion.php?nue=' + nue);
 		}
 	});
-}
+};
 function verInfoUsuario(id) {
 	console.log(id, ' id expediente');
 	$.ajax({
@@ -551,7 +543,7 @@ function verInfoUsuario(id) {
 
 		}
 	});
-}
+};
 function myFunctionDate2(val, nue) { //this.value from input date vista informeActividades.php
 	console.log(nue, 'en function DAte NUE');
 	var inicio = $('#inputInicio')[0].value;
@@ -592,7 +584,7 @@ function myFunctionDate2(val, nue) { //this.value from input date vista informeA
 	}
 
 
-}
+};
 function myFunctionDate(val) { //this.value from input date vista informeActividades.php
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
@@ -637,7 +629,7 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 	}
 
 
-}
+};
 function generarInformeAct2(nue) {
 	var fechaI = document.getElementById('inputInicio').value;
 	var fechaF = document.getElementById('inputFinal').value;
@@ -731,14 +723,13 @@ function generarInformeAct() {
 
 
 };
-
 function verMapaDir() {
 	var lat = parseFloat($('#idlatitud')[0].textContent);
 	var lon = parseFloat($('#idlongitud')[0].textContent);
 
 	//console.log(typeOf 72.83624970000005);
 	initialize(lat, lon);
-}
+};
 function initialize(lat, lon) {
 
 	$("#dialogoI").dialog({
@@ -786,7 +777,7 @@ function initialize(lat, lon) {
 			map.setStreetView(panorama);
 		}
 	});
-}
+};
 function convertirParrafo(str) {
 	var numPalabras = str.split(/\b[\s,\.\-:;]*/).length;
 	console.log(numPalabras, ' numero de palabras en STR');
@@ -794,13 +785,10 @@ function convertirParrafo(str) {
 
 	}
 	return str;
-}
+};
 function generarPDFActividades(){
-	console.log('perras');
 	var fechaI = document.getElementById('inputInicio').value;
 	var fechaF = document.getElementById('inputFinal').value;
-	
-
 	$.ajax({
 		url: "../../controlador/personal_campo/controladorInformeAct.php",
 		type: "POST",
@@ -811,24 +799,52 @@ function generarPDFActividades(){
 			console.log(jsonInforme);
 			var contenido = '';
 			$.each(jsonInforme, function (KEY, VALOR) {
-				contenido += 'NOMBRE DEFENSOR: ' + VALOR.Defensor+ '\n';
-				contenido += 'NOMBRE USUARIO SERVICIO: ' + VALOR.Usuario + '\n';
-				contenido += 'FECHA DE REGISTRO: ' + VALOR.fecha_registro + '\n';
-				contenido += 'OBSERVACIONES: ' + VALOR.observacion + '\n\n';
+				contenido += 'Nombre del defensor: ' + VALOR.Defensor+ '\n';
+				contenido += 'Nombre del usuario de servicio: ' + VALOR.Usuario + '\n';
+				contenido += 'Fecha de registro: ' + VALOR.fecha_registro + '\n';
+				contenido += 'Observaciones: ' + VALOR.observacion + '\n\n';
 			});
 			var docDefinition = {
 				// a string or { width: number, height: number }
 				pageSize: 'A4',
-
 				// by default we use portrait, you can change it to landscape if you wish
-				pageOrientation: 'landscape',
-
+				pageOrientation: 'portrait',
+				header: {
+					margin: 10,
+					columns: [
+						{
+							// usually you would use a dataUri instead of the name for client-side printing
+							// sampleImage.jpg however works inside playground so you can play with it
+							image: 'logo_oaxaca.jpg',
+							width: 600,height:30
+						},
+						{
+							margin: [10, 0, 0, 0],
+							text: 'Here goes the rest'
+						}
+					]
+				},
+				footer: function (currentPage, pageCount) {
+					return {
+						table: {
+							widths: ['*', 100],
+							body: [
+								[
+									{text: 'Defensoría pública del estado de Oaxaca.', alignment: 'center',bold:true},
+									{text: 'Página ' + pageCount+' de '+currentPage+'   ', alignment: 'right', bold:true}
+								]
+							]
+						},
+						layout: 'noBorders',						
+					};
+				},
 				// [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
 				pageMargins: [40, 60, 40, 60],
 				content: [
 					// using a { text: '...' } object lets you set styling properties
-					{ text: 'SE ENCONTRARON: ' + jsonInforme.length + ' REGISTROS DE ACTIVIDAD', style: 'header' },
+					{ text: 'SE ENCONTRARON: ' + jsonInforme.length + ' REGISTROS DE ACTIVIDAD\n\n', style: 'header' },
 					{ text: contenido, style: 'anotherStyle' }
+					
 				], styles: {
 					header: {
 						fontSize: 22,
@@ -852,14 +868,14 @@ function generarPDFActividades(){
 		}
 	});
 
-}
+};
 function generarPDF2() {
 	var content = [];
 	var simpleHtm = $('#partePDF').get(0).innerHTML;
 	console.log(simpleHtm);
 	ParseHtml(content, simpleHtm);
 	pdfMake.createPdf({ content: content }).open()
-}
+};
 function descargarPDF() {
 	//$('#menuContainer').load("listarDefensores.php");
 	//console.log(myFuncionZX());
@@ -924,8 +940,109 @@ function descargarPDF() {
 
 
 };
+var dialogo;
+function cambiarDefensor(botn){
+	console.log(botn, ' valor del boton');
+	dialogo=$("#dialogoCambio").dialog({
+		resizable: true,
+		height: "auto",
+		width: 500,
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#tebody')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			$(this).empty();
+			//$(this).append(data);					
+			$(this).load('cambiarDefensor.php?id_exp='+botn);
+			
+			//$(this).dialog("close");
+		}
+	});
 
+};
+function verPreguntasExp(botn){
+	console.log( botn,' ver preguntas del expediente');
+	$("#dialogoCambio").dialog({
+		resizable: true,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#tebody')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			$(this).empty();
+			//$(this).append(data);					
+			 $(this).append('hoooola '); 
+		}
+	});
+};
+function bajaExpediente(botn){
+	console.log(botn, ' id del expediente ');
+	$("#dialogoBaja").dialog({
+		resizable: true,
+		height: "auto",
+		width: 500,
+		modal: true,
+		show: {
+			effect: "blind",
+			duration: 1000
+		},
+		hide: {
+			effect: "explode",
+			duration: 1000
+		},
+		position: {
+			my: "left top",
+			at: "left bottom",
+			of: $('#tebody')
+		},
+		buttons: {
+			"Cancelar": function () {
+				$(this).dialog("close");
+			}
+		},
+		open: function () {
+			$(this).empty();
+			//$(this).append(data);					
+			$(this).load('bajaExpediente.php?id_exp='+botn);
+			
+			//$(this).dialog("close");
+		}
+	});
 
+};
 function showUser(str) {
 	var filtro2 = $('#filtro2')[0].value;
 	var botonDess = $('#botonDesc').get(0);
@@ -949,12 +1066,13 @@ function showUser(str) {
 					//console.log(data,' resultado de data');
 					$('#tebody').empty();
 					$.each(jsonExpDef, function (KEY, VALOR) {
-						//console.log(VALOR.nue, 'valor nue');
+						//console.log(VALOR, ' valor ');
 						var nomBoton;
+						var id_expediente=VALOR.id_expediente;
 						if (VALOR.id_personal < 0) {
-							nomBoton = '<button type="button" class="btn btn-danger"  id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';
+							nomBoton = '<button type="button" class="btn btn-danger"  id="botonReCambioDef" name="botonCambioDef" onclick="cambiarDefensor('+id_expediente+')"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>';
 						} else {
-							nomBoton = '<button type="button" class="btn btn-primary " id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
+							nomBoton = '<button type="button" class="btn btn-primary " id="botonCambioDef" name="botonCambioDef" onclick="cambiarDefensor('+id_expediente+')"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>';
 						}
 
 						$('#tebody').append(
@@ -963,9 +1081,11 @@ function showUser(str) {
 							'<td>' + VALOR.num_expediente + '</td>' +
 							'<td>' + VALOR.materia + '</td>' +
 							'<td>' + VALOR.fecha_inicio + '</td>' +
+							'<td>' + VALOR.estado + '</td>' +
 							'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
 							'<td>' + nomBoton +
-							'<br><button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp">DetalleExpediente</button></td> </tr>'
+							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp" onclick="verPreguntasExp(this)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'+
+							'<button type="button" class="btn btn-dark " id="botonBajaExp" name="botonBajaExp" onclick="bajaExpediente('+id_expediente+')"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button></td> </tr>'
 						);
 					});
 
@@ -977,7 +1097,7 @@ function showUser(str) {
 		});
 	}
 
-}
+};
 function showMateria(str) {
 	//var descarga = $('#botonDescargar');
 	var filtro1 = $('#filtro1')[0].value;
@@ -1001,20 +1121,22 @@ function showMateria(str) {
 					var nomBoton;
 					$.each(jsonExpDef, function (KEY, VALOR) {
 						if (VALOR.id_personal < 0) {
-							nomBoton = '<button type="button" class="btn btn-danger "  id="botonCambioDef" name="botonCambioDef">Asignar Defensor</button>';
+							nomBoton = '<button type="button" class="btn btn-danger"  id="botonReCambioDef" name="botonCambioDef" onclick="cambiarDefensor(this)"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>';
 						} else {
-							nomBoton = '<button type="button" class="btn btn-primary "  id="botonCambioDef" name="botonCambioDef">Cambiar Defensor</button>';
+							nomBoton = '<button type="button" class="btn btn-primary " id="botonCambioDef" name="botonCambioDef" onclick="cambiarDefensor(this)"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>';
 						}
-						VALOR.observaciones = convertirParrafo(VALOR.observaciones);
+						
 						$('#tebody').append(
 							'<tr> ' +
 							'<td id="idPersonal" style="display:none;">' + VALOR.id_personal + ' </td>' +
 							'<td>' + VALOR.num_expediente + '</td>' +
 							'<td>' + VALOR.materia + '</td>' +
 							'<td>' + VALOR.fecha_inicio + '</td>' +
+							'<td>' + VALOR.estado + '</td>' +
 							'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
 							'<td>' + nomBoton +
-							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp">DetalleExpediente</button></td> </tr>'
+							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp" onclick="versPreguntasExp(this)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'+
+							'<button type="button" class="btn btn-dark " id="botonBajaExp" name="botonBajaExp" onclick="bajaExpediente()"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button></td> </tr>'
 						);
 					});
 				} else {
@@ -1026,11 +1148,9 @@ function showMateria(str) {
 		});
 	}
 
-}
+};
 function verDetalleExp(llave) {//llave -> 0 exp1, 1 exp2 ....
-
 	var lis = document.getElementsByName('myclasse');//[0].textContent;
-
 	console.log(lis[llave].textContent, ' ver detall', llave);
 	var numExp = lis[llave].textContent;
 	//$(this).closest('tr').find('#idPersonal').text();	
@@ -1040,26 +1160,7 @@ function verDetalleExp(llave) {//llave -> 0 exp1, 1 exp2 ....
 		data: "numExp=" + numExp,
 		success: function (data) {
 			console.log(data, ' datos de data response   ');
-			var jsonExpDef = $.parseJSON(data);
-
-			//for(var i in data){
-			//console.log(data[i].pregunta);
-			//}
-			/* 
-			$.each(data, function( index, value ) {
-				alert( index + ": " + value.pregunta );
-			
-			  }); */
-			/* 	var preguntaResp =
-					'	<div class="item form-group">' +
-					'    <label  class="control-label col-md-12 col-sm-3 col-xs-12" for="name">PREGUNTA1 <span class="required">*</span>' +
-					'    </label>' +
-					'    <div class="col-md-6 col-sm-6 col-xs-12">' +
-					'      <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">' +
-					'    </div>' +
-					'  </div>'; */
-
-
+		
 			$("#dialogoDetalleExp").dialog({
 				resizable: true,
 				height: "auto",
@@ -1076,7 +1177,7 @@ function verDetalleExp(llave) {//llave -> 0 exp1, 1 exp2 ....
 				position: {
 					my: "left top",
 					at: "left bottom",
-					of: $('#home-tab')
+					of: $('#myTab')
 				},
 				buttons: {
 					"Cancelar": function () {
@@ -1084,58 +1185,36 @@ function verDetalleExp(llave) {//llave -> 0 exp1, 1 exp2 ....
 					}
 				},
 				open: function () {
-
-					$(this).empty();
-					$(this).append(
-						'<div style="height:600px;width:550px; overflow: scroll;" class="x_panel">' +
-						'    <div class="x_title">' +
-						'        <h2><b>Detalle Expediente</b></h2>' +
-						'        <div class="clearfix"></div>' +
-						'    </div>' +
-						'    <div class="x_content">' +
-						'        <form id="idFormPreguntas" class="form-horizontal " novalidate="">' +
-						'	<div class="item form-group">' +
-						'    <label  class="control-label col-md-12 col-sm-3 col-xs-12" for="name">PREGUNTA1 <span class="required">*</span>' +
-						'    </label>' +
-						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
-						'      <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">' +
-						'    </div>' +
-						'  </div>' +
-						'  <div class="item form-group">' +
-						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="email">PREGUNTA2 <span class="required">*</span>' +
-						'    </label>' +
-						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
-						'      <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">' +
-						'    </div>' +
-						'  </div>' +
-						'  <div class="item form-group">' +
-						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="email">PREGUNTA3 <span class="required">*</span>' +
-						'    </label>' +
-						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
-						'      <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12">' +
-						'    </div>' +
-						'  </div>' +
-						'  <div class="item form-group">' +
-						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="number">PREGUNTA4 <span class="required">*</span>' +
-						'    </label>' +
-						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
-						'      <input type="number" id="number" name="number" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">' +
-						'    </div>' +
-						'  </div>' +
-						'  <div class="item form-group">' +
-						'    <label class="control-label col-md-12 col-sm-3 col-xs-12" for="website">PREGUNTA5 <span class="required">*</span>' +
-						'    </label>' +
-						'    <div class="col-md-6 col-sm-6 col-xs-12">' +
-						'      <input type="url" id="website" name="website" required="required" placeholder="www.website.com" class="form-control col-md-7 col-xs-12">' +
-						'    </div>' +
-						'  </div>' +
-						'        </form>' +
-						'    </div>' +
-						'</div>'
-					);
+					$(this).load('interfazPreguntasR.php');
+					$.each(data, function (KEY, VALOR) {
+						$('#idFormPreguntas').append('<div class="item form-group">'+
+						'<label  class="control-label col-md-12 col-sm-3 col-xs-12" for="name">pregunta 1 <span class="required">*</span> </label>'+
+						'<div class="col-md-6 col-sm-6 col-xs-12">'+
+							 '<input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">'+
+						'</div>'+
+					  '</div>');
+					});
+					$(this).load('interfazPreguntasR.php');
 				}
 			});
 
 		}
 	});
-}
+};
+function validarSelect(str){
+	console.log(str);
+	
+	var botn= $('#botonBajaExp').get(0);
+	if(str==""){
+
+		$('input[ name="botonBajaExp"]').attr('disabled','disabled');
+		$('#mensajeSelectCausa').empty();
+		$('#mensajeSelectCausa').append('Selecciona una causa');
+	}else{
+		$('input[ name="botonBajaExp"]').removeAttr('disabled');
+		$('#mensajeSelectCausa').empty();
+		$('#mensajeSelectCausa').append('<span style="color:green;" class="glyphicon glyphicon-ok"></span>');
+
+	}
+	
+}	

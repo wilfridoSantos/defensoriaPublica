@@ -16,7 +16,7 @@
         <div class="x_content">
             <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="dataTables_length" id="datatable-responsive_length">
                             <label>Mostrar
                                 <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
@@ -46,14 +46,19 @@
                             </label>
                         </div>
                     </div>
+                    
+                    
+
                 </div>
                 <div class="row">
-         
+                <div id="dialogoV" class="ui-widget">
+                    </div>
                 </div>
                     <div class="col-sm-12">
-                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                   
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline ui-widget ui-widget-content"
                             cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
-                            <thead>
+                            <thead id="ui-widget-header">
                                 <tr role="row">                                   
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
                                         rowspan="1" colspan="1" style="width: 70px;" aria-label="Usuario: activate to sort column ascending">Usuario</th>
@@ -69,7 +74,7 @@
 
                             </tbody>
                         </table>
-                     
+                        
                     </div>
 
       
@@ -85,5 +90,3 @@
     </div>
 </div>
                                       
-<div id="dialogoV">                                                                
-</div>

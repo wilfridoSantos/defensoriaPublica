@@ -3,7 +3,9 @@ include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
   if($_SESSION["rol"] != 1 ){
      header("Location: ../baseIndex.php");
+     
   }
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +19,8 @@ include "../../Controlador/sesion.php";
     <title>Modulo ADMINISTRADOR</title>
     
 
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/> 
+ <!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -408,3 +410,12 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/js/herramienta.js"></script>
   </body>
 </html>
+<?php
+ if( $_SESSION['post_data'] == 1 ){
+?>
+    <script>$("#menuContainer").load("listarExpedientes.php");</script>
+
+<?php
+  unset($_SESSION['post_data']);
+  }  
+?>

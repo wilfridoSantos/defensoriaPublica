@@ -47,8 +47,7 @@ $(document).ready(function () {
 
 $.ajax({
   type: 'GET',
-  //data: {cod_sec: cod_sec,mes: mes, ano: ano},
-  url: '../../controlador/usuario_servicio/listaUsuario.php?term=busqueda',
+  url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
   success: function (data) {
       Global_usuarios_servicios = data;//parsedData[0].NUMERO;
 //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
