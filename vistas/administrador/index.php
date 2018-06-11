@@ -420,12 +420,36 @@ include "../../Controlador/sesion.php";
   unset($_SESSION['post_data']);
   }  
 ?>
-<script>
-  setTimeout(function() {
+<script type="text/javascript">
+  /* setTimeout(function() {
 //	$.notifyClose();
 console.log("hola");
 
 $.notify("Hello World"); 
-}, 100);
+}, 100); */
+
+
+    $(document).ready(function() {    
+    function changeColor(){
+       console.log("ffffe");
+      // $.notify("Hello World");
+      alert("hoa chavo");
+        if ($('body').hasClass('white')) {
+            $('body').removeClass('white');
+            $('body').addClass('black');
+            $('h1').removeClass('black');
+            $('h1').addClass('white');
+        }
+        else {
+            $('body').removeClass('black');
+            $('body').addClass('white');
+            $('h1').removeClass('white');
+            $('h1').addClass('black');
+        }
+    }
+
+    setInterval(changeColor, 3000);
+});
+
 //$.notify("Hello World");  
 </script>

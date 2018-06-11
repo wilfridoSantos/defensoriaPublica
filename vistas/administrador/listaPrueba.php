@@ -1,6 +1,8 @@
 <title>Modulo Coordinador General</title>
       <script src="../../recursos/js/main.js"></script>
       <script src="../../recursos/js/bootstrap.notify.js"></script>
+      
+      <script src="../../recursos/js/bootstrap.notify.js"></script>
       <!-- 
       <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
  <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 

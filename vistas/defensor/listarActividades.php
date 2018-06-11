@@ -104,12 +104,3 @@
     </div>
   </div>
 </div> 
-<script>
-  setTimeout(function() {
-//	$.notifyClose();
-console.log("hola");
-
-$.notify("Hello World"); 
-}, 100);
-//$.notify("Hello World");  
-</script>
