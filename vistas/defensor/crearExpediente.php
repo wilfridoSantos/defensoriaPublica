@@ -31,12 +31,11 @@ session_start();
                   // console.log(VALOR);
                    varUsuario.push(temp);
                 });
+
  $( function() {
       
   
     function log( message ) {
-
-
       var usuario=message.item.label+" "+message.item.apellidos;
          
       if($("#usuarios").val().indexOf(message.item.id_usuario)===-1){//PRIMERO CHECO SI ESQUE EL USUARIO NO FUE YA INSERTADO
@@ -69,6 +68,7 @@ session_start();
       }   
       $("#project").val("");//SIEMPRE LIMPIA EL INPUT DE BUSQUEDA  // $( "#usuarioSeleccionados" ).scrollTop( 0 );
     }///TERMINA LA FUCION
+    
     $( "#project" ).autocomplete({
       minLength: 0,
       source: varUsuario,
@@ -115,10 +115,11 @@ session_start();
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Nombre de usuario(s)<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input data-error="Seleccione al menos un usuario" type="text" required class="form-control col-md-7 col-xs-12">                          
-                              <div  class="help-block with-errors"></div>
-                        </div>
-                                      
+                          <!-- <input type="text" value="{{curp}}"minlength="18" maxlength="18" name="curp" data-error="debe ser un formato de curp correcto" id="curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required="required" class="form-control col-md-7 col-xs-12">
+                           --><input autocomplete="cualquier-cosa"  data-error="Seleccione al menos un usuario" type="text"  id="project"  required class="form-control col-md-7 col-xs-12">
+                          
+                          <div  class="help-block with-errors"></div></div>
+                      </div></dib>                     
                      <!-- usuario seleccionados -->
                       <div class="form-horizontal form-label-left">   <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue"><span class="required">*</span>
@@ -157,6 +158,8 @@ session_start();
                             <option value="">--SELECCIONE UNA OPCIÓN-</option>
                             <option value="GRAVE">GRAVE</option>
                             <option value="NO GRAVE"> NO GRAVE</option>
+                            
+                            
                           </select>
                           </div></div> 
 

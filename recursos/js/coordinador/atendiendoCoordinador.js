@@ -689,7 +689,7 @@ function generarInformeAct() {
 						if (VALOR.longitud == '' || VALOR.longitud == ' ') {
 							VALOR.longitud = '-96.722320';
 						}
-						var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir()">Ver Localizacion</button>';
+						var boton = '<button type="button" class="btn btn-success botonVerMapa" id="verDireccion" name="verDireccion" onclick = "verMapaDir(this)">Ver Localizacion</button>';
 
 						$('#resultadoInforme').append(
 							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"
@@ -716,11 +716,15 @@ function generarInformeAct() {
 
 
 };
-function verMapaDir() {
-	var lat = parseFloat($('#idlatitud')[0].textContent);
-	var lon = parseFloat($('#idlongitud')[0].textContent);
+function verMapaDir(element) {
+	
+	var mapsLat = $(element).closest('tr').find('#idlatitud').text();
+	var mapsLon = $(element).closest('tr').find('#idlongitud').text();
+	var lat = parseFloat(mapsLat);
+	var lon = parseFloat(mapsLon);
 
-	//console.log(typeOf 72.83624970000005);
+	
+	
 	initialize(lat, lon);
 };
 function initialize(lat, lon) {
@@ -751,7 +755,7 @@ function initialize(lat, lon) {
 			var map = new google.maps.Map(document.getElementById('mapa'), {
 				zoom: 16,
 				center: myLatLng,
-				mapTypeId: google.maps.MapTypeId.SATELLITE
+				mapTypeId: google.maps.MapTypeId.roadmap 
 			});
 
 			var marker = new google.maps.Marker({

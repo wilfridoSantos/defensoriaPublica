@@ -18,7 +18,7 @@
                                 <select id="causa" class="form-control" name="causa" onchange="validarSelect(this.value)">
                                     <option value="">Materia</option>
                                     <option value="Revocación del defensor">Revocación del defensor</option>
-                                    <option value="Fata de interés">Fata de interés</option>     
+                                    <option value="Falta de interés">Falta de interés</option>     
 
                                 </select>
                               </label>

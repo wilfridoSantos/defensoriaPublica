@@ -2,7 +2,7 @@
 //include '../../controlador/conexion.php';
 include_once '../../libreria/conexion.php';
 
-function getUsuarioServicioById($id_expediente){
+function getContraparteById($id_expediente){
     $sql = "select * from usuario_servicio inner join detalle_usuario_expediente using(id_usuario_servicio) where id_expediente='".$id_expediente."'";
     $lista = consulta($sql);
     return $lista;
@@ -16,9 +16,9 @@ function getUsuarioByCurp($curp){
 }
   
     //Definimos la funciones sobre el objeto crear_defensor
-    function crear_usuarioSevicio($objetoEntidad){
+    function crear_contraparte($objetoEntidad){
       
-        $sql = "INSERT INTO usuario_servicio ";
+        $sql = "INSERT INTO contraparte ";
         $sql.= "SET nombre='".$objetoEntidad['nombre']."', ap_materno='".$objetoEntidad['ap_materno']."',";
         $sql.= "ap_paterno='".$objetoEntidad['ap_paterno']."', genero='".$objetoEntidad['genero']."',";
         $sql.= "edad='".$objetoEntidad['edad']."', idioma='".$objetoEntidad['idioma']."',";
@@ -35,8 +35,8 @@ function getUsuarioByCurp($curp){
     }
 
     
-    //Definimos una funcion que acutualice al usuarioServicio
- function actualizar_usuarioServicio($defensor){
+    //Definimos una funcion que acutualice al Contraparte
+ function actualizar_Contraparte($defensor){
         
         $sql = "UPDATE  defensor as d inner join personal as p using(id_personal) inner join juzgado as j using(id_juzgado)".
         "SET p.nombre='".$defensor['nombre']."', p.ap_paterno='".$defensor['ap_paterno']."', p.ap_materno='".$defensor['ap_materno']."',".
@@ -52,7 +52,7 @@ function getUsuarioByCurp($curp){
  }
 
     //Definimos una funcion que borrar defensor
-    function eliminar_usuarioServicio($id_defensor){
+    function eliminar_Contraparte($id_defensor){
         
         //$sql = "DELETE from  defensor where id_defensor = '".$id_defensor."'";
         $sql = "UPDATE defensor as d  inner join personal as p using (id_personal)

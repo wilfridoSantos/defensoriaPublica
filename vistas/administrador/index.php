@@ -19,8 +19,8 @@ include "../../Controlador/sesion.php";
     <title>Modulo ADMINISTRADOR</title>
     
 
- <!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      <link href="../../recursos/css/style.css" rel="stylesheet"/> 
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <script src="../../recursos/js/administrador/notificarAdmin.js"></script>
@@ -409,6 +409,7 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/js/Gestion.js"></script>
     <script src="../../recursos/js/main.js"></script>
     <script src="../../recursos/js/herramienta.js"></script>
+    <script src="../../recursos/js/bootstrap.notify.js"></script>
   </body>
 </html>
 <?php
@@ -420,3 +421,36 @@ include "../../Controlador/sesion.php";
   unset($_SESSION['post_data']);
   }  
 ?>
+<script type="text/javascript">
+  /* setTimeout(function() {
+//	$.notifyClose();
+console.log("hola");
+
+$.notify("Hello World"); 
+}, 100); */
+
+
+    $(document).ready(function() {    
+    function changeColor(){
+       console.log("ffffe");
+      // $.notify("Hello World");
+      alert("hoa chavo");
+        if ($('body').hasClass('white')) {
+            $('body').removeClass('white');
+            $('body').addClass('black');
+            $('h1').removeClass('black');
+            $('h1').addClass('white');
+        }
+        else {
+            $('body').removeClass('black');
+            $('body').addClass('white');
+            $('h1').removeClass('white');
+            $('h1').addClass('black');
+        }
+    }
+
+    setInterval(changeColor, 3000);
+});
+
+//$.notify("Hello World");  
+</script>

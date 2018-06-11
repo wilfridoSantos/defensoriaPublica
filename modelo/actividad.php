@@ -13,7 +13,7 @@ function getActividades(){
                      left join audiencias as aud using(id_actividad)
                      left JOIN visitas_carcelarias as vis using(id_actividad)
                      inner join usuario_servicio as usu using(id_usuario_servicio)
-                     order by id_actividad;";
+                     order     by id_actividad;";
     $consulta = consulta($sql);
     return $consulta;
 }

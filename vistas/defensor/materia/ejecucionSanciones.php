@@ -138,23 +138,10 @@
                           
                           <address>
                             <button id="agregarContraparte" type="button">Agregar Contraparte</button>
-                                         <h1 style="display:none;"id="numExpedienteGlobal"></h1>
+                                         <input style="display:none;"id="numExpedienteGlobal"></input>
                                       </address>
                         </div>
-                        <!-- /.col -->
                         
-                        <!-- /.col -->
-                       <!--  <div class="col-sm-4 invoice-col">
-                          <b>Invoice #007612</b>
-                          <br>
-                          <br>
-                          <b>Order ID:</b> 4F3S8J
-                          <br>
-                          <b>Payment Due:</b> 2/22/2014
-                          <br>
-                          <b>Account:</b> 968-34567
-                        </div> -->
-                        <!-- /.col -->
                       </div>
                       <div class="row">
                         <div class="col-xs-12 table">
@@ -170,6 +157,9 @@
                           
                         </div>
                         <!-- /.col -->
+                        <div id="registroContraparte">
+                       
+                       </div>
                       </div>
                       
                           <!-- <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
@@ -194,7 +184,7 @@
   <!--   <script src="../../recursos/js/custom.min.js"></script> -->
     <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>
-    <script src="../../recursos/js/actividad/gestionActividad.js"></script>
+    <script src="../../recursos/js/defensor/atendiendoExpediente.js"></script>
     
     <script>
 

@@ -82,6 +82,10 @@ $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
 	  
 	},false);
 
+
+
+
+
 	  //MUESTRA LA INFORMACION DE UN USUARIO DEL SERVICIO DE DICHO EXPEDIENTE
 	
 $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
@@ -130,11 +134,6 @@ $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
 	});
 
 	///ABRE LA VISTA PARA DAR DE ALTA A UN USARIO DE SERVICIO
-
-
-	
-
-	
 
 
 
@@ -245,10 +244,8 @@ function muestraSeguimiento(evst) {
 });
 
 var num_expedienteGlobal=90;
-function funcionExpediente(num){
-	console.log("daos son");
-	console.log(this);
-}
+
+
 function cargarMisExpedientes(idpersonal) {
 // alert("atendiendoDef");
 //  $('#tebody').children().remove();
@@ -295,19 +292,20 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 							//console.log("varlor en funcion  ",this);
 							//funcionExpediente
 							
-				  var id_usuario_expedienteGlobal = $(this).closest('tr').find('#num_expediente').text();
+				  var id_usuario_expedienteGlobal = $(this).closest('tr').find('#id_expediente').text();
 			
 							if(materia==="EJECUCION"){
 								console.log("holaEjecucion");
 								 $.ajax({
-									url: "materia/ejecucionSanciones.php",
+									url: "materia/ejecucionSanciones.php?id_expediente="+id_usuario_expedienteGlobal,
 									type: "GET",
 																			
 									success: function (data) {
 										
 										
 										$( "#menuContainer" ).html(data);	
-										$("#numExpedienteGlobal").text("valor "+id_usuario_expedienteGlobal);
+										$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+										$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
 										//console.log($("#numExpedienteGlobal"));
 											
 										//console.log("el numero de exp es ",id_usuario_expedienteGlobal);
@@ -361,6 +359,7 @@ language: {
 
 });
 }
+
 function filtroActividades(str) {
 	console.log(str, ' str del filtro');
 	//var filtro2 = $('#filtro2')[0].value;
@@ -462,7 +461,14 @@ function saveObservacion(idAct){
 function verFotoVisita(botn) {
 	var fotoVis = botn.value;
 	console.log(botn.value, ' valor foto verFoto ');
-	$("#dialogoV").dialog({
+
+	$('#exampleModalLong').modal('show');
+	$('#miActividad').empty();
+	  $('#miActividad').append(
+	    '<div class="col-sm-6 invoice-col">' +
+	  '<img class="img-quad img-responsive" src="../../recursos/archivo/vistas'+fotoVis+'" alt="" class="img-quad ">' +
+  '</div>');
+	/* $("#dialogoV").dialog({
 		resizable: true,
 		height: 500,
 		width: 500,
@@ -494,7 +500,7 @@ function verFotoVisita(botn) {
 			
 			 $(this).append(foto); 
 		}
-	});
+	}); */
 
 }
 

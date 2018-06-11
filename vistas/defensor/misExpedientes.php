@@ -59,11 +59,6 @@ $idpersonal=$_SESSION['personal'];
 
 
 
-      
-
-
-
-
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -86,9 +81,9 @@ $idpersonal=$_SESSION['personal'];
                       <thead>
                         <tr > 
                         <th >    Num. Expediente     </th>
-                        <th >    Estado   </th>
-                        <th >   Delito </th>
-                        <th >    Gravedad del delito    </th>
+                        <th >   Delito   </th>
+                        <th >   Grado del delito </th>
+                        <th >   Observaciones   </th>
                         <th >    Accion     </th>
                         </thead>
                       <tbody id='tebody' >
@@ -97,25 +92,10 @@ $idpersonal=$_SESSION['personal'];
                     
                       </tbody>
                     </table>
-                  <!--   <div id="miUsuarioServicio" class="x_content" title="infomación">
-                    <table  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                    <thead>
-                        <tr > 
-                        <th >    Nombre    </th>
-                        <th >     Apellido paterno </th>
-                        <th >     Apellido Materno </th>
-                        <th >    Correo     </th>
-                        <th >    Teléfono     </th></tr>
-                        </thead>
-                      <tbody id="datosUsuarioServicio">
-                        
-                      </tbody>
-                    </table>
-
-                  </div> -->
+                  
                  
                     </div></div>
-                     
+                    
                     </div>
 					
 					
