@@ -448,7 +448,7 @@ $.notify("Hello World");
         }
     }
 
-    setInterval(changeColor, 3000);
+    //setInterval(changeColor, 3000);
 });
 
 //$.notify("Hello World");  
