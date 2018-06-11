@@ -35,34 +35,40 @@ session_start();
       
   
     function log( message ) {
+
+
       var usuario=message.item.label+" "+message.item.apellidos;
-      var tr=document.createElement("tr");
-//      $( "<tr><td>" ).text( message ).prependTo( "#usuarioSeleccionados" );
-      var td=document.createElement("td");
-          tr.appendChild(td);
-          console.log(message);
-          
-          // $( td ).text( message ).prependTo( "#usuarioSeleccionados" );
-           $( td ).text( usuario );// A ESTE TD LE ASIGO AL USUARIO DEL SERVICIO
-           td.setAttribute("id_usuario_eliminar",message.item.id_usuario);
-           //td.setAttribute("class","id_usuario_servicio");
-           //td.setAttribute("name","id_usuario");
-
-
-           
-       $("#usuarioSeleccionados").append(tr);
-       var td2=document.createElement("td"); 
-           if($("#usuarios").val()==="")//? message.item.id_usuario: $("#usuarios").val()+","message.item.id_usuario);
-               $("#usuarios").val(message.item.id_usuario);
-            else  
-           $("#usuarios").val($("#usuarios").val()+","+message.item.id_usuario);
          
-           $(td2).append("<button type='button' class='btn btn-primary eliminar col-md-7 col-xs-12'><span class='glyphicon glyphicon-remove' aria-hidden='true'> </span> </button>");   
-      
-         tr.appendChild(td2);
-      $("#project").val("");
-     // $( "#usuarioSeleccionados" ).scrollTop( 0 );
-    }
+      if($("#usuarios").val().indexOf(message.item.id_usuario)===-1){//PRIMERO CHECO SI ESQUE EL USUARIO NO FUE YA INSERTADO
+        
+            var tr=document.createElement("tr");
+    //      $( "<tr><td>" ).text( message ).prependTo( "#usuarioSeleccionados" );
+          var td=document.createElement("td");
+              tr.appendChild(td);
+              console.log(message);
+              
+              // $( td ).text( message ).prependTo( "#usuarioSeleccionados" );
+              $( td ).text( usuario );// A ESTE TD LE ASIGO AL USUARIO DEL SERVICIO
+              td.setAttribute("id_usuario_eliminar",message.item.id_usuario);
+              //td.setAttribute("class","id_usuario_servicio");
+              //td.setAttribute("name","id_usuario");
+
+
+              
+          $("#usuarioSeleccionados").append(tr);
+          var td2=document.createElement("td"); 
+              if($("#usuarios").val()==="")//? message.item.id_usuario: $("#usuarios").val()+","message.item.id_usuario);
+                  $("#usuarios").val(message.item.id_usuario);
+                else  
+              $("#usuarios").val($("#usuarios").val()+","+message.item.id_usuario);
+            
+              $(td2).append("<button type='button' class='btn btn-primary eliminar col-md-7 col-xs-12'><span class='glyphicon glyphicon-remove' aria-hidden='true'> </span> </button>");   
+          
+            tr.appendChild(td2);
+          $("#project").val("");
+      }   
+      $("#project").val("");//SIEMPRE LIMPIA EL INPUT DE BUSQUEDA  // $( "#usuarioSeleccionados" ).scrollTop( 0 );
+    }///TERMINA LA FUCION
     $( "#project" ).autocomplete({
       minLength: 0,
       source: varUsuario,
@@ -101,7 +107,7 @@ session_start();
                   </div>
                   <div class="x_content">
                     <br/>
-                    <form  id="myform"  data-toggle="validator" role="form" class="" action ="../../controlador/expediente/registrarExpediente.php?tipo=html" object="defensor" method="post">
+                    <form  autocomplete="off" id="myform"  data-toggle="validator" role="form" class="" action ="../../controlador/expediente/registrarExpediente.php?tipo=html" object="defensor" method="post">
 
                    
                       
@@ -118,6 +124,7 @@ session_start();
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue"><span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
+                          
                           <table required="" id="tablaAsinacionExpedienteusuario" class="table table-striped ">
                           <tbody  required="" id="usuarioSeleccionados" style="height: 200px; width:915px; overflow: auto;" class=" ui-widget-content"></tbody>
                             
@@ -130,15 +137,15 @@ session_start();
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Numero de expediente<span class=""></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input novalidate type="text"  name="estado" id="estado"  class="form-control col-md-7 col-xs-12">
-                        </div>
+                          <input required  onkeyup="mayusculas(event, this)" type="text"  name="expediente" id="expediente" data-error="Se requiere de un numero de expediente" class="form-control col-md-7 col-xs-12">
+                          <div  class="help-block with-errors"></div> </div>
                       </div></div>
 
                        <div class="form-horizontal form-label-left">   <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="delito">Delito<span class=""></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input novalidate type="text" pattern="[A-Za-z ]+"  onkeyup="mayusculas(event, this)" onmouseout="verificarDelito(event,this)" onblur="verificarDelito(event,this)"   name="delito" id="delito" data-error="Solo letras"   class="form-control col-md-7 col-xs-12">
+                          <input required type="text" pattern="[A-Za-z ]+"  onkeyup="mayusculas(event, this)" onmouseout="verificarDelito(event,this)" onblur="verificarDelito(event,this)"   name="delito" id="delito" data-error="Solo letras"   class="form-control col-md-7 col-xs-12">
                           <div  class="help-block with-errors"></div>  </div>
                       </div></div>
 

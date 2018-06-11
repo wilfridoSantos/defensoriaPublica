@@ -133,7 +133,29 @@
                         
                         <!-- /.col -->
                       </div>
-                   
+                      <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                          
+                          <address>
+                            <button id="agregarContraparte" type="button">Agregar Contraparte</button>
+                                         <h1 style="display:none;"id="numExpedienteGlobal"></h1>
+                                      </address>
+                        </div>
+                        <!-- /.col -->
+                        
+                        <!-- /.col -->
+                       <!--  <div class="col-sm-4 invoice-col">
+                          <b>Invoice #007612</b>
+                          <br>
+                          <br>
+                          <b>Order ID:</b> 4F3S8J
+                          <br>
+                          <b>Payment Due:</b> 2/22/2014
+                          <br>
+                          <b>Account:</b> 968-34567
+                        </div> -->
+                        <!-- /.col -->
+                      </div>
                       <div class="row">
                         <div class="col-xs-12 table">
                           <div id="preguntas">

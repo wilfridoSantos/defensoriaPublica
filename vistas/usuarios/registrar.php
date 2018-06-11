@@ -1,5 +1,8 @@
 <?php 
   include '../../controlador/juzgado/actividad_juzgado.php';
+
+
+  
 ?>
 <script src="../../recursos/js/herramienta.js"></script>
 <script>
@@ -97,39 +100,39 @@
 
 
  
+ 
+
+
  function validarRfc() {
                         
-   var rfcNombre=document.getElementById("nombre").value;
-   var rfcApaterno=document.getElementById('aPaterno').value;
-   var rfcAmaterno=document.getElementById('aMaterno').value;
-   var rfcFecha= document.getElementById("fechaNacimiento").value.split('-');
+                        var rfcNombre=document.getElementById("nombre").value;
+                        var rfcApaterno=document.getElementById('aPaterno').value;
+                        var rfcAmaterno=document.getElementById('aMaterno').value;
+                        var rfcFecha= document.getElementById("fechaNacimiento").value.split('-');
+                        
+                         var query="apellidoM="+rfcAmaterno+"&apellidoP="+rfcApaterno+"&nombre="+rfcNombre+"&dia="+rfcFecha[2]+"&mes="+rfcFecha[1]+"&anno="+rfcFecha[0]
+                         url="../../controlador/CalcularRfc.php?"+ query;//apellido_materno=GARCIA&apellido_paterno=HERNANDEZ&fecha=1988-03-17&nombre=OTHON&solo_homoclave=0"
    
-    var query="apellido_materno="+rfcAmaterno+"&apellido_paterno="+rfcApaterno+"&fecha="+rfcFecha.join('-')+"&nombre="+rfcNombre+"&solo_homoclave="+0
-    url="https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?"+ query;//apellido_materno=GARCIA&apellido_paterno=HERNANDEZ&fecha=1988-03-17&nombre=OTHON&solo_homoclave=0"
-   
-   
-    $.ajax({
-			url: url,
-			type: "GET",
-		//	data: "cveCurp=SALW941012HOCNPL04",
-      beforeSend: function(xhrObj){
-                xhrObj.setRequestHeader("Content-Type","application/json");
-                xhrObj.setRequestHeader("Accept","application/json");
-                xhrObj.setRequestHeader("X-Mashape-Key","p1y5uv5OzAmshsT2As9lNDKQnONZp15VuBJjsnBGrbwX8XO0qY");
-
-        },
-			success: function (data) {
-         var rfc=data.response.data.rfc;
-         var claserfc=document.getElementById("rfc");
-      claserfc.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9][A-Z0-9][A-Z0-9]");
-
-      }
-    });  
-     // console.log(curp.substr(0,13));
-      var claseCurp=document.getElementById("rfc");
-     // claseCurp.setAttribute("pattern",rfc.substr(0,10)+"[A-Z0-9]{3}");
-     
- }
+                         $.ajax({
+                           url: url,
+                           type: "GET",
+                         //	data: "cveCurp=SALW941012HOCNPL04",
+                           beforeSend: function(xhrObj){
+                                     xhrObj.setRequestHeader("Content-Type","application/json");
+                                     xhrObj.setRequestHeader("Accept","application/json");
+                            
+                             },
+                           success: function (data) {
+                              var rfc=data;
+                              var claserfc=document.getElementById("rfc");
+                              console.log(rfc);
+                              
+                           claserfc.setAttribute("pattern",rfc.trim());
+                     
+                           }
+                         });  
+                          
+                      }
 </script>
 
 <script>
@@ -315,7 +318,7 @@ function agrega(){
                        <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label></h4>
                         <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="validarCurps()" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="mayusculas(event, this)" onblur="validarCurps()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> 
                         </div>
                       </div>
@@ -341,24 +344,13 @@ function agrega(){
                         </div>
                       </div> 
 
-                      
-                     
-                      
-                     
-
-                  
-                       
-                      
-                    
-                           
-                 
                     
 
                     <div id="materia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Materia <span class="required">*</span>
                         </label>
                         <div class="col-md-8 col-sm-6 col-xs-12">
-                          <select name="materia"onkeyup="verificarMateria(event,this)" onblur="verificarMateria(event,this)" class="select2_group form-control ">
+                          <select required name="materia"onkeyup="verificarMateria(event,this)" onblur="verificarMateria(event,this)" class="select2_group form-control ">
                              <option value="">- Seleccione -</option> 
                              <option value="Civil">Civil</option> 
                              <option value="Familiar">Familiar</option>  
@@ -366,34 +358,51 @@ function agrega(){
                              <option value="Agrario">Agrario</option>  
                              <option value="Mercantil">Mercantil</option>  
                              <option value="Amparo">Amparo</option>  
+                             <option value="Ejecucion">Ejecución de sanciones</option>  
+                             <option value="Mixto">Mixto</option>  
+                              
                           </select>
                           </div>
                       </div>
                                           
                       
                    
-
+                      
                      
 
 
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                    
+
+                         <div id="instancia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
+                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Instancia <span class="required">*</span>
+                         </label>
+                         <div class="col-md-8 col-sm-6 col-xs-12">
+                          <select name="instancia" required class="select2_group form-control ">
+                             <option value="1">1 Instancia</option>  
+                             <option value="2">2 Instancia</option>  
+                          </select>
+                         </div>
+                     </div>
+
+                      <div id="sistema" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
+                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Sistema <span class="required">*</span>
+                         </label>
+                         <div class="col-md-8 col-sm-6 col-xs-12">
+                          <select name="sistema" required class="select2_group form-control ">
+                             <option value="ORAL"> Oral</option>  
+                             <option value="TRADICIONAL"> Tradicional</option>  
+                          </select>
+                         </div>
+                     </div>
+                   
+                    
+                     <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Contraseña<span class="required">*</span></label></h4> 
                           <div class="col-md-8 col-sm-9 col-xs-12">
                             <input type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" data-error="debe contener al menos  una mayúscula y número con minimo 8 carácter"  min="8" max="20"  class="form-control"  required placeholder="contraseña" name="password">
                           <div  class="help-block with-errors"></div>
                          </div>
                       </div>
-                    
-                      <div id="instancia" class="item form-group col-md-6 col-sm-6 col-xs-12 form-group">
-                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="last-name">Instancia <span class="required">*</span>
-                         </label>
-                         <div class="col-md-8 col-sm-6 col-xs-12">
-                          <select name="instancia"  class="select2_group form-control ">
-                             <option value="1">1 Instancia</option>  
-                             <option value="2">2 Instancia</option>  
-                          </select>
-                         </div>
-                     </div>
                    
                     
 

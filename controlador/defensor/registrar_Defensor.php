@@ -41,7 +41,7 @@ $personal = Array(
       $didigir="registrar_defensor";
       if(!vericar_coordinador($_POST['puesto'])){        
         crear_personal($personal);
-        $id_materia= get_materia_materia_instancia($_POST["materia"],$_POST["instancia"]);
+        $id_materia= get_materia_instancia_sistema($_POST["materia"],$_POST["instancia"],$_POST["sistema"]);
        //  print_r($id_materia);
         $defensor=Array(
           "id_juzgado"=>$_POST['adscripcion'],
@@ -73,7 +73,7 @@ $personal = Array(
             $_SESSION['mensaje'] = $mensaje;
             $_SESSION['dirigir']=$didigir;
 
-          header("location: ../../vistas/administrador/index.php");
+         header("location: ../../vistas/administrador/index.php");
         }
         else{
             echo "json";  

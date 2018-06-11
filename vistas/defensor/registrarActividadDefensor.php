@@ -45,6 +45,7 @@
         $( "#project" ).val(ui.item.label+" "+ ui.item.apellidos );
       
         $( "#curp" ).val(ui.item.curp );
+        $( "#curpMostrado" ).val(ui.item.curp );
         return false;
       }
     })
@@ -153,7 +154,7 @@ var ul=document.createElement('li');
 
                    
                    <div class="form-horizontal form-label-left">                     <div class="form-group ">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Nombre de usuario(s)<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Nombre de usuario<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <!-- <input type="text" value="{{curp}}"minlength="18" maxlength="18" name="curp" data-error="debe ser un formato de curp correcto" id="curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required="required" class="form-control col-md-7 col-xs-12">
@@ -162,12 +163,24 @@ var ul=document.createElement('li');
                           <div  class="help-block with-errors"></div></div>
                       </div></dib>
 
-                     <div class="form-horizontal form-label-left">     <div class="form-group ">
+                      <!-- ESTE CURP SE OCULTA Y ES EL QUE SE ENVIA AL POST -->
+                     <div id="div_curp"  class="form-horizontal form-label-left">     <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="curp">Curp de usuario<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <!-- <input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)">
-                           --><input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" >
+                           --><input type="text"  minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" >
+                          <div  class="help-block with-errors"></div></div> 
+                      </div>
+                      </div>
+
+                      <!-- ESTE CURP SE OCULTA Y ES EL NO QUE SE ENVIA AL POST -->
+                     <div  class="form-horizontal form-label-left">     <div class="form-group ">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="curp">Curp de usuario<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <!-- <input type="text" minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curp" id="curp" required="required" class="form-control col-md-7 col-xs-12" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)">
+                           --><input type="text"  disabled minlength="18" data-error="formato invalido" data-error="fecha invalida" maxlength="18" name="curpMostrado" id="curpMostrado" novalidate class="form-control col-md-7 col-xs-12" >
                           <div  class="help-block with-errors"></div></div> 
                       </div>
                       </div>
@@ -195,14 +208,14 @@ var ul=document.createElement('li');
         
 
 
-                      <div class="form-horizontal form-label-left">   <div class="form-group ">
+                      <div  class="form-horizontal form-label-left">   <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Resultado u observación<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                          <!--  <input type="textArea" name="resultado"  minlength="10" maxlength="200" name="expediente" id="expediente"  class="form-control col-md-7 col-xs-12">
-                          --> <textarea id="resultado" name="resultado" onclick="verificacionActividad()" pattern="[a-z0-9.,:áéíóú ]+" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describre el resultado u observaciones"></textarea>
+                          --> <textarea id="resultado" name="resultado" onclick="verificacionActividad()" pattern="([A-Z|a-z])[a-z0-9.,:áéíóúñ ]+" data-error="solo numeros o letras en minisculas con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describre el resultado u observaciones"></textarea>
                           <div  class="help-block with-errors"></div>
-                      </div></div></div>
+                      </div></div></div> 
 
                   <div id="mycomprobante" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="comprobante" class="control-label col-md-3 col-sm-3 col-xs-12 " >Comprobante <span class="required">*</span></label>
@@ -215,6 +228,7 @@ var ul=document.createElement('li');
                               </div> 
                       </div>
                       </div>
+                   
                             <!--// se requiere para identificar al personal  -->
                        <div id="personal" class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " ></label>
@@ -261,6 +275,7 @@ $('#myform').validator()
 $('#myubicacion').hide()
 $('#personal').hide()
 $('#mycomprobante').hide()
+$('#div_curp').hide()
 
 $('#resultado').keyup(validateTextarea);
 
