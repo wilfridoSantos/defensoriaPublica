@@ -9,8 +9,8 @@
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
       <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/>
-
+      <!-- <link href="../../recursos/css/style.css" rel="stylesheet"/>
+ -->
       
       <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">

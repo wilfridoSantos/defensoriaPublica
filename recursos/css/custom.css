@@ -2413,6 +2413,13 @@ a.btn-warning,
 a.btn-danger {
     color: #fff
 }
+.btn-imagenCambioDef{
+  padding-left: 20px;
+   padding-right: 20px;
+   padding-top: 20px;
+    background: url(../imagesButtons/boton1Prueba.png) no-repeat;
+    border: 1px solid #000040
+}
 .btn-success {
     background: #26B99A;
     border: 1px solid #169F85

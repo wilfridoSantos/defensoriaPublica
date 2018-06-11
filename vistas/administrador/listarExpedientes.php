@@ -11,38 +11,25 @@ include '../../controlador/defensor/controladorListarExp.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- Bootstrap -->
-<link href="../../recursos/vendors/jsPDF-1.3.2/examples/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="../../recursos/vendors/jsPDF-1.3.2/examples/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
-		<!-- Editor CSS -->
-		<link href="../../recursos/vendors/jsPDF-1.3.2/examples/css/editor.css" rel="stylesheet">
-
-		<!-- See closing body for JS -->
-
-		<script src="http://use.edgefonts.net/source-code-pro.js"></script>
     <title>Modulo Coordinador General</title>
 
-<script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
+    <script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
  	<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
-
-      <script src="../../recursos/js/main.js"></script>
-      <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
-      <script  type="text/javascript" src="../../recursos/vendors/jsPDF-1.3.2/dist/jspdf.debug.js"></script>
-      <script  type="text/javascript" src="../../recursos/vendors/jsPDF-1.3.2/dist/jspdf.min.js"></script>
-      <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <!-- Font Awesome -->
+    <script src="../../recursos/js/main.js"></script>
+    <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../../recursos/css/custom.css" rel="stylesheet"/>
-    <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-
-      <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+    <link href="../../recursos/css/style.css" rel="stylesheet"/>
+    <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
       
-      <script>showUser(3)</script>
+    <script>showUser(3)</script>
+    
 <body>
       <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
@@ -62,7 +49,7 @@ include '../../controlador/defensor/controladorListarExp.php';
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-       
+           
             <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
                     <div class="col-sm-2">
@@ -85,6 +72,7 @@ include '../../controlador/defensor/controladorListarExp.php';
                     <option value="2">Inactivos</option>
                     <option value="3" selected="selected">Todos</option>                                  \
                   </select></label>
+
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -116,10 +104,12 @@ include '../../controlador/defensor/controladorListarExp.php';
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1"
                                         style="width: 71px;" aria-label="Defensor: activate to sort column descending" aria-sort="ascending">NUM EXPEDIENTE</th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                    <th width="100px" class="sorting" tabindex="0" aria-controls="datatable-responsive"
                                         rowspan="1" colspan="1" style="width: 70px;" aria-label="Usuario: activate to sort column ascending">MATERIA</th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 155px;" aria-label="Fecha registro: activate to sort column ascending">FECHA DE REGISTRO</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
+                                        colspan="1" style="width: 155px;" aria-label="Estado: activate to sort column ascending">ESTADO EXP.</th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 66px;" aria-label="Observaciones: activate to sort column ascending">OBSERVACIONES</th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
@@ -175,6 +165,9 @@ include '../../controlador/defensor/controladorListarExp.php';
         </div>
     </div>
 </div>
+            <div id="dialogoCambio" > </div>
+            <div id="dialogoPreguntas" style="display:none;"> </div>
+            <div id="dialogoBaja" style="display:none;"> </div>
 
           </body>
           </html>

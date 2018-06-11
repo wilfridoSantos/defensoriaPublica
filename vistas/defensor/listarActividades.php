@@ -39,14 +39,19 @@
                             </label>
                         </div>
                     </div>
+                    
+                    
+
                 </div>
                 <div class="row">
-         
+                <div id="dialogoV" class="ui-widget">
+                    </div>
                 </div>
                     <div class="col-sm-12">
-                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                   
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline ui-widget ui-widget-content"
                             cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
-                            <thead>
+                            <thead id="ui-widget-header">
                                 <tr role="row">                                   
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
                                         rowspan="1" colspan="1" style="width: 70px;" aria-label="Usuario: activate to sort column ascending">Usuario</th>
@@ -62,7 +67,7 @@
 
                             </tbody>
                         </table>
-                     
+                        
                     </div>
 
       
@@ -87,7 +92,7 @@
         </button>
       </div>
       <div class="modal-body">
-       <div id="    " class="table-responsive x_content" title="infomación">
+       <div id="miActividad" class="table-responsive x_content" title="infomación">
 
 
                   </div>
@@ -99,3 +104,12 @@
     </div>
   </div>
 </div> 
+<script>
+  setTimeout(function() {
+//	$.notifyClose();
+console.log("hola");
+
+$.notify("Hello World"); 
+}, 100);
+//$.notify("Hello World");  
+</script>

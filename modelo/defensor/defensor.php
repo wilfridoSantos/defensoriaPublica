@@ -40,8 +40,8 @@ function getExpedientesById($id_defensor){
     p.colonia as coloniaDef, p.municipio as muniDef,p.id_personal,
      e.num_expediente, m.materia,e.fecha_inicio, e.id_expediente,e.fecha_final,e.nombre_delito,
     e.grado_delito,e.estado, e.incidente,e.observaciones
-    from personal_campo as d inner join expediente as e using(id_personal)
-    inner join usuario_servicio as u using(id_usuario_servicio)
+    from expediente as e inner join personal as p  using(id_personal)
+    inner join personal_campo using(id_personal)
     inner join materia as m using(id_materia)
     where id_cargo=4 and id_personal='".$id_defensor."' ";    
         $lista = consulta($sql);

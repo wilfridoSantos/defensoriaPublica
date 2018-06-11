@@ -3,7 +3,9 @@ include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
   if($_SESSION["rol"] != 1 ){
      header("Location: ../baseIndex.php");
+     
   }
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -406,5 +408,24 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/js/Gestion.js"></script>
     <script src="../../recursos/js/main.js"></script>
     <script src="../../recursos/js/herramienta.js"></script>
+    <script src="../../recursos/js/bootstrap.notify.js"></script>
   </body>
 </html>
+<?php
+ if( $_SESSION['post_data'] == 1 ){
+?>
+    <script>$("#menuContainer").load("listarExpedientes.php");</script>
+
+<?php
+  unset($_SESSION['post_data']);
+  }  
+?>
+<script>
+  setTimeout(function() {
+//	$.notifyClose();
+console.log("hola");
+
+$.notify("Hello World"); 
+}, 100);
+//$.notify("Hello World");  
+</script>

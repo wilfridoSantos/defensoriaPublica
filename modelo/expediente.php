@@ -64,8 +64,9 @@ function listar_expedientes_x_estado($estado){
                  inner join materia using(id_materia)where id_personal<0";
     break;
     case 3: 
-      $sql="SELECT * FROM expediente inner join personal_campo using(id_personal) inner join personal using(id_personal)
-       inner join materia using(id_materia)";
+      $sql="SELECT e.id_expediente, e.num_expediente, m.materia, e.fecha_inicio, e.estado, p.id_personal, e.observaciones
+       FROM expediente as e inner join personal_campo as pc using(id_personal) inner join personal as p using(id_personal)
+       inner join materia as m  using(id_materia)";
     break;
   }
   $lista=consulta($sql);
@@ -115,7 +116,21 @@ function listar_expedientes_inactivos_materia($q2){
   $lista=consulta($sql);
   return $lista;
 }
+function updateExpediente($id_defensor, $id_expediente){
+  $sql = "update expediente set id_personal='".$id_defensor."'";
+  $sql.=" where id_expediente='".$id_expediente."'";
+  $lista = consulta($sql);
+  //echo $sql;
+  return $lista;
 
+}
+function bajaExpediente($id_expediente, $motivacion){
+    $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
+          where id_expediente='".$id_expediente."'";
+          $lista = consulta($sql);
+          //echo $sql;
+          return $lista;
+}
  /* function listar_expediente_x_defensor($idDefensor){
    
     $sql = "select exp.estado,exp.fecha_final,exp.fecha_inicio, exp.num_expediente, exp.materia,exp.id_usuario_servicio,defensor.id_juzgado   defensor.estado from expediente as exp inner join 
