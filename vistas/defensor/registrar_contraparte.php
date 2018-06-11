@@ -100,6 +100,9 @@ function agrega(){
       console.log(curp.substr(0,13));
       var claseCurp=document.getElementById("curp");
       claseCurp.setAttribute("pattern",curp.substr(0,13)+'[A-Za-z]{3}[0-9]{2}');
+      var id_contraparte=document.getElementById("id_contraparte");
+          id_contraparte.value=curp
+      
      
  }
 </script>
@@ -142,7 +145,7 @@ function agrega(){
                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Telefono<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" required placeholder="" name="telefono">
+                          <input type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" novalidate placeholder="" name="telefono">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
 
@@ -157,7 +160,7 @@ function agrega(){
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input type="text"  data-error="correo invalido" class="form-control" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" required placeholder="Email" name="email">
+                              <input type="text"  data-error="correo invalido" class="form-control" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$"  novalidate placeholder="Email" name="email">
                               <div  class="help-block with-errors"></div></div>
                       </div>   
 
@@ -171,14 +174,14 @@ function agrega(){
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >calle<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" required placeholder="" name="calle">
+                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" novalidate placeholder="" name="calle">
                           <div  class="help-block with-errors"></div></div>
                       </div>
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Entidad federativa</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                      <select id="entidad" name="estado" class="select2_group form-control textbox">
+                      <select id="entidad" required name="estado" class="select2_group form-control textbox">
                       <option value="">- Seleccione -</option> 
                       <option value="AS">AGUASCALIENTES</option>
                        <option value="BC">BAJA CALIFORNIA</option>
@@ -197,50 +200,75 @@ function agrega(){
                      
                       
 
-                       <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
-                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
-                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input id="fechaNacimiento" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaNacimiento">
-                                 <div  class="help-block with-errors"></div>
-                              </div> 
-                      </div>  
+                    
 
-
-
-                      
-                      
-
-
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Sexo<span class="required">*</span></label>
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Genero<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-
-                       <select required id="genero" onkeyup="validarCurps()" onblur="validarCurps()" name="genero"  class="select2_group form-control">
+                       <select novalidate id="genero"  name="genero"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
-                             <option value="masculino">masculino</option> 
-                             <option value="masculino">femenino</option>   
+                             <option value="lesbico">Lésbico</option> 
+                             <option value="gay">Gay</option>   
+                             <option value="bisexual">Bisexual</option>   
+                             <option value="transexual">Transexual</option>   
+                             <option value="Transgenero">Transgénero</option>   
+                             <option value="Travesti">Travesti </option>   
+                             <option value="Intersexual">Intersexual </option>
                           </select>
 
                         </div>
                       </div>
 
-             
-                 
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                                <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia</label>
+                            </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                            <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  novalidate placeholder="" name="etnia">
+                                </div>
+                            </div>
+                    
+
+                                
 
                      <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" onkeyup="validarCurps()" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" onkeyup="validarCurps()" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  novalidate placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
                
 
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia</label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                       <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  novalidate placeholder="" name="etnia">
-                        </div>
-                      </div>
+                     
+
+                           <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                                    <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Sexo<span class="required">*</span></label>
+                                    </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                    <select required id="sexo" onkeyup="validarCurps()" onblur="validarCurps()" name="sexo"  class="select2_group form-control">
+                                            <option value="">- Seleccione -</option> 
+                                            <option value="masculino">masculino</option> 
+                                            <option value="femenino">femenino</option>   
+                                        </select>
+
+                                        </div>
+                           </div>
+
+                           <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                                    <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Tipo de contraparte<span class="required">*</span></label>
+                                    </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                    <select required id="tipo_contraparte" name="tipo_usuario"  class="select2_group form-control">
+                                            <option value="">- Seleccione -</option> 
+                                            <option value="Demandado">Demandado</option> 
+                                            <option value="Victima">Victima</option>   
+                                            <option value="Apelante">Apelante</option>   
+                                            <option value="Apelado">Apelado</option>   
+                                            <option value="Actor">Actor</option>   
+                                            <option value="Ofendido">Ofendido</option>   
+                                            <option value="Terceros">Terceros</option>   
+                                    </select>
+
+                                        </div>
+                           </div>
                                       
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma</label>
@@ -249,7 +277,18 @@ function agrega(){
                          </div>
                       </div>
                     
-
+                      <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
+                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                              <input id="fechaNacimiento" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaNacimiento">
+                                 <div  class="help-block with-errors"></div>
+                              </div> 
+                      </div> 
+                      
+                      <input type="text"  id="id_contraparte" name="id_contraparte" class="form-control  text-uppercase"   placeholder="" >
+                
+                      <input type="text"  id="id_expediente_contraparte" name="id_expediente" class="form-control  text-uppercase"   placeholder="" >
+                
                     
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -267,7 +306,7 @@ function agrega(){
 
     <!-- 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> -->
-    <script src="../../recursos/js/custom.min.js"></script>
+<!--     <script src="../../recursos/js/custom.min.js"></script> -->
     <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>
 <!-- Google Analytics -->
@@ -278,4 +317,4 @@ $('#myform').validator()
 
 
 
-</script>s
+</script>

@@ -31,12 +31,11 @@ session_start();
                   // console.log(VALOR);
                    varUsuario.push(temp);
                 });
+
  $( function() {
       
   
     function log( message ) {
-
-
       var usuario=message.item.label+" "+message.item.apellidos;
          
       if($("#usuarios").val().indexOf(message.item.id_usuario)===-1){//PRIMERO CHECO SI ESQUE EL USUARIO NO FUE YA INSERTADO
@@ -69,6 +68,7 @@ session_start();
       }   
       $("#project").val("");//SIEMPRE LIMPIA EL INPUT DE BUSQUEDA  // $( "#usuarioSeleccionados" ).scrollTop( 0 );
     }///TERMINA LA FUCION
+    
     $( "#project" ).autocomplete({
       minLength: 0,
       source: varUsuario,

@@ -200,7 +200,7 @@ function agrega(){
                         <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nombre<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni mánimo de 4" placeholder="Nombre" name="nombre">
+                            <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+" onkeyup="mayusculas(event, this)" maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni mánimo de 4" placeholder="Nombre" name="nombre">
                               <div  class="help-block with-errors"></div>
                             </div>
                        </div>
@@ -213,7 +213,7 @@ function agrega(){
                       <div class="item form-group  col-md-6 col-sm-6 col-xs-12 ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Apellido Paterno<span class="required">*</span></label>
                          </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" id="aPaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+" data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
+                            <input type="text" id="aPaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+" onkeyup="mayusculas(event, this)" data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4"  required class="form-control  text-uppercase" placeholder="Apellido Paterno" name="apellido_paterno">
                             <div  class="help-block with-errors"></div></div>
                        </div>
                       <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -228,7 +228,7 @@ function agrega(){
                         <div class="item form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
                           </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" id="aMaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
+                            <input type="text" id="aMaterno" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  onkeyup="mayusculas(event, this)" data-error="solo letras no máximo de 40 ni mánimo de 4" autofocus="autofocus" maxlength="40" minlength="4" required class="form-control  text-uppercase" placeholder="Apellido Materno" name="apellido_materno">
                             <div  class="help-block with-errors"></div> </div>
                        </div> 
                    
@@ -359,6 +359,7 @@ function agrega(){
                              <option value="Mercantil">Mercantil</option>  
                              <option value="Amparo">Amparo</option>  
                              <option value="Ejecucion">Ejecución de sanciones</option>  
+                             <option value="Adolescente">Adolescentes</option>  
                              <option value="Mixto">Mixto</option>  
                               
                           </select>

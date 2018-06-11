@@ -25,7 +25,8 @@
             "etnia"            =>$_POST['etnia'],
             "idioma"          =>$_POST['idioma'],         
             "fecha"          =>"",         
-            "genero"         =>$_POST['genero']
+            "genero"         =>$_POST['genero'],
+            "sexo"         =>$_POST['sexo']
         );
 
         $usuario =  array_map( "cadenaToMayuscula",$usuario);
