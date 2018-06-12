@@ -4,7 +4,7 @@
     $contenido = json_encode($listaDef);
 
     if(isset($_GET['term'])){//muestro todo los usuario para las busquedas del defensor
+
            echo $contenido;
        }
-
 ?>

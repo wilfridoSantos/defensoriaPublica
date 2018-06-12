@@ -430,7 +430,7 @@ $.notify("Hello World");
 }, 100); */
 
 
-    $(document).ready(function() {    
+    /* $(document).ready(function() {    
     function changeColor(){
        console.log("ffffe");
       // $.notify("Hello World");
@@ -450,7 +450,7 @@ $.notify("Hello World");
     }
 
     setInterval(changeColor, 3000);
-});
+}); */
 
 //$.notify("Hello World");  
 </script>

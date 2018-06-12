@@ -29,7 +29,8 @@
                       <div id="myTabContent" class="tab-content">
 
                         <div role="tabpanel" class="tab-pane fade in active" id="tab_content3" aria-labelledby="profile-tab">
-                              <div id = "infoGeneral" >                               
+                              <div id = "infoGeneral">      
+                                                     
                                </div> 
                         </div>
                       </div>
