@@ -8,11 +8,12 @@
             "juzgado"       =>$_POST['juzgado'],
             "region"        =>$_POST['region'],
             "calle"         =>$_POST['calle'],
-            "numero_ext"    =>" ",
+            "numero_ext"    =>$_POST['numero'],
             "numero_int"    =>" ",
             "municipio"     =>$_POST['municipio'],                
-            "cp"            =>" ",
-            "num_telefono"  =>" "
+            "cp"            =>$_POST['cp'],
+            "num_telefono"  =>$_POST['telefono'],
+            "colonia"       =>$_POST['colonia']
         );
 
        

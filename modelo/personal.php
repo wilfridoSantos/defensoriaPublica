@@ -29,6 +29,7 @@ function listar_personal(){
         $sql.= "nup='".$objetoEntidad['nup']."', nue='".$objetoEntidad['nue']."',"; 
         $sql.= "genero='".$objetoEntidad['genero']."', telefono='".$objetoEntidad['telefono']."',"; 
         $sql.= "correo_electronico='".$objetoEntidad['correo']."', foto='".$objetoEntidad['foto']."',";
+        $sql.= "etnia='".$objetoEntidad['etnia']."', idioma='".$objetoEntidad['idioma']."',";
         $sql.= "rfc='".$objetoEntidad['rfc']."'";
         //return consulta($sql, $conexion);
      // echo $sql;

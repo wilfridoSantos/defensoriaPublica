@@ -44,7 +44,11 @@
                 </div>
                 <div class="row">      
                     <div class="col-sm-12">
+<<<<<<< HEAD
+                        <div id="dialogo" title="Confirma eliminar"><span id="msnDialog" style="display:none"> Tiene al menos un expediente</span></div>
+=======
                     <div id="dialogo" title="Confirma Eliminar?"><span id="msnDialog" style="display:none;">tiene al menos 1 expediente</span></div>
+>>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
                             cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
                             <thead>

@@ -19,5 +19,11 @@ $(document).ready(function () {
 			 $('#menuContainer').load("registrarActividad.php");
 		};
 		
+		var juzgadoRegistro=document.getElementById('registrarJuzgadoMenu');
+		juzgadoRegistro.addEventListener('click', function () {
+           
+			$('#menuContainer').load("coordinadorRegistrarJuzgado.php");
+	   }, false);
+		
 });
 

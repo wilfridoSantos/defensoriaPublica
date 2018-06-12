@@ -96,6 +96,7 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
+                      <li><a id="registrarJuzgadoMenu">Registrar Juzgado</a></li>
                      <!--  <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li> -->
                       <form action="../../action.php" method="post">
                       <div class="input-group">
@@ -240,8 +241,13 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
+<<<<<<< HEAD
+           <!--  <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
+            --> 
+=======
             <div id="dialogoNotificacion" title="Revisión Notificación?" ></div>
             
+>>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
             <?php
                // echo isset($_SESSION['mensaje']);
               
@@ -430,6 +436,8 @@ $.notify("Hello World");
 }, 100); */
 
 
+<<<<<<< HEAD
+=======
     /* $(document).ready(function() {    
     function changeColor(){
        console.log("ffffe");
@@ -451,6 +459,7 @@ $.notify("Hello World");
 
     setInterval(changeColor, 3000);
 }); */
+>>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
 
 //$.notify("Hello World");  
 </script>
