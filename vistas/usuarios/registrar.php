@@ -200,7 +200,7 @@ function agrega(){
                         <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nombre<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+" onkeyup="mayusculas(event, this)" maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni mánimo de 4" placeholder="Nombre" name="nombre">
+                            <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+" onkeyup="mayusculas(event, this)" maxlength="40" minlength="3" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni minímo de 3" placeholder="Nombre" name="nombre">
                               <div  class="help-block with-errors"></div>
                             </div>
                        </div>
