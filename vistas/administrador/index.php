@@ -23,6 +23,7 @@ include "../../Controlador/sesion.php";
       <link href="../../recursos/css/style.css" rel="stylesheet"/> 
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../recursos/js/administrador/notificarAdmin.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
@@ -95,6 +96,7 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
+                      <li><a id="registrarJuzgadoMenu">Registrar Juzgado</a></li>
                      <!--  <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li> -->
                       <form action="../../action.php" method="post">
                       <div class="input-group">
@@ -239,8 +241,8 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
-            <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
-            
+           <!--  <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
+            --> 
             <?php
                // echo isset($_SESSION['mensaje']);
               
@@ -429,27 +431,6 @@ $.notify("Hello World");
 }, 100); */
 
 
-    $(document).ready(function() {    
-    function changeColor(){
-       console.log("ffffe");
-      // $.notify("Hello World");
-      alert("hoa chavo");
-        if ($('body').hasClass('white')) {
-            $('body').removeClass('white');
-            $('body').addClass('black');
-            $('h1').removeClass('black');
-            $('h1').addClass('white');
-        }
-        else {
-            $('body').removeClass('black');
-            $('body').addClass('white');
-            $('h1').removeClass('white');
-            $('h1').addClass('black');
-        }
-    }
-
-    //setInterval(changeColor, 3000);
-});
 
 //$.notify("Hello World");  
 </script>

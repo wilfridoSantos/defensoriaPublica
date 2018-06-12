@@ -1,8 +1,8 @@
 <?php
 include_once('../../libreria/conexion.php');
 function listar_defensores(){
-        $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado FROM personal_campo as d inner join personal as p using(id_personal)
-                        inner join juzgado as j using(id_juzgado) where id_cargo =4";			
+            $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d inner join personal as p using(id_personal)
+                            inner join juzgado as j using(id_juzgado) where id_cargo =4";			
 
    $lista=consulta($sql);
    return $lista;
@@ -189,7 +189,22 @@ return $lista;
     //Definimos una funcion que borrar defensor
     function eliminar_defensor($id_defensor){
         $newId= -1 * $id_defensor;
-        //$sql = "DELETE from  defensor where id_defensor = '".$id_defensor."'";
+        $sql = "select id_expediente from  expediente inner join personal_campo 
+                using (id_personal) 
+                    where id_personal ='".$id_defensor."'
+                    limit 1";
+        $idExp = consulta($sql);
+        $id_exp = $idExp[0]['id_expediente'];
+        $sql = "select count(id_expediente) as num from  expediente inner join personal_campo 
+        using (id_personal) 
+            where id_personal ='".$id_defensor."'";
+        $numExp = consulta($sql);
+        $num_exp = $numExp[0]['num'];
+
+        $sql = "insert into notificaciones (id_expediente, notificacion, fecha_registro) values('".$id_exp."', 'Existen ".$num_exp." expedientes que necesitan ser atendidos, ya!.','2018-06-11')";                                
+        $insert = consulta($sql);
+
+
         $sql = "UPDATE personal_campo as d  inner join personal as p using (id_personal)
                 set d.estado = false, d.id_personal ='".$newId."',p.id_personal ='".$newId."' where d.id_personal = '".$id_defensor."'";                                
         $listaExp = consulta($sql);

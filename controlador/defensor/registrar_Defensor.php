@@ -27,6 +27,8 @@ $personal = Array(
            "genero"         =>$_POST['genero'],
             "telefono"       =>$_POST['telefono'],
             "correo"         =>$_POST['email'],                
+            "etnia"       =>$_POST['etnia'],
+            "idioma"         =>$_POST['idioma'],                
             "foto"          =>" "           
         );
 

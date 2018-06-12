@@ -23,6 +23,11 @@
 			$('#menuContainer').load("listarExpedientes.php");
 		};	
 
+		var juzgadoRegistro=document.getElementById('registrarJuzgadoMenu');
+		juzgadoRegistro.addEventListener('click', function () {
+           
+			$('#menuContainer').load("coordinadorRegistrarJuzgado.php");
+	   }, false);
 	/* var asignar=document.getElementById('cambiarAdscripcion');
 	asignar.addEventListener('click',asinar,false);
 	 function asinar(){

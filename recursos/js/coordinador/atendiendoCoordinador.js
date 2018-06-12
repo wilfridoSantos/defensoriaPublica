@@ -367,6 +367,7 @@ $(document).ready(function () {
 			success: function (data) {
 				console.log(data, ' expedientes del id_Defensor-> ' + idDef);
 				if (data != 0) {
+					$("#msnDialog").removeAttr("style");
 					$("#dialogo").dialog({
 						resizable: true,
 						height: "auto",
@@ -390,27 +391,21 @@ $(document).ready(function () {
 		});
 	});
 	function eliminarDefensor(idDef) {
-		console.log(idDef, 'i defensor');
+		//console.log(idDef, 'i defensor');
 		$.ajax({
 			url: "../../controlador/defensor/controlDelDefensor.php",
 			type: "get",
 			data: "id_personal=" + idDef,
 			success: function (data) {
-				var mensaje = {
-					'tipo': "exito",
-					'mensaje': "Se ha eliminado satisfactoriamente."
-				};
-				var xx = '<?php ' +
-					'session_start(); ' +
-					'$_SESSION["mensaje"] =' + mensaje + '?>';
+				console.log(data);
+				$('#msnDialog').attr('style', 'display:none');
 
-				console.log('Success!! Eliminado defensor id = ' + idDef);
 				$('#menuContainer').load('listarDefensores.php');
-
 			}
 		});
 
 	};
+
 }); // fin document ready -------------------------------------------------------------------------------------------------
 
 function generaInformeByNue() {
