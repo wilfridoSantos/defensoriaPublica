@@ -1,17 +1,12 @@
 
 $(document).ready(function () {
-
-
 	$('#tebody').on('click', '.botonExp', function (evst) {
-		//		  var target= $(event.target);
-		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
 		console.log(idDef, ' id del defensor');
 		verExpedientes(idDef);
 	});
 	function verExpedientes(idDef) {
 		var id;
-
 		$.ajax({
 			url: "../../controlador/defensor/controlExpDefensor.php",
 			type: "GET",
@@ -148,8 +143,8 @@ $(document).ready(function () {
 				$.each(jsonInfoDef, function (KEY, VALOR) {
 					console.log(VALOR.foto, " =>RUTA");
 					if (VALOR.perfil == undefined && VALOR.cedula_profesional == undefined) {
-						VALOR.perfil = 'Aun no tiene escolaridad registrada.';
-						VALOR.cedula_profesional = 'Aun no tiene escolaridad registrada.';
+						VALOR.perfil = 'Aún no tiene capacitación y/o curso registrado.';
+						VALOR.cedula_profesional = 'Aún no tiene capacitación y/o curso registrado.';
 					}
 					if (VALOR.foto == '' || VALOR.foto == ' ') {
 						VALOR.foto = 'default.png';
@@ -252,14 +247,14 @@ $(document).ready(function () {
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-12">Apellido Paterno<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">' +
-						'<input type="text" required pattern= "[A-Z |a-z ]+"  maxlength="50" title = "Se aceptan solo letras" class="form-control text-uppercase" id="ap_paterno" placeholder="apellido Paterno" name="ap_paterno"' +
+						'<input type="text" required pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  maxlength="50" title = "Se aceptan solo letras" data-error=" letras no máximo de 40 y minimo de 4" class="form-control text-uppercase" id="ap_paterno" placeholder="apellido Paterno" name="ap_paterno"' +
 						'value="' + (VALOR.ap_paterno).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
 						'<div class="form-group">' +
 						'<label class="control-label col-md-3 col-sm-3 col-xs-4">Apellido Materno<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-4 form-group has-feedback">' +
-						'<input type="text" required pattern= "[A-Z | a-z ]+"  maxlength="50" title = "Se aceptan solo letras" class="form-control text-uppercase" id="ap_materno" placeholder="apellido materno" name="ap_materno"' +
+						'<input type="text" required pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ]+"  maxlength="50" title = "Se aceptan solo letras" class="form-control text-uppercase" id="ap_materno" placeholder="apellido materno" name="ap_materno"' +
 						'value="' + (VALOR.ap_materno).toUpperCase() + '">' +
 						'</div>' +
 						'</div>' +
@@ -1073,7 +1068,7 @@ function showUser(str) {
 
 		botonDess.disabled = true;
 		$('#tebody').empty();
-		$('#tebody').append('SELECCIONE UN FILTRO');
+		$('#tebody').append('<td><h3><b>Debe tener Seleccionado al menos un filtro.</b></h3></td>');
 
 	} else {
 		$.ajax({
@@ -1114,6 +1109,7 @@ function showUser(str) {
 
 				} else {
 					$('#tebody').empty();
+					$('#tebody').append('<td><h3><b>Aún no existen expedientes registrados al sistema.</b></h3></td>');
 					botonDess.disabled = true;
 				}
 			}

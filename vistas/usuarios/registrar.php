@@ -255,14 +255,14 @@ function agrega(){
                     <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input type="text" title"correo invalido"  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="" placeholder="Email" name="email">
+                              <input autocomplete="off" type="text" title"correo invalido"  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$" data-error="correo invalido" maxlength="50" class="form-control" required="" placeholder="Email" name="email">
                               <div  class="help-block with-errors"></div>  </div> 
                       </div>  
 
 
                                         
                       
-                    
+                                        
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Entidad federativa</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
