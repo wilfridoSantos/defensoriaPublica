@@ -19,8 +19,8 @@ include "../../Controlador/sesion.php";
     <title>Modulo ADMINISTRADOR</title>
     
 
-    <!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      <link href="../../recursos/css/style.css" rel="stylesheet"/>  
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <script src="../../recursos/js/administrador/notificarAdmin.js"></script>

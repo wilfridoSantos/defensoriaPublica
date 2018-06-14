@@ -43,13 +43,14 @@ function buscarXPrimerCampo() {
 
 // estos son datos de tipo variables globales
 var Global_usuarios_servicios;
+var Global_defensores;
 $(document).ready(function () {
 
   function data(){
 
 $.ajax({
   type: 'GET',
-  url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+  url: '../../controlador/usuario_servicio/listaUsuario.php?term=busqueda',
   success: function (data) {
       Global_usuarios_servicios = data;//parsedData[0].NUMERO;
 //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
@@ -62,4 +63,21 @@ $.ajax({
 
 data();// llamao a la funcion para almacenar estos datos
 
+
+function dataDefensor(){
+
+  $.ajax({
+    type: 'GET',
+    url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+    success: function (data) {
+        Global_defensores = data;//parsedData[0].NUMERO;
+  //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
+    },
+    error: function () {
+        alert('Error peticion Ajax ');
+    }
+    });
+  }
+  
+  dataDefensor();
 });

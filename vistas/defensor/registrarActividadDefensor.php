@@ -188,7 +188,7 @@ var ul=document.createElement('li');
                       <div class=" form-horizontal form-label-left form-group  "><div class="form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " >Fecha de actividad <span class="required">*</span></label>
                             </h4><div class="col-md-6   col-sm-6 col-xs-12">
-                              <input id="fecha_registro" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaRegistro">
+                              <input id="fecha_registro" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fecha_registro">
                                  <div  class="help-block with-errors"></div>
                               </div> 
                       </div>

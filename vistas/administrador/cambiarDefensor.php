@@ -7,7 +7,7 @@
 <script src="../../recursos/js/herramienta.js"></script> 
    <script>       
        var varUsuario=[];
-       var datos = jQuery.parseJSON(window.Global_usuarios_servicios);
+       var datos = jQuery.parseJSON(window.Global_defensores);
        $.each(datos, function (KEY, VALOR) {
                    var temp={};
                     if(VALOR.id_personal > 0){

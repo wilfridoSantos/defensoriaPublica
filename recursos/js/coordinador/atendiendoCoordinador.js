@@ -630,8 +630,6 @@ function generarInformeAct2(nue) {
 		success: function (data) {
 			console.log(data);
 			var jsonInforme = jQuery.parseJSON(data);
-
-
 			$('#resultadoInformeByNue').empty();
 			$.each(jsonInforme, function (KEY, VALOR) {
 				if (VALOR.latitud == '' || VALOR.latitud == ' ') {
@@ -673,6 +671,7 @@ function generarInformeAct() {
 		success: function (data) {
 			if (data != 0) {
 				desc.disabled = false;
+				filtroActividades(4);
 				var jsonInforme = jQuery.parseJSON(data);
 
 
@@ -1443,4 +1442,77 @@ function validarSelect(str) {
 	}
 
 }
+function filtroActividades(str) {
+	console.log(str, ' str del filtro');
+	//var filtro2 = $('#filtro2')[0].value;
+	//var botonDess = $('#botonDesc').get(0);
+	var fotoVis='';
+	var active =false;
+	 if (str == "" ) {
+		$('#resultadoInforme').empty();
+		$('#resultadoInforme').append('SELECCIONE UNA OPCION DEL FILTRO');
+		
+	} else {
+		$.ajax({
+			url: "../../controlador/actividad/listarActividades.php",
+			type: "GET",
+			data: "q=" + str ,
+			success: function (data) {
+				
+				if (data != 0) {
+					var actividad = '';
+					var es_visita='';	
+					var idAct;	
 
+					var botonObservacion= '';				
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log(jsonInforme, ' data de actividades');
+					//descarga.on("click", function(){ descargarPDF(jsonExpDef); });
+					//console.log(data,' resultado de data');
+					$('#resultadoInforme').empty();
+					$.each(jsonInforme, function (KEY, VALOR) {
+						idAct = VALOR.idAct;
+						
+						botonObservacion ='<button type="button" onclick="editarObservaciones('+idAct+')"class="btn btn-default">	<span class="glyphicon glyphicon-ok"></span></button>';
+						if(VALOR.latAse != null || VALOR.longAse != undefined){
+							actividad = 'ASESORÍA';
+						}
+						if(VALOR.latAud != null || VALOR.longAud != undefined){
+							actividad = 'AUDIENCIA';
+						}
+						if(VALOR.fotoVis != null || VALOR.fotoVis != undefined){
+							actividad = 'VISITA CARCELARÍA';
+							fotoVis = VALOR.fotoVis;
+							console.log(fotoVis, 'valor fotoVis');
+						}						
+						if(actividad == 'VISITA CARCELARÍA'){
+							es_visita = '<td tabindex="0"  class="sorting_1"> <a id="verFotoVisita">'+actividad+'</a>'+
+							'<button type="button" onclick="verFotoVisita(this)" value = "'+fotoVis+'" class="btn btn-success">	<span class="glyphicon glyphicon-ok"></span></button>';
+							active=true;
+						}else{
+							es_visita = '<td tabindex="0" class="sorting_1"> '+actividad+'';
+						}
+						$('#resultadoInforme').append(
+							
+							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"							
+							'<td id="verDialog" tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
+							'<td tabindex="0" class="sorting_1">' + VALOR.fechaR + '</td>' +
+							'<td id="tdObservaciones" tabindex="0" class="sorting_1">' + VALOR.observaciones + '</td>' +
+							es_visita+botonObservacion+'</td>'+
+							'</tr>'
+						);
+
+					});
+					
+				} else {
+					$('#resultadoInforme').empty();
+					$('#resultadoInforme').append('NO EXISTEN DATOS AÚN');
+				}
+			}
+		});
+	}
+/* 	if(active == true){
+		console.log(active, $('#verFotoVisita'));
+		$('#verFotoVisita').addEventListener('click', verFotoVisita, false);
+	} */
+}
