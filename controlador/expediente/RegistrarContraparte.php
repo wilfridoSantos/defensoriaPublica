@@ -1,7 +1,8 @@
 <?php 
-    header('Content-Type: application/json');
-    include '../../modelo/personal.php';    
+  //  header('Content-Type: application/json');
+    //include '../../modelo/personal.php';    
     include '../../modelo/contraparte.php';
+    include '../../modelo/detalleContraparteExpediente.php';
     include '../../libreria/herramientas.php';
 
     $hoy = getdate();
@@ -16,57 +17,57 @@
             "telefono"       =>$_POST['telefono'],
             "correo"         =>$_POST['email'],                
             "calle"          =>$_POST['calle'],
-            "numero_ext"     =>$_POST['numero'],               
+                          
             "numero_int"     =>"",
-            "colonia"        =>$_POST['colonia'],
-            "municipio"      =>$_POST['municipio'],         
+            "numero_ext"     =>"",
+            "colonia"        =>'',
+           "municipio"      =>'',         
             "curp"           =>$_POST['curp'],
             "estado"           =>$_POST['estado'],
             "edad"            =>$edadNumero,
+            "fecha_nacimiento" =>$_POST['fechaNacimiento'],
             "etnia"            =>$_POST['etnia'],
             "idioma"          =>$_POST['idioma'],         
-            "fecha"          =>"",         
+             
             "genero"         =>$_POST['genero'],
-            "sexo"         =>$_POST['sexo']
+            "sexo"         =>$_POST['sexo'],
+            "discapacidad"         =>$_POST['discapacidad']
         );
       $detalle_contraparte=Array(
-        $id_expediente=>$_POST['id_expediente'],
-        $id_contraparte=>$_POST['id_contraparte']
+        'id_expediente'=> $_POST['id_expediente'],
+        'id_contraparte'=>$_POST['id_contraparte'],
+        'tipo_contraparte'=>$_POST['tipo_contraparte']
       );
-      print_r($usuario);
-      print_r($detalle_contraparte);
+      //print_r($usuario);
+      //print_r($detalle_contraparte);
         $usuario =  array_map( "cadenaToMayuscula",$usuario);
+       
         $mensaje=['tipo'=>"error",
-        'mensaje'=>"este usuario ya se encuentra registrado"];
-         $dirigir="registrar_usuario";
+        'mensaje'=>"este usuario ya se encuentra registrado en tu expediente"];
+         $dirigir="";
        //sprint_r (getDefensorByCurp($_POST['curp']));
-        if(getUsuarioByCurp($_POST['curp'])==0){
-            //crear_contraparte($usuario); //regresa 1 si regristro para validar tambien par validar si ya exite o res regisro correctamente
-            $mensaje=['tipo'=>"exito",
-                      'mensaje'=>"registro existoso"
-                    ];
-            $dirigir="asignar_defensor";
+        if(getContraparteById($_POST['id_contraparte'])==0){
+            crear_contraparte($usuario); //regresa 1 si regristro para validar tambien par validar si ya exite o res regisro correctamente
+        //    alta_DetalleContraparte($detalle_contraparte);
         } 
+        if(getDetalleByContraparteAndExpediente($_POST['id_contraparte'],$_POST['id_expediente'])==0){
+              alta_DetalleContraparte($detalle_contraparte);
+                  $mensaje=['tipo'=>"exito",
+                    'mensaje'=>"registro existoso"
+                  ];
+      } 
      //print_r($usuario);
 
-        if(!isset($_GET['tipo'])){
+         if(!isset($_GET['tipo'])){
            session_start();
-            $_SESSION['mensaje'] = $mensaje;
-            $_SESSION['dirigir']=$dirigir;
-          header("location: ../../vistas/defensor/index.php");
+            print_r(json_encode($mensaje));
+            //$_SESSION['dirigir']=$dirigir;
+       //   header("location: ../../vistas/defensor/index.php");
         }
         else{
             echo "json";
-        }
+        } 
     
       
-     
-      function vericar_coordinador($puesto){
-        if($puesto=='2')
-           $verificador=listar_defensor_x_juzgado($_POST['adscripcion']);
-            if($verificador==0)
-               return false;
-            
-          return true;     
-      }  
+      
 ?>

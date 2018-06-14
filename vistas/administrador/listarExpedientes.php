@@ -117,6 +117,7 @@ include '../../controlador/defensor/controladorListarExp.php';
                                     </tr>
                             </thead>
                             <tbody id="tebody" >
+      
 
                             </tbody>
                         </table>

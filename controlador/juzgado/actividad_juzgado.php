@@ -9,7 +9,7 @@
     $user = json_decode($contenido);
     
    $juzgado = Array( );
-  if($user != 0)
+  
    foreach($user as $values){
     if($values->region!=$equals){
         $equals=$values->region;

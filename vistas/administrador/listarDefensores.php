@@ -66,31 +66,69 @@
                             <?php include '../../controlador/defensor/controladorListaDef.php';
                               $defensores=json_decode($contenido);
                               //print_r($defensores);
-                              if($defensores != 0){
-                                foreach($defensores as $obj){
-                                    //print_r('=> '. $obj->estado);
-                                    if($obj->estado){                
-                                        echo '<tr role="row" class="odd"> '. //OR oven || odd
-                                            '<td id="idPersonal" style="display:none;">'.$obj->id_personal.'</td>'.
-                                            '<td>'.strtoupper($obj->nombre).'</td>'.
-                                            '<td>'.strtoupper($obj->ap_paterno).'</td>'.
-                                            '<td>'.strtoupper($obj->ap_materno).'</td>'.
-                                            '<td>'.strtoupper($obj->juzgado).'</td>'.                                                                            
-                                            '<td><button type="button" class="btn btn-primary botonExp" id="botonExp" name="expedientes">'.
-                                                '<span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span></button>'.
-                                                '<button type="button" class="btn btn-primary boton" id="boton" name="info">'.
-                                                '<span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
-                                                '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp">'.
-                                                '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
-                                                '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel">'.
-                                                '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
-                                            '</td> </tr>';
-                                    }            
+                              foreach($defensores as $obj){
+                                //print_r('=> '. $obj->estado);
+                                if($obj->estado){                
+                                  echo '<tr role="row" class="odd"> '. //OR oven || odd
+                                    '<td id="idPersonal" style="display:none;">'.$obj->id_personal.'</td>'.
+                                    '<td>'.strtoupper($obj->nombre).'</td>'.
+                                    '<td>'.strtoupper($obj->ap_paterno).'</td>'.
+                                    '<td>'.strtoupper($obj->ap_materno).'</td>'.
+                                    '<td>'.strtoupper($obj->juzgado).'</td>'.                                          
+                                  
+                                    '<td><button type="button" class="btn btn-primary botonExp" id="botonExp" name="expedientes">'.
+                                      '<span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span></button>'.
+                                    '<button type="button" class="btn btn-primary boton" id="boton" name="info">'.
+                                      '<span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
+                                    '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp">'.
+                                        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
+                                    '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel">'.
+                                        '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
+                                    '</td> </tr>';
+                                  }            
                                 }
-                            }else{
-                                echo '<td><h3><b>Aún no hay defensores registrados al sistema.</b></h3></td>';
-                            }
                           ?>
+                                <!-- <tr role="row" class="odd">
+                                    <td tabindex="0" class="sorting_1">Airi</td>
+                                    <td>Satou</td>
+                                    <td>Accountant</td>
+                                    <td style="">Tokyo</td>
+                                    <td style="">33</td>
+
+                                </tr>
+                                <tr role="row" class="even">
+                                    <td class="sorting_1" tabindex="0">Angelica</td>
+                                    <td>Ramos</td>
+                                    <td>Chief Executive Officer (CEO)</td>
+                                    <td style="">London</td>
+                                    <td style="">47</td>
+                                    
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td tabindex="0" class="sorting_1">Ashton</td>
+                                    <td>Cox</td>
+                                    <td>Junior Technical Author</td>
+                                    <td style="">San Francisco</td>
+                                    <td style="">66</td>
+                              
+                                </tr>
+                                <tr role="row" class="even">
+                                    <td class="sorting_1" tabindex="0">Bradley</td>
+                                    <td>Greer</td>
+                                    <td>Software Engineer</td>
+                                    <td style="">London</td>
+                                    <td style="">41</td>
+                                
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1" tabindex="0">Brenden</td>
+                                    <td>Wagner</td>
+                                    <td>Software Engineer</td>
+                                    <td style="">San Francisco</td>
+                                    <td style="">28</td>
+                                   
+                                </tr>
+                                 -->
                             </tbody>
                         </table>
                     </div>

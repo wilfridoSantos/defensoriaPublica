@@ -297,7 +297,7 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 							if(materia==="EJECUCION"){
 								console.log("holaEjecucion");
 								 $.ajax({
-									url: "materia/ejecucionSanciones.php?id_expediente="+id_usuario_expedienteGlobal,
+									url: "materia/ejecucionSanciones.php",
 									type: "GET",
 																			
 									success: function (data) {

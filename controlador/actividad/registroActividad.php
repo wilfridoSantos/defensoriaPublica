@@ -5,10 +5,10 @@
     include_once('../../modelo/asesoria.php');
     include_once('../../modelo/visita.php');
     include_once('../../modelo/audiencia.php');
-   
     $usuario_servicio=getUsuarioByCurp($_POST['curp'])[0]['id_usuario_servicio'];
-    $dia_registro=split('[/.-]', $_POST['fechaRegistro'])[2];
-    $mes_registro=split('[/.-]', $_POST['fechaRegistro'])[1];
+    print_r( explode("[/.-]", $_POST['fechaRegistro']));
+    $dia_registro=preg_split('[/.-]', $_POST['fechaRegistro'])[2];
+    $mes_registro=preg_split('[/.-]', $_POST['fechaRegistro'])[1];
     $anio_registro=split('[/.-]', $_POST['fechaRegistro'])[0];
     $actividad = Array(
            

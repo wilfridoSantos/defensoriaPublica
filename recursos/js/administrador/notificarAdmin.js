@@ -20,5 +20,6 @@ function checkNotificacion(){
 		}
 	});
 }
+
 setInterval(checkNotificacion, 10000);
 });
