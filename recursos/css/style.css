@@ -72,7 +72,7 @@ border: 1px solid#000; /* Add a grey border */
       url('fonts/icomoon.woff?esodeu') format('woff'),
       url('fonts/icomoon.svg?esodeu#icomoon') format('svg');
     font-weight: normal;
-    font-style: normal;
+    font-style: normal; 
   }
   
   [class^="icon-"], [class*=" icon-"] {

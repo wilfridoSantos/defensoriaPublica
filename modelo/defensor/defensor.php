@@ -1,8 +1,10 @@
 <?php
 include_once('../../libreria/conexion.php');
 function listar_defensores(){
+
             $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d inner join personal as p using(id_personal)
                             inner join juzgado as j using(id_juzgado) where id_cargo =4";			
+
    $lista=consulta($sql);
    return $lista;
 }

@@ -25,7 +25,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                          
+                          <input type="date" id="inputInicio" value="2018-05-01" required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                          
                          
                         </div>
                       </div>
@@ -33,7 +33,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fecha Final <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputFinal" name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
+                          <input type="date" id="inputFinal"  name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
                           <div id="labelFinal" class='block-help with-errors'></div>
 
                         </div>
@@ -126,3 +126,4 @@
                             </div>
 
                         </div>
+
