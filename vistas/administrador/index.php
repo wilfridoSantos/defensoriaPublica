@@ -241,13 +241,8 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
-<<<<<<< HEAD
-           <!--  <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
-            --> 
-=======
             <div id="dialogoNotificacion" title="Revisión Notificación?" ></div>
             
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
             <?php
                // echo isset($_SESSION['mensaje']);
               
@@ -427,39 +422,3 @@ include "../../Controlador/sesion.php";
   unset($_SESSION['post_data']);
   }  
 ?>
-<script type="text/javascript">
-  /* setTimeout(function() {
-//	$.notifyClose();
-console.log("hola");
-
-$.notify("Hello World"); 
-}, 100); */
-
-
-<<<<<<< HEAD
-=======
-    /* $(document).ready(function() {    
-    function changeColor(){
-       console.log("ffffe");
-      // $.notify("Hello World");
-      alert("hoa chavo");
-        if ($('body').hasClass('white')) {
-            $('body').removeClass('white');
-            $('body').addClass('black');
-            $('h1').removeClass('black');
-            $('h1').addClass('white');
-        }
-        else {
-            $('body').removeClass('black');
-            $('body').addClass('white');
-            $('h1').removeClass('white');
-            $('h1').addClass('black');
-        }
-    }
-
-    setInterval(changeColor, 3000);
-}); */
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
-
-//$.notify("Hello World");  
-</script>

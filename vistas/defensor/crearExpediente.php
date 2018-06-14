@@ -151,15 +151,13 @@ session_start();
                       </div></div>
 
                         <div id="gradoDelito"  class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Grado de delito <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo de delito <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select required="" id="id_gradodelito"   name="grado_delito"  class="form-control ">
                             <option value="">--SELECCIONE UNA OPCIÓN-</option>
-                            <option value="GRAVE">GRAVE</option>
-                            <option value="NO GRAVE"> NO GRAVE</option>
-                            
-                            
+                            <option value="DOLOSO">DOLOSO</option>
+                            <option value="CULPOSO">CULPOSO</option> 
                           </select>
                           </div></div> 
 

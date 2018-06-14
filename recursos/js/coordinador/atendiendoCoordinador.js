@@ -361,11 +361,7 @@ $(document).ready(function () {
 			success: function (data) {
 				console.log(data, ' expedientes del id_Defensor-> ' + idDef);
 				if (data != 0) {
-<<<<<<< HEAD
 					$("#msnDialog").removeAttr("style");
-=======
-					$('#msnDialog').removeAttr("style");
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
 					$("#dialogo").dialog({
 						resizable: true,
 						height: "auto",
