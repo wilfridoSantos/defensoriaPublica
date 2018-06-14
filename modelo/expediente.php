@@ -2,7 +2,7 @@
 
 include_once ('../../libreria/conexion.php');
 function getExpedienteByNum($numExp){
-      $sql = " select * from respuesta inner join preguntas using(id_pregunta) inner join expediente using(id_expediente)
+      $sql = " select r.id_respuesta, r.respuesta,r.accion_implementar, r.observaciones as obsR, p.pregunta, e.id_expediente, e.num_expediente,e.observaciones   from respuesta as r inner join preguntas as p using(id_pregunta) inner join expediente as e using(id_expediente)
        where num_expediente='".$numExp."' ";
     $lista=consulta($sql);
     return $lista;    
@@ -119,6 +119,14 @@ function listar_expedientes_inactivos_materia($q2){
 function updateExpediente($id_defensor, $id_expediente){
   $sql = "update expediente set id_personal='".$id_defensor."'";
   $sql.=" where id_expediente='".$id_expediente."'";
+  $lista = consulta($sql);
+  //echo $sql;
+  return $lista;
+
+}
+function updateObservacionResp($id_respuesta,$observacion){
+  $sql = "update respuesta set observaciones='".$observacion."'";
+  $sql.=" where id_respuesta='".$id_respuesta."'";
   $lista = consulta($sql);
   //echo $sql;
   return $lista;
