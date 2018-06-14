@@ -20,14 +20,8 @@
     <!-- Bootstrap -->
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-<<<<<<< HEAD
 <!--     <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
     <script src="../../recursos/vendors/nprogress/nprogress.js"></script> -->
-=======
-    <!-- <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script> -->
-    <!-- NProgress -->
-    <!-- <script src="../../recursos/vendors/nprogress/nprogress.js"></script> -->
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
     <!-- <script src="../../recursos/js/jquery-validator.js"></script> -->
     <!-- <script src="../../recursos/js/custom.min.js"></script> -->
     <script src="../../recursos/js/jquery-validator.js"></script>

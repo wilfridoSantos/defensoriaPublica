@@ -2,8 +2,8 @@
 //include '../../controlador/conexion.php';
 include_once '../../libreria/conexion.php';
 
-function getContraparteById($id_expediente){
-    $sql = "select * from usuario_servicio inner join detalle_usuario_expediente using(id_usuario_servicio) where id_expediente='".$id_expediente."'";
+function getContraparteById($id_contraparte){
+    $sql = "select * from contraparte where id_contraparte='".$id_contraparte."'";
     $lista = consulta($sql);
     return $lista;
 }
@@ -14,19 +14,30 @@ function getUsuarioByCurp($curp){
  //  echo $sql;
     return $consulta;
 }
-  
+//("insert ignore into test_warnings (id_, num_) values (?,?)
     //Definimos la funciones sobre el objeto crear_defensor
     function crear_contraparte($objetoEntidad){
       
-        $sql = "INSERT INTO contraparte ";
-        $sql.= "SET nombre='".$objetoEntidad['nombre']."', ap_materno='".$objetoEntidad['ap_materno']."',";
-        $sql.= "ap_paterno='".$objetoEntidad['ap_paterno']."', genero='".$objetoEntidad['genero']."',";
-        $sql.= "edad='".$objetoEntidad['edad']."', idioma='".$objetoEntidad['idioma']."',";
+        $sql="INSERT INTO contraparte(id_contraparte,nombre,apellido_paterno,apellido_materno,sexo,fecha_nacimiento,edad,";
+        $sql.="etnia,idioma,entidad,genero,telefono,email,calle,curp,discapacidad) values(";
+        $sql.="'".$objetoEntidad['id_contraparte']."',"."'".$objetoEntidad['nombre']."',"."'".$objetoEntidad['ap_paterno']."',";
+        $sql.="'".$objetoEntidad['ap_materno']."',"."'".$objetoEntidad['sexo']."',"."'".$objetoEntidad['fecha_nacimiento']."',";
+        $sql.="'".$objetoEntidad['edad']."',"."'".$objetoEntidad['etnia']."',"."'".$objetoEntidad['idioma']."',";
+        $sql.="'".$objetoEntidad['estado']."',"."'".$objetoEntidad['genero']."',"."'".$objetoEntidad['telefono']."',";
+        $sql.="'".$objetoEntidad['correo']."',"."'".$objetoEntidad['calle']."',"."'".$objetoEntidad['curp']."',";
+        $sql.="'".$objetoEntidad['discapacidad']."')";
+       // $sql.="'".$objetoEntidad['calle']."',"."'".$objetoEntidad['curp']."')";
+        /* $sql = "INSERT INTO contraparte ";
+        $sql.= "SET nombre='".$objetoEntidad['nombre']."', apellido_materno='".$objetoEntidad['ap_materno']."',";
+        $sql.= "apellido_paterno='".$objetoEntidad['ap_paterno']."', genero='".$objetoEntidad['genero']."',";
+        $sql.= "calle='".$objetoEntidad['calle']."', edad='".$objetoEntidad['edad']."',";
+        $sql.= "fecha_nacimiento='".$objetoEntidad['fecha_nacimiento']."', idioma='".$objetoEntidad['idioma']."',";
         $sql.= "etnia='".$objetoEntidad['etnia']."', curp='".$objetoEntidad['curp']."',"; 
-        $sql.= "calle='".$objetoEntidad['calle']."', numero_ext='".$objetoEntidad['numero_ext']."',"; 
-        $sql.= "numero_int='".$objetoEntidad['numero_int']."', municipio='".$objetoEntidad['municipio']."',"; 
-        $sql.= "estadoProveniente='".$objetoEntidad['estado']."',sexo='".$objetoEntidad['sexo']."',"; 
-        $sql.= "telefono='".$objetoEntidad['telefono']."', correo_electronico='".$objetoEntidad['correo']."'"; 
+        $sql.= "id_contraparte='".$objetoEntidad['id_contraparte']."',"; 
+        //$sql.= "calle='".$objetoEntidad['calle']."', municipio='".$objetoEntidad['municipio']."',"; 
+       // $sql.= "numero_int='".$objetoEntidad['numero_int']."', numero_ext='".$objetoEntidad['numero_ext']."',"; 
+        $sql.= "entidad='".$objetoEntidad['estado']."',sexo='".$objetoEntidad['sexo']."',"; 
+        $sql.= "telefono='".$objetoEntidad['telefono']."', email='".$objetoEntidad['correo']."'";  */
        //echo $sql;
          $lista=registro($sql);
 
@@ -68,18 +79,12 @@ function getUsuarioByCurp($curp){
         return $id[0]['id']; 
 
     }
-    function listar_usuarios(){
-        $sql="SELECT id_usuario_servicio, nombre, ap_paterno,ap_materno,curp,etnia,colonia,municipio FROM usuario_servicio as u;";			
+    function listar_contraparte(){
+        $sql="SELECT * FROM contraparte";			
 
    $lista=consulta($sql);
    return $lista;
 }
 
-function listar_usuarios_id($id_usuario_servicio){
-    $sql="SELECT *  FROM usuario_servicio where id_usuario_servicio=".$id_usuario_servicio;			
-// echo $sql;
-$lista=consulta($sql);
-return $lista;
-}
 
 ?>

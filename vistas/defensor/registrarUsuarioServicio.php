@@ -79,7 +79,7 @@ function agrega(){
    
    var curpApaterno=document.getElementById('aPaterno').value;
    var curpAmaterno=document.getElementById('aMaterno').value;
-   var curpGenero=(((document.getElementById("genero").options[document.getElementById("genero").selectedIndex].value)==="masculino")?'H':'M');
+   var curpGenero=(((document.getElementById("sexo").options[document.getElementById("sexo").selectedIndex].value)==="masculino")?'H':'M');
    var curpFecha= document.getElementById("fechaNacimiento").value.split('-');
 
    
@@ -224,7 +224,7 @@ function agrega(){
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Sexo<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-                       <select required id="genero" onkeyup="validarCurps()" onblur="validarCurps()" name="sexo"  class="select2_group form-control">
+                       <select required id="sexo" onkeyup="validarCurps()" onblur="validarCurps()" name="sexo"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
                              <option value="masculino">masculino</option> 
                              <option value="femenino">femenino</option>   

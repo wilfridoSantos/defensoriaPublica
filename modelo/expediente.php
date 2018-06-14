@@ -130,7 +130,6 @@ function checkNoti(){
   
   return $nums;
 }
-<<<<<<< HEAD
 
 function DeleteNotificacion($id_expediente ){
   $sql = "delete   notificaciones where id_expediente=".$id_expediente;//num notis
@@ -139,8 +138,6 @@ function DeleteNotificacion($id_expediente ){
   return $nums;
 }
 
-=======
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
 function bajaExpediente($id_expediente, $motivacion){
     $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
           where id_expediente='".$id_expediente."'";
@@ -160,7 +157,7 @@ function bajaExpediente($id_expediente, $motivacion){
  } */
  function listar_expediente_x_defensor($idDefensor){
    
-    $sql = "select exp.id_expediente,exp.estado,exp.nombre_delito,exp.grado_delito,exp.observaciones,exp.fecha_final,exp.fecha_inicio, exp.num_expediente,
+    $sql = "select exp.id_expediente,exp.estado,exp.nombre_delito,exp.tipo_delito,exp.observaciones,exp.fecha_final,exp.fecha_inicio, exp.num_expediente,
                 defensor.id_juzgado,     defensor.estado AS estadoDefensor,defensor.id_personal,mate.materia
                 from expediente as exp inner join 
             personal_campo  as defensor using(id_personal)
@@ -216,7 +213,7 @@ function bajaExpediente($id_expediente, $motivacion){
       
         $sql = "INSERT INTO expediente ";
         $sql.= " SET id_personal='".$objetoEntidad['id_defensor']."', nombre_delito='".$objetoEntidad['nombre_delito']."' ,";
-        $sql.= "  grado_delito='".$objetoEntidad['grado_delito']."', num_expediente='".$objetoEntidad['num_expediente']."' ";
+        $sql.= "  tipo_delito='".$objetoEntidad['grado_delito']."', num_expediente='".$objetoEntidad['num_expediente']."' ";
         //$sql.= " num_expediente='".$objetoEntidad['num_expediente']."' ";
       // echo $sql;
          $lista=registro($sql);

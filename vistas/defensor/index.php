@@ -195,10 +195,10 @@ include "../../Controlador/sesion.php";
                           
                       }
                   ?> <!-- class='alert-dismissible fade in  -->
-                    <div  class='alert-dismissible fade in <?php echo $alert; ?>'  role="alert">
+                    <div id="contenedorMensaje"  class='alert-dismissible fade in <?php echo $alert; ?>'  role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
-                      <strong align="center">
+                      <strong align="center" id="idMensaje">
                         <?php 
                         echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");
                                                 $_SESSION['mensaje']=[];
@@ -209,6 +209,7 @@ include "../../Controlador/sesion.php";
 
                   </div>
                 <?php
+                 $_SESSION['mensaje']['mensaje']='';
                }
                ?>
             <div class="row" id="menuContainer">

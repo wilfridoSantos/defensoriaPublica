@@ -43,23 +43,42 @@ function buscarXPrimerCampo() {
 
 // estos son datos de tipo variables globales
 var Global_usuarios_servicios;
+var Global_usuarios_Contraparte;
 $(document).ready(function () {
 
-  function data(){
+      function data(){
 
-$.ajax({
-  type: 'GET',
-  url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
-  success: function (data) {
-      Global_usuarios_servicios = data;//parsedData[0].NUMERO;
-//        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
-  },
-  error: function () {
-      alert('Error peticion Ajax ');
-  }
-  });
-}
+    $.ajax({
+        type: 'GET',
+        url: '../../controlador/usuario_servicio/listaUsuario.php?term=busqueda',
+        success: function (data) {
+            Global_usuarios_servicios = data;//parsedData[0].NUMERO;
+      //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
+        },
+        error: function () {
+            alert('Error peticion Ajax ');
+        }
+        });
+    }
 
-data();// llamao a la funcion para almacenar estos datos
+  data();// llamao a la funcion para almacenar estos datos
 
+
+
+    function pedirContraparte(){
+
+        $.ajax({
+          type: 'GET',
+          url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+          success: function (data) {
+            Global_usuarios_Contraparte = data;//parsedData[0].NUMERO;
+        //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
+          },
+          error: function () {
+              alert('Error peticion Ajax ');
+          }
+          });
+    }
+
+    pedirContraparte();// llamao a la funcion para almacenar estos datos
 });
