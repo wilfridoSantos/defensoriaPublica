@@ -17,7 +17,7 @@ function listar_juzgado_x_id($id){
   }
 
 
-   
+ 
   
   function crear_juzgado($objetoEntidad){
       //  echo $objetoEntidad[session_name()];
@@ -26,7 +26,8 @@ function listar_juzgado_x_id($id){
         $sql.= "SET juzgado='".$objetoEntidad['juzgado']."', region='".$objetoEntidad['region']."',";
         $sql.= "calle='".$objetoEntidad['calle']."', num_extension='".$objetoEntidad['numero_ext']."',";
         $sql.= " municipio='".$objetoEntidad['municipio']."',"; 
-        $sql.= "cp='".$objetoEntidad['cp']."', num_telefono='".$objetoEntidad['num_telefono']."'";
+        $sql.= "cp='".$objetoEntidad['cp']."', num_telefono='".$objetoEntidad['num_telefono']."',";
+        $sql.= "colonia='".$objetoEntidad['colonia']."'";
         //return consulta($sql, $conexion);
     
       registro($sql); 

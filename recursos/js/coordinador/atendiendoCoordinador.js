@@ -366,7 +366,7 @@ $(document).ready(function () {
 			success: function (data) {
 				console.log(data, ' expedientes del id_Defensor-> ' + idDef);
 				if (data != 0) {
-					$('#msnDialog').removeAttr("style");
+					$("#msnDialog").removeAttr("style");
 					$("#dialogo").dialog({
 						resizable: true,
 						height: "auto",
@@ -404,6 +404,7 @@ $(document).ready(function () {
 		});
 
 	};
+
 }); // fin document ready -------------------------------------------------------------------------------------------------
 
 function generaInformeByNue() {

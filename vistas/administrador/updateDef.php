@@ -23,6 +23,12 @@
     <!-- <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script> -->
     <!-- NProgress -->
     <!-- <script src="../../recursos/vendors/nprogress/nprogress.js"></script> -->
+
+<!--     <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../../recursos/vendors/nprogress/nprogress.js"></script> -->
+    <!-- <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script> -->
+    <!-- NProgress -->
+    <!-- <script src="../../recursos/vendors/nprogress/nprogress.js"></script> -->
     <!-- <script src="../../recursos/js/jquery-validator.js"></script> -->
     <!-- <script src="../../recursos/js/custom.min.js"></script> -->
     <script src="../../recursos/js/jquery-validator.js"></script>

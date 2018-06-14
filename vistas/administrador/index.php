@@ -96,6 +96,7 @@ include "../../Controlador/sesion.php";
                   <li><a><i class="fa fa-home"></i> Configuracion Personal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a id="registrarDefensor">Registrar personal</a></li>
+                      <li><a id="registrarJuzgadoMenu">Registrar Juzgado</a></li>
                      <!--  <li><a id="cambiarAdscripcion">Cambiar Adscripcion Defensor</a></li> -->
                       <form action="../../action.php" method="post">
                       <div class="input-group">
@@ -421,36 +422,3 @@ include "../../Controlador/sesion.php";
   unset($_SESSION['post_data']);
   }  
 ?>
-<script type="text/javascript">
-  /* setTimeout(function() {
-//	$.notifyClose();
-console.log("hola");
-
-$.notify("Hello World"); 
-}, 100); */
-
-
-    /* $(document).ready(function() {    
-    function changeColor(){
-       console.log("ffffe");
-      // $.notify("Hello World");
-      alert("hoa chavo");
-        if ($('body').hasClass('white')) {
-            $('body').removeClass('white');
-            $('body').addClass('black');
-            $('h1').removeClass('black');
-            $('h1').addClass('white');
-        }
-        else {
-            $('body').removeClass('black');
-            $('body').addClass('white');
-            $('h1').removeClass('white');
-            $('h1').addClass('black');
-        }
-    }
-
-    setInterval(changeColor, 3000);
-}); */
-
-//$.notify("Hello World");  
-</script>

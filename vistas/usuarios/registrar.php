@@ -200,7 +200,7 @@ function agrega(){
                         <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nombre<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+" onkeyup="mayusculas(event, this)" maxlength="40" minlength="4" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni mánimo de 4" placeholder="Nombre" name="nombre">
+                            <input type="text"  id="nombre" pattern="[a-zA-ZéėíóúūñÁÉÍÓÚÜÑ ]+" onkeyup="mayusculas(event, this)" maxlength="40" minlength="3" autofocus="autofocus"   required class="form-control text-uppercase" data-error="se letras no máximo de 40 ni minímo de 3" placeholder="Nombre" name="nombre">
                               <div  class="help-block with-errors"></div>
                             </div>
                        </div>
@@ -310,7 +310,7 @@ function agrega(){
                       <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Rfc<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="rfc" tidata-error="El rfc es invalido"   onkeyup="mayusculas(event, this)" onblur="validarRfc()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="Rfc" name="rfc">
+                          <input type="text" id="rfc" data-error="El rfc es invalido"   onkeyup="mayusculas(event, this)" onblur="validarRfc()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="Rfc" name="rfc">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
 
@@ -318,7 +318,23 @@ function agrega(){
                        <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label></h4>
                         <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" tidata-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="mayusculas(event, this)" onblur="validarCurps()"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" data-error=": el formato debe ser alfanumerico con 18 digitos"   onkeyup="mayusculas(event, this)" onblur="validarCurps()"  maxlength="18" class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <div  class="help-block with-errors"></div> 
+                        </div>
+                      </div>
+                      <!-- CAPTURA DE ETNIA -->
+                      <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia<span class="required">*</span></label></h4>
+                        <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" id="etnia" data-error=" el campo debe ser colo letras"   onkeyup="mayusculas(event, this)" onblur="validarCurps()"  maxlength="80" pattern="[A-Za-z0-9 éíóúūñÁÉÍÓÚÜÑ]+" class="form-control  text-uppercase"  novalidate placeholder="Etnia" name="etnia">
+                          <div  class="help-block with-errors"></div> 
+                        </div>
+                      </div>
+                      <!-- CAPTURA DE LENGUA E IDIOMA -->
+                      <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma<span class="required">*</span></label></h4>
+                        <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" id="idioma" data-error="El campo debe ser solo letras"   onkeyup="mayusculas(event, this)" onblur="validarCurps()"  maxlength="80" pattern="[A-Za-z0-9 éíóúūñÁÉÍÓÚÜÑ]+" class="form-control  text-uppercase"  required placeholder="Idioma" name="idioma">
                           <div  class="help-block with-errors"></div> 
                         </div>
                       </div>
@@ -365,11 +381,7 @@ function agrega(){
                           </select>
                           </div>
                       </div>
-                                          
-                      
-                   
-                      
-                     
+                               
 
 
                     
@@ -390,7 +402,8 @@ function agrega(){
                          </label>
                          <div class="col-md-8 col-sm-6 col-xs-12">
                           <select name="sistema" required class="select2_group form-control ">
-                             <option value="ORAL"> Oral</option>  
+                             <option value=""> --Seleccione--</option>  
+                             <option value="ORAL"> Acusatoria y Oral</option>  
                              <option value="TRADICIONAL"> Tradicional</option>  
                           </select>
                          </div>

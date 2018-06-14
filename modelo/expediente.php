@@ -138,6 +138,14 @@ function checkNoti(){
   
   return $nums;
 }
+
+function DeleteNotificacion($id_expediente ){
+  $sql = "delete   notificaciones where id_expediente=".$id_expediente;//num notis
+  $nums = consulta($sql);
+  
+  return $nums;
+}
+
 function bajaExpediente($id_expediente, $motivacion){
     $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
           where id_expediente='".$id_expediente."'";
