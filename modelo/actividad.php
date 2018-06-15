@@ -64,10 +64,16 @@ function listar_actividad_x_id($id){
       return $consulta;
   }
   function getActividadesByRangoFecha($fechaI, $fechaF){
-    $sql = "SELECT P.nombre as Defensor, U.nombre as Usuario, fecha_registro, observacion, latitud, longitud
-     FROM actividad inner join asesoria as A using(id_actividad) inner join personal AS P using(id_personal) 
-     inner join usuario_servicio as U using(id_usuario_servicio)  
-    where fecha_registro between '".$fechaI."' and '".$fechaF."' ";
+    $sql = " SELECT P.nombre as Defensor, U.nombre as Usuario, fecha_registro, observacion,
+                    A.id_actividad as idAse, A.latitud as latAse, A.longitud as longAse,
+                    Au.id_actividad as idAud, Au.latitud as latAud, Au.longitud as longAud,
+                    vis.id_actividad as idAct, vis.foto as fotoVis, act.id_actividad as idAct
+    from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join usuario_servicio as U using(id_usuario_servicio)
+    where fecha_registro between '".$fechaI."' and '".$fechaF."'  order by act.id_actividad";
     $lista= consulta($sql);
     //print_r($sql);
     return $lista;

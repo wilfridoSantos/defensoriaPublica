@@ -500,7 +500,7 @@ function verFotoVisita(botn) {
 			
 			 $(this).append(foto); 
 		}
-	}); */
+	}); */ 
 
 }
 
