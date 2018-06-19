@@ -1,7 +1,9 @@
 
 <script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
  	<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
+
 <script src="../../recursos/js/main.js"></script>
+<script src="../../recursos/js/coordinador/headerPDF.js"></script>
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
 
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
@@ -9,7 +11,6 @@
 <script src="../../recursos/js/jquery-validator.js"></script>
 <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
-
 
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
