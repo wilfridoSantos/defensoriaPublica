@@ -2,6 +2,7 @@
 
 include_once('../../libreria/conexion.php');
 
+
 function getActividades(){
     $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,act.id_actividad as idAct,
     ase.latitud as latAse, ase.longitud as longAse,

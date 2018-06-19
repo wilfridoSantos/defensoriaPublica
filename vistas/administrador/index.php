@@ -3,6 +3,7 @@ include "../../Controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
   if($_SESSION["rol"] != 1 ){
      header("Location: ../baseIndex.php");
+     
   }
 ?>
 <!DOCTYPE html>
