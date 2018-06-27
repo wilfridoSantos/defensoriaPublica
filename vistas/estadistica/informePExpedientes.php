@@ -15,20 +15,20 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>Generar informe general de actividades<b></h2>
+                    <h2><b>Generar informe parcial de expedientes<b></h2>
                     
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br>
                     <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
-                      <div class="form-group">
+                    <label class="control-label " style="padding-left:300px;" >PERIODO 
+                        </label><br>
+                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                          
-                         
+                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                                                   
                         </div>
                       </div>
                       <div class="form-group">
@@ -37,10 +37,37 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="date" id="inputFinal" name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
                           <div id="labelFinal" class='block-help with-errors'></div>
-
                         </div>
                       </div>  
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sistema <span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-6 col-xs-12">                        
+                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
+                                    <option value="">Seleccione un sistema</option>
+                                    <option value="T">Tradicional</option>
+                                    <option value="O">Acusatorio y Oral</option>
+                                    <option value="J">Justicia para Adolecentes</option>
+                                    <option value="ALL">Todos</option>
+                                </select>
+                    </div>
+                      </div>
 
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Atributos a solicitar <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">                        
+                                <select name="datatable-responsive_length" multiple="multiple" aria-controls="datatable-responsive" class="form-control input-sm">                                    
+                                    <option value="T">Sexo</option>
+                                    <option value="O">Genero</option>
+                                    <option value="J">Edad</option>
+                                    <option value="ALL">Etnia</option>
+                                    <option value="ALL">Idioma o Lengua</option>
+                                    <option value="ALL">Discapacidad</option>                                    
+                                </select>
+                    </div>
+                      </div>
+                    
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
@@ -52,6 +79,7 @@
                 </div>
               </div>
 
+<!--
 <div class="col-md-12 col-sm-12 col-xs-12" id="tablaPanel">
     <div class="x_panel">
         <div class="x_title">
@@ -156,7 +184,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
       </div>
     </div>
   </div>
@@ -177,8 +205,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
       </div>
     </div>
   </div>
 </div> 
+-->

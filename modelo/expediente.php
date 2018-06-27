@@ -1,6 +1,25 @@
 <?php
 
 include_once ('../../libreria/conexion.php');
+
+function getExpedientesByRangoFecha($fechaI, $fechaF){
+  $sql = " select * from expediente as exp inner join personal as p using(id_personal)
+  inner join( SELECT * from personal_campo as pc inner join materia as m using(id_materia)
+                  )as tablaPersonalCampo using(id_personal)
+                  inner join (
+    select * from usuario_servicio as us 
+                      inner join detalle_usuario_expediente as deus using(id_usuario_servicio)
+                  ) as tablaUsuario using(id_expediente)
+                  inner join (
+        select * from contraparte_expediente as co 
+                              inner join contraparte using(id_contraparte)
+                              ) as tablaContraparte using(id_expediente)
+where fecha_registro between '".$fechaI."' and '".$fechaF."'  order by generoU";
+  $lista= consulta($sql);
+  //print_r($sql);
+  return $lista;
+}
+
 function getExpedienteByNum($numExp){
       $sql = " select * from respuesta inner join preguntas using(id_pregunta) inner join expediente using(id_expediente)
        where num_expediente='".$numExp."' ";

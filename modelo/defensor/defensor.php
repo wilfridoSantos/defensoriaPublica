@@ -5,6 +5,7 @@ function listar_defensores(){
                             inner join juzgado as j using(id_juzgado) where id_cargo =4";			
 
    $lista=consulta($sql);
+   //print_r($sql);
    return $lista;
 }
 

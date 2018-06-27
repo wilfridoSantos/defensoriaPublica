@@ -1,7 +1,13 @@
 <?php
 
 include_once('../../libreria/conexion.php');
-
+/* 
+    select d.nombre as defensor, count( select actAs.id_actividad 
+                                            from asesorias inner join actividad as act
+                                                where actAs.id_actividad = 5
+                                                ) as numAses
+            from actividades left join.....
+*/
 
 function getActividades(){
     $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,act.id_actividad as idAct,
@@ -65,7 +71,7 @@ function listar_actividad_x_id($id){
       return $consulta;
   }
   function getActividadesByRangoFecha($fechaI, $fechaF){
-    $sql = " SELECT sistema,P.nombre as Defensor, U.nombre as Usuario, fecha_registro, observacion,
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor, U.nombre as Usuario, fecha_registro, observacion,
                     A.id_actividad as idAse, A.latitud as latAse, A.longitud as longAse,
                     Au.id_actividad as idAud, Au.latitud as latAud, Au.longitud as longAud,
                     vis.id_actividad as idAct, vis.foto as fotoVis, act.id_actividad as idAct
@@ -76,7 +82,25 @@ function listar_actividad_x_id($id){
         left join personal_campo using(id_personal) 
         left join materia as m using(id_materia)
         left join usuario_servicio as U using(id_usuario_servicio)
-    where fecha_registro between '".$fechaI."' and '".$fechaF."'  order by act.id_actividad";
+    where fecha_registro between '".$fechaI."' and '".$fechaF."'  order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+
+function getActividadesConsulta($inicio, $final, $sys){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor, U.nombre as Usuario, fecha_registro, observacion,
+                    A.id_actividad as idAse, A.latitud as latAse, A.longitud as longAse,
+                    Au.id_actividad as idAud, Au.latitud as latAud, Au.longitud as longAud,
+                    vis.id_actividad as idAct, vis.foto as fotoVis, act.id_actividad as idAct
+    from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join personal_campo using(id_personal) 
+        left join materia as m using(id_materia)
+        left join usuario_servicio as U using(id_usuario_servicio)
+    where (fecha_registro between '".$inicio."' and '".$final."') and m.sistema='".$sys."'";
     $lista= consulta($sql);
     //print_r($sql);
     return $lista;

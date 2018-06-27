@@ -22,7 +22,8 @@
                   <div class="x_content">
                     <br>
                     <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
+                    <label class="control-label " style="padding-left:300px;" >PERIODO 
+                        </label><br>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
                         </label>
@@ -52,6 +53,7 @@
                 </div>
               </div>
 
+<!--
 <div class="col-md-12 col-sm-12 col-xs-12" id="tablaPanel">
     <div class="x_panel">
         <div class="x_title">
@@ -156,7 +158,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
       </div>
     </div>
   </div>
@@ -177,8 +179,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
       </div>
     </div>
   </div>
 </div> 
+-->

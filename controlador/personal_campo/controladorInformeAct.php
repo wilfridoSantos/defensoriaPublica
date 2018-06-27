@@ -10,8 +10,7 @@
     }else {
         $fechaInicio = $_POST['fechaI'];
         $fechaFinal  = $_POST['fechaF'];            
-        $informeGeneralAct = getActividadesByRangoFecha($fechaInicio, $fechaFinal);
-        
+        $informeGeneralAct = getActividadesByRangoFecha($fechaInicio, $fechaFinal);        
         $informeEncode = json_encode($informeGeneralAct);
         echo $informeEncode; 
     }

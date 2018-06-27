@@ -47,6 +47,9 @@ var Global_defensores;
 var Global_usuarios_Contraparte;
 $(document).ready(function () {
 
+ 
+
+
       function data(){
 
     $.ajax({
@@ -72,6 +75,7 @@ function dataDefensor(){
     type: 'GET',
     url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
     success: function (data) {
+      console.log('data en herramientas js ', data );
         Global_defensores = data;//parsedData[0].NUMERO;
   //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
     },
@@ -80,8 +84,8 @@ function dataDefensor(){
     }
     });
   }
-  
   dataDefensor();
+
     function pedirContraparte(){
 
         $.ajax({
@@ -98,4 +102,21 @@ function dataDefensor(){
     }
 
     pedirContraparte();// llamao a la funcion para almacenar estos datos
+
+    $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
+      //		  var target= $(event.target);
+        var target= $(this);
+        //console.log(target);
+        var eliminar = $(this).closest('tr');
+        var id_usuarioEliminar = $(this).closest('tr')[0].children[0].getAttribute("id_usuario_eliminar");;
+         //console.log("id",id_usuarioEliminar);
+         
+        var usuarios=$("#usuarios").val().split(",");
+        //console.log(usuarios);
+        usuarios.splice(usuarios.indexOf(id_usuarioEliminar),1);
+        $("#usuarios").val(usuarios.toString());
+        $(eliminar).remove();
+        $("#project").attr('disabled', false);
+        $("#project").val("");
+  });
 });
