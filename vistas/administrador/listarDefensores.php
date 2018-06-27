@@ -1,17 +1,81 @@
     <title>Modulo Coordinador General</title>
-      <script src="../../recursos/js/main.js"></script>
-      <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
- <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
+      <!-- <script src="../../recursos/js/main.js"></script>
+      <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
+   <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
     <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-      <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+      <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script> -->
       <!-- <link href="../../recursos/css/style.css" rel="stylesheet"/>
  -->
-      
+<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<!-- <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+ -->  
+
+  <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script> 
+   <script src="../../recursos/js/main.js"></script>
+      <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
+      <!-- <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+       --><link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../../recursos/css/custom.css" rel="stylesheet"/>
+    <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../recursos/js/main.js"></script><!-- 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+<script>
+
+//$(document).ready(function () {
+    function tabla(){
+    //$('#example').DataTable(); 
+    
+
+ $('#example').DataTable({
+searching: false,
+
+	
+language: {
+	"decimal":        "",
+	"emptyTable":     "No hay datos",
+	"info":           "mostrando _START_ a _END_ de _TOTAL_ pagina",
+	"infoEmpty":      "mostrando 0 datos",
+	"infoFiltered":   "(filtered from _MAX_ total entries)",
+	"infoPostFix":    "",
+	"thousands":      ",",
+	"lengthMenu":     "mostrar de _MENU_ paginas",
+	"loadingRecords": "Loading...",
+	"processing":     "Processing...",
+	"search":         "Buscar:",
+	"zeroRecords":    "No matching records found",
+	
+	"aria": {
+		"sortAscending":  ": activate to sort column ascending",
+		"sortDescending": ": activate to sort column descending"
+	},	"emptyTable":     "No hay datos",
+
+	paginate: {
+		previous: 'Atras',
+		next:     'Siguiente'
+	},
+	aria: {
+		paginate: {
+			previous: 'Atras',
+			next:     'Siguiente'
+		}
+	}
+},
+
+}); $('.idPersonal').hide();
+}
+//});
+          </script>
+     <link href="../../recursos/css/style.css" rel="stylesheet"/>
+
+
       <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -22,17 +86,7 @@
         <div class="x_content">
             <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="dataTables_length" id="datatable-responsive_length">
-                            <label>Mostrar
-                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> Entradas</label>
-                        </div>
-                    </div>
+                   
                     <div class="col-sm-6">
                         <div id="datatable-responsive_filter" class="dataTables_filter">
                             <label>Buscar por Defensor:
@@ -44,37 +98,31 @@
                 </div>
                 <div class="row">      
                     <div class="col-sm-12">
-<<<<<<< HEAD
                         <div id="dialogo" title="Confirma eliminar"><span id="msnDialog" style="display:none"> Tiene al menos un expediente</span></div>
-=======
-                    <div id="dialogo" title="Confirma Eliminar?"><span id="msnDialog" style="display:none;">tiene al menos 1 expediente</span></div>
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
-                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                        <table id="example" class="table ui table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    
+                    <!--     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
                             cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
-                            <thead>
+                     -->        <thead>
                                 <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1"
-                                        style="width: 71px;" aria-label="Defensor: activate to sort column descending" aria-sort="ascending">NOMBRE</th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
-                                        rowspan="1" colspan="1" style="width: 70px;" aria-label="Usuario: activate to sort column ascending">A. PATERNO</th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 155px;" aria-label="Fecha registro: activate to sort column ascending">A. MATERNO</th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 66px;" aria-label="Observaciones: activate to sort column ascending">LUGAR ADSCRIPCION</th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 28px;" aria-label="Acciones: activate to sort column ascending">ACCIONES</th>
+                                    <th class="idPersonal">NUM</th>
+                                    <th>NOMBRE</th>
+                                    <th >A. PATERNO</th>
+                                    <th >A. MATERNO</th>
+                                    <th >LUGAR ADSCRIPCIÓN</th>
+                                    <th >ACCIONES</th>
                                     </tr>
                             </thead>
                             <tbody id="tebody" >
 
                             <?php include '../../controlador/defensor/controladorListaDef.php';
-                              $defensores=json_decode($contenido);
+                               $defensores=json_decode($contenido);
                               //print_r($defensores);
                               foreach($defensores as $obj){
                                 //print_r('=> '. $obj->estado);
                                 if($obj->estado){                
-                                  echo '<tr role="row" class="odd"> '. //OR oven || odd
-                                    '<td id="idPersonal" style="display:none;">'.$obj->id_personal.'</td>'.
+                                  echo '<tr role="row" class="odd gradeA"> '. //OR oven || odd
+                                    '<td  class="idPersonal" id="idPersonal" style="display:none; visibility:hidden;">'.$obj->id_personal.'</td>'.
                                     '<td>'.strtoupper($obj->nombre).'</td>'.
                                     '<td>'.strtoupper($obj->ap_paterno).'</td>'.
                                     '<td>'.strtoupper($obj->ap_materno).'</td>'.
@@ -90,90 +138,17 @@
                                         '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
                                     '</td> </tr>';
                                   }            
-                                }
+                                } 
+                                echo "<script> tabla() </script>"
                           ?>
-                                <!-- <tr role="row" class="odd">
-                                    <td tabindex="0" class="sorting_1">Airi</td>
-                                    <td>Satou</td>
-                                    <td>Accountant</td>
-                                    <td style="">Tokyo</td>
-                                    <td style="">33</td>
-
-                                </tr>
-                                <tr role="row" class="even">
-                                    <td class="sorting_1" tabindex="0">Angelica</td>
-                                    <td>Ramos</td>
-                                    <td>Chief Executive Officer (CEO)</td>
-                                    <td style="">London</td>
-                                    <td style="">47</td>
-                                    
-                                </tr>
-                                <tr role="row" class="odd">
-                                    <td tabindex="0" class="sorting_1">Ashton</td>
-                                    <td>Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td style="">San Francisco</td>
-                                    <td style="">66</td>
-                              
-                                </tr>
-                                <tr role="row" class="even">
-                                    <td class="sorting_1" tabindex="0">Bradley</td>
-                                    <td>Greer</td>
-                                    <td>Software Engineer</td>
-                                    <td style="">London</td>
-                                    <td style="">41</td>
                                 
-                                </tr>
-                                <tr role="row" class="odd">
-                                    <td class="sorting_1" tabindex="0">Brenden</td>
-                                    <td>Wagner</td>
-                                    <td>Software Engineer</td>
-                                    <td style="">San Francisco</td>
-                                    <td style="">28</td>
-                                   
-                                </tr>
-                                 -->
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button previous disabled" id="datatable-responsive_previous">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="0" tabindex="0">Previous</a>
-                                </li>
-                                <li class="paginate_button active">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">1</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="2" tabindex="0">2</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="3" tabindex="0">3</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="4" tabindex="0">4</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="5" tabindex="0">5</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="6" tabindex="0">6</a>
-                                </li>
-                                <li class="paginate_button next" id="datatable-responsive_next">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
-          
+

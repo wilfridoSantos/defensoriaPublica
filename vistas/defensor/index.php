@@ -25,7 +25,8 @@ include "../../Controlador/sesion.php";
   <!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
     <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> ESTA ESTO Y SE CAMBIO POR LO DE ABAJO-->
+    <script src="../../recursos/js/jquery-1.11.2.min.js"></script> 
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -64,6 +65,7 @@ include "../../Controlador/sesion.php";
               <div class="profile_info">
                 <span>Bienvenido,</span>
                                   <?php echo  $personal[0]['nombre'] ?>
+                                  <input type="hidden" id="id_personalUser" name=""  value="<?php echo $personal[0]['id_personal']?>">
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -195,10 +197,10 @@ include "../../Controlador/sesion.php";
                           
                       }
                   ?> <!-- class='alert-dismissible fade in  -->
-                    <div  class='alert-dismissible fade in <?php echo $alert; ?>'  role="alert">
+                    <div id="contenedorMensaje"  class='alert-dismissible fade in <?php echo $alert; ?>'  role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                       </button>
-                      <strong align="center">
+                      <strong align="center" id="idMensaje">
                         <?php 
                         echo (isset($_SESSION['mensaje']['mensaje'])?$_SESSION['mensaje']['mensaje']:"");
                                                 $_SESSION['mensaje']=[];
@@ -209,6 +211,7 @@ include "../../Controlador/sesion.php";
 
                   </div>
                 <?php
+                 $_SESSION['mensaje']['mensaje']='';
                }
                ?>
             <div class="row" id="menuContainer">

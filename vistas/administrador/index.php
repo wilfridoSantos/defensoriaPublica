@@ -22,7 +22,8 @@ include "../../Controlador/sesion.php";
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/> 
 
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+<!--     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+ -->    <script src="../../recursos/js/jquery-1.11.2.min.js"></script>
     <script src="../../recursos/js/administrador/notificarAdmin.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     
@@ -60,7 +61,8 @@ include "../../Controlador/sesion.php";
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                                  <?php //echo $_SESSION['usuario'] ?>
+                         <?php //echo $_SESSION['usuario'] ?>
+                        <input type="hidden" id="id_personalUser" name=""  value="<?php echo $personal[0]['id_personal']?>">
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -241,13 +243,8 @@ include "../../Controlador/sesion.php";
             </div>
 
             <div class="clearfix"></div>
-<<<<<<< HEAD
-           <!--  <div id="dialogo" title="Confirma Eliminar?" message="haksjdhkjas"></div>
-            --> 
-=======
             <div id="dialogoNotificacion" title="Revisión Notificación?" ></div>
             
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
             <?php
                // echo isset($_SESSION['mensaje']);
               
@@ -436,30 +433,6 @@ $.notify("Hello World");
 }, 100); */
 
 
-<<<<<<< HEAD
-=======
-    /* $(document).ready(function() {    
-    function changeColor(){
-       console.log("ffffe");
-      // $.notify("Hello World");
-      alert("hoa chavo");
-        if ($('body').hasClass('white')) {
-            $('body').removeClass('white');
-            $('body').addClass('black');
-            $('h1').removeClass('black');
-            $('h1').addClass('white');
-        }
-        else {
-            $('body').removeClass('black');
-            $('body').addClass('white');
-            $('h1').removeClass('white');
-            $('h1').addClass('black');
-        }
-    }
-
-    setInterval(changeColor, 3000);
-}); */
->>>>>>> 463deed2d4cb356adb1227d4525a885ff5f87be2
 
 //$.notify("Hello World");  
 </script>

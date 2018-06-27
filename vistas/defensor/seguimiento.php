@@ -51,5 +51,25 @@
         Aquí podemos introducir todo cuanto queramos, desde formularios a imágenes, sliders...
     </div>
  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> 
+
+
+<select>
+<option>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam sed leo quis dignissim. Nunc porta molestie suscipit. Integer id aliquam eros. Integer lobortis risus semper, convallis arcu vitae, venenatis libero. Fusce non commodo quam. Pellentesque a viverra ante. Etiam at dignissim felis, at lobortis turpis.</option>
+  <option>Vivamus ut elit ac tortor rhoncus mollis quis at leo. Vestibulum suscipit tincidunt metus ac aliquet. Donec ultricies odio laoreet consequat elementum. Integer diam ipsum, condimentum eu posuere ac, consequat quis velit. Pellentesque euismod orci vel iaculis condimentum. </option>
+  <option> Maecenas id velit molestie, efficitur dolor vel, condimentum turpis. Etiam vel dolor vel justo posuere volutpat. Quisque facilisis, sapien ut blandit posuere, massa nulla imperdiet orci, sit amet tincidunt nisl arcu sollicitudin sem. Morbi vel nisl a dolor tincidunt aliquam.</option>
+  <option>Aliquam tellus metus, fermentum eget urna nec, vestibulum condimentum lacus. Nunc felis leo, euismod eget condimentum a, feugiat quis tellus.</option>
+  <option> Maecenas id velit molestie, efficitur dolor vel, condimentum turpis. Etiam vel dolor vel justo posuere volutpat. Quisque facilisis, sapien ut blandit posuere, massa nulla imperdiet orci, sit amet tincidunt nisl arcu sollicitudin sem. Morbi vel nisl a dolor tincidunt aliquam.</option>
+  <option>Mauris posuere ligula ac nisl laoreet ultricies. Mauris molestie sed nisi et ultrices. Integer feugiat in diam in posuere. Vestibulum a tempus tellus, sed faucibus dui.</option>
+</select>
+
+<script size='10'>
+    $("select").select2({
+    width:'100%'
+  });
+</script>
 </body>
 </html>

@@ -43,23 +43,44 @@ function buscarXPrimerCampo() {
 
 // estos son datos de tipo variables globales
 var Global_usuarios_servicios;
+var Global_user_basic;
 $(document).ready(function () {
 
-  function data(){
+      function data(){
 
-$.ajax({
-  type: 'GET',
-  url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
-  success: function (data) {
-      Global_usuarios_servicios = data;//parsedData[0].NUMERO;
-//        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
-  },
-  error: function () {
-      alert('Error peticion Ajax ');
-  }
-  });
-}
+    $.ajax({
+        type: 'GET',
+        url: '../../controlador/usuario_servicio/listaUsuario.php?term=busqueda',
+        success: function (data) {
+            Global_usuarios_servicios = data;//parsedData[0].NUMERO;
+      //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
+        },
+        error: function () {
+            alert('Error peticion Ajax ');
+        }
+        });
+    }
 
-data();// llamao a la funcion para almacenar estos datos
+  data();// llamao a la funcion para almacenar estos datos
 
+
+
+    function userBAsico(){
+          var user=document.getElementById('id_personalUser');
+        $.ajax({
+          type: 'GET',
+          url: '../../controlador/datos_basicos.php?personal='+user.value,
+          success: function (data) {
+            Global_user_basic = data;//parsedData[0].NUMERO;
+        //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
+          },
+          error: function () {
+                console.log("Error de ajax");
+                
+              //alert('Error peticion Ajax ');
+          }
+          });
+    }
+
+    userBAsico();// llamao a la funcion para almacenar estos datos
 });

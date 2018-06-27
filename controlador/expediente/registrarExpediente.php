@@ -15,10 +15,12 @@
     $expediente = Array(
             "id_defensor"          =>$_POST['defensor'],
             "num_expediente"       =>((isset($_POST['expediente']))?$_POST['expediente']:""),
-            "nombre_delito"               =>$_POST["delito"],
+            "nombre_delito"        =>$_POST["delito"],
+            "tipo_expediente"      =>$_POST["tipo_expediente"],
             "grado_delito"  =>$_POST["grado_delito"]
            
         );
+        print_r($expediente);
     //////// CUANDO ES EJECUCION DE SANCIONES SE DEBE DE REGISTRAR LA FECHA EN QUE SE CREO EL EXPEDIENTE
     $mensaje=['tipo'=>"error",
     'mensaje'=>"expediente ya existe"];
@@ -29,7 +31,7 @@
         {   echo "entro valido personal materia";
             alta_expediente($expediente);
             foreach ($usuario as $key => $value) {
-                alta_DetalleExpedinte(ultimoExpedinteCreatado(),$value);
+             alta_DetalleExpedinte(ultimoExpedinteCreatado(),$value);
              }
            
         $mensaje=['tipo'=>"exito",

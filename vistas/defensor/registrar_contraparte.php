@@ -4,8 +4,8 @@
 
 <script>
 
-function agrega(){
-		//	 $('#menuContainer').load("coordinadorRegistrarJuzgado.php");
+function cerrar(){
+			 $('#registroContraparte').children().remove();
       }
       
 
@@ -45,8 +45,10 @@ function agrega(){
 		}   
 	
 	 
-		if(ano < 1958 || ano > 1998)
+    console.log("fecha que muestra", date.getYear());
+		if(ano <= (date.getFullYear()-5) || ano > 1998)
     { 
+	 console.log("fecha que muestra", (date.getFullYear()-5));
       console.log("fecha invalida");
      $(".errors").remove();
       ul.setAttribute("class", "errors");
@@ -68,7 +70,6 @@ function agrega(){
     intano=parseInt(ano);
 
 	
-	 console.log( date.getYear());
   }
 
  function validarCurps() {
@@ -79,7 +80,7 @@ function agrega(){
    
    var curpApaterno=document.getElementById('aPaterno').value;
    var curpAmaterno=document.getElementById('aMaterno').value;
-   var curpGenero=(((document.getElementById("genero").options[document.getElementById("genero").selectedIndex].value)==="masculino")?'H':'M');
+   var curpGenero=(((document.getElementById("sexo").options[document.getElementById("sexo").selectedIndex].value)==="masculino")?'H':'M');
    var curpFecha= document.getElementById("fechaNacimiento").value.split('-');
 
    
@@ -107,32 +108,27 @@ function agrega(){
  }
 </script>
 
+    <script src="../../recursos/js/expediente/registrarContraparte.js"></script>
      <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12 ">
                 <div class="x_panel">
                   <div class="x_title">
                     <h1><label class="control-label col-md-4 col-sm-3 col-xs-12 " >Registro   usuario de contraparte</label></h1>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
+                      
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#" id="agregarjuzado" onclick="agrega()">
-                            <label  ></label></a>
-                        </li>
-                   
-                        </li>
-                        </ul>
+                       <button type="" onclick="cerrar()"><a class="close-link"><i class="fa fa-close"></i></a></button>
+                      
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br/>
-                    <form  id="myform"  data-toggle="validator" role="form" class="form-horizontal form-label-left" action ="../../controlador/usuario_servicio/crearUsuario.php" object="defensor" method="post">
+                    <!-- <form  id="myform"  data-toggle="validator" role="form" class="form-horizontal form-label-left" action ="../../controlador/expediente/registrarContraparte.php" object="defensor" method="post">
+ -->                    <form  id="myform"  data-toggle="validator" role="form" class="form-horizontal form-label-left"  object="defensor">
 
                        <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                          <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Nombre<span class="required">*</span></label>
@@ -145,7 +141,7 @@ function agrega(){
                        <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Telefono<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" novalidate placeholder="" name="telefono">
+                          <input id="telefono" type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" novalidate placeholder="" name="telefono">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
 
@@ -160,7 +156,7 @@ function agrega(){
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Email<span class="required">*</span></label>
                             </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input type="text"  data-error="correo invalido" class="form-control" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$"  novalidate placeholder="Email" name="email">
+                              <input id="email" type="text"  data-error="correo invalido" class="form-control" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$"  novalidate placeholder="Email" name="email">
                               <div  class="help-block with-errors"></div></div>
                       </div>   
 
@@ -174,7 +170,7 @@ function agrega(){
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >calle<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" novalidate placeholder="" name="calle">
+                          <input id="calle" type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" novalidate placeholder="" name="calle">
                           <div  class="help-block with-errors"></div></div>
                       </div>
 
@@ -214,32 +210,30 @@ function agrega(){
                              <option value="Transgenero">Transgénero</option>   
                              <option value="Travesti">Travesti </option>   
                              <option value="Intersexual">Intersexual </option>
+                             <option value="">Ninguno </option>
                           </select>
 
                         </div>
                       </div>
 
+
+                      <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
+                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                              <input id="fechaNacimiento" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaNacimiento">
+                                 <div  class="help-block with-errors"></div>
+                              </div> 
+                      </div> 
+                          
+
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                                 <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia</label>
                             </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                            <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  novalidate placeholder="" name="etnia">
+                            <input id="etnia" type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  novalidate placeholder="" name="etnia">
                                 </div>
                             </div>
-                    
 
-                                
-
-                     <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" onkeyup="validarCurps()" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  novalidate placeholder="curp" name="curp">
-                          <div  class="help-block with-errors"></div> </div>
-                      </div>
-               
-
-                     
-
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                                     <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Sexo<span class="required">*</span></label>
                                     </h4> <div class="col-md-8 col-sm-8 col-xs-12">
 
@@ -250,13 +244,52 @@ function agrega(){
                                         </select>
 
                                         </div>
-                           </div>
+                           </div>  
 
+                   
+
+                     
+                     <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma/Lengua</label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                    <input id="idioma" type="text" data-error=":  solo letras de maximo 50 caracter"  pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="idioma">
+                         </div>
+                      </div>
+                         
+
+                          
+                          
+                           <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" id="curp" onkeyup="validarCurps()" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  novalidate placeholder="curp" name="curp">
+                          <div  class="help-block with-errors"></div> </div>
+                      </div>
+               
+                    
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                                    <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Discapacidad<span class="required">*</span></label>
+                                    </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+
+
+                                    <select required id="discapacidad" name="tipo_usuario"  class="select2_group form-control">
+                                            <option value="ninguno">- Seleccione -</option> 
+                                            <option value="sensorial">Discapacidades sensoriales y de la comunicación</option> 
+                                            <option value="motrices"> Discapacidades motrices</option>   
+                                            <option value="mental"> Discapacidades mentales</option>   
+                                            <option value="multiples"> Discapacidades multiples </option>   
+                                            <option value="ninguno"> Ninguno </option>   
+                                           
+                                    </select>
+
+                                        </div>
+                           </div>
+                                      
                            <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                                     <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Tipo de contraparte<span class="required">*</span></label>
                                     </h4> <div class="col-md-8 col-sm-8 col-xs-12">
 
-                                    <select required id="tipo_contraparte" name="tipo_usuario"  class="select2_group form-control">
+                                    <select required id="tipo_contraparte" name="tipo_contraparte"  class="select2_group form-control">
                                             <option value="">- Seleccione -</option> 
                                             <option value="Demandado">Demandado</option> 
                                             <option value="Victima">Victima</option>   
@@ -264,37 +297,24 @@ function agrega(){
                                             <option value="Apelado">Apelado</option>   
                                             <option value="Actor">Actor</option>   
                                             <option value="Ofendido">Ofendido</option>   
-                                            <option value="Terceros">Terceros</option>   
+                                            <option value="Tercero">Terceros</option>   
                                     </select>
 
                                         </div>
                            </div>
-                                      
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma</label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input type="text" data-error=":  solo letras de maximo 50 caracter"  pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="idioma">
-                         </div>
-                      </div>
                     
-                      <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
-                           <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
-                            </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                              <input id="fechaNacimiento" type="date"  onkeyup="validarFecha(event,this)" onblur="validarFecha(event,this)" data-error="fecha invalido" pattern="" data-error="fecha invalida" maxlength="50" class="form-control" required="" placeholder="Email" name="fechaNacimiento">
-                                 <div  class="help-block with-errors"></div>
-                              </div> 
-                      </div> 
+                   
                       
-                      <input type="text"  id="id_contraparte" name="id_contraparte" class="form-control  text-uppercase"   placeholder="" >
+                      <input type="hidden"   id="id_contraparte" name="id_contraparte" class="form-control  text-uppercase"   placeholder="" >
                 
-                      <input type="text"  id="id_expediente_contraparte" name="id_expediente" class="form-control  text-uppercase"   placeholder="" >
+                      <input type="hidden"  id="id_expediente_contraparte" name="id_expediente" value="<?php echo $_GET['id_expediente']?>"class="form-control  text-uppercase"   placeholder="" >
                 
                     
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
 						   <button class="btn btn-primary btn btn-info btn-lg" type="reset">Limpiar</button>
-						   <input type ="submit" class="btn btn-succes btn btn-success btn-lg" value="Guardar"/>
+						   <input type ="button" onclick="registrarContraparte()" class="btn btn-succes btn btn-success btn-lg" value="Guardar"/>
                         <!--   <button type="submit" class="btn btn-success">Submit</button> -->
                         </div>
                       </div>
