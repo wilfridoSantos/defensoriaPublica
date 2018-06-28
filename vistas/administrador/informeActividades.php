@@ -1,13 +1,10 @@
 
 <script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
- 	<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
-
+<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
-
 <script src="../../recursos/js/jquery-validator.js"></script>
 <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
@@ -22,13 +19,11 @@
                   <div class="x_content">
                     <br>
                     <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                          
-                         
+                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                                                   
                         </div>
                       </div>
                       <div class="form-group">
@@ -37,10 +32,8 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="date" id="inputFinal" name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
                           <div id="labelFinal" class='block-help with-errors'></div>
-
                         </div>
                       </div>  
-
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
@@ -180,5 +173,8 @@
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
+
+
+     
   </div>
 </div> 

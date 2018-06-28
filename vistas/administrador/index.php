@@ -15,11 +15,11 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Modulo ADMINISTRADOR</title>
-    
-
+    <title>Modulo ADMINISTRADOR</title>    
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/> 
+      
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
     <script src="../../recursos/js/administrador/notificarAdmin.js"></script>
@@ -39,6 +39,8 @@ include "../../Controlador/sesion.php";
 
 
     <link href="../../recursos/css/custom.css" rel="stylesheet"/> 
+
+ 
   </head>
 
   <body class="nav-md" style="background-color:black;">
@@ -361,7 +363,7 @@ include "../../Controlador/sesion.php";
               </div>
             </div>
           </div>
-          
+        
          
         </div>
         <!-- /page content --> 
@@ -421,15 +423,3 @@ include "../../Controlador/sesion.php";
   unset($_SESSION['post_data']);
   }  
 ?>
-<script type="text/javascript">
-  /* setTimeout(function() {
-//	$.notifyClose();
-console.log("hola");
-
-$.notify("Hello World"); 
-}, 100); */
-
-
-
-//$.notify("Hello World");  
-</script>
