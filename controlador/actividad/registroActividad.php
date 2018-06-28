@@ -5,7 +5,7 @@
     include_once('../../modelo/asesoria.php');
     include_once('../../modelo/visita.php');
     include_once('../../modelo/audiencia.php');
-   
+
     $usuario_servicio=getUsuarioByCurp($_POST['curp'])[0]['id_usuario_servicio'];
     //print_r(explode("-", "2018-01-09"));
     $dia_registro=explode('-', $_POST['fechaRegistro'])[2];
@@ -40,7 +40,6 @@
        // echo "Error: " . $_FILES['archivo']['error'] ;
         //echo "comprabante es =>".$_FILES["archivo"]["name"];
         if(isset($_FILES['archivo']))   
-
             if ($_FILES['archivo']["error"] > 0)
             {
            // echo "Error: " . $_FILES['archivo']['error'] . "<br>";
@@ -49,7 +48,6 @@
             $dirigir="registrar_actividad";
         
             }
-
             if($_FILES['archivo']['size'] != 0){
                 $nombreFoto = $_FILES["archivo"]["name"];
                 $rutaFoto   = $_FILES["archivo"]["tmp_name"];

@@ -8,9 +8,9 @@
         $informeEncodeNue = json_encode($informeGeneralActNue);
         echo $informeEncodeNue; 
     }else {
-        $fechaInicio =$_POST['fechaI'];
-        $fechaFinal = $_POST['fechaF'];            
-        $informeGeneralAct = getActividadesByRangoFecha($fechaInicio, $fechaFinal);
+        $fechaInicio = $_POST['fechaI'];
+        $fechaFinal  = $_POST['fechaF'];            
+        $informeGeneralAct = getActividadesByRangoFecha($fechaInicio, $fechaFinal);        
         $informeEncode = json_encode($informeGeneralAct);
         echo $informeEncode; 
     }

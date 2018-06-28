@@ -5,7 +5,6 @@ include "../../Controlador/sesion.php";
      header("Location: ../baseIndex.php");
      
   }
- 
 ?>
 <!DOCTYPE html>
 <html lang="en">

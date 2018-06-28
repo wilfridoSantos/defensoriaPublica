@@ -26,8 +26,9 @@ function getUsuarioByCurp($curp){
         $sql.= "calle='".$objetoEntidad['calle']."', numero_ext='".$objetoEntidad['numero_ext']."',"; 
         $sql.= "numero_int='".$objetoEntidad['numero_int']."', municipio='".$objetoEntidad['municipio']."',"; 
         $sql.= "estadoProveniente='".$objetoEntidad['estado']."',sexo='".$objetoEntidad['sexo']."',"; 
-        $sql.= "telefono='".$objetoEntidad['telefono']."', correo_electronico='".$objetoEntidad['correo']."'"; 
-       //echo $sql;
+        $sql.= "telefono='".$objetoEntidad['telefono']."', correo_electronico='".$objetoEntidad['correo']."',"; 
+        $sql.= "discapacidad='".$objetoEntidad['discapacidad']."'"; 
+       echo $sql;
          $lista=registro($sql);
 
         // echo $lista;

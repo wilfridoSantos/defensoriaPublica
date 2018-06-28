@@ -82,7 +82,7 @@ $idpersonal=$_SESSION['personal'];
                         <tr > 
                         <th >    Num. Expediente     </th>
                         <th >   Delito   </th>
-                        <th >   Grado del delito </th>
+                        <th >   Tipo del delito </th>
                         <th >   Observaciones   </th>
                         <th >    Accion     </th>
                         </thead>

@@ -15,7 +15,7 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
 //print_r( $arrayUser);
     $passHashed = $arrayUser[0]['password'];// obtiene la Contrasenia del usuario en la BD
     if(password_verify($pass, $passHashed)){//verifica las contraseñas si son correctas entra al if
-        $sqlRol = 'select id_cargo from personal where nue ='.$usuario;
+        $sqlRol = 'select id_cargo,nombre,ap_paterno, ap_materno, foto from personal where nue ='.$usuario;
         //$consultaRol = $conexion->query($sqlRol);
         $num_regis = registro($sqlRol);//$consultaRol->num_rows;
         if($num_regis == 1){
@@ -23,7 +23,8 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
             $temp = consulta($sqlRol);// $ejecutar_consulta->fetch_assoc();
             $id_cargo = $temp[0]['id_cargo'];
             $estado = $arrayUser[0]['estado'];
-            $nombreUsuario = $arrayUser[0]['username'];
+            $fotoPerfil = $temp[0]['foto'];
+            $nombreUsuario = 'Lic. '.$temp[0]['nombre'].' '.$temp[0]['ap_paterno'].' '.$temp[0]['ap_materno'];
             //echo $id_cargo . ' ' . $estado . ' ' . $nombreUsuario;
             if($estado == 1){
                 session_start();

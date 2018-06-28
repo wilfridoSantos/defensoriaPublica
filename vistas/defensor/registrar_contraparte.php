@@ -270,9 +270,7 @@ function cerrar(){
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                                     <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Discapacidad<span class="required">*</span></label>
                                     </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-                                    <select required id="discapacidad" name="tipo_usuario"  class="select2_group form-control">
+                                     <select required id="discapacidad" name="discapacidad"  class="select2_group form-control">
                                             <option value="ninguno">- Seleccione -</option> 
                                             <option value="sensorial">Discapacidades sensoriales y de la comunicación</option> 
                                             <option value="motrices"> Discapacidades motrices</option>   
