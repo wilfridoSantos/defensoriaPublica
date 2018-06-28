@@ -4,9 +4,19 @@ include_once '../../libreria/conexion.php';
 
 function getContraparteById($id_contraparte){
     $sql = "select * from contraparte where id_contraparte='".$id_contraparte."'";
+    //echo $sql;
     $lista = consulta($sql);
     return $lista;
 }
+function getContrapartesById($id_contraparte){
+    $sql = "select * from contraparte as contra 
+    inner join contraparte_expediente  as detalle  using(id_contraparte)
+    where detalle.id_expediente='".$id_contraparte."'";
+    //echo $sql;
+    $lista = consulta($sql);
+    return $lista;
+}
+
 
 function getUsuarioByCurp($curp){
     $sql = "select * from usuario_servicio where curp='".$curp."'";
@@ -26,19 +36,7 @@ function getUsuarioByCurp($curp){
         $sql.="'".$objetoEntidad['estado']."',"."'".$objetoEntidad['genero']."',"."'".$objetoEntidad['telefono']."',";
         $sql.="'".$objetoEntidad['correo']."',"."'".$objetoEntidad['calle']."',"."'".$objetoEntidad['curp']."',";
         $sql.="'".$objetoEntidad['discapacidad']."')";
-       // $sql.="'".$objetoEntidad['calle']."',"."'".$objetoEntidad['curp']."')";
-        /* $sql = "INSERT INTO contraparte ";
-        $sql.= "SET nombre='".$objetoEntidad['nombre']."', apellido_materno='".$objetoEntidad['ap_materno']."',";
-        $sql.= "apellido_paterno='".$objetoEntidad['ap_paterno']."', genero='".$objetoEntidad['genero']."',";
-        $sql.= "calle='".$objetoEntidad['calle']."', edad='".$objetoEntidad['edad']."',";
-        $sql.= "fecha_nacimiento='".$objetoEntidad['fecha_nacimiento']."', idioma='".$objetoEntidad['idioma']."',";
-        $sql.= "etnia='".$objetoEntidad['etnia']."', curp='".$objetoEntidad['curp']."',"; 
-        $sql.= "id_contraparte='".$objetoEntidad['id_contraparte']."',"; 
-        //$sql.= "calle='".$objetoEntidad['calle']."', municipio='".$objetoEntidad['municipio']."',"; 
-       // $sql.= "numero_int='".$objetoEntidad['numero_int']."', numero_ext='".$objetoEntidad['numero_ext']."',"; 
-        $sql.= "entidad='".$objetoEntidad['estado']."',sexo='".$objetoEntidad['sexo']."',"; 
-        $sql.= "telefono='".$objetoEntidad['telefono']."', email='".$objetoEntidad['correo']."'";  */
-       //echo $sql;
+      
          $lista=registro($sql);
 
         // echo $lista;
@@ -47,19 +45,21 @@ function getUsuarioByCurp($curp){
 
     
     //Definimos una funcion que acutualice al Contraparte
- function actualizar_Contraparte($defensor){
-        
-        $sql = "UPDATE  defensor as d inner join personal as p using(id_personal) inner join juzgado as j using(id_juzgado)".
-        "SET p.nombre='".$defensor['nombre']."', p.ap_paterno='".$defensor['ap_paterno']."', p.ap_materno='".$defensor['ap_materno']."',".
-        "p.curp='".$defensor['curp']."', p.calle='".$defensor['calle']."', p.numero_ext='".$defensor['numero_ext']."',".
-        "p.numero_int='".$defensor['numero_int']."',p.colonia='".$defensor['colonia']."',p.municipio='".$defensor['municipio']."',".
-        "p.nup='".$defensor['nup']."',p.nue='".$defensor['nue']."',p.genero='".$defensor['genero']."',p.telefono='".$defensor['telefono']."',".
-        "p.corre_electronico='".$defensor['corre_electronico']."',j.juzgado='".$defensor['juzgado']."'".
-        " where id_defensor = '".$defensor['id_defensor']."'";
-        $lista=consulta($sql);
-        //echo $defensor['id_defensor'].' => Ah sido actualizado';
-        //echo $sql;
-        return $lista;
+ function actualizar_Contraparte($contraparte){
+    $sql = "update contraparte set ";
+    $sql.= "nombre='".$contraparte['nombre']."',";
+    $sql.= "apellido_paterno='".$contraparte['apellido_paterno']."',";
+    $sql.= "apellido_materno='".$contraparte['apellido_materno']."',";
+    $sql.= "etnia='".$contraparte['etnia']."',";
+    $sql.= "idioma='".$contraparte['idioma']."',";
+    $sql.= "telefono='".$contraparte['telefono']."',";
+    $sql.= "genero='".$contraparte['genero']."',";
+    $sql.= "discapacidad='".$contraparte['discapacidad']."',";
+    $sql.= "email='".$contraparte['email']."'";
+  $sql.=" where id_contraparte='".$contraparte['id_contraparte']."'";
+  $lista = consulta($sql);
+  //echo $sql;
+  return $lista;
  }
 
     //Definimos una funcion que borrar defensor

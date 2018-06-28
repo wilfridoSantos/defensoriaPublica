@@ -32,15 +32,9 @@ if($("#usuarios").val()!= " " || $("#usuarios").val()!= ""){//PRIMERO CHECO SI E
 //      $( "<tr><td>" ).text( message ).prependTo( "#usuarioSeleccionados" );
     var td=document.createElement("td");
         tr.appendChild(td);
-        //console.log(message);
-        
-        // $( td ).text( message ).prependTo( "#usuarioSeleccionados" );
         $( td ).text( usuario );// A ESTE TD LE ASIGO AL USUARIO DEL SERVICIO
         td.setAttribute("id_usuario_eliminar",message.item.id_usuario);
-        //td.setAttribute("class","id_usuario_servicio");
-        //td.setAttribute("name","id_usuario");
-
-
+      
         
     $("#usuarioSeleccionados").append(tr);
     var td2=document.createElement("td");         

@@ -7,10 +7,10 @@
     include_once('../../modelo/audiencia.php');
 
     $usuario_servicio=getUsuarioByCurp($_POST['curp'])[0]['id_usuario_servicio'];
-    print_r( explode("[/.-]", $_POST['fechaRegistro']));
-    $dia_registro=preg_split('[/.-]', $_POST['fechaRegistro'])[2];
-    $mes_registro=preg_split('[/.-]', $_POST['fechaRegistro'])[1];
-    $anio_registro=split('[/.-]', $_POST['fechaRegistro'])[0];
+    //print_r(explode("-", "2018-01-09"));
+    $dia_registro=explode('-', $_POST['fechaRegistro'])[2];
+    $mes_registro=explode('-', $_POST['fechaRegistro'])[1];
+    $anio_registro=explode('-', $_POST['fechaRegistro'])[0];
     $actividad = Array(
            
             "id_personal_campo"         =>$_POST['id_personal'],
@@ -30,7 +30,7 @@
      // if($_POST["actividad"]=="asesoria"||$_POST["actividad"]=="visita"){
         $id_actividadRegistrado=ultimoActividadRegistrado();
      
-        $ubicacion=split(',',$_POST['ubicacion']);
+        $ubicacion=explode(',',$_POST['ubicacion']);
        
         //print_r($ubicacion);
         $la=(count($ubicacion)==2)?$ubicacion[0]:"";
@@ -115,7 +115,7 @@ if(isset($_GET['tipo'])){
          $_SESSION['mensaje'] = $mensaje;
          //$_SESSION['dirigir'] = $dirigir;
         // echo $mensaje['mensaje'];
-      header("location: ../../vistas/defensor/index.php");
+     header("location: ../../vistas/defensor/index.php");
      }
      else{
           header('Content-Type: application/json');

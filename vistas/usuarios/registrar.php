@@ -1,5 +1,6 @@
 <?php 
-  include '../../controlador/juzgado/actividad_juzgado.php';
+  //include_once('../../controlador/juzgado/actividad_juzgado.php?tipo=listadoJuzgadoSeguimiento');
+  include_once('../../controlador/juzgado/actividad_juzgado.php');
 
 
   

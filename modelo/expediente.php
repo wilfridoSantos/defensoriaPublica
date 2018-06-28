@@ -151,12 +151,19 @@ function checkNoti(){
 }
 
 function DeleteNotificacion($id_expediente ){
-  $sql = "delete   notificaciones where id_expediente=".$id_expediente;//num notis
+  $sql = "delete from  notificaciones where id_expediente=".$id_expediente;//num notis
   $nums = consulta($sql);
-  
+ echo $sql;
   return $nums;
 }
 
+function finalizarExpediente($datos){
+  $sql="update expediente set estado='finalizado',fecha_final='".$datos['fecha_final']."', observaciones='".$datos['observaciones']."'
+  where id_expediente='".$datos['id_expediente']."'";
+  $lista = consulta($sql);
+  echo $sql;
+  return $lista;
+}
 function bajaExpediente($id_expediente, $motivacion){
     $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
           where id_expediente='".$id_expediente."'";
@@ -177,7 +184,7 @@ function bajaExpediente($id_expediente, $motivacion){
  function listar_expediente_x_defensor($idDefensor){
    
     $sql = "select exp.id_expediente,exp.estado,exp.nombre_delito,exp.tipo_delito,exp.observaciones,exp.fecha_final,exp.fecha_inicio, exp.num_expediente,
-                defensor.id_juzgado,     defensor.estado AS estadoDefensor,defensor.id_personal,mate.materia
+                defensor.id_juzgado,     defensor.estado AS estadoDefensor,defensor.id_personal,mate.materia,mate.sistema
                 from expediente as exp inner join 
             personal_campo  as defensor using(id_personal)
             inner join materia as mate using(id_materia)
@@ -218,12 +225,38 @@ function bajaExpediente($id_expediente, $motivacion){
         return $consulta;
     }
     
-    function listar_preguntaConOpciones($id_materia){
+    function listar_preguntaConOpciones($id_materia,$id_expediente){
      
-        $sql = "select pregunta.id_pregunta,pregunta.id_materia,pregunta.id_pregunta,pregunta.pregunta,pregunta.identificador,op.opcion
-                    from preguntas as pregunta
-                    left join opcion as op on pregunta.id_pregunta=op.id_pregunta where id_materia='".$id_materia."'";
+        /*  $sql = "select pregunta.id_pregunta,pregunta.pregunta,detalle.id_materia,detalle.id_pregunta_materia,detalle.identificador,op.opcion
+                from pregunta as pregunta
+                inner join pregunta_materia as detalle using(id_pregunta)
+                left join opcion as op on pregunta.id_pregunta=op.id_pregunta
+                where id_materia='".$id_materia."'";   */
+           
+
+        /*   $sql="select  preguntaOpcion.id_pregunta,preguntaOpcion.pregunta,preguntaOpcion.id_materia,preguntaOpcion.id_pregunta_materia,preguntaOpcion.identificador,preguntaOpcion.opcion
+             from (select pregunta.id_pregunta,pregunta.pregunta,detalle.id_materia,detalle.id_pregunta_materia,detalle.identificador,op.opcion
+              from pregunta as pregunta
+              inner join pregunta_materia as detalle using(id_pregunta)
+              left join opcion as op on pregunta.id_pregunta=op.id_pregunta
+              where id_materia=".$id_materia.") as preguntaOpcion left join respuesta as res
+                on preguntaOpcion.id_pregunta_materia=res.id_pregunta_materia
+              where res.id_pregunta_materia IS NULL";  */
+
+              $sql=" select pre.id_pregunta, pre.pregunta, detalle.id_materia, detalle.id_pregunta_materia, detalle.identificador, op.opcion, expRespuesta.id_respuesta, expRespuesta.respuesta  from( 
+                select exp.id_expediente, exp.id_personal,res.id_respuesta,res.id_pregunta_materia,res.respuesta
+                  from expediente as exp left join  respuesta as res 
+                    using(id_expediente)  
+                  where exp.id_expediente =".$id_expediente."
+              ) as expRespuesta
+                          right join pregunta_materia as detalle using(id_pregunta_materia) 
+              inner join pregunta as pre using(id_pregunta) 
+              left join opcion as op using(id_pregunta) 
+            where  detalle.id_materia=".$id_materia; 
+      //  echo $sql;
+           
         $consulta = consulta($sql);
+    //  print_r($consulta);
         return $consulta;
     }
     
@@ -232,11 +265,11 @@ function bajaExpediente($id_expediente, $motivacion){
       
         $sql = "INSERT INTO expediente ";
         $sql.= " SET id_personal='".$objetoEntidad['id_defensor']."', nombre_delito='".$objetoEntidad['nombre_delito']."' ,";
-        $sql.= "  tipo_delito='".$objetoEntidad['grado_delito']."', num_expediente='".$objetoEntidad['num_expediente']."' ";
-        //$sql.= " num_expediente='".$objetoEntidad['num_expediente']."' ";
+        $sql.= "  tipo_delito='".$objetoEntidad['grado_delito']."', num_expediente='".$objetoEntidad['num_expediente']."', ";
+        $sql.= " tipo_expediente='".$objetoEntidad['tipo_expediente']."' ";
       // echo $sql;
          $lista=registro($sql);
-   return $lista;
+      return $lista;
     }
   
 

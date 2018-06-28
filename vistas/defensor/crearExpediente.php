@@ -49,10 +49,6 @@ session_start();
               // $( td ).text( message ).prependTo( "#usuarioSeleccionados" );
               $( td ).text( usuario );// A ESTE TD LE ASIGO AL USUARIO DEL SERVICIO
               td.setAttribute("id_usuario_eliminar",message.item.id_usuario);
-              //td.setAttribute("class","id_usuario_servicio");
-              //td.setAttribute("name","id_usuario");
-
-
               
           $("#usuarioSeleccionados").append(tr);
           var td2=document.createElement("td"); 
@@ -91,10 +87,31 @@ session_start();
   } );
   </script>
 
- 
 
+<script>
+  function cambiarVista(){
+    var sistema=document.getElementById('tipoSistema').value;
+    var materia=document.getElementById('tipoMateria').value;
+    console.log(sistema);
+    console.log(materia);
+    if(sistema==="ORAL"&&materia==="PENAL"){
+       console.log("SE AGREGARA EL ELEMENTO TIPO DE EXPEDIENTE");
+       $("#divExpediente").after('<div id="divTipoExpediente" class="form-horizontal form-label-left"> <div   class="form-group">'+
+                        '<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo de expediente <span class="required">*</span>'+
+                        '</label>'+
+                        '<div class="col-md-6 col-sm-6 col-xs-12">'+
+                          '<select required="" id="tipo_expediente"   name="tipo_expediente"  class="form-control ">'+
+                            '<option value="">--SELECCIONE UNA OPCIÓN--</option>'+
+                            '<option value="LEGAJO">LEGAJO</option>'+
+                            '<option value="CAUSA_PENAL">CAUSA PENAL</option>'+
+                          '</select>'+
+                          '</div></div> </div>');
+         
+    }
+}
 
-
+  cambiarVista();
+</script>
 
  
      <div class="row">
@@ -134,7 +151,7 @@ session_start();
                       </div></div></div>
                             
                      
-                      <div class="form-horizontal form-label-left">   <div class="form-group ">
+                      <div id="divExpediente" class="form-horizontal form-label-left">   <div class="form-group ">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nue">Numero de expediente<span class=""></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -150,7 +167,7 @@ session_start();
                           <div  class="help-block with-errors"></div>  </div>
                       </div></div>
 
-                        <div id="gradoDelito"  class="form-group">
+                        <div id="gradoDelito" class="form-horizontal form-label-left"> <div   class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tipo de delito <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -161,46 +178,16 @@ session_start();
                             
                             
                           </select>
-                          </div></div> 
+                          </div></div> </div>
 
                        
 
                
                           <input type="text" name="usuarios" id="usuarios"   style="display:none;" class="form-control col-md-7 col-xs-12"/>
                           <input type="text" name="defensor" id="defensor" style="display:none;" value="<?php  echo $_SESSION['personal'][0]["id_personal"]?>"  class="form-control col-md-7 col-xs-12"/>
-                          <!-- <input type="text" name="materia" id="materia" style="display:none;" value=""  class="form-control col-md-7 col-xs-12"/>
-                -->
-                  <!--    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Materia <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select required="" onmouseout="cargaDefensorPorMateria(event,this)" onblur="cargaDefensorPorMateria(event,this)"  name="materia"  class="form-control ">
-                            <option value="civil">Civil</option>
-                            <option value="familiar"> Familiar</option>
-                            <option value="penal"> Penal</option>
-                            <option value="agrario"> Agrario</option>
-                            <option value="mercantil"> Mercantil</option>
-                            
-                            
-                          </select>
-                          </div></div> -->
-
-
-                      <!--  <div class="form-group  ">
-                        <h4><label class="control-label col-md-3 col-sm-3 col-xs-12 ">Defensor <span class="required">*</span></label>
-                       </h4> <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select required=""  name="defensor" id="asignarDefensor" class="select2_group form-control">
-                             <option > eleccione una opción</option>
-                             
-                               // $defensormateria=json_decode($contenido);
-                             
-                              
-                                 
-                           
-                          </select>
-                        </div>
-                      </div>
-                     -->
+                          <input type="text" name="tipoSistema" id="tipoSistema" style="display:none;" value="<?php  echo $_SESSION['personal'][0]["sistema"]?>"  class="form-control col-md-7 col-xs-12"/>
+                          <input type="text" name="tipoMateria" id="tipoMateria" style="display:none;" value="<?php  echo $_SESSION['personal'][0]["materia"]?>"  class="form-control col-md-7 col-xs-12"/>
+              
                       
                      
                     

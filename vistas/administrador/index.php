@@ -21,7 +21,8 @@ include "../../Controlador/sesion.php";
       
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+<!--     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+ -->    <script src="../../recursos/js/jquery-1.11.2.min.js"></script>
     <script src="../../recursos/js/administrador/notificarAdmin.js"></script>
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     
@@ -61,7 +62,8 @@ include "../../Controlador/sesion.php";
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                                  <?php //echo $_SESSION['usuario'] ?>
+                         <?php //echo $_SESSION['usuario'] ?>
+                        <input type="hidden" id="id_personalUser" name=""  value="<?php echo $personal[0]['id_personal']?>">
               </div>
             </div>
             <!-- /menu profile quick info -->

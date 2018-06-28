@@ -26,6 +26,7 @@
             "idioma"          =>$_POST['idioma'],         
             "fecha"          =>"",         
             "genero"         =>$_POST['genero'],
+            "discapacidad"   =>$_POST['discapacidad'],
             "sexo"         =>$_POST['sexo']
         );
 

@@ -82,7 +82,7 @@ $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
 	  
 	},false);
 
-
+  
 
 
 
@@ -254,21 +254,25 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 	var jsonMisExp = jQuery.parseJSON(data);
 	$('#tebody').children().remove();
 	var materia;
+	var sistema;
 	  $.each(jsonMisExp, function (KEY, VALOR) {
 				var nomBoton;
-			//	console.log(VALOR);
+				console.log("lista de exp ",VALOR);
 				 //nomBoton = $('<button>Seguimiento<button/>');
 				 
 				var nuevoBoton = document.createElement('button');
 				 materia=VALOR.materia;
-				 if (VALOR.num_expediente!="") {
+				 sistema=VALOR.sistema;
+				 console.log(VALOR.estado);
+				 
+				 if (VALOR.num_expediente!=""&VALOR.estado!="finalizado") {
 					 
 				 
 				 
 				 $('#tebody').append(
 					'<tr role="row" class="odd gradeA" > '+
-					'<td id="idPersonal" style="display:none;">'+VALOR.id_personal+' </td>'+
-					'<td id="id_expediente" style="display:none;">'+VALOR.id_expediente+' </td>'+
+					'<td id="idPersonal" style="display:none;">'+VALOR.id_personal+'</td>'+
+					'<td id="id_expediente" style="display:none;">'+VALOR.id_expediente+'</td>'+
 					'<td > <textarea id="num_expediente"   rows="1%"  disabled cols="10" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.num_expediente+'</textarea></td>'+
 					'<td > <textarea    rows="1%"  disabled cols="30" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.nombre_delito+'</textarea></td>'+
 					'<td> <textarea 	rows="1%"  disabled cols="35" minlength="10" maxlength="250" style="background-color:transparent; border:none; auto; color:#000000;resize: none;" readonly class="form-control col-md-5 col-xs-12" >'+VALOR.tipo_delito+'</textarea></td>'+
@@ -292,8 +296,8 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 							//console.log("varlor en funcion  ",this);
 							//funcionExpediente
 							
-				  var id_usuario_expedienteGlobal = $(this).closest('tr').find('#id_expediente').text();
-			
+				 			 var id_usuario_expedienteGlobal = $(this).closest('tr').find('#id_expediente').text();
+				            num_expedienteGlobal=id_usuario_expedienteGlobal;			
 							if(materia==="EJECUCION"){
 								console.log("holaEjecucion");
 								 $.ajax({
@@ -301,21 +305,65 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 									type: "GET",
 																			
 									success: function (data) {
-										
-										
 										$( "#menuContainer" ).html(data);	
 										$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
 										$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
-										//console.log($("#numExpedienteGlobal"));
-											
-										//console.log("el numero de exp es ",id_usuario_expedienteGlobal);
-										
 									   }
 									   
 									}); 
 
 									
-								} 
+								} else
+								if((materia==="PENAL"||materia=="ADOLESCENTE")&&sistema==="ORAL"){
+									console.log("holaPenal o adolecnetes");
+									 $.ajax({
+										url: "materia/penalOral.php",
+										type: "GET",
+																				
+										success: function (data) {
+											$( "#menuContainer" ).html(data);	
+											$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+											$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
+											
+										   }
+										   
+										}); 
+	
+										
+									}
+									else
+									if(materia==="AGRARIO"){
+										console.log("holaAgrario");
+										 $.ajax({
+											url: "materia/agrario.php",
+											type: "GET",
+																					
+											success: function (data) {
+												$( "#menuContainer" ).html(data);	
+												$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+												$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
+												
+											   }
+											   
+											}); 
+		
+											
+										} else{
+//CASO DE QUE SEA EL RESTO DE LAS MATERIAS
+										 $.ajax({
+											url: "materia/seguimientoMateria.php",
+											type: "GET",
+																					
+											success: function (data) {
+												$( "#menuContainer" ).html(data);	
+												$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+												$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
+											   }
+											   
+											}); 
+		
+											
+										} 
 							
 						  },false) 
 					 }
@@ -411,12 +459,11 @@ function filtroActividades(str) {
 							es_visita = '<td tabindex="0" class="sorting_1"> '+actividad+'';
 						}
 						$('#resultadoInforme').append(
-							
 							'<tr role="row" class="oven">' + //cla	ss ="oven" or "odd"							
 							'<td id="verDialog" tabindex="0" class="sorting_1">' + VALOR.Usuario + '</td>' +
 							'<td tabindex="0" class="sorting_1">' + VALOR.fechaR + '</td>' +
 							'<td id="tdObservaciones" tabindex="0" class="sorting_1">' + VALOR.observaciones + '</td>' +
-							es_visita+botonObservacion+'</td>'+
+							  es_visita+botonObservacion+'</td>'+
 							'</tr>'
 						);
 
@@ -468,39 +515,7 @@ function verFotoVisita(botn) {
 	    '<div class="col-sm-6 invoice-col">' +
 	  '<img class="img-quad img-responsive" src="../../recursos/archivo/vistas'+fotoVis+'" alt="" class="img-quad ">' +
   '</div>');
-	/* $("#dialogoV").dialog({
-		resizable: true,
-		height: 500,
-		width: 500,
-		modal: true,
-		show: {
-			effect: "blind",
-			duration: 1000
-		},
-		hide: {
-			effect: "explode",
-			duration: 1000
-		},
-		position: {
-			my: "left top",
-			at: "left bottom",
-			of: $('#verDialog')
-		},
-		buttons: {
-			"Cancelar": function () {
-				$(this).dialog("close");
-			}
-		},
-		open: function () {
-			$(this).empty();
-			//$(this).append(data);					
-				var foto='<div class="col-sm-6">' +
-					'<img src="../../recursos/uploads/'+fotoVis+'" alt="" class="img-quad ">' +
-				'</div>';
-			
-			 $(this).append(foto); 
-		}
-	}); */ 
+	
 
 }
 

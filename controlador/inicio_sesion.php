@@ -32,12 +32,14 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
                 $_SESSION["usuario"] = $nombreUsuario; // se asigna el nombre del usuario a la session
                 $_SESSION["rol"] = $id_cargo; //asignamos rol de usuario /admin =1, coordinado =2, defensor =3
                  $_SESSION["mensaje"] = ' ';
-                 $_SESSION["foto"] = $fotoPerfil;
-                 $sqlPersonal = 'select id_personal,nombre,ap_paterno,ap_materno,curp,nup,nue,foto from personal where nue ='.$usuario;
+               //  $sqlPersonal = 'select id_personal,nombre,ap_paterno,ap_materno,curp,nup,nue,foto from personal where nue ='.$usuario;
+                 $sqlPersonal = 'select id_personal,nombre,ap_paterno,ap_materno,curp,nup,nue,foto,materia,sistema,instancia 
+                                            from personal inner join personal_campo using(id_personal) 
+                                                inner join materia using(id_materia) where nue ='.$usuario;
                  $arrayPersonal = consulta($sqlPersonal);
                  $_SESSION["personal"] = $arrayPersonal;
                   
-                echo'<script language="javascript">window.location="Vistas/baseIndex.php"</script>';
+                echo'<script language="javascript">window.location="vistas/baseIndex.php"</script>';
                 //header("Location: ../Vistas/baseIndex.php");
             }else{
                  echo '<p class="text-danger"><strong>Cuenta inactiva contacto al administrador</strong></p>';

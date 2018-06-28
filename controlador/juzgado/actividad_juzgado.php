@@ -30,6 +30,7 @@
   //$mensaje="Registro exitoso";
   $mensaje=['tipo'=>"exito",
   'mensaje'=>"registro existoso"];
+
 if(isset($_POST['nue'])){
   $nue=$_POST['nue'];
   $mensaje=['tipo'=>"error",
@@ -46,7 +47,10 @@ if(isset($_POST['nue'])){
 }
 
 if(isset($_GET['tipo'])){
-        
+  if($_GET['tipo']=="listadoJuzgadoSeguimiento"){//ENVIA EL JSON A LA VISTA DE SEGUIMIENTO
+    echo $contenidojuzgado;
+   }
+
 if($_GET['tipo']=="html"){
      
     session_start();
@@ -57,7 +61,7 @@ if($_GET['tipo']=="html"){
  }
  else{
       header('Content-Type: application/json');
-     echo "json";
+   //  echo "json";
  }
 }
      //   print_r($contenidojuzgado);

@@ -49,7 +49,7 @@ $(document).ready(function () {
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Observaciones: </b>' + VALOR.observaciones + ' </li>' +
 							'	<li><button class="btn btn-success" onclick="verInfoUsuario(' + id + ')" name="botonVerUser" type="button" ><span class="glyphicon glyphicon-ok-sign"></span></button>' +
 							'	<button class="btn btn-warning" onclick="verDetalleExp(' + KEY + ')" name="botonVerDetalleExp" type="button" ><span class="glyphicon glyphicon-ok-sign"></span></button></li>' +
-
+					
 							'</div>' +
 							'			  	</div></td>' +
 							'				<td>CERO PREGUNTAS POR AHORA<td></tr>';
@@ -2904,7 +2904,9 @@ function showUser(str) {
 							'<td>' + VALOR.materia + '</td>' +
 							'<td>' + VALOR.fecha_inicio + '</td>' +
 							'<td>' + VALOR.estado + '</td>' +
-							'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
+							'<td> <textarea rows="2%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+VALOR.observaciones+'</textarea></td>'+                                                     
+					
+							//'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
 							'<td>' + nomBoton +
 							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp" onclick="verPreguntasExp(this)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
 							'<button type="button" class="btn btn-dark " id="botonBajaExp" name="botonBajaExp" onclick="bajaExpediente(' + id_expediente + ')"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button></td> </tr>'

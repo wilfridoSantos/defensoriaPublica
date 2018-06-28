@@ -25,7 +25,8 @@ include "../../Controlador/sesion.php";
   <!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
     <!-- jQuery -->
-    <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> ESTA ESTO Y SE CAMBIO POR LO DE ABAJO-->
+    <script src="../../recursos/js/jquery-1.11.2.min.js"></script> 
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -64,6 +65,7 @@ include "../../Controlador/sesion.php";
               <div class="profile_info">
                 <span>Bienvenido,</span>
                                   <?php echo  $personal[0]['nombre'] ?>
+                                  <input type="hidden" id="id_personalUser" name=""  value="<?php echo $personal[0]['id_personal']?>">
               </div>
             </div>
             <!-- /menu profile quick info -->

@@ -45,8 +45,10 @@ function cerrar(){
 		}   
 	
 	 
-		if(ano < 1958 || ano > 1998)
+    console.log("fecha que muestra", date.getYear());
+		if(ano <= (date.getFullYear()-5) || ano > 1998)
     { 
+	 console.log("fecha que muestra", (date.getFullYear()-5));
       console.log("fecha invalida");
      $(".errors").remove();
       ul.setAttribute("class", "errors");
@@ -68,7 +70,6 @@ function cerrar(){
     intano=parseInt(ano);
 
 	
-	 console.log( date.getYear());
   }
 
  function validarCurps() {
@@ -249,7 +250,7 @@ function cerrar(){
 
                      
                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma</label>
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma/Lengua</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                     <input id="idioma" type="text" data-error=":  solo letras de maximo 50 caracter"  pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="idioma">
                          </div>
@@ -269,9 +270,7 @@ function cerrar(){
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                                     <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Discapacidad<span class="required">*</span></label>
                                     </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-                                    <select required id="discapacidad" name="tipo_usuario"  class="select2_group form-control">
+                                     <select required id="discapacidad" name="discapacidad"  class="select2_group form-control">
                                             <option value="ninguno">- Seleccione -</option> 
                                             <option value="sensorial">Discapacidades sensoriales y de la comunicación</option> 
                                             <option value="motrices"> Discapacidades motrices</option>   
