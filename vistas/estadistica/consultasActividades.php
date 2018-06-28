@@ -1,82 +1,21 @@
 <?php
      include_once('../../controlador/defensor/controladorListaDef.php');
 ?>
+  <!-- CanvasJS -->
+<script src="../../recursos/vendors/canvasJS/canvasjs.min.js"></script>
+<script src="../../recursos/vendors/canvasJS/jquery.canvasjs.min.js"></script>
+<!-- ESTADISTICA Y HERRAMIENTAS MAS JQUERY UI-->
 <script src="../../recursos/js/estadistica/atendiendoEstadistica.js"></script>
- <script src="../../recursos/js/jquery-ui.1.12.1.js"></script> 
-   <script src="../../recursos/js/herramienta.js"></script> 
- 
+<script src="../../recursos/js/jquery-ui.1.12.1.js"></script> 
+<script src="../../recursos/js/herramienta.js"></script> 
+ <!-- PDFMAKE -->
 <script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
 <script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
-
-
-
+<!-- VALIDATOR Y CSS -->
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
 <script src="../../recursos/js/jquery-validator.js"></script>
 
-
-<script>       
-       var varUsuario=[];
-       console.log(window.Global_defensores, ' valor del global');
-       //var datos = $.parseJSON(window.Global_defensores);
-       var datos= window.Global_defensores;
-       $.each(datos, function (KEY, VALOR) {
-                   var temp={};
-                    if(VALOR.id_personal > 0){
-                            temp['label']=VALOR.nombre;
-                            temp['apellidos']=VALOR.ap_paterno+" "+VALOR.ap_materno;
-                            temp['desc']=VALOR.colonia+", "+VALOR.municipio;
-                            temp['id_usuario']=VALOR.id_personal;
-                            //console.log(VALOR);
-                            varUsuario.push(temp);
-                    }
-                   });
-    $( function() {             
-        function log( message ) {
-          var usuario=message.item.label+" "+message.item.apellidos;
-          if($("#usuarios").val()!= " " || $("#usuarios").val()!= ""){//PRIMERO CHECO SI ESQUE EL USUARIO NO FUE YA INSERTADO
-            $('#usuarioSeleccionados').empty();
-            var tr=document.createElement("tr");
-            //      $( "<tr><td>" ).text( message ).prependTo( "#usuarioSeleccionados" );
-            var td=document.createElement("td");
-            tr.appendChild(td);
-            //console.log(message);
-        
-            // $( td ).text( message ).prependTo( "#usuarioSeleccionados" );
-            $( td ).text( usuario );// A ESTE TD LE ASIGO AL USUARIO DEL SERVICIO
-            td.setAttribute("id_usuario_eliminar",message.item.id_usuario);
-            //td.setAttribute("class","id_usuario_servicio");
-            //td.setAttribute("name","id_usuario");
-            $("#usuarioSeleccionados").append(tr);
-            var td2=document.createElement("td");         
-            $("#usuarios").val(message.item.id_usuario);          
-            $(td2).append("<button type='button' class='btn btn-primary eliminar col-md-7 col-xs-12'><span class='glyphicon glyphicon-remove' aria-hidden='true'> </span> </button>");   
-            tr.appendChild(td2);
-            //$("#project").text(usuario);
-          }   
-          $("#project").attr('disabled', true);//SIEMPRE LIMPIA EL INPUT DE BUSQUEDA  // $( "#usuarioSeleccionados" ).scrollTop( 0 );
-        }///TERMINA LA FUCION
-      $( "#project" ).autocomplete({
-         minLength: 0,
-         source: varUsuario,
-         focus: function( event, ui ) {
-           $( "#project" ).val(ui.item.label+" "+ ui.item.apellidos );
-           return false;
-         },
-         select: function( event, ui ) {
-           var usuario=ui.item.label+" "+ui.item.apellidos;
-            log(ui);
-           return false;
-         }
-       })
-       .autocomplete( "instance" )._renderItem = function( ul, item ) {
-         return $( "<li>" )
-           .append( "<div>" + item.label +" "+item.apellidos+ "<br>" + item.desc + "</div>" )
-           .appendTo( ul );
-       };
-    });
-   </script>
-   
 
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -160,23 +99,95 @@
 
                     <div class="row no-print">
 						             <div class="col-xs-12">
-						               <button class="btn btn-success pull-right" id="botonDesc" name ="botonDesc"disabled onclick="solicitarConsultaAct();" style="margin-right: 5px;">
+						               <button class="btn btn-success pull-right" id="botonDesc" name ="botonDesc" disabled onclick="solicitarConsultaAct();" style="margin-right: 5px;">
 						                <i class="fa fa-download"></i> Realizar consulta</button>
 					             </div>
 						           </div>
                        </form>
                   </div>
+                    <div id="resultadoConsulta" name="resultadoConsulta" >
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
                 </div>
               </div>
 
-              <div id="resultadoConsulta" name="resultadoConsulta" >
-
-              </div>
+              
 
 <script src="../../recursos/js/jquery-validator.js"></script>
-<script>
 
-$('#myform').validator()
+
+<script>    
+  cargarInputDefensor();
+  $('#myform').validator();
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Crude Oil Reserves vs Production, 2016"
+	},	
+	axisY: {
+		title: "Billions of Barrels",
+		titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC"
+	},
+	axisY2: {
+		title: "Millions of Barrels/day",
+		titleFontColor: "#C0504E",
+		lineColor: "#C0504E",
+		labelFontColor: "#C0504E",
+		tickColor: "#C0504E"
+	},	
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		itemclick: toggleDataSeries
+	},
+	data: [{
+		type: "column",
+		name: "Proven Oil Reserves (bn)",
+		legendText: "Proven Oil Reserves",
+		showInLegend: true, 
+		dataPoints:[
+			{ label: "Saudi", y: 266.21 },
+			{ label: "Venezuela", y: 302.25 },
+			{ label: "Iran", y: 157.20 },
+			{ label: "Iraq", y: 148.77 },
+			{ label: "Kuwait", y: 101.50 },
+			{ label: "UAE", y: 97.8 }
+		]
+	},
+	{
+		type: "column",	
+		name: "Oil Production (million/day)",
+		legendText: "Oil Production",
+		axisYType: "secondary",
+		showInLegend: true,
+		dataPoints:[
+			{ label: "Saudi", y: 10.46 },
+			{ label: "Venezuela", y: 2.27 },
+			{ label: "Iran", y: 3.99 },
+			{ label: "Iraq", y: 4.45 },
+			{ label: "Kuwait", y: 2.92 },
+			{ label: "UAE", y: 3.1 }
+		]
+	}]
+});
+chart.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
 
 </script>
 	
