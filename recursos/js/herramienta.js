@@ -98,7 +98,7 @@ function dataDefensor(){
     type: 'GET',
     url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
     success: function (data) {
-      console.log('data en herramientas js ', data );
+      //console.log('data en herramientas js ', data );
         Global_defensores = data;//parsedData[0].NUMERO;
   //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
     },
