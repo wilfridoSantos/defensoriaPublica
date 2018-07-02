@@ -8,8 +8,6 @@
   $nombre = $_SESSION['personal'][0]['nombre'];
   //echo $id_personal;
   //echo $nombre;
-
- 
 ?>
 
 <script >
