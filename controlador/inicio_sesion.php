@@ -31,7 +31,8 @@ if ($num_regs == 0) { //no encontro ningun registro con ese nombre usuario
                 $_SESSION["autentificado"] = true;//queda autenticado          
                 $_SESSION["usuario"] = $nombreUsuario; // se asigna el nombre del usuario a la session
                 $_SESSION["rol"] = $id_cargo; //asignamos rol de usuario /admin =1, coordinado =2, defensor =3
-                 $_SESSION["mensaje"] = ' ';
+                $_SESSION["mensaje"] = ' ';
+                $_SESSION["foto"] = $fotoPerfil;
                //  $sqlPersonal = 'select id_personal,nombre,ap_paterno,ap_materno,curp,nup,nue,foto from personal where nue ='.$usuario;
                  $sqlPersonal = 'select id_personal,nombre,ap_paterno,ap_materno,curp,nup,nue,foto,materia,sistema,instancia 
                                             from personal inner join personal_campo using(id_personal) 

@@ -893,3 +893,55 @@ $( function() {
    };
 });
 }
+
+function functionInputDefensores(){
+    var varUsuario=[];
+    var datos = jQuery.parseJSON(window.Global_defensores);
+    $.each(datos, function (KEY, VALOR) {
+        var temp={};
+        if(VALOR.id_personal > 0){
+            temp['label']=VALOR.nombre;
+            temp['apellidos']=VALOR.ap_paterno+" "+VALOR.ap_materno;
+            temp['desc']=VALOR.colonia+", "+VALOR.municipio;
+            temp['id_usuario']=VALOR.id_personal;            
+            varUsuario.push(temp);
+        }
+    });
+    $( function() {
+        function log( message ) {
+            var usuario=message.item.label+" "+message.item.apellidos;
+            if($("#usuarios").val()!= " " || $("#usuarios").val()!= ""){//PRIMERO CHECO SI ESQUE EL USUARIO NO FUE YA INSERTADO
+                $('#usuarioSeleccionados').empty();
+                var tr=document.createElement("tr");                
+                var td=document.createElement("td");
+                tr.appendChild(td);
+                $( td ).text( usuario );// A ESTE TD LE ASIGO AL USUARIO DEL SERVICIO
+                td.setAttribute("id_usuario_eliminar",message.item.id_usuario);        
+                $("#usuarioSeleccionados").append(tr);
+                var td2=document.createElement("td");         
+                $("#usuarios").val(message.item.id_usuario);          
+                $(td2).append("<button type='button' class='btn btn-primary eliminar col-md-7 col-xs-12'><span class='glyphicon glyphicon-remove' aria-hidden='true'> </span> </button>");   
+                tr.appendChild(td2);
+            }   
+            $("#project").attr('disabled', true);//SIEMPRE LIMPIA EL INPUT DE BUSQUEDA  // $( "#usuarioSeleccionados" ).scrollTop( 0 );
+        }///TERMINA LA FUCION
+        $( "#project" ).autocomplete({
+            minLength: 0,
+            source: varUsuario,
+            focus: function( event, ui ) {
+            $( "#project" ).val(ui.item.label+" "+ ui.item.apellidos );
+            return false;
+         },
+         select: function( event, ui ) {
+            var usuario=ui.item.label+" "+ui.item.apellidos;     
+            log(ui);
+            return false;
+         }
+       })
+       .autocomplete( "instance" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+           .append( "<div>" + item.label +" "+item.apellidos+ "<br>" + item.desc + "</div>" )
+           .appendTo( ul );
+       };
+     });
+}

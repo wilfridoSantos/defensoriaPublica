@@ -1,17 +1,22 @@
-
+<script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
 <script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
  	<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividades.js"></script>
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+<!-- <script src="../../recursos/js/herramienta.js"></script> 
+ -->
 
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
 
 <script src="../../recursos/js/jquery-validator.js"></script>
-<script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+<!-- <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
+ -->
 
+ <script>seleccionarUnDefensor(true)</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -19,28 +24,55 @@
                     
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <br>
-                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                          
-                         
+                  <div class="x_content">         
+                    <form id="myform" data-toggle="validator" class="form-horizontal form-label-left" novalidate="">
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" id="inputRadio1" name="optradio" >Informe con periodo
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="inputRadio2" name="optradio" checked="checked">Informe completo
+                            </label>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fecha Final <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputFinal" name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
-                          <div id="labelFinal" class='block-help with-errors'></div>
-
+                        
+                        <div class="form-group" id="checkDefensor" name="checkDefensor">
+                            
+                            <div class="form-group">
+                                <label class="form-check-label" >Defensor en especifico? 
+                                    <input type="checkbox" checked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
+                                </label>
+                            </div>
+                            <div class="form-group" id="idCheckDefensor" name="idCheckDefensor" style="display:none;">
+                                <div class="form-inline">
+                                    <label class="form-inline" for="project">Eliga un defensor<span class="required">*</span></label>
+                                        <input data-error="Seleccione un defensor" type="text"  id="project"  required onchange="estadoInput(this.value)">                                                                                              
+                                        <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-horizontal form-label-left">
+                                    <div class="form-group ">                                        
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <table required="" id="tablaAsinacionExpedienteusuario" class="table table-striped ">
+                                                <tbody required="" id="usuarioSeleccionados" style="height: 200px; width:915px; overflow: auto;" class=" ui-widget-content"></tbody></table>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" name="usuarios" id="usuarios"   style="display:none;" class="form-control col-md-7 col-xs-12"/>                    
+                                <input type="text" name="idDefensor" id="idDefensor" style="display:none;" />                    
+                            </div>
+                        </div> 
+                        <div class="form-group" style="display:none;" id="divPeriodo">
+                            <div class="form-group" >PERIODO*<br>
+                                <label class="form-check-label" > Fecha inicial
+                                    <input type="date" id="inputInicio"  required="required"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate()" data-error="ingresa fecha menor a la final" step="1">                                                      
+                                </label>
+                                <br>
+                                <label class="form-check-label" > Fecha  final   
+                                     <input type="date" id="inputFinal" name="inputFinal" required="required"  data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate()" data-error="ingresa fecha menor a la final" step="1">
+                                    <div id="labelFinal" class='block-help with-errors'></div>
+                                </label>
+                            </div>                            
                         </div>
-                      </div>  
-
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
@@ -182,3 +214,8 @@
     </div>
   </div>
 </div> 
+<script>
+
+$('#myform').validator()
+
+</script>

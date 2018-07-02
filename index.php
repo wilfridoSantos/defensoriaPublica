@@ -21,7 +21,7 @@ if (session_start()) {
     <!-- NProgress -->
     <link href="recursos/vendors/nprogress/nprogress.css" rel="stylesheet"/>
     <!-- Animate.css -->
-    <link href="recursos/vendors/animate.css/animate.min.css" rel="stylesheet"/>
+    <link href="recursos/vendors/animatecss/animate.min.css" rel="stylesheet"/>
     <!-- Custom Theme Style -->
     <link href="recursos/css/custom.min.css" rel="stylesheet"/>
         <script src="recursos/js/ajax/jquery.min.js"> </script>
