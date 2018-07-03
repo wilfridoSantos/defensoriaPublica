@@ -20,59 +20,64 @@ $(document).ready(function () {
 	$("input[type=radio][name=optradio]").change(function() {
 		var desc = $('#botonDesc').get(0);
 		var inputProject = $('#project').val();
-		var checkDef = $('#checkId').get(0);
-		var selAtributos = $('#selectAtributos').val(); 
-		var selectSistema = $('#selectSistema').val(); 
-		console.log(selAtributos, ' ATRIBUTOS', selectSistema, ' sistema');
+		var checkDef = $('#checkId').get(0).checked;                                                              		
 
-		if(this.id == "inputRadio1"){//informe por periodo
-			$("#divParcial").attr('style','display:none');
-			$("#divPeriodo").removeAttr('style');			
-			if(checkDef.checked == true && inputProject != '' && myFunctionDate('')!=false){				
-				desc.disabled= false;
-				console.log('project diff');				
-			}else{				
-				desc.disabled= true; 	
-			}
-			
+		if(this.id == "inputRadio1"){//informe por periodo			
+			$("#divPeriodo").removeAttr('style');
+			if(checkDef){
+				if(inputProject != '' && myFunctionDate('') != false){
+					desc.disabled= false;
+				}
+				//desc.disabled= true;
+			}else{
+				if(myFunctionDate('') != false){
+					desc.disabled= false;
+				}
+				//desc.disabled= true;
+			}						
 		}
-		if(this.id == "inputRadio2"){//informe  completo
-			$("#divParcial").attr('style','display:none');			
+		if(this.id == "inputRadio2"){//informe  completo				
 			$("#divPeriodo").attr('style','display:none');
-			if(checkDef.checked == true && inputProject == ''){
-				desc.disabled= true;				
-			}
-			if(checkDef.checked == false){
+			console.log(inputProject, ' valor del input project');
+			if(checkDef){ 
+				if(inputProject != ''){
+					desc.disabled= false;
+				}
+			}else{
 				desc.disabled= false;
 			}	
-			
 		}
-		if(this.id == "inputRadio3"){//informe por periodo parcial
+	}); 
+	$("input[type=radio][name=optradioP]").change(function() {
+		var desc = $('#botonDesc').get(0);
+		var inputProject = $('#project').val();
+		var checkDef = $('#checkId').get(0).checked;                                                              		
+
+		if(this.id == "inputRadio3"){//informe por periodo			
 			$("#divPeriodo").removeAttr('style');
-			$("#divParcial").removeAttr('style');			
-			if(checkDef.checked == true && inputProject != '' && myFunctionDate('')!=false && selAtributos != ''){				
-				desc.disabled= false;
-				console.log('project diff');				
-			}else{				
-				desc.disabled= true; 	
-			}
-			
-		}
-		if(this.id == "inputRadio4"){//informe  parcial sin periodo
-			$("#divParcial").removeAttr('style');				
-			$("#divPeriodo").attr('style','display:none');
-			if(checkDef.checked){
-				if(inputProject != '' && selectSistema != ''){
-					desc.disabled= false;					
+			if(checkDef){
+				if(inputProject != '' && myFunctionDate('') != false && selectSistema !=''){
+					desc.disabled= false;
 				}
-				desc.disabled= true;
-			}else{//check desactivado
-				if(selectSistema != ''){
-					desc.disabled= false;					
+			}else{
+				if(myFunctionDate('') != false && selectSistema != ''){
+					desc.disabled= false;
 				}
-				desc.disabled= true;
 			}						
-		}	
+		}
+		if(this.id == "inputRadio4"){//informe  completo				
+			$("#divPeriodo").attr('style','display:none');
+			console.log(inputProject, ' valor del input project');
+			if(checkDef){ 
+				if(inputProject != '' && selectSistema != ''){
+					desc.disabled= false;
+				}
+			}else{
+				if(selectSistema != ''){
+					desc.disabled= false;
+				}
+			}	
+		}
     }); 
 
 	$('#tebody').on('click', '.botonExp', function (evst) {
@@ -652,50 +657,36 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 	var check = $('#checkId').get(0).checked;
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
-	var labelInicio = document.getElementById('labelInicio');//val.parentElement.children[1];//label dentro del div
 	var labelFinal = document.getElementById('labelFinal');
 	var desc = $('#botonDesc').get(0);
-	var selectSistema = $('#selectSistema').get(0);
-	console.log(inicio, ' longitud ', inicio.length);
-	console.log(final, ' longitud ', final.length);
+	//var selectSistema = $('#selectSistema').get(0);
 
 	if (inicio != '' && final != '') {
 		var ini = new Date(inicio);
 		var fin = new Date(final);
-		if (((ini < fin) || (ini == fin)) && selectSistema != '') {
-			var fechaI = ini.toISOString().split('T')[0];
+		if (((ini < fin) || (ini == fin))) {
 			$(".alert").remove();
 			$(".errors").remove();
 			if(check){
-				if(inputProject != ''){				
+				if(inputProject != ''){
 					desc.disabled = false;
-					//generarInformeAct();
-				}else{
-					desc.disabled = true;
+					return true;	
 				}
-			}else{
-				if(selectSistema != ''){				
-					desc.disabled = false;
-					//generarInformeAct();
-				}else{
-					desc.disabled = true;
-				}
-				
+				desc.disabled = true;
+				return false;
 			}
+			desc.disabled = false;
 			return true;
 		} else {
-			desc.disabled = true;			
+					
 			//console.log( fechaI, 'fecha inicial');				
 			$(".errors").remove();
 			labelFinal.setAttribute("class", "alert alert-danger");
-
 			labelFinal.innerText = "La fecha final debe ser Mayor";
-
 			return false;
 		}
-	} else {
-		return false;
-	}
+	} 
+	return false;
 };
 function generarInformeAct2(nue) {
 	var fechaI = document.getElementById('inputInicio').value;
@@ -1568,14 +1559,13 @@ function generarPDFExpedientes() {
 	});
 	console.timeEnd('Test performance');
 };
-function generarPDFActividades() {
+function generarPDFActividadesGeneral() {
 	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
 	var checkDef = $('#checkId').get(0).checked;
 	console.time('TEST PERFORMANCE');
 	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
-	var r1 = $('#inputRadio1').get(0).checked;//informe general completo
-	var r1 = $('#inputRadio1').get(0).checked;//informe parcial con periodo
-	var r1 = $('#inputRadio1').get(0).checked;//informe parcial completo
+	var r2 = $('#inputRadio2').get(0).checked;//informe general completo
+	
 	if(r1){//informe por periodo
 		fechaI = document.getElementById('inputInicio').value;
 		fechaFi = document.getElementById('inputFinal').value;
@@ -1587,7 +1577,8 @@ function generarPDFActividades() {
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject, "radio1":r1, "check":checkDef},
+				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
+					   "radio1":r1, "check":checkDef},
 				success: function (data) {			
 					console.log(data);
 					var jsonInforme = jQuery.parseJSON(data);					
@@ -1644,7 +1635,7 @@ function generarPDFActividades() {
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"defensor":inputProject,"radio1":r1, "check":checkDef},
+				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
 				success: function (data) {			
 					console.log(data, ' completo por defensor');
 					var jsonInforme = jQuery.parseJSON(data);
@@ -1671,7 +1662,7 @@ function generarPDFActividades() {
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"radio1":r1, "check":checkDef},
+				data: {"radio2":r2, "check":checkDef},
 				success: function (data) {	
 					console.log(data, ' completo ooooooooo');		
 					var jsonInforme = jQuery.parseJSON(data);
@@ -1697,23 +1688,33 @@ function generarPDFActividades() {
 			});
 		}
 	}
+	console.timeEnd('TEST PERFORMANCE');
+};
+function generarPDFActividadesParcial() {
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
+	var checkDef = $('#checkId').get(0).checked;
+	console.time('TEST PERFORMANCE');
+	var r3 = $('#inputRadio3').get(0).checked;//informe general con periodo
+	var r4 = $('#inputRadio4').get(0).checked;//informe general completo
 
-		selectAtributos = $('#selectAtributos').val();
-		selectSistema = $('#selectSistema').val();
+	fechaI = document.getElementById('inputInicio').value;
+	fechaFi = document.getElementById('inputFinal').value;
+	selectSistema = $('#selectSistema').val();
+	selectAtributos = $('#selectAtributos').val();	
+
 	if(r3){//informe PARCIAL por periodo
-		fechaI = document.getElementById('inputInicio').value;
-		fechaFi = document.getElementById('inputFinal').value;
-		
+	
 		if(checkDef){	//informe por defensor
 			//inputProject = $('#project').val();//ajax con fechas y input con defensor unico
 			inputProject = $('#idDefensor').val();
+
 			console.log('PETICION AJAX  PERIODO + UN DEFENSOR + UN SISTEMA + ATRIBUTOS');
 			console.log($('#idDefensor').val(), 'id del defensor');
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
 				data: {"fechaI":fechaI, "fechaF":fechaFi, 
-					 "defensor":inputProject, "radio1":r1,
+					 "defensor":inputProject, "radio3":r3,
 					 "check":checkDef, "atributos":selectAtributos, "sistema":selectSistema},
 				success: function (data) {			
 					console.log(data);
@@ -1735,12 +1736,12 @@ function generarPDFActividades() {
 				  });
 				}
 			});
-		}else{//solo esta las fechas y sera general
+		}else{//no activado check defensor
 			console.log('PETICION AJAX parcial periodo varios defensores ');
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, 
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio3":r3, 
 						"check":checkDef,"atributos":selectAtributos, "sistema":selectSistema},
 				success: function (data) {	
 					console.log(data, ' data por periooodo');		
@@ -1769,10 +1770,11 @@ function generarPDFActividades() {
 	if(r4){// informe parcial sin periodo
 		if(checkDef){//informe por defensor
 			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			console.log(inputProject, ' id defensor especificooo');
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"defensor":inputProject,"radio1":r1, "check":checkDef},
+				data: {"defensor":inputProject,"radio4":r4, "check":checkDef},
 				success: function (data) {			
 					console.log(data, ' completo por defensor');
 					var jsonInforme = jQuery.parseJSON(data);
@@ -1796,10 +1798,11 @@ function generarPDFActividades() {
 				}
 			});
 		}else{//shacer ajax informe completo sin filtros
+			console.log(selectAtributos, ' atributos seleccionados');
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"radio1":r1, "check":checkDef},
+				data: {"radio4":r4, "check":checkDef},
 				success: function (data) {	
 					console.log(data, ' completo ooooooooo');		
 					var jsonInforme = jQuery.parseJSON(data);
@@ -2178,14 +2181,63 @@ function functionInputDefensores(dataDefe){
 	 
 	 
 }
-function estadoInput(val){
+function estadoInputParcial(val){
 	var desc = $('#botonDesc').get(0);
 	var selectSistema = $('#selectSistema').val();
 	var check = $('#checkId').get(0).checked;
-	var rGeneralC = $('#inputRadio2').get(0).checked;
-	var rGeneralP = $('#inputRadio1').get(0).checked;
 	var rParcialC = $('#inputRadio4').get(0).checked;
 	var rParcialP = $('#inputRadio3').get(0).checked;
+	var inicio = $('#inputInicio')[0].value;
+	var final = $('#inputFinal')[0].value;
+	console.log('fuera del if dentro estadoIo=nput');
+	if(rParcialC){//radio parcial completo
+		if(check){//check defensor unico
+			if(val != '' && selectSistema != '' ){
+				desc.disabled= false;
+				return true;				
+			}
+		}else{
+			if(selectSistema != '' ){
+				desc.disabled= false;
+				return true;				
+			}
+			desc.disabled= true;
+			return false;                                   
+		}
+		
+	}
+	if(rParcialP){// radio general x periodo de tiempo
+		if(check){//check defensor unico
+			if(val != '' ){//input no vacio?
+				if(myFunctionDate('') != false && selectSistema != '') {
+					desc.disabled= false;
+					return true;
+				}
+				desc.disabled= true;
+				return false;				
+			}
+				desc.disabled= true;
+				return false;	
+		}else{
+			if(myFunctionDate('') != false && selectSistema!='') {
+				desc.disabled= false;
+				return true;
+			}
+			desc.disabled= true;
+			return false;	
+		}
+		desc.disabled= true;
+		return false;	
+	}
+}
+function estadoInput(val){
+	var desc = $('#botonDesc').get(0);
+	//var selectSistema = $('#selectSistema').val();
+	var check = $('#checkId').get(0).checked;
+	var rGeneralC = $('#inputRadio2').get(0).checked;
+	var rGeneralP = $('#inputRadio1').get(0).checked;
+/* 	var rParcialC = $('#inputRadio4').get(0).checked;
+	var rParcialP = $('#inputRadio3').get(0).checked; */
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
 	console.log('fuera del if dentro estadoIo=nput');
@@ -2193,206 +2245,141 @@ function estadoInput(val){
 		if(check){//check defensor unico
 			if(val != '' ){
 				desc.disabled= false;
-				console.log(' rgeneral, checkdefensor, input ACTIVOS o con datos boton habil ');
-			}else{
-				desc.disabled= true;
-				console.log(' rgeneral(true), check(true),  inputdef vacion boton no habilit ');
-
+				return true;				
 			}
-		}else{
+			desc.disabled= true;
+				return false;
+		}
 			desc.disabled= false;
-			console.log(' rgeneral true, checkdefe false, boton no habilit ');
-		}
-	}
-	if(rParcialC){//radio Parcial completo
-		if(check){//check defensor unico
-			if(val != '' && selectSistema != ''){
-				desc.disabled= false;
-				console.log(' rgeneral, checkdefensor, input ACTIVOS o con datos boton habil ');
-
-			}else{
-				desc.disabled= true;
-				console.log(' rgeneral(true), check(true),  inputdef vacion boton no habilit ');
-			}
-		}else {
-			if(selectSistema != ''){
-				desc.disabled= false;
-			}else{
-				desc.disabled= true;
-			}
-			
-			console.log(' rgeneral true, checkdefe false, boton no habilit ');
-		}
+			return true;	
 	}
 	if(rGeneralP){// radio general x periodo de tiempo
-		if(check == true){//check defensor unico
-			if(val != '' ){//input no vacio?
-				if (inicio != '' && final != '') {
-					var ini = new Date(inicio);
-					var fin = new Date(final);
-					if ((ini < fin) || (ini == fin)) {
-						//var fechaI = ini.toISOString().split('T')[0];
-						$(".alert").remove();					
-						desc.disabled=false;
-					}else{
-						desc.disabled=true;
-					}
-				}else{
-					desc.disabled=true;
-				} 
-				//primero pregunta por periodos fechas correctos
-				//desc.disabled= false;
-				//console.log(' rPeriodo true, checkdefensor true, input ACTIVOS o con datos boton habil ');
-
-			}else{
-				desc.disabled= true;
-				console.log(' rPeriodo(true), check(true),  inputdef vacion boton no habilit ');
-
-			}
-		}else{
-			desc.disabled= false;
-			console.log(' rPeriodo true, checkdefe false, boton no habilit ');
-		}
-	}
-
-	if(rParcialP){// radio general x periodo de tiempo
 		if(check){//check defensor unico
 			if(val != '' ){//input no vacio?
-				if (inicio != '' && final != '') {
-					var ini = new Date(inicio);
-					var fin = new Date(final);
-					if (((ini < fin) || (ini == fin)) && selectSistema != '') {
-						//var fechaI = ini.toISOString().split('T')[0];
-						$(".alert").remove();					
-						desc.disabled=false;
-					}else{
-						desc.disabled=true;
-					}
-				}else{
-					desc.disabled=true;
-				} 
-				//primero pregunta por periodos fechas correctos
-				//desc.disabled= false;
-				//console.log(' rPeriodo true, checkdefensor true, input ACTIVOS o con datos boton habil ');
-
-			}else{
+				if(myFunctionDate('') != false) {
+					desc.disabled= false;
+					return true;
+				}		
 				desc.disabled= true;
-				console.log(' rPeriodo(true), check(true),  inputdef vacion boton no habilit ');
-
-			}
-		}else{//check desactivado
-			if (inicio != '' && final != '') {
-				var ini = new Date(inicio);
-				var fin = new Date(final);
-				if (((ini < fin) || (ini == fin)) && selectSistema != '') {
-					//var fechaI = ini.toISOString().split('T')[0];
-					$(".alert").remove();					
-					desc.disabled=false;
-				}else{
-					desc.disabled=true;
-				}
-			}else{
-				desc.disabled=true;
-			} 
-			console.log(' rPeriodo true, checkdefe false, boton no habilit ');
+				return false;				
+			}			
+			desc.disabled= true;
+				return false;
+		}else{
+			if(myFunctionDate('') != false) {
+				desc.disabled= false;
+			}			
+				desc.disabled= true;
+				return false;
 		}
-	}
+	}	
+	desc.disabled= true;
+		return false;
 }
-function seleccionarUnDefensor(val){//checkdefensor especifico
+function seleccionarUnDefensorParcial(val){//checkdefensor especifico
 	var desc = $('#botonDesc').get(0);	
-	var rGeneralC = $('#inputRadio2').get(0).checked;
-	var rGeneralP = $('#inputRadio1').get(0).checked;
 	var rParcialC = $('#inputRadio4').get(0).checked;
 	var rParcialP = $('#inputRadio3').get(0).checked;
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
-	var selectSistema = $('#selectSistema').val();
-
-	if(rGeneralC){
-		$("#divPeriodo").attr('style','display:none');
-		if(val == true){//esta activada el check defensor esp?     
-			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
-			dataDefensor(); //lista de defensores
-			desc.disabled= true;		
-			return true;		
-		}else{
-			desc.disabled= false;
-			//$('#').empty();
-			$('#idCheckDefensor').attr('style','display:none');
-			return false;
-		}
-	}
-	if(rGeneralP){//esta activado por periodo
-		$("#divPeriodo").removeAttr('style');
-		if(val == true){//esta activada el check defensor esp?     
-			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
-			dataDefensor(); //lista de defensores
-			desc.disabled= true;
-
-			return true;		
-		}else{//check defensor esta desact
-			$('#idCheckDefensor').attr('style','display:none');
-			if (inicio != '' && final != '') {
-				var ini = new Date(inicio);
-				var fin = new Date(final);
-				if ((ini < fin) || (ini == fin)) {
-					//var fechaI = ini.toISOString().split('T')[0];
-					$(".alert").remove();					
-					desc.disabled=false;
-				}else{
-					desc.disabled=true;
-				}
-			}else{
-				desc.disabled=true;
-			}  
-		}
+	var selectSistema  = $('#selectSistema').val();
+	var inputProject = $('#project').val();
+	if(val){
+		$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
+		dataDefensor();
+	}else{
+		$("#idCheckDefensor").attr('style','display:none');
 	}
 	if(rParcialC){
-		$("#divPeriodo").attr('style','display:none');
-		if(val==true){//esta activada el check defensor esp?     
-			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
-			dataDefensor(); //lista de defensores
-			desc.disabled= true;		
-			return true;		
+		$("#divPeriodo").attr('style', 'display:none;');		
+		if(val){//esta activada el check defensor esp?  	
+			if(inputProject != '' && selectSistema != ''){
+				desc.disabled= false;
+				return true;
+			}
+			desc.disabled= true;
+			return false;
 		}else{
-			$('#idCheckDefensor').attr('style','display:none');
 			if(selectSistema != ''){
 				desc.disabled= false;
 				return true;
-			}else{				
-				desc.disabled= true;
-				return false;
-			}		
-			//$('#').empty();
-			
+			}
+			desc.disabled= true;
 			return false;
 		}
 	}
 	if(rParcialP){//esta activado por periodo
 		$("#divPeriodo").removeAttr('style');
 		if(val){//esta activada el check defensor esp?     
-			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
-			dataDefensor(); //lista de defensores
+			if(myFunctionDate('') != false && inputProject != '' && selectSistema != ''){
+				desc.disabled= false;
+				return true;
+			}
 			desc.disabled= true;
-			return true;		
+			console.log('se congelo bpoton porque no hay');
+			return false;		
 		}else{//check defensor esta desact
-			$('#idCheckDefensor').attr('style','display:none');
-			if (inicio != '' && final != '') {
-				var ini = new Date(inicio);
-				var fin = new Date(final);
-				if (((ini < fin) || (ini == fin)) && selectSistema != '') {
-					//var fechaI = ini.toISOString().split('T')[0];
-					$(".alert").remove();					
-					desc.disabled=false;
-				}else{
-					desc.disabled=true;
-				}
-			}else{
-				desc.disabled=true;
-			} 
+			if (myFunctionDate('') != false && selectSistema != ''){
+				desc.disabled= false;
+				return true;
+			}
+			desc.disabled= true;
+			return false; 
+		}
+		desc.disabled= true;
+		return false;
+	}
+}
+function seleccionarUnDefensor(val){//checkdefensor especifico
+	var desc = $('#botonDesc').get(0);	
+	var rGeneralC = $('#inputRadio2').get(0).checked;
+	var rGeneralP = $('#inputRadio1').get(0).checked;
+	//var rParcialC = $('#inputRadio4').get(0).checked;
+	//var rParcialP = $('#inputRadio3').get(0).checked;
+	var inicio = $('#inputInicio')[0].value;
+	var final = $('#inputFinal')[0].value;
+	var inputProject = $('#project').val();
+	if(val){
+		$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
+		dataDefensor();
+	}else{
+		$("#idCheckDefensor").attr('style','display:none');
+	}
+	if(rGeneralC){
+		$("#divPeriodo").attr('style', 'display:none;');		
+		if(val){//esta activada el check defensor esp?  	
+			if(inputProject != ''){
+				desc.disabled= false;
+				return true;
+			}
+			desc.disabled= true;
+			return false;
+		}else{
+			desc.disabled= false;
+			return true;
 		}
 	}
-
+	if(rGeneralP){//esta activado por periodo
+		$("#divPeriodo").removeAttr('style');
+		if(val){//esta activada el check defensor esp?     
+			if(myFunctionDate('') != false && inputProject != ''){
+				desc.disabled= false;
+				return true;
+			}
+			desc.disabled= true;
+			console.log('se congelo bpoton porque no hay');
+			return false;		
+		}else{//check defensor esta desact
+			if (myFunctionDate('') != false){
+				desc.disabled= false;
+				return true;
+			}
+			desc.disabled= true;
+			return false; 
+		}
+		desc.disabled= true;
+		return false;
+	}
 }
 function verObservacion(check, llave) {
 	var divs = document.getElementsByName('idObs');
@@ -2561,15 +2548,60 @@ function filtroActividades(str) {
 			$('#verFotoVisita').addEventListener('click', verFotoVisita, false);
 		} */
 }
-
+function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en que se encuentra
+	var inicio = $('#inputInicio').val();
+	var final = $('#inputFinal').val();
+	var check = $('#checkId').get(0).checked;
+	var rParcialC = $('#inputRadio4').get(0).checked;
+	var rParcialP = $('#inputRadio3').get(0).checked;
+	var selectProject = $('#project').val();
+	var selectSistema = $('#selectSistema').get(0); 
+	var desc = $('#botonDesc').get(0);   
+	console.log(check, "valor seleccionadpo");
+	if(rParcialP){//esta activado por periodo
+		if(check){
+			if(	selectProject != '' && myFunctionDate('') != false && val !=''){
+				desc.disabled = false;
+				return true;
+			}
+			desc.disabled = true;
+			return false;
+		}else{
+			if( myFunctionDate('') != false && val !=''){
+				desc.disabled = false;
+				return true;
+			}
+			desc.disabled = true;
+			return false;
+		}
+	} 
+	if(rParcialC){//esta activado por periodo
+		if(check){
+			if(	selectProject != ''  && val !=''){
+				desc.disabled = false;
+				return true;
+			}
+			desc.disabled = true;
+			return false;
+		}else{
+			if(val !=''){
+				desc.disabled = false;
+				return true;
+			}
+			desc.disabled = true;
+			return false;
+		}
+	} 
+	desc.disabled = true;
+	return false;
+};
 function myFunctionSistema(val){// aqui tambien debe checar por radio en que se encuentra
 	var inicio = $('#inputInicio').val();
 	var final = $('#inputFinal').val();
 	var check = $('#checkId').get(0).checked;
 	var rGeneralC = $('#inputRadio2').get(0).checked;
 	var rGeneralP = $('#inputRadio1').get(0).checked;
-	var rParcialC = $('#inputRadio4').get(0).checked;
-	var rParcialP = $('#inputRadio3').get(0).checked;
+
 	var selProject = $('#project').val();
 	//var selectSistema = $('#selectSistema').get(0); 
 	var desc = $('#botonDesc').get(0);   

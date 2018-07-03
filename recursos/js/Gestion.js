@@ -4,10 +4,25 @@
 				$('#menuContainer').load("../usuarios/registrar.php");
 			};
 			
-	var informeAct=document.getElementById('informeActividades');
-		informeAct.addEventListener('click', informeActividades, false);
+	var informeGActivi=document.getElementById('informeGAct');
+		informeGActivi.addEventListener('click', informeActividades, false);
 		function informeActividades() {
-				$('#menuContainer').load("informeActividades.php");
+				$('#menuContainer').load("informeGActividades.php");
+		};
+		var informeGExped=document.getElementById('informeGExp');
+		informeGExped.addEventListener('click', informeGExpedientes, false);
+		function informeGExpedientes() {
+				$('#menuContainer').load("informeGExpedientes.php");
+		};
+		var informePActivi=document.getElementById('informePAct');
+		informePActivi.addEventListener('click', informePActividades, false);
+		function informePActividades() {
+				$('#menuContainer').load("informePActividades.php");
+		};
+		var informePExped=document.getElementById('informePExp');
+		informePExped.addEventListener('click', informePExpedientes, false);
+		function informePExpedientes() {
+				$('#menuContainer').load("informePExpedientes.php");
 		};
 
 		
