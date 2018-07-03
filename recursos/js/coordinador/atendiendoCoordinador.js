@@ -1774,7 +1774,8 @@ function generarPDFActividadesParcial() {
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"defensor":inputProject,"radio4":r4, "check":checkDef},
+				data: {"defensor":inputProject,"radio4":r4, "check":checkDef, "atributos":selectAtributos,
+						"sistema":selectSistema},
 				success: function (data) {			
 					console.log(data, ' completo por defensor');
 					var jsonInforme = jQuery.parseJSON(data);
@@ -1802,7 +1803,8 @@ function generarPDFActividadesParcial() {
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeAct.php",
 				type: "POST",
-				data: {"radio4":r4, "check":checkDef},
+				data: {"radio4":r4, "check":checkDef,  "atributos":selectAtributos,
+				"sistema":selectSistema},
 				success: function (data) {	
 					console.log(data, ' completo ooooooooo');		
 					var jsonInforme = jQuery.parseJSON(data);

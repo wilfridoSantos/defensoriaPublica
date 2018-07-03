@@ -8,6 +8,20 @@
         $informeEncodeNue = json_encode($informeGeneralActNue);
         echo $informeEncodeNue; 
     }else {
+        if(isset(($_POST['radio1'])){
+            if($_POST['radio1'] == 'true'){}else{}            
+        }
+        if(isset(($_POST['radio2'])){
+            if($_POST['radio2'] == 'true'){}else{}            
+        }
+        if(isset(($_POST['radio3'])){
+            if($_POST['radio3'] == 'true'){}else{}            
+        }
+        if(isset(($_POST['radio4'])){
+            if($_POST['radio4'] == 'true'){}else{}            
+        }
+
+            
         if($_POST['radio1'] == 'true'){//informe por periodo
             if(isset($_POST['fechaI']) && isset($_POST['fechaF']) ){
                 $fi= $_POST['fechaI'];
