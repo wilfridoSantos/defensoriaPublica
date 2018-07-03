@@ -22,6 +22,8 @@ $(document).ready(function () {
 		var inputProject = $('#project').val();
 		var checkDef = $('#checkId').get(0);
 		var selAtributos = $('#selectAtributos').val(); 
+		var selectSistema = $('#selectSistema').val(); 
+		console.log(selAtributos, ' ATRIBUTOS', selectSistema, ' sistema');
 
 		if(this.id == "inputRadio1"){//informe por periodo
 			$("#divParcial").attr('style','display:none');
@@ -59,13 +61,17 @@ $(document).ready(function () {
 		if(this.id == "inputRadio4"){//informe  parcial sin periodo
 			$("#divParcial").removeAttr('style');				
 			$("#divPeriodo").attr('style','display:none');
-			if(checkDef.checked == true && inputProject == '' && selAtributos != ''){
-				desc.disabled= true;				
-			}
-			if(checkDef.checked == false){
-				desc.disabled= false;
-			}	
-			
+			if(checkDef.checked){
+				if(inputProject != '' && selectSistema != ''){
+					desc.disabled= false;					
+				}
+				desc.disabled= true;
+			}else{//check desactivado
+				if(selectSistema != ''){
+					desc.disabled= false;					
+				}
+				desc.disabled= true;
+			}						
 		}	
     }); 
 
@@ -649,15 +655,14 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 	var labelInicio = document.getElementById('labelInicio');//val.parentElement.children[1];//label dentro del div
 	var labelFinal = document.getElementById('labelFinal');
 	var desc = $('#botonDesc').get(0);
-	//console.log(desc, 'es label?');
-	//var ul=document.createElement('li');
+	var selectSistema = $('#selectSistema').get(0);
 	console.log(inicio, ' longitud ', inicio.length);
 	console.log(final, ' longitud ', final.length);
 
 	if (inicio != '' && final != '') {
 		var ini = new Date(inicio);
 		var fin = new Date(final);
-		if ((ini < fin) || (ini == fin)) {
+		if (((ini < fin) || (ini == fin)) && selectSistema != '') {
 			var fechaI = ini.toISOString().split('T')[0];
 			$(".alert").remove();
 			$(".errors").remove();
@@ -669,7 +674,13 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 					desc.disabled = true;
 				}
 			}else{
-				desc.disabled = false;
+				if(selectSistema != ''){				
+					desc.disabled = false;
+					//generarInformeAct();
+				}else{
+					desc.disabled = true;
+				}
+				
 			}
 			return true;
 		} else {
@@ -915,14 +926,6 @@ function initialize(lat, lon) {
 			map.setStreetView(panorama);
 		}
 	});
-};
-function convertirParrafo(str) {
-	var numPalabras = str.split(/\b[\s,\.\-:;]*/).length;
-	console.log(numPalabras, ' numero de palabras en STR');
-	if (numPalabras > 2) {
-
-	}
-	return str;
 };
 function generarPDFExpedientes() {
 	var fechaI = document.getElementById('inputInicio').value;
@@ -1566,10 +1569,13 @@ function generarPDFExpedientes() {
 	console.timeEnd('Test performance');
 };
 function generarPDFActividades() {
-	var inputProject, fechaI, fechaFi; 
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
 	var checkDef = $('#checkId').get(0).checked;
 	console.time('TEST PERFORMANCE');
-	var r1 = $('#inputRadio1').get(0).checked;//informe con periodo
+	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
+	var r1 = $('#inputRadio1').get(0).checked;//informe general completo
+	var r1 = $('#inputRadio1').get(0).checked;//informe parcial con periodo
+	var r1 = $('#inputRadio1').get(0).checked;//informe parcial completo
 	if(r1){//informe por periodo
 		fechaI = document.getElementById('inputInicio').value;
 		fechaFi = document.getElementById('inputFinal').value;
@@ -1590,14 +1596,12 @@ function generarPDFActividades() {
 					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefPeriodo.js" )
 					.done(function( script, textStatus ) {
 					  console.log( textStatus );
-					  pdfAct = informeByDefPeriodo(jsonInforme);
-					  
+					  pdfAct = informeByDefPeriodo(jsonInforme);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-				  
-						pdfMake.createPdf(pdfAct).open();
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					  pdfMake.createPdf(pdfAct).open();
 					})
 					.fail(function( jqxhr, settings, exception ) {
 					  //$( "div.log" ).text( "Triggered ajaxError handler." );
@@ -1633,7 +1637,136 @@ function generarPDFActividades() {
 				}
 			});
 		}
-	}else{// informe completo
+	}
+	if(r2){// informe completo
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"defensor":inputProject,"radio1":r1, "check":checkDef},
+				success: function (data) {			
+					console.log(data, ' completo por defensor');
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo by defensor ', jsonInforme);
+					var pdfAct;
+					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefCompleto.js" )
+					.done(function( script, textStatus ) {
+					  console.log( textStatus );
+					  pdfAct = informeByDefCompleto(jsonInforme)
+					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+				  
+						pdfMake.createPdf(pdfAct).open();
+					})
+					.fail(function( jqxhr, settings, exception ) {
+					  //$( "div.log" ).text( "Triggered ajaxError handler." );
+				  });
+				}
+			});
+		}else{//shacer ajax informe completo sin filtros
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"radio1":r1, "check":checkDef},
+				success: function (data) {	
+					console.log(data, ' completo ooooooooo');		
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo FULL ', jsonInforme);
+
+					var pdfAct;
+					$.getScript( "../../recursos/js/coordinador/pdfActividadesCompleto.js" )
+					.done(function( script, textStatus ) {
+					  console.log( textStatus );
+					  pdfAct = informeCompleto(jsonInforme)
+					  
+						// print the PDF
+						//pdfMake.createPdf(docDefinition).print();
+						// download the PDF
+						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+					
+					  pdfMake.createPdf(pdfAct).open();
+					})
+					.fail(function( jqxhr, settings, exception ) {
+					  //$( "div.log" ).text( "Triggered ajaxError handler." );
+				  });
+				}
+			});
+		}
+	}
+
+		selectAtributos = $('#selectAtributos').val();
+		selectSistema = $('#selectSistema').val();
+	if(r3){//informe PARCIAL por periodo
+		fechaI = document.getElementById('inputInicio').value;
+		fechaFi = document.getElementById('inputFinal').value;
+		
+		if(checkDef){	//informe por defensor
+			//inputProject = $('#project').val();//ajax con fechas y input con defensor unico
+			inputProject = $('#idDefensor').val();
+			console.log('PETICION AJAX  PERIODO + UN DEFENSOR + UN SISTEMA + ATRIBUTOS');
+			console.log($('#idDefensor').val(), 'id del defensor');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi, 
+					 "defensor":inputProject, "radio1":r1,
+					 "check":checkDef, "atributos":selectAtributos, "sistema":selectSistema},
+				success: function (data) {			
+					console.log(data);
+					var jsonInforme = jQuery.parseJSON(data);					
+					console.log(jsonInforme,' valor jsonInfr');
+					var pdfAct;
+					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefParcialPeriodo.js" )
+					.done(function( script, textStatus ) {
+					  console.log( textStatus );
+					  pdfAct = informeByDefParcialPeriodo(jsonInforme);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					  pdfMake.createPdf(pdfAct).open();
+					})
+					.fail(function( jqxhr, settings, exception ) {
+					  //$( "div.log" ).text( "Triggered ajaxError handler." );
+				  });
+				}
+			});
+		}else{//solo esta las fechas y sera general
+			console.log('PETICION AJAX parcial periodo varios defensores ');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, 
+						"check":checkDef,"atributos":selectAtributos, "sistema":selectSistema},
+				success: function (data) {	
+					console.log(data, ' data por periooodo');		
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('solopor periodo ', jsonInforme);
+					var pdfAct;
+					$.getScript( "../../recursos/js/coordinador/pdfActividadesParcial.js" )
+					.done(function( script, textStatus ) {
+					  console.log( textStatus );
+					  pdfAct = funcionGlobalInformeAct(jsonInforme);
+					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+				  
+					pdfMake.createPdf(pdfAct).open();
+					})
+					.fail(function( jqxhr, settings, exception ) {
+					  //$( "div.log" ).text( "Triggered ajaxError handler." );
+				  });
+				}
+			});
+		}
+	}
+	if(r4){// informe parcial sin periodo
 		if(checkDef){//informe por defensor
 			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
 			$.ajax({
@@ -2047,17 +2180,20 @@ function functionInputDefensores(dataDefe){
 }
 function estadoInput(val){
 	var desc = $('#botonDesc').get(0);
+	var selectSistema = $('#selectSistema').val();
 	var check = $('#checkId').get(0).checked;
-	var rGeneral = $('#inputRadio2').get(0).checked;
+	var rGeneralC = $('#inputRadio2').get(0).checked;
+	var rGeneralP = $('#inputRadio1').get(0).checked;
+	var rParcialC = $('#inputRadio4').get(0).checked;
+	var rParcialP = $('#inputRadio3').get(0).checked;
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
 	console.log('fuera del if dentro estadoIo=nput');
-	if(rGeneral == true){//radio general
-		if(check == true){//check defensor unico
+	if(rGeneralC){//radio general completo
+		if(check){//check defensor unico
 			if(val != '' ){
 				desc.disabled= false;
 				console.log(' rgeneral, checkdefensor, input ACTIVOS o con datos boton habil ');
-
 			}else{
 				desc.disabled= true;
 				console.log(' rgeneral(true), check(true),  inputdef vacion boton no habilit ');
@@ -2067,7 +2203,28 @@ function estadoInput(val){
 			desc.disabled= false;
 			console.log(' rgeneral true, checkdefe false, boton no habilit ');
 		}
-	}else{//por periodo
+	}
+	if(rParcialC){//radio Parcial completo
+		if(check){//check defensor unico
+			if(val != '' && selectSistema != ''){
+				desc.disabled= false;
+				console.log(' rgeneral, checkdefensor, input ACTIVOS o con datos boton habil ');
+
+			}else{
+				desc.disabled= true;
+				console.log(' rgeneral(true), check(true),  inputdef vacion boton no habilit ');
+			}
+		}else {
+			if(selectSistema != ''){
+				desc.disabled= false;
+			}else{
+				desc.disabled= true;
+			}
+			
+			console.log(' rgeneral true, checkdefe false, boton no habilit ');
+		}
+	}
+	if(rGeneralP){// radio general x periodo de tiempo
 		if(check == true){//check defensor unico
 			if(val != '' ){//input no vacio?
 				if (inicio != '' && final != '') {
@@ -2097,20 +2254,66 @@ function estadoInput(val){
 			console.log(' rPeriodo true, checkdefe false, boton no habilit ');
 		}
 	}
+
+	if(rParcialP){// radio general x periodo de tiempo
+		if(check){//check defensor unico
+			if(val != '' ){//input no vacio?
+				if (inicio != '' && final != '') {
+					var ini = new Date(inicio);
+					var fin = new Date(final);
+					if (((ini < fin) || (ini == fin)) && selectSistema != '') {
+						//var fechaI = ini.toISOString().split('T')[0];
+						$(".alert").remove();					
+						desc.disabled=false;
+					}else{
+						desc.disabled=true;
+					}
+				}else{
+					desc.disabled=true;
+				} 
+				//primero pregunta por periodos fechas correctos
+				//desc.disabled= false;
+				//console.log(' rPeriodo true, checkdefensor true, input ACTIVOS o con datos boton habil ');
+
+			}else{
+				desc.disabled= true;
+				console.log(' rPeriodo(true), check(true),  inputdef vacion boton no habilit ');
+
+			}
+		}else{//check desactivado
+			if (inicio != '' && final != '') {
+				var ini = new Date(inicio);
+				var fin = new Date(final);
+				if (((ini < fin) || (ini == fin)) && selectSistema != '') {
+					//var fechaI = ini.toISOString().split('T')[0];
+					$(".alert").remove();					
+					desc.disabled=false;
+				}else{
+					desc.disabled=true;
+				}
+			}else{
+				desc.disabled=true;
+			} 
+			console.log(' rPeriodo true, checkdefe false, boton no habilit ');
+		}
+	}
 }
 function seleccionarUnDefensor(val){//checkdefensor especifico
 	var desc = $('#botonDesc').get(0);	
-	var rGeneral = $('#inputRadio2').get(0).checked;
+	var rGeneralC = $('#inputRadio2').get(0).checked;
+	var rGeneralP = $('#inputRadio1').get(0).checked;
+	var rParcialC = $('#inputRadio4').get(0).checked;
+	var rParcialP = $('#inputRadio3').get(0).checked;
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
+	var selectSistema = $('#selectSistema').val();
 
-	if(rGeneral == true){
+	if(rGeneralC){
 		$("#divPeriodo").attr('style','display:none');
 		if(val == true){//esta activada el check defensor esp?     
 			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
 			dataDefensor(); //lista de defensores
-			desc.disabled= true;
-		
+			desc.disabled= true;		
 			return true;		
 		}else{
 			desc.disabled= false;
@@ -2118,7 +2321,8 @@ function seleccionarUnDefensor(val){//checkdefensor especifico
 			$('#idCheckDefensor').attr('style','display:none');
 			return false;
 		}
-	}else{//esta activado por periodo
+	}
+	if(rGeneralP){//esta activado por periodo
 		$("#divPeriodo").removeAttr('style');
 		if(val == true){//esta activada el check defensor esp?     
 			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
@@ -2135,11 +2339,59 @@ function seleccionarUnDefensor(val){//checkdefensor especifico
 					//var fechaI = ini.toISOString().split('T')[0];
 					$(".alert").remove();					
 					desc.disabled=false;
+				}else{
+					desc.disabled=true;
 				}
+			}else{
+				desc.disabled=true;
+			}  
+		}
+	}
+	if(rParcialC){
+		$("#divPeriodo").attr('style','display:none');
+		if(val==true){//esta activada el check defensor esp?     
+			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
+			dataDefensor(); //lista de defensores
+			desc.disabled= true;		
+			return true;		
+		}else{
+			$('#idCheckDefensor').attr('style','display:none');
+			if(selectSistema != ''){
+				desc.disabled= false;
+				return true;
+			}else{				
+				desc.disabled= true;
+				return false;
+			}		
+			//$('#').empty();
+			
+			return false;
+		}
+	}
+	if(rParcialP){//esta activado por periodo
+		$("#divPeriodo").removeAttr('style');
+		if(val){//esta activada el check defensor esp?     
+			$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
+			dataDefensor(); //lista de defensores
+			desc.disabled= true;
+			return true;		
+		}else{//check defensor esta desact
+			$('#idCheckDefensor').attr('style','display:none');
+			if (inicio != '' && final != '') {
+				var ini = new Date(inicio);
+				var fin = new Date(final);
+				if (((ini < fin) || (ini == fin)) && selectSistema != '') {
+					//var fechaI = ini.toISOString().split('T')[0];
+					$(".alert").remove();					
+					desc.disabled=false;
+				}else{
+					desc.disabled=true;
+				}
+			}else{
+				desc.disabled=true;
 			} 
 		}
 	}
-
 
 }
 function verObservacion(check, llave) {
@@ -2310,26 +2562,94 @@ function filtroActividades(str) {
 		} */
 }
 
-function myFunctionSistema(val){
+function myFunctionSistema(val){// aqui tambien debe checar por radio en que se encuentra
 	var inicio = $('#inputInicio').val();
 	var final = $('#inputFinal').val();
-	var selAtributos = $('#selectAtributos').val(); 
+	var check = $('#checkId').get(0).checked;
+	var rGeneralC = $('#inputRadio2').get(0).checked;
+	var rGeneralP = $('#inputRadio1').get(0).checked;
+	var rParcialC = $('#inputRadio4').get(0).checked;
+	var rParcialP = $('#inputRadio3').get(0).checked;
+	var selProject = $('#project').val();
+	//var selectSistema = $('#selectSistema').get(0); 
 	var desc = $('#botonDesc').get(0);   
-	console.log(val, "valor seleccionadpo");
-	if (inicio != '' && final != '' && selAtributos != '' && val !='' ) {
-		var ini = new Date(inicio);
-		var fin = new Date(final);
-		if(fin > ini){
+	console.log(check, "valor seleccionadpo");
+	if(rGeneralP){//esta activado por periodo
+		if (inicio != '' && final != '' ) {
+			var ini = new Date(inicio);
+			var fin = new Date(final);
+			if((fin > ini)  && val !=''){
+				if(check){
+					if(	selProject != ''){
+						desc.disabled = false;
+						return true;
+					}
+					desc.disabled = true;
+					return false;
+				}
+				desc.disabled = false;
+					return true;			
+			}else{
+				desc.disabled = true;
+				return false;
+			}
+		} else {
+			//console.log('entro false');
+			desc.disabled = true;
+			return false;
+		}
+	} 
+	if(rGeneralC){//esta activado por periodo
+		if(check){
+			if(inputProject != '' ){
+				desc.disabled = false;
+			}
+			desc.disabled = true;
+		}else{			
 			desc.disabled = false;
+		}
+	} 
+	if(rParcialP){//esta activado por periodo
+		if (inicio != '' && final != '' ) {
+			var ini = new Date(inicio);
+			var fin = new Date(final);
+			if((fin > ini || ini == fin)  && val !=''){
+				if(check){
+					if(	selProject != '' && selectSistema != ''){
+						desc.disabled = false;
+						return true;
+					}
+					desc.disabled = true;
+					return false;
+				}else{
+					if(selectSistema != ''){
+						desc.disabled = false;
+					}
+				}
+				desc.disabled = true;
+					return true;			
+			}else{
+				desc.disabled = true;
+				return false;
+			}
+		} else {
+			//console.log('entro false');
+			desc.disabled = true;
+			return false;
+		}
+	} 
+	if(rParcialC){//esta activado por periodo
+		if(check){
+			if(inputProject != '' && selectSistema != ''){
+				desc.disabled = false;
+			}
+			desc.disabled = true;
 		}else{
+			if(selectSistema != ''){
+				desc.disabled = false;
+			}
 			desc.disabled = true;
 		}
-		
-		return true;
-	} else {
-		//console.log('entro false');
-		desc.disabled = true;
-		return false;
 	} 
 };
 

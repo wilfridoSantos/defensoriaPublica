@@ -13,7 +13,6 @@
 <!-- <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
  -->
-
  <script>seleccionarUnDefensor(true)</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
