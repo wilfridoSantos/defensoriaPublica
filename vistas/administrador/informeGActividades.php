@@ -3,8 +3,18 @@
 <script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividades.js"></script>
+
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+<script src="../../recursos/js/coordinador/funcionesGeneralesPDF.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividades.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesByDefCompleto.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesCompleto.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesParcial.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesByDefCompleto.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesCompletoParcial.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesByDefCompletoParcial.js"></script>
+
 <!-- <script src="../../recursos/js/herramienta.js"></script> 
  -->
 

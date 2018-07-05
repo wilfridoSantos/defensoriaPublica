@@ -3,8 +3,10 @@
 <script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividades.js"></script>
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+<script src="../../recursos/js/coordinador/funcionesGeneralesPDF.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesByDefParcialPeriodo.js"></script>
+
 <!-- <script src="../../recursos/js/herramienta.js"></script> 
  -->
 
@@ -67,9 +69,9 @@
                                     <div class="col-md-7">                        
                                             <select required="required"  id="selectSistema" name="selectSistema" data-error="Seleccione un sistema." aria-controls="datatable-responsive" class="form-control input-sm" onchange="myFunctionSistemaParcial(this.value)">
                                                 <option value="">Seleccione un sistema</option>
-                                                <option value="T">Tradicional</option>
-                                                <option value="O">Acusatorio y Oral</option>
-                                                <option value="J">Justicia para Adolecentes</option>
+                                                <option value="TRADICIONAL">Tradicional</option>
+                                                <option value="ORAL">Acusatorio y Oral</option>
+                                                <option value="JUSTICIA">Justicia para Adolecentes</option>
                                                 <option value="ALL">Todos</option>
                                             </select>
                                             <div  class="help-block with-errors"></div> 

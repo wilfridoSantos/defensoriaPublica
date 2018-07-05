@@ -1,559 +1,15 @@
-function getNumAsesoriasTO(jsonInforme) {
-	var asesorias = {};
-	var numAseT = 0;
-	var numAseO = 0;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			if (VALOR.sistema === 'TRADICIONAL') {
-				numAseT++;
-			}
-			if (VALOR.sistema === 'ORAL') {
-				numAseO++;
-			}
-		}
-	});
-	asesorias['asesTradicional'] = numAseT;
-	asesorias['asesOral'] = numAseO;
-
-	return asesorias;
-}
-function getNumSexoUsuarios(jsonInforme) {
-	var sexos = {};
-	var numMascT = 0;
-	var numFemT = 0;
-	var numMascO = 0;
-	var numFemO = 0;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-
-				if (VALOR.sexo == 'MASCULINO') {
-					numMascT++;
-				} else if (VALOR.sexo == 'FEMENINO') {
-					numFemT++;
-				}
-			}
-			if (VALOR.sistema == 'ORAL') {
-				if (VALOR.sexo == 'MASCULINO') {
-					numMascO++;
-				} else if (VALOR.sexo == 'FEMENINO') {
-					numFemO++;
-				}
-			}
-		}
-	});
-	sexos['numMascT'] = numMascT;
-	sexos['numFemT'] = numFemT;
-	sexos['numMascO'] = numMascO;
-	sexos['numFemO'] = numFemO;
-	return sexos;
-}
-function getNumDiscapacidadUsuarios(jsonInforme) {
-	var discapacidades = {};
-	var numSensorialesT = 0,numMotricesT = 0, numMentalesT = 0, numMultiplesT=0;
-	var numSensorialesO = 0,numMotricesO = 0, numMentalesO = 0, numMultiplesO=0;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-				switch(VALOR.discapacidadU){
-					case 'SENSORIALES': 
-						numSensorialesT++;
-					break;
-					case 'MOTRICES': 
-						numMotricesT++;
-					break;
-					case 'MENTALES': 
-						numMentalesT++;
-					break;
-					case 'MULTIPLES': 
-						numMultiplesT++;
-					break;																										
-				}
-
-			}
-			if (VALOR.sistema == 'ORAL') {
-				switch(VALOR.discapacidadU){
-					case 'SENSORIALES': 
-						numSensorialesO++;
-					break;
-					case 'MOTRICES': 
-						numMotricesO++;
-					break;
-					case 'MENTALES': 
-						numMentalesO++;
-					break;
-					case 'MULTIPLES': 
-						numMultiplesO++;
-					break;
-																								
-				}
-			}
-		}
-	});
-	discapacidades['numSensorialesT'] = numSensorialesT;
-	discapacidades['numMotricesT'] = numMotricesT;
-	discapacidades['numMentalesT'] = numMentalesT;
-	discapacidades['numMultiplesT'] = numMultiplesT;
-	
-	discapacidades['numSensorialesO'] = numSensorialesO;
-	discapacidades['numMotricesO'] = numMotricesO;
-	discapacidades['numMentalesO'] = numMentalesO;
-	discapacidades['numMultiplesO'] = numMultiplesO;
-	
-	
-	
-	return discapacidades;
-}
-function getNumGeneroUsuarios(jsonInforme) {
-	var generos = {};
-	var numLesbicoT = 0;
-	var numLesbicoO = 0;
-	var numGayT = 0, numGayO = 0;
-	var numBisexualT = 0, numBisexualO = 0;
-	var numTransexualT = 0, numTransexualO = 0;
-	var numTransgeneroT = 0, numTransgeneroO = 0;
-	var numTravestiT = 0, numTravestiO = 0;
-	var numIntersexualT = 0, numIntersexualO = 0;
-	//console.log(jsonInforme);
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-				//console.log(' entro filtro TRADICIONAL');
-				if (VALOR.generoU == 'LESBICO') {
-					numLesbicoT++;
-					console.log(numLesbicoT, ' numLesbicoTradicional');
-				}
-				if (VALOR.generoU == 'GAY') {
-					numGayT++;
-				}
-				if (VALOR.generoU == 'BISEXUAL') {
-					numBisexualT++;
-					//console.log(numBisexualT, ' numbisexualTradicional')
-				}
-				if (VALOR.generoU == 'TRANSEXUAL') {
-					numTransexualT++;
-				}
-				if (VALOR.generoU == 'TRANSGENERO') {
-					numTransgeneroT++;
-				}
-				if (VALOR.generoU == 'TRAVESTI') {
-					numTravestiT++;
-				}
-				if (VALOR.generoU == 'INTERSEXUAL') {
-					numIntersexualT++;
-				}
-			}
-			if (VALOR.sistema == 'ORAL') {
-				console.log(' entro a ORAL');
-				if (VALOR.generoU == 'LESBICO') {
-					numLesbicoO++;
-					console.log(numLesbicoO, ' numLesbicoOral');
-				}
-				if (VALOR.generoU == 'GAY') {
-					numGayO++;
-				}
-				if (VALOR.generoU == 'BISEXUAL') {
-					numBisexualO++;
-				}
-				if (VALOR.generoU == 'TRANSEXUAL') {
-					numTransexualO++;
-				}
-				if (VALOR.generoU == 'TRANSGENERO') {
-					numTransgeneroO++;
-				}
-				if (VALOR.generoU == 'TRAVESTI') {
-					numTravestiO++;
-				}
-				if (VALOR.generoU == 'INTERSEXUAL') {
-					numIntersexualO++;
-				}
-			}
-		}
-	});
-	generos['numLesbicoT'] = numLesbicoT;
-	generos['numGayT'] = numGayT;
-	generos['numBisexualT'] = numBisexualT;
-	generos['numTransexualT'] = numTransexualT;
-	generos['numTransgeneroT'] = numTransgeneroT;
-	generos['numTravestiT'] = numTravestiT;
-	generos['numIntersexualT'] = numIntersexualT;
-
-	generos['numLesbicoO'] = numLesbicoO;
-	generos['numGayO'] = numGayO;
-	generos['numBisexualO'] = numBisexualO;
-	generos['numTransexualO'] = numTransexualO;
-	generos['numTransgeneroO'] = numTransgeneroO;
-	generos['numTravestiO'] = numTravestiO;
-	generos['numIntersexualO'] = numIntersexualO;
-
-	return generos;
-}
-function getNumEdadUsuarios(jsonInforme) {
-	var edades = {};
-	var num07T = 0, num07O = 0;
-	var num812T = 0, num812O = 0;
-	var num1318T = 0, num1318O = 0;
-	var num1925T = 0, num1925O = 0;
-	var num2630T = 0, num2630O = 0;
-	var num3190T = 0, num3190O = 0;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-				//console.log('TRADICIONAL EDAD-> '+VALOR.edadU);
-				if (VALOR.edadU >= 0 && VALOR.edadU <= 7) {
-					num07T++;
-				}
-				if (VALOR.edadU >= 8 && VALOR.edadU <= 12) {
-					num812T++;
-				}
-				if (VALOR.edadU >= 13 && VALOR.edadU <= 18) {
-					num1318T++;
-				}
-				if (VALOR.edadU >= 19 && VALOR.edadU <= 25) {
-					num1925T++;
-				}
-				if (VALOR.edadU >= 26 && VALOR.edadU <= 30) {
-					num2630T++;
-				} if (VALOR.edadU >= 31 && VALOR.edadU <= 90) {
-					num3190T++;
-				}
-			}
-			if (VALOR.sistema == 'ORAL') {
-				
-				if (VALOR.edadU >= 0 && VALOR.edadU <= 7) {
-					num07O++;
-				}
-				if (VALOR.edadU >= 8 && VALOR.edadU <= 12) {
-					num812O++;
-				}
-				if (VALOR.edadU >= 13 && VALOR.edadU <= 18) {
-					num1318O++;
-				}
-				if (VALOR.edadU >= 19 && VALOR.edadU <= 25) {
-					
-					num1925O++;
-					console.log('ORAL EDAD-> '+VALOR.edadU, num1925O);
-				}
-				if (VALOR.edadU >= 26 && VALOR.edadU <= 30) {
-					num2630O++;
-				} if (VALOR.edadU >= 31 && VALOR.edadU <= 90) {
-					num3190O++;
-				}
-			}
-		}
-	});
-	edades['edades1T'] = num07T;
-	edades['edades2T'] = num812T;
-	edades['edades3T'] = num1318T;
-	edades['edades4T'] = num1925T;
-	edades['edades5T'] = num2630T;
-	edades['edades6T'] = num3190T;
-
-	edades['edades1O'] = num07O;
-	edades['edades2O'] = num812O;
-	edades['edades3O'] = num1318O;
-	edades['edades4O'] = num1925O;
-	edades['edades5O'] = num2630O;
-	edades['edades6O'] = num3190O;
-	return edades;
-}
-function getArrayIdiomasSystem(jsonInforme) {
-	var arrIdiomas = [];
-	$.each(jsonInforme, function (KEY, VALOR) {
-		var obj = {};
-		obj['idioma'] = VALOR.idiomaU;
-		obj['pos'] = 0;
-		arrIdiomas[KEY] = obj;
-
-	});
-	var hash = {};
-	arrIdiomas = arrIdiomas.filter(function (current) {
-		var exists = !hash[current.idioma] || false;
-		hash[current.idioma] = true;
-		return exists;
-	});
-	return arrIdiomas;
-}
-function getArrayEtniasSystem(jsonInforme) {
-	var arrEtnias = [];
-	$.each(jsonInforme, function (KEY, VALOR) {
-		var obj = {};
-		obj['etnia'] = VALOR.etniaU;
-		obj['pos'] = 0;
-		arrEtnias[KEY] = obj;
-
-	});
-	var hash = {};
-	arrEtnias = arrEtnias.filter(function (current) {
-		var exists = !hash[current.etnia] || false;
-		hash[current.etnia] = true;
-		return exists;
-	});
-	return arrEtnias;
-}
-function getIdiomasBySistema(arrIdiomas, jsonInforme) {
-	var arr = []; //contendra la cantidad de etnias por sistema arr['TRADICIONAL'] arr['ORAL']
-	var arrTradicional = {};
-	var arrOral = {};
-	//console.log(arrEtnias, jsonInforme);
-	for (var i = 0; i < arrIdiomas.length; i++) {
-		arrTradicional[arrIdiomas[i]['idioma']] = 0;
-		arrOral[arrIdiomas[i]['idioma']] = 0;
-		$.each(jsonInforme, function (KEY, VALOR) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-				if (arrIdiomas[i]['idioma'] == VALOR.idiomaU) {
-
-					arrTradicional[arrIdiomas[i]['idioma']] += 1;
-				}
-			} else if (VALOR.sistema == 'ORAL') {
-				if (arrIdiomas[i]['idioma'] == VALOR.idiomaU) {
-					arrOral[arrIdiomas[i]['idioma']] += 1;
-				}
-			}
-		});
-	}
-	arr.push(arrTradicional);
-	arr.push(arrOral);
-	return arr;
-}
-
-function getEtniasBySistema(arrEtnias, jsonInforme) {
-	var arr = []; //contendra la cantidad de etnias por sistema arr['TRADICIONAL'] arr['ORAL']
-	var arrTradicional = {};
-	var arrOral = {};
-	//console.log(arrEtnias, jsonInforme);
-	for (var i = 0; i < arrEtnias.length; i++) {
-		arrTradicional[arrEtnias[i]['etnia']] = 0;
-		arrOral[arrEtnias[i]['etnia']] = 0;
-		$.each(jsonInforme, function (KEY, VALOR) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-				if (arrEtnias[i]['etnia'] == VALOR.etniaU) {
-
-					arrTradicional[arrEtnias[i]['etnia']] += 1;
-				}
-			} else if (VALOR.sistema == 'ORAL') {
-				if (arrEtnias[i]['etnia'] == VALOR.etniaU) {
-
-					arrOral[arrEtnias[i]['etnia']] += 1;
-				}
-			}
-		});
-	}
-	arr.push(arrTradicional);
-	arr.push(arrOral);
-	return arr;
-}
-function getNumIdiomasUsers(arrIdiomas, jsonInforme) {
-	var arr = [];
-	//console.log(arrEtnias, ' arr etnias');
-	for (var i = 0; i < arrIdiomas.length; i++) {
-		$.each(jsonInforme, function (KEY, VALOR) {
-			//console.log(i, arrEtnias[i]['etnia'], arrEtnias[i]['pos']);
-			//console.log(VALOR.etniaU, ' etnias json');
-			if (arrIdiomas[i]['idioma'] == VALOR.idiomaU) {
-				//console.log(arrEtnias[i]['pos'], ' arretniasvalor Pos');
-				var obj = {};
-				arrIdiomas[i]['pos'] += 1;
-				obj[arrIdiomas[i]['idioma']] = arrIdiomas[i]['pos'];
-				arr[i] = obj;
-
-			}
-		});
-	}
-	//console.log(arr, ' valor arr');
-	return arr;//contiene las filas pero solo nombre de la etnia y su cantidad total en ambos sistemas
-	// falta por sistema
-}
-function getNumEtniasUsers(arrEtnias, jsonInforme) {
-	var arr = [];
-	var ite = 0;
-	//console.log(arrEtnias, ' arr etnias');
-	for (var i = 0; i < arrEtnias.length; i++) {
-		$.each(jsonInforme, function (KEY, VALOR) {
-			//console.log(i, arrEtnias[i]['etnia'], arrEtnias[i]['pos']);
-			//console.log(VALOR.etniaU, ' etnias json');
-			if (arrEtnias[i]['etnia'] == VALOR.etniaU) {
-				//console.log(arrEtnias[i]['pos'], ' arretniasvalor Pos');
-				var obj = {};
-				arrEtnias[i]['pos'] += 1;
-				obj[arrEtnias[i]['etnia']] = arrEtnias[i]['pos'];
-				arr[i] = obj;
-
-			}
-		});
-	}
-	//console.log(arr, ' valor arr');
-	return arr;//contiene las filas pero solo nombre de la etnia y su cantidad total en ambos sistemas
-	// falta por sistema
-}
-function getNumIdiomasUsuarios(jsonInforme) {
-	var arrIdiomas = [];
-	var idiomas;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		var obj = {};
-		obj['idioma'] = VALOR.idiomaU;
-		obj['pos'] = 0;
-		arrIdiomas[KEY] = obj;
-
-	});
-	//console.log(arrEtnias, ' VALOR ETNIA');
-
-	var hash = {};
-	arrIdiomas = arrIdiomas.filter(function (current) {
-		var exists = !hash[current.idioma] || false;
-		hash[current.idioma] = true;
-		return exists;
-	});
-	//aqui arrEtnias ya tiene filtrado las etnias
-	idiomas = getNumIdiomasUsers(arrIdiomas, jsonInforme);
-
-	return idiomas;
-}
-function getNumEtniasUsuarios(jsonInforme) {
-	var arrEtnias = [];
-	var etnias;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		var obj = {};
-		obj['etnia'] = VALOR.etniaU;
-		obj['pos'] = 0;
-		arrEtnias[KEY] = obj;
-
-	});
-	//console.log(arrEtnias, ' VALOR ETNIA');
-
-	var hash = {};
-	arrEtnias = arrEtnias.filter(function (current) {
-		var exists = !hash[current.etnia] || false;
-		hash[current.etnia] = true;
-		return exists;
-	});
-	//aqui arrEtnias ya tiene filtrado las etnias
-	etnias = getNumEtniasUsers(arrEtnias, jsonInforme);
-
-	return etnias;
-}
-function generarRowsIdiomas(jsonData, idiomasSistema) {
-	//console.log(etniasSistema[0]['CHATINO'], ' cuantos chatino tradicional ');
-	var body = new Array();
-	var rowHeader1 = [], rowHeader2 = [];
-
-	rowHeader1.push(
-		{ text: 'Idioma o Lengua', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-		{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-		{},
-		{}
-	);
-	rowHeader2.push(
-		{},
-		{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-	);
-	body.push(rowHeader1);
-	body.push(rowHeader2);
-	var content = [];
-	var totalF = 0, totalT = 0, totalO = 0;
-	for (var obj in jsonData) {
-		if (jsonData.hasOwnProperty(obj)) {
-			for (var prop in jsonData[obj]) {
-				if (jsonData[obj].hasOwnProperty(prop)) {
-					content = [prop, jsonData[obj][prop], idiomasSistema[0][prop], idiomasSistema[1][prop]];
-					body.push(content);
-					totalF += jsonData[obj][prop];
-					totalT += idiomasSistema[0][prop];
-					totalO += idiomasSistema[1][prop];
-				}
-			}
-		}
-	}
-	content = ['TOTAL', totalF, totalT, totalO];
-	body.push(content);
-	return body;
-}
-function generarRowsEtnias(jsonData, etniasSistema) {
-	//console.log(etniasSistema[0]['CHATINO'], ' cuantos chatino tradicional ');
-	var body = new Array();
-	var rowHeader1 = [], rowHeader2 = [];
-
-	rowHeader1.push(
-		{ text: 'Etnías', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-		{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-		{},
-		{}
-	);
-	rowHeader2.push(
-		{},
-		{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-	);
-	body.push(rowHeader1);
-	body.push(rowHeader2);
-	var content = [];
-	var totalF = 0, totalT = 0, totalO = 0;
-	for (var obj in jsonData) {
-		if (jsonData.hasOwnProperty(obj)) {
-			for (var prop in jsonData[obj]) {
-				if (jsonData[obj].hasOwnProperty(prop)) {
-					content = [prop, jsonData[obj][prop], etniasSistema[0][prop], etniasSistema[1][prop]];
-					body.push(content);
-					totalF += jsonData[obj][prop];
-					totalT += etniasSistema[0][prop];
-					totalO += etniasSistema[1][prop];
-				}
-			}
-		}
-	}
-	content = ['TOTAL', totalF, totalT, totalO];
-	body.push(content);
-	return body;
-}
-function getNumActividades(jsonInforme) {
-	var actividades = {};
-	var numAses = 0;
-	var numAuds = 0;
-	var numVis = 0;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			numAses++;
-		}
-		if (VALOR.latAud != null || VALOR.longAud != undefined) {
-			numAuds++;
-		}
-		if (VALOR.fotoVis != null || VALOR.fotoVis != undefined) {
-			numVis++;
-		}
-	});
-	actividades['asesorias'] = numAses;
-	actividades['audiencias'] = numAuds;
-	actividades['visitas'] = numVis;
-	return actividades;
-}
-
 function funcionGlobalInformeAct(jsonInforme){
         console.time('Test functionGlobalInformeAct');
         var fechaI = document.getElementById('inputInicio').value;
-	    var fechaFi = document.getElementById('inputFinal').value;
-        var base64 = globalHeaderPDF;
-
-    	var fecha1 = new Date(fechaI);
-    	var fecha2 = new Date(fechaFi);
-    	var actividades;
-    	var asesoriasTO, discapacidades;
-    	var sexos, generos, etnias, etniasR, etniasSistema, edades, idiomasR, idiomas, idiomasSistema;
-    	var totalH, totalM, totalSexoT, totalSexoO, totalSexo, totalSen, totalMot,totalMen, totalMul, totalDisT,totalDisO, totalDiscapacidad;
-    	var totalLesbico, totalGay, totalBisexual, totalTransexual, 
-    		totalTransgenero, totalTravesti, totalIntersexual,
-    		totalGenerosT, totalGenerosO, totalG, totalEdadT, 
-    		totalEdadO, totalEdadS,totalEdad1, totalEdad2, totalEdad3, totalEdad4, totalEdad5, totalEdad6 ;
+        var fechaFi = document.getElementById('inputFinal').value;
+        var nombreDef = jsonInforme[0]['Defensor']+' '+jsonInforme[0]['apDefP']+' '+jsonInforme[0]['apDefM'];
+        var fecha1 = new Date(fechaI);
+        var fecha2 = new Date(fechaFi);
         var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Nomviembre", "Diciembre"];
-        var fecha = new Date();
-        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        var fechaF = fecha.toLocaleDateString("es-ES", options);
-        var primerM = fechaF.charAt(0).toUpperCase();
-        var siguiente = fechaF.slice(1).toLowerCase();
+    
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+        defensores = getDefensores(jsonInforme);
+        console.log(defensores, ' defensores econtrados');
         actividades = getNumActividades(jsonInforme);
     	asesoriasTO = getNumAsesoriasTO(jsonInforme);
     	sexos = getNumSexoUsuarios(jsonInforme);
@@ -600,10 +56,13 @@ function funcionGlobalInformeAct(jsonInforme){
     	totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
     	totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
     	totalEdad5 =  edades['edades5T'] +  edades['edades5O'];
-    	totalEdad6 =  edades['edades6T'] +  edades['edades6O'];
-    	totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T'];
-    	totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O'];
-        totalEdadS = totalEdadT + totalEdadO;
+        totalEdad6 =  edades['edades6T'] +  edades['edades6O'];	
+        totalEdad7 =  edades['edades7T'] +  edades['edades7O'];
+    	totalEdad8 =  edades['edades8T'] +  edades['edades8O'];
+    	totalEdad9 =  edades['edades9T'] +  edades['edades9O'];
+    	totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T']+  edades['edades7T']+  edades['edades8T']+  edades['edades9T'];
+    	totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O']+  edades['edades7O']+  edades['edades8O']+  edades['edades9O'];
+		totalEdadS = totalEdadT + totalEdadO;
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         var pdfAct  = {
             watermark: { text: 'www oaxaca gob mx', color: 'gray', opacity: 0.3, bold: true, italics: false },
@@ -740,13 +199,16 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['0-7 Años',	totalEdad1, edades['edades1T'], edades['edades1O']],
-                            ['8-12 Años',	totalEdad2, edades['edades2T'], edades['edades2O']],
-                            ['13-18 Años',	totalEdad3, edades['edades3T'], edades['edades3O']],
-                            ['19-25 Años',	totalEdad4, edades['edades4T'], edades['edades4O']],
-                            ['26-30 Años',	totalEdad5, edades['edades5T'], edades['edades5O']],
-                            ['31-90 Años',	totalEdad6, edades['edades6T'], edades['edades6O']],
-                            ['Total', 		totalEdadS, totalEdadT,totalEdadO]
+                            ['18 A 24 AÑOS',	totalEdad1, edades['edades1T'], edades['edades1O']],
+                            ['25 A 29 AÑOS',	totalEdad2, edades['edades2T'], edades['edades2O']],
+                            ['30 A 34 AÑOS',	totalEdad3, edades['edades3T'], edades['edades3O']],
+                            ['35 A 39 AÑOS',	totalEdad4, edades['edades4T'], edades['edades4O']],
+                            ['40 A 44 AÑOS',	totalEdad5, edades['edades5T'], edades['edades5O']],
+                            ['45 A 49 AÑOS',	totalEdad6, edades['edades6T'], edades['edades6O']],
+                            ['50 A 54 AÑOS',	totalEdad7, edades['edades7T'], edades['edades7O']],
+                            ['55 A 59 AÑOS',	totalEdad8, edades['edades8T'], edades['edades8O']],
+                            ['DE 60 O MAS AÑOS',	totalEdad9, edades['edades9T'], edades['edades9O']],
+                            ['TOTAL', 		totalEdadS, totalEdadT,totalEdadO]
                         ]
                     }
                 },
@@ -760,7 +222,7 @@ function funcionGlobalInformeAct(jsonInforme){
                         body: etniasR
                     }
                 },
-                { text: '\n\n', style: 'saltoLinea' }, { text: '\n\n', style: 'saltoLinea' },
+                { text: '', style: 'saltoLinea' }, { text: '\n\n', style: 'saltoLinea' },
                 {
                     style: 'tableExample',
                     color: 'black',
@@ -799,12 +261,13 @@ function funcionGlobalInformeAct(jsonInforme){
                     }
                 },
                 { text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de asesorías jurídicas brindadas en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos en  asesorías jurídicas, esto también por sistema. ', style: 'textoJustificado' },
+                { text: '', style: 'saltoLinea' }, { text: '\n\n', style: 'saltoLinea' },
                 { text: '10 DEFENSORES CON ALTO NÚMERO DE ASESORÍAS JURÍDICAS' },
                 {
                     style: 'tableExample',
                     color: 'black',
                     table: {
-                        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [150, 'auto', 'auto', 'auto', 'auto'],
                         headerRows: 2,
                         // keepWithHeaderRows: 1,
                         body: [
@@ -822,26 +285,27 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['1', ' ', ' ', ' ', ' '],
-                            ['2', ' ', ' ', ' ', ' '],
-                            ['3', ' ', ' ', ' ', ''],
-                            ['4', ' ', ' ', ' ', ''],
-                            ['5', ' ', ' ', ' ', ''],
-                            ['6', ' ', ' ', ' ', ''],
-                            ['7', ' ', ' ', ' ', ''],
-                            ['8', ' ', ' ', ' ', ''],
-                            ['9', ' ', ' ', ' ', ''],
-                            ['10', ' ', ' ', ' ', '']
+                            [defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
+                            [defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
+                            [defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
+                            [defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
+                            [defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
+                            [defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
+                            [defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
+                            [defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
+                            [defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
+                            [defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
                         ]
                     }
                 },
+                { text: '\n ', style: 'saltoLinea' },
                 { text: '\n ', style: 'saltoLinea' },
                 { text: '10 DEFENSORES CON UN BAJO NÚMERO DE ASESORÍAS JURÍDICAS' },
                 {
                     style: 'tableExample',
                     color: 'black',
                     table: {
-                        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [150, 'auto', 'auto', 'auto', 'auto'],
                         headerRows: 2,
                         // keepWithHeaderRows: 1,
                         body: [
@@ -859,23 +323,23 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['1', ' ', ' ', ' ', ' '],
-                            ['2', ' ', ' ', ' ', ' '],
-                            ['3', ' ', ' ', ' ', ''],
-                            ['4', ' ', ' ', ' ', ''],
-                            ['5', ' ', ' ', ' ', ''],
-                            ['6', ' ', ' ', ' ', ''],
-                            ['7', ' ', ' ', ' ', ''],
-                            ['8', ' ', ' ', ' ', ''],
-                            ['9', ' ', ' ', ' ', ''],
-                            ['10', ' ', ' ', ' ', '']
+                            [defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
+                            [defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
+                            [defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
+                            [defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
+                            [defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
+                            [defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
+                            [defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
+                            [defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
+                            [defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
+                            [defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
                         ]
                     }
                 },
 
                 { text: '2.- AUDIENCIAS', style: 'subheader2' },
                 {
-                    text: 'Durante el periodo que comprende del ___ de _______ al ____ de ________ del 			presente año, los Defensores Públicos asistieron a _______ audiencias celebradas.', style: 'textoJustificado'
+                    text: 'Durante el periodo que comprende del ' + fecha1.getUTCDate() + ' de ' + meses[fecha1.getUTCMonth()] + ' al ' + fecha2.getUTCDate() + ' de ' + meses[fecha2.getUTCMonth()] + ' del presente año, los defensores publicos asistieron a ' + actividades['audiencias'] + ' audiencias celebradas.', style: 'textoJustificado'
                 },
                 { text: 'Por sistema__________ Sistema Tradicional: materia penal _____; materia civil ________; materia familiar _______; materia administrativa _______; materia agraria ________; materia ejecución de sanciones ________; tribunal de alzada _______. Sistema Acusatorio y oral: materia penal adultos __________; materia penal adolescentes ________; materia ejecución de sanciones ________.', style: 'textoJustificado' },
                 { text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de asistencia a audiencias en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos de asistencia en audiencias, esto también por sistema.', style: 'textoJustificado' },
@@ -885,7 +349,7 @@ function funcionGlobalInformeAct(jsonInforme){
                     style: 'tableExample',
                     color: 'black',
                     table: {
-                        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [150, 'auto', 'auto', 'auto', 'auto'],
                         headerRows: 2,
                         // keepWithHeaderRows: 1,
                         body: [
@@ -903,26 +367,27 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['1', ' ', ' ', ' ', ''],
-                            ['2', ' ', ' ', ' ', ''],
-                            ['3', ' ', ' ', ' ', ''],
-                            ['4', ' ', ' ', ' ', ''],
-                            ['5', ' ', ' ', ' ', ''],
-                            ['6', ' ', ' ', ' ', ''],
-                            ['7', ' ', ' ', ' ', ''],
-                            ['8', ' ', ' ', ' ', ''],
-                            ['9', ' ', ' ', ' ', ''],
-                            ['10', ' ', ' ', ' ', '']
+                            [defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
+                            [defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
+                            [defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
+                            [defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
+                            [defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
+                            [defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
+                            [defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
+                            [defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
+                            [defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
+                            [defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
                         ]
                     }
                 },
-
+                { text: '\n ', style: 'saltoLinea' },
+                { text: '\n ', style: 'saltoLinea' },
                 { text: '10 DEFENSORES CON UN BAJO NÚMERO DE AUDIENCIAS' },
                 {
                     style: 'tableExample',
                     color: 'black',
                     table: {
-                        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [150, 'auto', 'auto', 'auto', 'auto'],
                         headerRows: 2,
                         // keepWithHeaderRows: 1,
                         body: [
@@ -940,32 +405,32 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['1', ' ', ' ', ' ', ' '],
-                            ['2', ' ', ' ', ' ', ' '],
-                            ['3', ' ', ' ', ' ', ''],
-                            ['4', ' ', ' ', ' ', ''],
-                            ['5', ' ', ' ', ' ', ''],
-                            ['6', ' ', ' ', ' ', ''],
-                            ['7', ' ', ' ', ' ', ''],
-                            ['8', ' ', ' ', ' ', ''],
-                            ['9', ' ', ' ', ' ', ''],
-                            ['10', ' ', ' ', ' ', '']
+                            [defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
+                            [defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
+                            [defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
+                            [defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
+                            [defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
+                            [defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
+                            [defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
+                            [defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
+                            [defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
+                            [defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
                         ]
                     }
                 },
-                { text: '\n ', style: 'saltoLinea' },
                 { text: '3.- VISITAS CARCELARÍAS', style: 'subheader2' },
                 {
                     text: 'Durante el periodo que comprende del ___ de _______ al ____ de ________ del presente año, los Defensores Públicos realizaron ___________ visitas carcelarias a sus internos.', style: 'textoJustificado'
                 },
                 { text: 'Por sistema__________ Sistema Tradicional: materia penal _____; materia ejecución de sanciones ________ Sistema Acusatorio y oral: materia penal adultos __________; materia penal adolescentes ________; materia ejecución de sanciones ________.', style: 'textoJustificado' },
                 { text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de visitas carcelarias  en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos en visitas carcelarias , esto también por sistema.', style: 'textoJustificado' },
+                { text: '\n ', style: 'saltoLinea' },
                 { text: '10 DEFENSORES CON ALTO NÚMERO DE VISITAS CARCELARÍAS' },
                 {
                     style: 'tableExample',
                     color: 'black',
                     table: {
-                        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [150, 'auto', 'auto', 'auto', 'auto'],
                         headerRows: 2,
                         // keepWithHeaderRows: 1,
                         body: [
@@ -983,26 +448,27 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['1', ' ', ' ', ' ', ' '],
-                            ['2', ' ', ' ', ' ', ' '],
-                            ['3', ' ', ' ', ' ', ''],
-                            ['4', ' ', ' ', ' ', ''],
-                            ['5', ' ', ' ', ' ', ''],
-                            ['6', ' ', ' ', ' ', ''],
-                            ['7', ' ', ' ', ' ', ''],
-                            ['8', ' ', ' ', ' ', ''],
-                            ['9', ' ', ' ', ' ', ''],
-                            ['10', ' ', ' ', ' ', '']
+                            [defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
+                            [defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
+                            [defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
+                            [defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
+                            [defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
+                            [defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
+                            [defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
+                            [defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
+                            [defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
+                            [defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
                         ]
                     }
                 },
                 { text: '\n\n\n ', style: 'saltoLinea' },
+                { text: '\n\n ', style: 'saltoLinea' },
                 { text: '10 DEFENSORES CON UN BAJO NÚMERO DE VISITAS CARCELARÍAS' },
                 {
                     style: 'tableExample',
                     color: 'black',
                     table: {
-                        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [150, 'auto', 'auto', 'auto', 'auto'],
                         headerRows: 2,
                         // keepWithHeaderRows: 1,
                         body: [
@@ -1020,16 +486,16 @@ function funcionGlobalInformeAct(jsonInforme){
                                 { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
                                 { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
                             ],
-                            ['1', ' ', ' ', ' ', ' '],
-                            ['2', ' ', ' ', ' ', ' '],
-                            ['3', ' ', ' ', ' ', ''],
-                            ['4', ' ', ' ', ' ', ''],
-                            ['5', ' ', ' ', ' ', ''],
-                            ['6', ' ', ' ', ' ', ''],
-                            ['7', ' ', ' ', ' ', ''],
-                            ['8', ' ', ' ', ' ', ''],
-                            ['9', ' ', ' ', ' ', ''],
-                            ['10', ' ', ' ', ' ', '']
+                            [defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
+                            [defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
+                            [defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
+                            [defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
+                            [defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
+                            [defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
+                            [defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
+                            [defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
+                            [defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
+                            [defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
                         ]
                     }
                 },
@@ -1105,27 +571,4 @@ function funcionGlobalInformeAct(jsonInforme){
 
 
 
-/* function getBase64FromImageUrl(url) {
-    var img = new Image();
 
-    img.setAttribute('crossOrigin', 'anonymous');
-    var code;
-    img.onload = function () {
-        var canvas = document.createElement("canvas");
-        canvas.width = this.width;
-        canvas.height = this.height;
-
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(this, 0, 0);
-
-        var dataURL = canvas.toDataURL("image/png");
-
-        console.log(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-
-        code = String(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-        console.log(code, ' code');
-        return code;
-    };
-    img.src = url;
-    return code;
-} */

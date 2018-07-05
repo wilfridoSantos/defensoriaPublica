@@ -1580,23 +1580,16 @@ function generarPDFActividadesGeneral() {
 				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
 					   "radio1":r1, "check":checkDef},
 				success: function (data) {			
-					console.log(data);
+					console.log(data, 'resultado R1 con un defensor');
 					var jsonInforme = jQuery.parseJSON(data);					
 					console.log(jsonInforme,' valor jsonInfr');
 					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefPeriodo.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
 					  pdfAct = informeByDefPeriodo(jsonInforme);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
 					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					  pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+					  pdfMake.createPdf(pdfAct).open();					
 				}
 			});
 		}else{//solo esta las fechas y sera general
@@ -1606,25 +1599,15 @@ function generarPDFActividadesGeneral() {
 				type: "POST",
 				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
 				success: function (data) {	
-					console.log(data, ' data por periooodo');		
+					console.log(data, ' resultado R1 vario defensores');		
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('solopor periodo ', jsonInforme);
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividades.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = funcionGlobalInformeAct(jsonInforme);
-					  
+					var pdfAct = funcionGlobalInformeAct(jsonInforme);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-				  
-					pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					pdfMake.createPdf(pdfAct).open();					
 				}
 			});
 		}
@@ -1637,25 +1620,17 @@ function generarPDFActividadesGeneral() {
 				type: "POST",
 				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
 				success: function (data) {			
-					console.log(data, ' completo por defensor');
+					console.log(data, ' resultado r2 por defensor');
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo by defensor ', jsonInforme);
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefCompleto.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = informeByDefCompleto(jsonInforme)
+					var pdfAct= informeByDefCompleto(jsonInforme)
 					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
 					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
 				  
-						pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+						pdfMake.createPdf(pdfAct).open();			
 				}
 			});
 		}else{//shacer ajax informe completo sin filtros
@@ -1664,26 +1639,15 @@ function generarPDFActividadesGeneral() {
 				type: "POST",
 				data: {"radio2":r2, "check":checkDef},
 				success: function (data) {	
-					console.log(data, ' completo ooooooooo');		
+					console.log(data, ' resultado r2 varios defensores');		
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo FULL ', jsonInforme);
-
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesCompleto.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = informeCompleto(jsonInforme)
-					  
+					var pdfAct = informeCompleto(jsonInforme)					  
 						// print the PDF
 						//pdfMake.createPdf(docDefinition).print();
 						// download the PDF
-						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-					
-					  pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
+					  pdfMake.createPdf(pdfAct).open();					
 				}
 			});
 		}
@@ -1703,11 +1667,10 @@ function generarPDFActividadesParcial() {
 	selectAtributos = $('#selectAtributos').val();	
 
 	if(r3){//informe PARCIAL por periodo
-	
 		if(checkDef){	//informe por defensor
 			//inputProject = $('#project').val();//ajax con fechas y input con defensor unico
-			inputProject = $('#idDefensor').val();
-
+			inputProject = $('#idDefensor').val();			
+			console.log('vallor atributos');
 			console.log('PETICION AJAX  PERIODO + UN DEFENSOR + UN SISTEMA + ATRIBUTOS');
 			console.log($('#idDefensor').val(), 'id del defensor');
 			$.ajax({
@@ -1717,23 +1680,16 @@ function generarPDFActividadesParcial() {
 					 "defensor":inputProject, "radio3":r3,
 					 "check":checkDef, "atributos":selectAtributos, "sistema":selectSistema},
 				success: function (data) {			
-					console.log(data);
+					console.log(data, ' resultado r3 por defensor' );
 					var jsonInforme = jQuery.parseJSON(data);					
 					console.log(jsonInforme,' valor jsonInfr');
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefParcialPeriodo.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = informeByDefParcialPeriodo(jsonInforme);					  
+					var pdfAct= informeByDefParcialPeriodo(jsonInforme,selectAtributos);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
 					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
 					  pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+
 				}
 			});
 		}else{//no activado check defensor
@@ -1744,25 +1700,17 @@ function generarPDFActividadesParcial() {
 				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio3":r3, 
 						"check":checkDef,"atributos":selectAtributos, "sistema":selectSistema},
 				success: function (data) {	
-					console.log(data, ' data por periooodo');		
+					console.log(data, ' resultado r3 varios defensores');		
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('solopor periodo ', jsonInforme);
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesParcial.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = funcionGlobalInformeAct(jsonInforme);
-					  
+					var pdfAct= funcionGlobalInformeAct(jsonInforme);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
 					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
 				  
 					pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+
 				}
 			});
 		}
@@ -1777,25 +1725,17 @@ function generarPDFActividadesParcial() {
 				data: {"defensor":inputProject,"radio4":r4, "check":checkDef, "atributos":selectAtributos,
 						"sistema":selectSistema},
 				success: function (data) {			
-					console.log(data, ' completo por defensor');
+					console.log(data, 'resultado r4 por defensor');
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo by defensor ', jsonInforme);
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesByDefCompleto.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = informeByDefCompleto(jsonInforme)
-					  
+					var pdfAct= informeByDefCompletoParcial(jsonInforme)					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
 					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
 				  
 						pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
+
 				}
 			});
 		}else{//shacer ajax informe completo sin filtros
@@ -1806,26 +1746,17 @@ function generarPDFActividadesParcial() {
 				data: {"radio4":r4, "check":checkDef,  "atributos":selectAtributos,
 				"sistema":selectSistema},
 				success: function (data) {	
-					console.log(data, ' completo ooooooooo');		
+					console.log(data, ' resultado r4 varios defensores');		
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo FULL ', jsonInforme);
 
-					var pdfAct;
-					$.getScript( "../../recursos/js/coordinador/pdfActividadesCompleto.js" )
-					.done(function( script, textStatus ) {
-					  console.log( textStatus );
-					  pdfAct = informeCompleto(jsonInforme)
-					  
+					var pdfAct= informeCompletoParcial(jsonInforme)
 						// print the PDF
 						//pdfMake.createPdf(docDefinition).print();
 						// download the PDF
 						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
 					
 					  pdfMake.createPdf(pdfAct).open();
-					})
-					.fail(function( jqxhr, settings, exception ) {
-					  //$( "div.log" ).text( "Triggered ajaxError handler." );
-				  });
 				}
 			});
 		}

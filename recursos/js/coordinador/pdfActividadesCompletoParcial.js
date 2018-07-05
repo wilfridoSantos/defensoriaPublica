@@ -1,4 +1,4 @@
-function informeCompleto(jsonInforme){
+function informeCompletoParcial(jsonInforme){
 	console.time('Test functionGlobalInformeAct');
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	defensores = getDefensores(jsonInforme);

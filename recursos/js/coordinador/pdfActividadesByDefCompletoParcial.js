@@ -1,4 +1,4 @@
-function informeByDefCompleto(jsonInforme){
+function informeByDefCompletoParcial(jsonInforme){
 	console.time('Test functionGlobalInformeAct');
 	var nombreDef = jsonInforme[0]['Defensor']+' '+jsonInforme[0]['apDefP']+' '+jsonInforme[0]['apDefM'];
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -92,7 +92,7 @@ function informeByDefCompleto(jsonInforme){
 					'“2018, AÑO DE LA ERRADICACIÓN DEL TRABAJO INFANTIL”',
 					{
 						text: 'Reyes Mantecón, San Bartolo Coyotepec, Oax; ' + primerM + siguiente + '.\n' +
-							'completo', style: 'subheader'
+							'completo PARCIAL', style: 'subheader'
 					},
 				],
 				style: 'header'
