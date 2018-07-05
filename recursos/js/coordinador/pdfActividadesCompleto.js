@@ -1,62 +1,7 @@
 function informeCompleto(jsonInforme){
 	console.time('Test functionGlobalInformeAct');
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	defensores = getDefensores(jsonInforme);
-	console.log(defensores, ' defensores econtrados');
-	actividades = getNumActividades(jsonInforme);
-	asesoriasTO = getNumAsesoriasTO(jsonInforme);
-	sexos = getNumSexoUsuarios(jsonInforme);
-	discapacidades = getNumDiscapacidadUsuarios(jsonInforme);
-	generos = getNumGeneroUsuarios(jsonInforme);
-	etnias = getNumEtniasUsuarios(jsonInforme);
-	idiomas = getNumIdiomasUsuarios(jsonInforme);
-	idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInforme), jsonInforme);						
-	etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInforme), jsonInforme);
-	idiomasR = generarRowsIdiomas(idiomas, idiomasSistema);
-	etniasR = generarRowsEtnias(etnias, etniasSistema);
-	edades = getNumEdadUsuarios(jsonInforme);
 
-	totalH = sexos['numMascT'] + sexos['numMascO'];
-	totalM = sexos['numFemT'] + sexos['numFemO'];
-	totalSexo = totalH + totalM;
-	totalSexoT = sexos['numMascT'] + sexos['numFemT'];
-	totalSexoO = sexos['numMascO'] + sexos['numFemO'];
-
-
-	totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
-	totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
-	totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
-	totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
-
-	totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
-	totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
-	totalDiscapacidad = totalDisT + totalDisO;
-
-
-	totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
-	totalGay = generos['numGayT'] + generos['numGayO'];
-	totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
-	totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
-	totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
-	totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
-	totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
-	totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
-	totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
-
-	totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
-	totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
-	totalEdad2 =  edades['edades2T'] +  edades['edades2O'];
-	totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
-	totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
-	totalEdad5 =  edades['edades5T'] +  edades['edades5O'];
-	totalEdad6 =  edades['edades6T'] +  edades['edades6O'];	
-	totalEdad7 =  edades['edades7T'] +  edades['edades7O'];
-	totalEdad8 =  edades['edades8T'] +  edades['edades8O'];
-	totalEdad9 =  edades['edades9T'] +  edades['edades9O'];
-	totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T']+  edades['edades7T']+  edades['edades8T']+  edades['edades9T'];
-	totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O']+  edades['edades7O']+  edades['edades8O']+  edades['edades9O'];
-	totalEdadS = totalEdadT + totalEdadO;
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	var pdfAct  = {
 		watermark: { text: 'www oaxaca gob mx', color: 'gray', opacity: 0.3, bold: true, italics: false },
 		pageSize: 'A4',
@@ -120,7 +65,7 @@ function informeCompleto(jsonInforme){
 				style: 'tableExample',
 				color: 'black',
 				table: {
-					widths: [200, 'auto', 'auto', 'auto'],
+					widths: ['auto', 'auto', 'auto', 'auto'],
 					headerRows: 2,
 					// keepWithHeaderRows: 1,
 					body: [
@@ -145,7 +90,7 @@ function informeCompleto(jsonInforme){
 				style: 'tableExample',
 				color: 'black',
 				table: {
-					widths: [200, 'auto', 'auto', 'auto'],
+					widths: ['auto', 'auto', 'auto', 'auto'],
 					headerRows: 2,
 					// keepWithHeaderRows: 1,
 					body: [
@@ -176,31 +121,45 @@ function informeCompleto(jsonInforme){
 				style: 'tableExample',
 				color: 'black',
 				table: {
-					widths: [200, 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
+					widths: ['auto', 'auto', 'auto', 'auto','auto', 'auto', 'auto', 'auto'],
+					headerRows: 3,
+					//keepWithHeaderRows: 3,
 					body: [
 						[
-							{ text: 'Edad', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-							{}, {}
+							{ text: 'Edad', rowSpan:3, style: 'tableHeader', alignment: 'center' },
+							{ text: 'Sistema de justicia', colSpan:7, style: 'tableHeader', alignment: 'center' },
+							{},{},{},{},{},{}
 						],
 						[
 							{},
-							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
+							{ text: 'Total', rowSpan:2, style: 'tableHeader', alignment: 'center' },
+							{ text: 'Tradicional',colSpan: 3, style: 'tableHeader', alignment: 'center' },
+							{},
+							{},
+							{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
+							{},
+							{}
 						],
-						['18 A 24 AÑOS',	totalEdad1, edades['edades1T'], edades['edades1O']],
-						['25 A 29 AÑOS',	totalEdad2, edades['edades2T'], edades['edades2O']],
-						['30 A 34 AÑOS',	totalEdad3, edades['edades3T'], edades['edades3O']],
-						['35 A 39 AÑOS',	totalEdad4, edades['edades4T'], edades['edades4O']],
-						['40 A 44 AÑOS',	totalEdad5, edades['edades5T'], edades['edades5O']],
-						['45 A 49 AÑOS',	totalEdad6, edades['edades6T'], edades['edades6O']],
-						['50 A 54 AÑOS',	totalEdad7, edades['edades7T'], edades['edades7O']],
-						['55 A 59 AÑOS',	totalEdad8, edades['edades8T'], edades['edades8O']],
-						['DE 60 O MAS AÑOS',	totalEdad9, edades['edades9T'], edades['edades9O']],
-						['TOTAL', 		totalEdadS, totalEdadT,totalEdadO]
+						[
+							{},
+							{},
+							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+							{ text: 'H', style: 'tableHeader', alignment: 'center' },
+							{ text: 'M',style: 'tableHeader', alignment: 'center' },
+							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+							{ text: 'H', style: 'tableHeader', alignment: 'center' },
+							{ text: 'M',style: 'tableHeader', alignment: 'center' }
+						],
+						['18 A 24 AÑOS',	totalEdad1, edades['edades1T'], edades['edades1tH'],edades['edades1tM'], edades['edades1O'],edades['edades1OH'],edades['edades1OM']],
+						['25 A 29 AÑOS',	totalEdad2, edades['edades2T'], edades['edades2tH'],edades['edades2tM'], edades['edades2O'],edades['edades2OH'],edades['edades2OM']],
+						['30 A 34 AÑOS',	totalEdad3, edades['edades3T'], edades['edades3tH'],edades['edades3tM'], edades['edades3O'],edades['edades3OH'],edades['edades3OM']],
+						['35 A 39 AÑOS',	totalEdad4, edades['edades4T'], edades['edades4tH'],edades['edades4tM'], edades['edades4O'],edades['edades4OH'],edades['edades4OM']],
+						['40 A 44 AÑOS',	totalEdad5, edades['edades5T'], edades['edades5tH'],edades['edades5tM'], edades['edades5O'],edades['edades5OH'],edades['edades5OM']],
+						['45 A 49 AÑOS',	totalEdad6, edades['edades6T'], edades['edades6tH'],edades['edades6tM'], edades['edades6O'],edades['edades6OH'],edades['edades6OM']],
+						['50 A 54 AÑOS',	totalEdad7, edades['edades7T'], edades['edades7tH'],edades['edades7tM'], edades['edades7O'],edades['edades7OH'],edades['edades7OM']],
+						['55 A 59 AÑOS',	totalEdad8, edades['edades8T'], edades['edades8tH'],edades['edades8tM'], edades['edades8O'],edades['edades8OH'],edades['edades8OM']],
+						['DE 60 O MAS AÑOS',totalEdad9, edades['edades9T'], edades['edades9tH'],edades['edades9tM'], edades['edades9O'],edades['edades9OH'],edades['edades9OM']],
+						['TOTAL', 			totalEdadS, totalEdadT,totalHT,totalMT,totalEdadO,totalHO,totalMO]
 					]
 				}
 			},

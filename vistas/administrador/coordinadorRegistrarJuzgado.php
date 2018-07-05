@@ -26,7 +26,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >Nombre <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text"  pattern="[A-Za-z ]{1,30}" onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)" id="nombre_juzgado" required name="juzgado" class="form-control  has-feedback-left col-md-7 col-xs-12">
+                          <input type="text"  pattern="[A-Za-z ZéėíóúūñÁÉÍÓÚÜÑá]{1,100}" onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)" id="nombre_juzgado" required name="juzgado" class="form-control  has-feedback-left col-md-7 col-xs-12">
                              <span class="" aria-hidden="true"></span>
                         </div>
                       </div>
@@ -53,7 +53,7 @@
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Calle</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="calle_juzgado" type="text" required pattern="[A-Z1-9 ]{3,50}" onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  class="form-control has-feedback-left col-md-7 col-xs-12"  name="calle">
+                          <input id="calle_juzgado" type="text" required pattern="[A-Z1-9 ZéėíóúūñÁÉÍÓÚÜÑá.,]{3,50}" onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  class="form-control has-feedback-left col-md-7 col-xs-12"  name="calle">
                              <span class="" aria-hidden="true"></span>
                         </div>
                       </div>  
@@ -62,7 +62,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Número <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="numero_juzgado" title=":solo números entero sin espacio con máximo 10 digito" name="numero" class="date-picker has-feedback-left form-control col-md-7 col-xs-12"  type="text" required pattern="[1-9]{1,10}">
+                          <input id="numero_juzgado" title=":solo números entero sin espacio con máximo 10 digito" name="numero" class="date-picker has-feedback-left form-control col-md-7 col-xs-12"  type="text" required pattern="([0-9]{1,10}|S/N|s/n)">
                            <span class="" aria-hidden="true"></span>
                         </div>
                       </div>
@@ -71,7 +71,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="municipio_juzgado" pattern="[A-Za-z0-9 ]{3,50}" required onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  name="municipio" class="date-picker form-control has-feedback-left col-md-7 col-xs-12"  type="text">
+                          <input id="municipio_juzgado" pattern="[A-Za-z0-9 ZéėíóúūñÁÉÍÓÚÜÑá.]{3,80}" required onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  name="municipio" class="date-picker form-control has-feedback-left col-md-7 col-xs-12"  type="text">
                           <span class="" aria-hidden="true"></span>
                         </div>
                       </div>
@@ -80,7 +80,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Colonia <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="colonia_juzgado" name="colonia" pattern="[A-Za-z0-9 ]{3,50}"required onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  class="date-picker has-feedback-left form-control col-md-7 col-xs-12"  type="text">
+                          <input id="colonia_juzgado" name="colonia" pattern="[A-Za-z0-9 ZéėíóúūñÁÉÍÓÚÜÑá.,]{3,80}"required onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  class="date-picker has-feedback-left form-control col-md-7 col-xs-12"  type="text">
                          <span class="" aria-hidden="true"></span>
                         </div>
                       </div>
@@ -107,7 +107,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Extensión</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="numero_extension" title=":solo números entero sin espacio con máximo 10 digito" name="numero_extension" class="date-picker has-feedback-left form-control col-md-7 col-xs-12"  type="text" pattern="[1-9]{1,6}">
+                          <input id="numero_extension" title=":solo números entero sin espacio con máximo 10 digito" name="numero_extension" class="date-picker has-feedback-left form-control col-md-7 col-xs-12"  type="text" pattern="[0-9]{1,6}">
                            <span class="" aria-hidden="true"></span>
                         </div>
                       </div>
