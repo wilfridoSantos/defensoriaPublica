@@ -4,7 +4,7 @@ function informeCompleto(jsonInforme){
 	defensores = getDefensores(jsonInforme);
 	console.log(defensores, ' defensores econtrados');
 	actividades = getNumActividades(jsonInforme);
-	asesoriasTO = getNumAsesoriasTO(jsonInforme);
+	asesoriasTO = getNumAsesoriasTO(jsonInforcme);
 	sexos = getNumSexoUsuarios(jsonInforme);
 	discapacidades = getNumDiscapacidadUsuarios(jsonInforme);
 	generos = getNumGeneroUsuarios(jsonInforme);
