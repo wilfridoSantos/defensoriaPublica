@@ -9,62 +9,24 @@ function informeByDefParcialPeriodo(jsonInforme, selectAtributos){
     var fecha2 = new Date(fechaFi);
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Nomviembre", "Diciembre"];
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    console.log(selectAtributos, ' atributos desde el pdf');
-    actividades = getNumActividades(jsonInforme);
-    asesoriasTO = getNumAsesoriasTO(jsonInforme);
-    sexos = getNumSexoUsuarios(jsonInforme);
-    discapacidades = getNumDiscapacidadUsuarios(jsonInforme);
-    generos = getNumGeneroUsuarios(jsonInforme);
-    etnias = getNumEtniasUsuarios(jsonInforme);
-    idiomas = getNumIdiomasUsuarios(jsonInforme);
-    idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInforme), jsonInforme);						
-    etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInforme), jsonInforme);
-    idiomasR = generarRowsIdiomas(idiomas, idiomasSistema);
-    etniasR = generarRowsEtnias(etnias, etniasSistema);
-    edades = getNumEdadUsuarios(jsonInforme);
-
-    totalH = sexos['numMascT'] + sexos['numMascO'];
-    totalM = sexos['numFemT'] + sexos['numFemO'];
-    totalSexo = totalH + totalM;
-    totalSexoT = sexos['numMascT'] + sexos['numFemT'];
-    totalSexoO = sexos['numMascO'] + sexos['numFemO'];
-
-
-    totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
-    totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
-    totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
-    totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
-
-    totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
-    totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
-    totalDiscapacidad = totalDisT + totalDisO;
-
-
-    totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
-    totalGay = generos['numGayT'] + generos['numGayO'];
-    totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
-    totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
-    totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
-    totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
-    totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
-    totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
-    totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
-
-    totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
-    totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
-    totalEdad2 =  edades['edades2T'] +  edades['edades2O'];
-    totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
-    totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
-    totalEdad5 =  edades['edades5T'] +  edades['edades5O'];
-    totalEdad6 =  edades['edades6T'] +  edades['edades6O'];
-    totalEdad7 =  edades['edades7T'] +  edades['edades7O'];
-    totalEdad8 =  edades['edades8T'] +  edades['edades8O'];
-    totalEdad9 =  edades['edades9T'] +  edades['edades9O'];
-    totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T']+  edades['edades7T']+  edades['edades8T']+  edades['edades9T'];
-    totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O']+  edades['edades7O']+  edades['edades8O']+  edades['edades9O'];
-    totalEdadS = totalEdadT + totalEdadO;
-    var tablaSexo = getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexos['numMascT'], sexos['numMascO'],sexos['numFemT'], sexos['numFemO']);
+    //console.log(selectAtributos, ' atributos desde el pdf');    
+    var tablaSexo={}, tablaGenero={}, tablaEdad={}, tablaEtnia={}, tablaIdioma={}, tablaDiscapacidad={};
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+for(var i=0; i<selectAtributos.length; i++){
+    switch(selectAtributos[i]){
+        case "SEXO":
+            tablaSexo = getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexos['numMascT'], sexos['numMascO'],sexos['numFemT'], sexos['numFemO']);
+        break;
+        case "GENERO":
+            tablaGenero = getTablaGenero(totalLesbico, totalGay,totalBisexual,totalTransexual, totalTransgenero,totalTravesti,totalIntersexual, totalG,
+                                        generos['numLesbicoT'], generos['numLesbicoT'], generos['numGayT'], generos['numGayO'], generos['numBisexualT'], generos['numBisexualO'],
+                                        generos['numTransexualT'], generos['numTransexualO'],generos['numTransgeneroT'], generos['numTransgeneroO'], generos['numTravestiT'], generos['numTravestiO'],
+                                        generos['numIntersexualT'], generos['numIntersexualO']
+                        );
+        break;
+    }
+    //console.log(selectAtributos[i]);
+}
     var pdfAct  = {
         watermark: { text: 'www oaxaca gob mx', color: 'gray', opacity: 0.3, bold: true, italics: false },
         pageSize: 'A4',
@@ -126,37 +88,7 @@ function informeByDefParcialPeriodo(jsonInforme, selectAtributos){
                 }
             },
             { text: 'Del total general de asesorías jurídicas, a continuación se desglosan los atributos de los beneficiarios:', style: 'textoJustificado' },
-            tablaSexo,
-            {
-                style: 'tableExample',
-                color: 'black',
-                table: {
-                    widths: [200, 'auto', 'auto', 'auto'],
-                    headerRows: 2,
-                    // keepWithHeaderRows: 1,
-                    body: [
-                        [
-                            { text: 'Género', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-                            { text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-                            {}, {}
-                        ],
-                        [
-                            {},
-                            { text: 'Total', style: 'tableHeader', alignment: 'center' },
-                            { text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-                            { text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-                        ],
-                        ['Lésbico', totalLesbico, generos['numLesbicoT'], generos['numLesbicoO']],
-                        ['Gay', totalGay, generos['numGayT'], generos['numGayO']],
-                        ['Bisexual', totalBisexual, generos['numBisexualT'], generos['numBisexualO']],
-                        ['Transexual', totalTransexual, generos['numTransexualT'], generos['numTransexualO']],
-                        ['Transgénero', totalTransgenero, generos['numTransgeneroT'], generos['numTransgeneroO']],
-                        ['Travestí', totalTravesti, generos['numTravestiT'], generos['numTravestiO']],
-                        ['Intersexual', totalIntersexual, generos['numIntersexualT'], generos['numIntersexualO']],
-                        ['Total', totalG, totalGenerosT, totalGenerosO]
-                    ]
-                }
-            },
+                tablaSexo,tablaGenero, 
             { text: '\n ', style: 'saltoLinea' },
             {
                 style: 'tableExample',

@@ -1660,12 +1660,11 @@ function generarPDFActividadesParcial() {
 	console.time('TEST PERFORMANCE');
 	var r3 = $('#inputRadio3').get(0).checked;//informe general con periodo
 	var r4 = $('#inputRadio4').get(0).checked;//informe general completo
-
 	fechaI = document.getElementById('inputInicio').value;
 	fechaFi = document.getElementById('inputFinal').value;
 	selectSistema = $('#selectSistema').val();
 	selectAtributos = $('#selectAtributos').val();	
-
+	
 	if(r3){//informe PARCIAL por periodo
 		if(checkDef){	//informe por defensor
 			//inputProject = $('#project').val();//ajax con fechas y input con defensor unico
@@ -1683,6 +1682,7 @@ function generarPDFActividadesParcial() {
 					console.log(data, ' resultado r3 por defensor' );
 					var jsonInforme = jQuery.parseJSON(data);					
 					console.log(jsonInforme,' valor jsonInfr');
+					constructor(jsonInforme);
 					var pdfAct= informeByDefParcialPeriodo(jsonInforme,selectAtributos);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
@@ -1707,10 +1707,8 @@ function generarPDFActividadesParcial() {
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-				  
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
 					pdfMake.createPdf(pdfAct).open();
-
 				}
 			});
 		}
@@ -1729,13 +1727,11 @@ function generarPDFActividadesParcial() {
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo by defensor ', jsonInforme);
 					var pdfAct= informeByDefCompletoParcial(jsonInforme)					  
-					  // print the PDF
+					  //print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-				  
+					  //download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');	  
 						pdfMake.createPdf(pdfAct).open();
-
 				}
 			});
 		}else{//shacer ajax informe completo sin filtros

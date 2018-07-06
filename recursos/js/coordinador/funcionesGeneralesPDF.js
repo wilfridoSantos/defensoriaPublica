@@ -1,26 +1,90 @@
+	var base64 = globalHeaderPDF;
+	var jsonInf={};
+	var actividades;
+	var asesoriasTO, discapacidades;
+	var sexos, generos, etnias, etniasR, etniasSistema, edades, idiomasR, idiomas, idiomasSistema;
+	var totalH, totalM, totalSexoT, totalSexoO, totalSexo, totalSen, totalMot,totalMen, totalMul, totalDisT,totalDisO, totalDiscapacidad;
+	var totalLesbico, totalGay, totalBisexual, totalTransexual, 
+		totalTransgenero, totalTravesti, totalIntersexual,
+		totalGenerosT, totalGenerosO, totalG, totalEdadT, 
+		totalEdadO, totalEdadS,totalEdad1, totalEdad2, totalEdad3, totalEdad4, totalEdad5, totalEdad6, totalEdad7, totalEdad8, totalEdad9 ;
+	var fecha = new Date();
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	var fechaF = fecha.toLocaleDateString("es-ES", options);
+	var primerM = fechaF.charAt(0).toUpperCase();
+	var siguiente = fechaF.slice(1).toLowerCase();
+	var defensores;
+	var totalHT;
+	var totalMT;
+	var totalHO;
+	var totalMO;
 
-var base64 = globalHeaderPDF;
 
-var actividades;
-var asesoriasTO, discapacidades;
-var sexos, generos, etnias, etniasR, etniasSistema, edades, idiomasR, idiomas, idiomasSistema;
-var totalH, totalM, totalSexoT, totalSexoO, totalSexo, totalSen, totalMot,totalMen, totalMul, totalDisT,totalDisO, totalDiscapacidad;
-var totalLesbico, totalGay, totalBisexual, totalTransexual, 
-	totalTransgenero, totalTravesti, totalIntersexual,
-	totalGenerosT, totalGenerosO, totalG, totalEdadT, 
-	totalEdadO, totalEdadS,totalEdad1, totalEdad2, totalEdad3, totalEdad4, totalEdad5, totalEdad6, totalEdad7, totalEdad8, totalEdad9 ;
-var fecha = new Date();
-var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-var fechaF = fecha.toLocaleDateString("es-ES", options);
-var primerM = fechaF.charAt(0).toUpperCase();
-var siguiente = fechaF.slice(1).toLowerCase();
-var defensores;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function constructor(jsonInforme){
+	jsonInf = jsonInforme;
+	actividades = getNumActividades(jsonInf);
+    asesoriasTO = getNumAsesoriasTO(jsonInf);
+    sexos = getNumSexoUsuarios(jsonInf);
+    discapacidades = getNumDiscapacidadUsuarios(jsonInf);
+    generos = getNumGeneroUsuarios(jsonInf);
+    etnias = getNumEtniasUsuarios(jsonInf);
+    idiomas = getNumIdiomasUsuarios(jsonInf);
+    idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInf), jsonInf);						
+    etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInf), jsonInf);
+    idiomasR = generarRowsIdiomas(idiomas, idiomasSistema);
+    etniasR = generarRowsEtnias(etnias, etniasSistema);
+    edades = getNumEdadUsuarios(jsonInf);
+
+    totalH = sexos['numMascT'] + sexos['numMascO'];
+    totalM = sexos['numFemT'] + sexos['numFemO'];
+    totalSexo = totalH + totalM;
+    totalSexoT = sexos['numMascT'] + sexos['numFemT'];
+    totalSexoO = sexos['numMascO'] + sexos['numFemO'];
+
+    totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
+    totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
+    totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
+    totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
+
+    totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
+    totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
+    totalDiscapacidad = totalDisT + totalDisO;
+
+    totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
+    totalGay = generos['numGayT'] + generos['numGayO'];
+    totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
+    totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
+    totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
+    totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
+    totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
+    totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
+    totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
+
+    totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
+    totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
+    totalEdad2 =  edades['edades2T'] +  edades['edades2O'];
+    totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
+    totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
+    totalEdad5 =  edades['edades5T'] +  edades['edades5O'];
+    totalEdad6 =  edades['edades6T'] +  edades['edades6O'];
+    totalEdad7 =  edades['edades7T'] +  edades['edades7O'];
+    totalEdad8 =  edades['edades8T'] +  edades['edades8O'];
+    totalEdad9 =  edades['edades9T'] +  edades['edades9O'];
+    totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T']+  edades['edades7T']+  edades['edades8T']+  edades['edades9T'];
+    totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O']+  edades['edades7O']+  edades['edades8O']+  edades['edades9O'];
+	totalEdadS = totalEdadT + totalEdadO;
+
+	totalHT = edades['edades1tH'] + edades['edades2tH'] + edades['edades3tH'] + edades['edades4tH']+ edades['edades5tH']+ edades['edades6tH']+ edades['edades7tH']+ edades['edades8tH']+ edades['edades9tH'];
+	totalMT = edades['edades1tM'] + edades['edades2tM'] + edades['edades3tM'] + edades['edades4tM']+ edades['edades5tM']+ edades['edades6tM']+ edades['edades7tM']+ edades['edades8tM']+ edades['edades9tM'];
+	totalHO = edades['edades1OH'] + edades['edades2OH'] + edades['edades3OH'] + edades['edades4OH']+ edades['edades5OH']+ edades['edades6OH']+ edades['edades7OH']+ edades['edades8OH']+ edades['edades9OH'];
+	totalMO = edades['edades1OM'] + edades['edades2OM'] + edades['edades3OM'] + edades['edades4OM']+ edades['edades5OM']+ edades['edades6OM']+ edades['edades7OM']+ edades['edades8OM']+ edades['edades9OM'];
+}
 function getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexosNumMascT, sexosNumMascO,sexosNumFemT, sexosNumFemO){
 	var tabla ={};
 
 	var tablaGeneral={};
-	tablaGeneral.widths=  [200, 'auto', 'auto', 'auto'];
+	tablaGeneral.widths=  [100, 'auto', 'auto', 'auto'];
 	tablaGeneral.headerRows= 2;
 	tablaGeneral.body = [
 		[
@@ -42,6 +106,43 @@ function getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexosNumMa
 	tabla.style = 'tableExample';
 	tabla.color = 'black';
 	tabla.table = tablaGeneral;
+	return tabla;
+}
+function getTablaGenero(totalLesbico, totalGay,totalBisexual,totalTransexual, totalTransgenero,totalTravesti,
+						totalIntersexual, totalG, gNumLesbicoT, gNumLesbicoO, gNumGayT, gNumGayO, gNumBisexualT, gNumBisexualO,
+						gNumTransexualT, gNumTransexualO, gNumTransgeneroT, gNumTransgeneroO, gNumTravestiT, gNumTravestiO,
+						gNumIntersexualT, gNumIntersexualO){
+	var tabla ={};
+	var tablaGeneral={};
+	tablaGeneral.widths=  [150, 'auto', 'auto', 'auto'];
+	tablaGeneral.headerRows= 2;
+	//console.log("getTablaGeneroooooooo", gNumBisexualO, gNumTransexualT);
+	tablaGeneral.body = [
+		[
+			{ text: 'Género', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{}, {}
+		],
+		[
+			{},
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
+			{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
+		],
+		['Lésbico', totalLesbico, gNumLesbicoT, gNumLesbicoO],
+		['Gay', totalGay, gNumGayT, gNumGayO],
+		['Bisexual', totalBisexual, gNumBisexualT,gNumBisexualO],
+		['Transexual', totalTransexual, gNumTransexualT, gNumTransexualO],
+		['Transgénero', totalTransgenero, gNumTransgeneroT, gNumTransgeneroO],
+		['Travestí', totalTravesti, gNumTravestiT, gNumTravestiO],
+		['Intersexual', totalIntersexual, gNumIntersexualT, gNumIntersexualO],
+		['Total', totalG, totalGenerosT, totalGenerosO]
+	];
+
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	//console.log(tabla);
 	return tabla;
 }
 function getDefensores(jsonInforme) {
@@ -219,7 +320,7 @@ function getNumGeneroUsuarios(jsonInforme) {
 				//console.log(' entro filtro TRADICIONAL');
 				if (VALOR.generoU == 'LESBICO') {
 					numLesbicoT++;
-					console.log(numLesbicoT, ' numLesbicoTradicional');
+					//console.log(numLesbicoT, ' numLesbicoTradicional');
 				}
 				if (VALOR.generoU == 'GAY') {
 					numGayT++;
@@ -242,10 +343,10 @@ function getNumGeneroUsuarios(jsonInforme) {
 				}
 			}
 			if (VALOR.sistema == 'ORAL') {
-				console.log(' entro a ORAL');
+				//console.log(' entro a ORAL');
 				if (VALOR.generoU == 'LESBICO') {
 					numLesbicoO++;
-					console.log(numLesbicoO, ' numLesbicoOral');
+				//	console.log(numLesbicoO, ' numLesbicoOral');
 				}
 				if (VALOR.generoU == 'GAY') {
 					numGayO++;
@@ -283,7 +384,7 @@ function getNumGeneroUsuarios(jsonInforme) {
 	generos['numTransgeneroO'] = numTransgeneroO;
 	generos['numTravestiO'] = numTravestiO;
 	generos['numIntersexualO'] = numIntersexualO;
-
+	//console.log(generos);
 	return generos;
 }
 function getNumEdadUsuarios(jsonInforme) {
@@ -297,89 +398,218 @@ function getNumEdadUsuarios(jsonInforme) {
 	var num1T = 0, num1O = 0;
 	var num2T = 0, num2O = 0;
 	var num3T = 0, num3O = 0;
+	var hT1=0,hT2=0,hT3=0,hT4=0,hT5=0,hT6=0,hT7=0,hT8=0,hT9=0,
+		mT1=0,mT2=0,mT3=0,mT4=0,mT5=0,mT6=0,mT7=0,mT8=0,mT9=0, 
+		hO1=0,hO2=0,hO3=0,hO4=0,hO5=0,hO6=0,hO7=0,hO8=0,hO9=0,
+		mO1=0,mO2=0,mO3=0,mO4=0,mO5=0,mO6=0,mO7=0,mO8=0,mO9=0;
 	$.each(jsonInforme, function (KEY, VALOR) {
 		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			if (VALOR.sistema == 'TRADICIONAL') {
-				//console.log('TRADICIONAL EDAD-> '+VALOR.edadU);
-				if (VALOR.edadU >= 18 && VALOR.edadU <= 24) {
-					num07T++;
-				}
-				if (VALOR.edadU >= 25 && VALOR.edadU <= 29) {
-					num812T++;
-				}
-				if (VALOR.edadU >= 30 && VALOR.edadU <= 34) {
-					num1318T++;
-				}
-				if (VALOR.edadU >= 35 && VALOR.edadU <= 39) {
-					num1925T++;
-				}
-				if (VALOR.edadU >= 40 && VALOR.edadU <= 44) {
-					num2630T++;
-				} 
-				if (VALOR.edadU >= 45 && VALOR.edadU <= 49) {
-					num3190T++;
-				}
-				if (VALOR.edadU >= 50 && VALOR.edadU <= 54) {
-					num1T++;
-				}
-				if (VALOR.edadU >= 55 && VALOR.edadU <= 59) {
-					num2T++;
-				}
-				if (VALOR.edadU >= 60) {
-					num3T++;
-				}
-				
-			}
-			if (VALOR.sistema == 'ORAL') {
-				
+			switch(VALOR.sistema){
+				case'TRADICIONAL':
+					if (VALOR.edadU >= 18 && VALOR.edadU <= 24) {
+						num07T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT1++;
+						}else{
+							mT1++;
+						}
+					}
+					if (VALOR.edadU >= 25 && VALOR.edadU <= 29) {
+						num812T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT2++;
+						}else{
+							mT2++;
+						}
+					}
+					if (VALOR.edadU >= 30 && VALOR.edadU <= 34) {
+						num1318T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT3++;
+						}else{
+							mT3++;
+						}
+					}
+					if (VALOR.edadU >= 35 && VALOR.edadU <= 39) {
+						num1925T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT4++;
+						}else{
+							mT4++;
+						}
+					}
+					if (VALOR.edadU >= 40 && VALOR.edadU <= 44) {
+						num2630T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT5++;
+						}else{
+							mT5++;
+						}
+					} 
+					if (VALOR.edadU >= 45 && VALOR.edadU <= 49) {
+						num3190T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT6++;
+						}else{
+							mT6++;
+						}
+					}
+					if (VALOR.edadU >= 50 && VALOR.edadU <= 54) {
+						num1T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT7++;
+						}else{
+							mT7++;
+						}
+					}
+					if (VALOR.edadU >= 55 && VALOR.edadU <= 59) {
+						num2T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT8++;
+						}else{
+							mT8++;
+						}
+					}
+					if (VALOR.edadU >= 60) {
+						num3T++;
+						if(VALOR.sexo== 'MASCULINO' ){
+							hT9++;
+						}else{
+							mT9++;
+						}
+					}					
+			break;
+			case 'ORAL':				
 				if (VALOR.edadU >= 18 && VALOR.edadU <= 24) {
 					num07O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO1++;
+					}else{
+						mO1++;
+					}
 				}
 				if (VALOR.edadU >= 25 && VALOR.edadU <= 29) {
 					num812O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO2++;
+					}else{
+						mO2++;
+					}
 				}
 				if (VALOR.edadU >= 30 && VALOR.edadU <= 34) {
 					num1318O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO3++;
+					}else{
+						mO3++;
+					}
 				}
 				if (VALOR.edadU >= 35 && VALOR.edadU <= 39) {					
 					num1925O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO4++;
+					}else{
+						mO4++;
+					}
 				}
 				if (VALOR.edadU >= 40 && VALOR.edadU <= 44) {
 					num2630O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO5++;
+					}else{
+						mO5++;
+					}
 				} if (VALOR.edadU >= 45 && VALOR.edadU <= 49) {
 					num3190O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO6++;
+					}else{
+						mO6++;
+					}
 				}
 				if (VALOR.edadU >= 50 && VALOR.edadU <= 54) {
 					num1O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO7++;
+					}else{
+						mO7++;
+					}
 				}
 				if (VALOR.edadU >= 55 && VALOR.edadU <= 59) {
 					num2O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO8++;
+					}else{
+						mO8++;
+					}
 				}
 				if (VALOR.edadU >= 60) {
 					num3O++;
+					if(VALOR.sexo== 'MASCULINO' ){
+						hO9++;
+					}else{
+						mO9++;
+					}
 				}
+			break;
 			}
 		}
 	});
 	edades['edades1T'] = num07T;
+	edades['edades1tH'] = hT1;
+	edades['edades1tM'] = mT1;
 	edades['edades2T'] = num812T;
+	edades['edades2tH'] = hT2;
+	edades['edades2tM'] = mT2;
 	edades['edades3T'] = num1318T;
+	edades['edades3tH'] = hT3;
+	edades['edades3tM'] = mT3;
 	edades['edades4T'] = num1925T;
+	edades['edades4tH'] = hT4;
+	edades['edades4tM'] = mT4;
 	edades['edades5T'] = num2630T;
+	edades['edades5tH'] = hT5;
+	edades['edades5tM'] = mT5;
 	edades['edades6T'] = num3190T;
+	edades['edades6tH'] = hT6;
+	edades['edades6tM'] = mT6;
 	edades['edades7T'] = num1T;
+	edades['edades7tH'] = hT7;
+	edades['edades7tM'] = mT7;
 	edades['edades8T'] = num2T;
+	edades['edades8tH'] = hT8;
+	edades['edades8tM'] = mT8;
 	edades['edades9T'] = num3T;
+	edades['edades9tH'] = hT9;
+	edades['edades9tM'] = mT9;
 
 	edades['edades1O'] = num07O;
+	edades['edades1OH'] = hO1;
+	edades['edades1OM'] = mO1;
 	edades['edades2O'] = num812O;
+	edades['edades2OH'] = hO2;
+	edades['edades2OM'] = mO2;
 	edades['edades3O'] = num1318O;
+	edades['edades3OH'] = hO3;
+	edades['edades3OM'] = mO3;
 	edades['edades4O'] = num1925O;
+	edades['edades4OH'] = hO4;
+	edades['edades4OM'] = mO4;
 	edades['edades5O'] = num2630O;
+	edades['edades5OH'] = hO5;
+	edades['edades5OM'] = mO5;
 	edades['edades6O'] = num3190O;
+	edades['edades6OH'] = hO6;
+	edades['edades6OM'] = mO6;
 	edades['edades7O'] = num1O;
+	edades['edades7OH'] = hO7;
+	edades['edades7OM'] = mO7;
 	edades['edades8O'] = num2O;
+	edades['edades8OH'] = hO8;
+	edades['edades8OM'] = mO8;
 	edades['edades9O'] = num3O;
+	edades['edades9OH'] = hO9;
+	edades['edades9OM'] = mO9;
 	return edades;
 }
 function getArrayIdiomasSystem(jsonInforme) {
@@ -441,7 +671,6 @@ function getIdiomasBySistema(arrIdiomas, jsonInforme) {
 	arr.push(arrOral);
 	return arr;
 }
-
 function getEtniasBySistema(arrEtnias, jsonInforme) {
 	var arr = []; //contendra la cantidad de etnias por sistema arr['TRADICIONAL'] arr['ORAL']
 	var arrTradicional = {};
@@ -634,25 +863,26 @@ function generarRowsEtnias(jsonData, etniasSistema) {
 	return body;
 }
 function getNumActividades(jsonInforme) {
-	var actividades = {};
-	var numAses = 0;
-	var numAuds = 0;
-	var numVis = 0;
-	$.each(jsonInforme, function (KEY, VALOR) {
-		if (VALOR.latAse != null || VALOR.longAse != undefined) {
-			numAses++;
-		}
-		if (VALOR.latAud != null || VALOR.longAud != undefined) {
-			numAuds++;
-		}
-		if (VALOR.fotoVis != null || VALOR.fotoVis != undefined) {
-			numVis++;
-		}
-	});
-	actividades['asesorias'] = numAses;
-	actividades['audiencias'] = numAuds;
-	actividades['visitas'] = numVis;
-	return actividades;
-	}
-
-	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		console.log(jsonInforme, " jsonnInforme ");
+		var actividades = {};
+		var numAses = 0;
+		var numAuds = 0;
+		var numVis = 0;
+		$.each(jsonInforme, function (KEY, VALOR) {
+			if (VALOR.latAse != null || VALOR.longAse != undefined) {
+				numAses++;
+			}
+			if (VALOR.latAud != null || VALOR.longAud != undefined) {
+				numAuds++;
+			}
+			if (VALOR.fotoVis != null || VALOR.fotoVis != undefined) {
+				numVis++;
+			}
+		});
+		actividades['asesorias'] = numAses;
+		actividades['audiencias'] = numAuds;
+		actividades['visitas'] = numVis;
+		console.log("valor devuelto en func acividades ", actividades);
+		return actividades;
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

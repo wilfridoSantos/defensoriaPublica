@@ -7,62 +7,6 @@ function funcionGlobalInformeAct(jsonInforme){
         var fecha2 = new Date(fechaFi);
         var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Nomviembre", "Diciembre"];
     
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        defensores = getDefensores(jsonInforme);
-        console.log(defensores, ' defensores econtrados');
-        actividades = getNumActividades(jsonInforme);
-    	asesoriasTO = getNumAsesoriasTO(jsonInforme);
-    	sexos = getNumSexoUsuarios(jsonInforme);
-    	discapacidades = getNumDiscapacidadUsuarios(jsonInforme);
-    	generos = getNumGeneroUsuarios(jsonInforme);
-    	etnias = getNumEtniasUsuarios(jsonInforme);
-    	idiomas = getNumIdiomasUsuarios(jsonInforme);
-    	idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInforme), jsonInforme);						
-    	etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInforme), jsonInforme);
-    	idiomasR = generarRowsIdiomas(idiomas, idiomasSistema);
-    	etniasR = generarRowsEtnias(etnias, etniasSistema);
-    	edades = getNumEdadUsuarios(jsonInforme);
-
-    	totalH = sexos['numMascT'] + sexos['numMascO'];
-    	totalM = sexos['numFemT'] + sexos['numFemO'];
-    	totalSexo = totalH + totalM;
-    	totalSexoT = sexos['numMascT'] + sexos['numFemT'];
-    	totalSexoO = sexos['numMascO'] + sexos['numFemO'];
-
-
-    	totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
-    	totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
-    	totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
-    	totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
-
-    	totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
-    	totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
-    	totalDiscapacidad = totalDisT + totalDisO;
-
-
-    	totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
-    	totalGay = generos['numGayT'] + generos['numGayO'];
-    	totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
-    	totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
-    	totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
-    	totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
-    	totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
-    	totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
-    	totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
-
-    	totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
-    	totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
-    	totalEdad2 =  edades['edades2T'] +  edades['edades2O'];
-    	totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
-    	totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
-    	totalEdad5 =  edades['edades5T'] +  edades['edades5O'];
-        totalEdad6 =  edades['edades6T'] +  edades['edades6O'];	
-        totalEdad7 =  edades['edades7T'] +  edades['edades7O'];
-    	totalEdad8 =  edades['edades8T'] +  edades['edades8O'];
-    	totalEdad9 =  edades['edades9T'] +  edades['edades9O'];
-    	totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T']+  edades['edades7T']+  edades['edades8T']+  edades['edades9T'];
-    	totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O']+  edades['edades7O']+  edades['edades8O']+  edades['edades9O'];
-		totalEdadS = totalEdadT + totalEdadO;
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         var pdfAct  = {
             watermark: { text: 'www oaxaca gob mx', color: 'gray', opacity: 0.3, bold: true, italics: false },
