@@ -1,7 +1,13 @@
 function informeCompleto(jsonInforme){
 	console.time('Test functionGlobalInformeAct');
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+	var tablaSexo = getTablaSexo();
+	var tablaGenero = getTablaGenero();
+	var tablaDiscapacidades = getTablaDiscapacidad();
+	var tablaEdad = getTablaEdad();
+	var tablaIdiomas = getTablaIdiomas();
+	var tablaEtnias = getTablaEtnias();
+	var top10Defensores = getTablaTopTen();
+	var tablaGeneral = getTablaGeneral();
 	var pdfAct  = {
 		watermark: { text: 'www oaxaca gob mx', color: 'gray', opacity: 0.3, bold: true, italics: false },
 		pageSize: 'A4',
@@ -44,249 +50,24 @@ function informeCompleto(jsonInforme){
 			},			
 			{ text: '1.- ASESORÍAS JURÍDICAS', style: 'subheader2' },
 			{ text: 'Con el objetivo de contribuir a una justicia pronta, expedita e imparcial, la Defensoría Pública brindó ' + actividades['asesorias'] + ' servicios gratuitos de asesorías jurídicas generales, lo anterior se detalla de la siguiente manera:', style: 'textoJustificado' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					headerRows: 1,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Sistema de justicia', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorio y oral', style: 'tableHeader', alignment: 'center' },
-						],
-						['Asesorías simples Jurídicas', asesoriasTO['asesTradicional'], asesoriasTO['asesOral']],
-					]
-				}
-			},
+			tablaGeneral,
 			{ text: 'Del total general de asesorías jurídicas, a continuación se desglosan los atributos de los beneficiarios:', style: 'textoJustificado' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: ['auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Sexo', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-							{}, {}
-						],
-						[
-							{},
-							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						['Hombre', totalH, sexos['numMascT'], sexos['numMascO']],
-						['Mujer', totalM, sexos['numFemT'], sexos['numFemO']],
-						['Total', totalSexo, totalSexoT, totalSexoO]
-					]
-				}
-			},
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: ['auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Género', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-							{}, {}
-						],
-						[
-							{},
-							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						['Lésbico', totalLesbico, generos['numLesbicoT'], generos['numLesbicoO']],
-						['Gay', totalGay, generos['numGayT'], generos['numGayO']],
-						['Bisexual', totalBisexual, generos['numBisexualT'], generos['numBisexualO']],
-						['Transexual', totalTransexual, generos['numTransexualT'], generos['numTransexualO']],
-						['Transgénero', totalTransgenero, generos['numTransgeneroT'], generos['numTransgeneroO']],
-						['Travestí', totalTravesti, generos['numTravestiT'], generos['numTravestiO']],
-						['Intersexual', totalIntersexual, generos['numIntersexualT'], generos['numIntersexualO']],
-						['Total', totalG, totalGenerosT, totalGenerosO]
-					]
-				}
-			},
+			tablaSexo,
+			tablaGenero,
 			{ text: '\n ', style: 'saltoLinea' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: ['auto', 'auto', 'auto', 'auto','auto', 'auto', 'auto', 'auto'],
-					headerRows: 3,
-					//keepWithHeaderRows: 3,
-					body: [
-						[
-							{ text: 'Edad', rowSpan:3, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan:7, style: 'tableHeader', alignment: 'center' },
-							{},{},{},{},{},{}
-						],
-						[
-							{},
-							{ text: 'Total', rowSpan:2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Tradicional',colSpan: 3, style: 'tableHeader', alignment: 'center' },
-							{},
-							{},
-							{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
-							{},
-							{}
-						],
-						[
-							{},
-							{},
-							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-							{ text: 'H', style: 'tableHeader', alignment: 'center' },
-							{ text: 'M',style: 'tableHeader', alignment: 'center' },
-							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-							{ text: 'H', style: 'tableHeader', alignment: 'center' },
-							{ text: 'M',style: 'tableHeader', alignment: 'center' }
-						],
-						['18 A 24 AÑOS',	totalEdad1, edades['edades1T'], edades['edades1tH'],edades['edades1tM'], edades['edades1O'],edades['edades1OH'],edades['edades1OM']],
-						['25 A 29 AÑOS',	totalEdad2, edades['edades2T'], edades['edades2tH'],edades['edades2tM'], edades['edades2O'],edades['edades2OH'],edades['edades2OM']],
-						['30 A 34 AÑOS',	totalEdad3, edades['edades3T'], edades['edades3tH'],edades['edades3tM'], edades['edades3O'],edades['edades3OH'],edades['edades3OM']],
-						['35 A 39 AÑOS',	totalEdad4, edades['edades4T'], edades['edades4tH'],edades['edades4tM'], edades['edades4O'],edades['edades4OH'],edades['edades4OM']],
-						['40 A 44 AÑOS',	totalEdad5, edades['edades5T'], edades['edades5tH'],edades['edades5tM'], edades['edades5O'],edades['edades5OH'],edades['edades5OM']],
-						['45 A 49 AÑOS',	totalEdad6, edades['edades6T'], edades['edades6tH'],edades['edades6tM'], edades['edades6O'],edades['edades6OH'],edades['edades6OM']],
-						['50 A 54 AÑOS',	totalEdad7, edades['edades7T'], edades['edades7tH'],edades['edades7tM'], edades['edades7O'],edades['edades7OH'],edades['edades7OM']],
-						['55 A 59 AÑOS',	totalEdad8, edades['edades8T'], edades['edades8tH'],edades['edades8tM'], edades['edades8O'],edades['edades8OH'],edades['edades8OM']],
-						['DE 60 O MAS AÑOS',totalEdad9, edades['edades9T'], edades['edades9tH'],edades['edades9tM'], edades['edades9O'],edades['edades9OH'],edades['edades9OM']],
-						['TOTAL', 			totalEdadS, totalEdadT,totalHT,totalMT,totalEdadO,totalHO,totalMO]
-					]
-				}
-			},
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {//etnias
-					widths: [200, 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: etniasR
-				}
-			},
+			tablaEdad,
+			tablaEtnias,
 			{ text: '', style: 'saltoLinea' }, { text: '\n\n', style: 'saltoLinea' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [200, 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: idiomasR
-				}
-			},		
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: ['auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Discapacidades', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-							{}, {}
-						],
-						[
-							{},
-							{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						['Sensoriales y de la comunicación', totalSen,  discapacidades['numSensorialesT'],  discapacidades['numSensorialesO']],
-						['Motrices', totalMot, discapacidades['numMotricesT'],  discapacidades['numMotricesO']],
-						['Mentales', totalMen,  discapacidades['numMentalesT'],  discapacidades['numMentalesO']],
-						['Multiples', totalMul,  discapacidades['numMultiplesT'],  discapacidades['numMultiplesO']],
-						['Total', totalDiscapacidad, totalDisT, totalDisO]
-					]
-				}
-			},
+			tablaIdiomas,		
+			tablaDiscapacidades,
 			{ text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de asesorías jurídicas brindadas en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos en  asesorías jurídicas, esto también por sistema. ', style: 'textoJustificado' },
 			{ text: '', style: 'saltoLinea' }, { text: '\n\n', style: 'saltoLinea' },
 			{ text: '10 DEFENSORES CON ALTO NÚMERO DE ASESORÍAS JURÍDICAS' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [150, 'auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Asesorías brindadas', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{}
-						],
-						[
-							{},
-							{},
-							{},
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						[defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
-						[defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
-						[defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
-						[defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
-						[defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
-						[defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
-						[defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
-						[defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
-						[defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
-						[defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
-					]
-				}
-			},
+			top10Defensores,
 			{ text: '\n ', style: 'saltoLinea' },
 			{ text: '\n ', style: 'saltoLinea' },
 			{ text: '10 DEFENSORES CON UN BAJO NÚMERO DE ASESORÍAS JURÍDICAS' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [150, 'auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Asesorías brindadas', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{}
-						],
-						[
-							{},
-							{},
-							{},
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						[defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
-						[defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
-						[defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
-						[defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
-						[defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
-						[defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
-						[defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
-						[defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
-						[defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
-						[defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
-					]
-				}
-			},
+			getTablaTopTen(),
 
 			{ text: '2.- AUDIENCIAS', style: 'subheader2' },
 			{
@@ -296,79 +77,11 @@ function informeCompleto(jsonInforme){
 			{ text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de asistencia a audiencias en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos de asistencia en audiencias, esto también por sistema.', style: 'textoJustificado' },
 			{ text: '\n ', style: 'saltoLinea' },
 			{ text: '10 DEFENSORES CON ALTO NÚMERO DE AUDIENCIAS' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [150, 'auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Asistencia \nde audiencias', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{}
-						],
-						[
-							{},
-							{},
-							{},
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						[defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
-						[defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
-						[defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
-						[defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
-						[defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
-						[defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
-						[defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
-						[defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
-						[defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
-						[defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
-					]
-				}
-			},
+			getTablaTopTen(),
 			{ text: '\n ', style: 'saltoLinea' },
 			{ text: '\n ', style: 'saltoLinea' },
 			{ text: '10 DEFENSORES CON UN BAJO NÚMERO DE AUDIENCIAS' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [150, 'auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Asistencia \nde audiencias', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{}
-						],
-						[
-							{},
-							{},
-							{},
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						[defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
-						[defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
-						[defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
-						[defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
-						[defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
-						[defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
-						[defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
-						[defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
-						[defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
-						[defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
-					]
-				}
-			},
+			getTablaTopTen(),
 			{ text: '3.- VISITAS CARCELARÍAS', style: 'subheader2' },
 			{
 				text: 'Los Defensores Públicos realizaron ___________ visitas carcelarias a sus internos.', style: 'textoJustificado'
@@ -377,79 +90,11 @@ function informeCompleto(jsonInforme){
 			{ text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de visitas carcelarias  en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos en visitas carcelarias , esto también por sistema.', style: 'textoJustificado' },
 			{ text: '\n ', style: 'saltoLinea' },
 			{ text: '10 DEFENSORES CON ALTO NÚMERO DE VISITAS CARCELARÍAS' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [150, 'auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Visitas \n Carcelarías', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{}
-						],
-						[
-							{},
-							{},
-							{},
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						[defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
-						[defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
-						[defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
-						[defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
-						[defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
-						[defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
-						[defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
-						[defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
-						[defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
-						[defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
-					]
-				}
-			},
+			getTablaTopTen(),
 			{ text: '\n\n\n ', style: 'saltoLinea' },
 			{ text: '\n\n ', style: 'saltoLinea' },
 			{ text: '10 DEFENSORES CON UN BAJO NÚMERO DE VISITAS CARCELARÍAS' },
-			{
-				style: 'tableExample',
-				color: 'black',
-				table: {
-					widths: [150, 'auto', 'auto', 'auto', 'auto'],
-					headerRows: 2,
-					// keepWithHeaderRows: 1,
-					body: [
-						[
-							{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Visitas \n Carcelarías', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-							{}
-						],
-						[
-							{},
-							{},
-							{},
-							{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-							{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-						],
-						[defensores[0].defensor, defensores[0].asesoriasTotal, defensores[0].juzgado, defensores[0].asesoriasT, defensores[0].asesoriasO],
-						[defensores[1].defensor, defensores[1].asesoriasTotal, defensores[1].juzgado, defensores[1].asesoriasT, defensores[1].asesoriasO],
-						[defensores[2].defensor, defensores[2].asesoriasTotal, defensores[2].juzgado, defensores[2].asesoriasT, defensores[2].asesoriasO],
-						[defensores[3].defensor, defensores[3].asesoriasTotal, defensores[3].juzgado, defensores[3].asesoriasT, defensores[3].asesoriasO],
-						[defensores[4].defensor, defensores[4].asesoriasTotal, defensores[4].juzgado, defensores[4].asesoriasT, defensores[4].asesoriasO],
-						[defensores[5].defensor, defensores[5].asesoriasTotal, defensores[5].juzgado, defensores[5].asesoriasT, defensores[5].asesoriasO],
-						[defensores[6].defensor, defensores[6].asesoriasTotal, defensores[6].juzgado, defensores[6].asesoriasT, defensores[6].asesoriasO],
-						[defensores[7].defensor, defensores[7].asesoriasTotal, defensores[7].juzgado, defensores[7].asesoriasT, defensores[7].asesoriasO],
-						[defensores[8].defensor, defensores[8].asesoriasTotal, defensores[8].juzgado, defensores[8].asesoriasT, defensores[8].asesoriasO],
-						[defensores[9].defensor, defensores[9].asesoriasTotal, defensores[9].juzgado, defensores[9].asesoriasT, defensores[9].asesoriasO]
-					]
-				}
-			},
+			getTablaTopTen(),
 			{
 				style: 'tableExample',
 				color: 'black',

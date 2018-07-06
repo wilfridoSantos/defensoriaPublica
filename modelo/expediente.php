@@ -165,7 +165,7 @@ function finalizarExpediente($datos){
   return $lista;
 }
 function bajaExpediente($id_expediente, $motivacion){
-    $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
+    $sql="update expediente set estado='BAJA', observaciones='".$motivacion."'
           where id_expediente='".$id_expediente."'";
           $lista = consulta($sql);
           //echo $sql;

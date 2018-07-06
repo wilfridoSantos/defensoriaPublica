@@ -1642,6 +1642,7 @@ function generarPDFActividadesGeneral() {
 					console.log(data, ' resultado r2 varios defensores');		
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo FULL ', jsonInforme);
+					constructor(jsonInforme);
 					var pdfAct = informeCompleto(jsonInforme)					  
 						// print the PDF
 						//pdfMake.createPdf(docDefinition).print();

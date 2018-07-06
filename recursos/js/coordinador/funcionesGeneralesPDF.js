@@ -19,50 +19,82 @@
 	var totalHO;
 	var totalMO;
 
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function constructor(jsonInforme){
 	jsonInf = jsonInforme;
 	actividades = getNumActividades(jsonInf);
-    asesoriasTO = getNumAsesoriasTO(jsonInf);
-    sexos = getNumSexoUsuarios(jsonInf);
-    discapacidades = getNumDiscapacidadUsuarios(jsonInf);
-    generos = getNumGeneroUsuarios(jsonInf);
-    etnias = getNumEtniasUsuarios(jsonInf);
-    idiomas = getNumIdiomasUsuarios(jsonInf);
-    idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInf), jsonInf);						
-    etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInf), jsonInf);
-    idiomasR = generarRowsIdiomas(idiomas, idiomasSistema);
-    etniasR = generarRowsEtnias(etnias, etniasSistema);
-    edades = getNumEdadUsuarios(jsonInf);
+	defensores = getDefensores(jsonInf);
+}
+function getTablaGeneral(){
+	asesoriasTO = getNumAsesoriasTO(jsonInf);
+	var tabla ={};
 
-    totalH = sexos['numMascT'] + sexos['numMascO'];
-    totalM = sexos['numFemT'] + sexos['numFemO'];
-    totalSexo = totalH + totalM;
-    totalSexoT = sexos['numMascT'] + sexos['numFemT'];
-    totalSexoO = sexos['numMascO'] + sexos['numFemO'];
+	var tablaGeneral={};
+	tablaGeneral.headerRows= 1;
+	tablaGeneral.body =  [
+		[
+			{ text: 'Sistema de justicia', style: 'tableHeader', alignment: 'center' },
+			{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
+			{ text: 'Acusatorio y oral', style: 'tableHeader', alignment: 'center' },
+		],
+		['Asesorías simples Jurídicas', asesoriasTO['asesTradicional'], asesoriasTO['asesOral']],
+	];
 
-    totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
-    totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
-    totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
-    totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
-
-    totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
-    totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
-    totalDiscapacidad = totalDisT + totalDisO;
-
-    totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
-    totalGay = generos['numGayT'] + generos['numGayO'];
-    totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
-    totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
-    totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
-    totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
-    totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
-    totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
-    totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
-
-    totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
-    totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	return tabla;
+}
+function getTablaTopTen(){
+	var tabla ={};
+	var tablaGeneral={};
+	tablaGeneral.widths= ['auto', 'auto', 'auto','auto', 'auto', 'auto','auto', 'auto', 'auto'];
+	tablaGeneral.headerRows= 3;
+	tablaGeneral.body =  [
+		[
+			{ text: 'Defensor público', rowSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Lugar de adscripción', rowSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Sistema de justicia', colSpan: 7, style: 'tableHeader', alignment: 'center' },
+			{},{},{},{},{},{} 
+		],
+		[
+			{},                                                                                                                                         
+			{},
+			{ text: 'Total',rowSpan:2,style: 'tableHeader', alignment: 'center'},			
+			{ text: 'Tradicional', colSpan:3, style: 'tableHeader', alignment: 'center' },
+			{},{},
+			{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
+			{},{} 
+		],
+		[
+			{},
+			{},
+			{},			
+			{ text: 'Total T',style: 'tableHeader', alignment: 'center' },
+			{ text: 'H',style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' },
+			{ text: 'Total O',style: 'tableHeader', alignment: 'center' },
+			{ text: 'H',style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' }
+		],
+		[defensores[0].defensor, defensores[0].juzgado, defensores[0].asesoriasTotal, defensores[0].asesoriasT,'','', defensores[0].asesoriasO,'',''],
+		[defensores[1].defensor, defensores[1].juzgado, defensores[1].asesoriasTotal, defensores[1].asesoriasT,'','', defensores[1].asesoriasO,'',''],
+		[defensores[2].defensor, defensores[2].juzgado, defensores[2].asesoriasTotal, defensores[2].asesoriasT,'','', defensores[2].asesoriasO,'',''],
+		[defensores[3].defensor, defensores[3].juzgado, defensores[3].asesoriasTotal, defensores[3].asesoriasT,'','', defensores[3].asesoriasO,'',''],
+		[defensores[4].defensor, defensores[4].juzgado, defensores[4].asesoriasTotal, defensores[4].asesoriasT,'','', defensores[4].asesoriasO,'',''],
+		[defensores[5].defensor, defensores[5].juzgado, defensores[5].asesoriasTotal, defensores[5].asesoriasT,'','', defensores[5].asesoriasO,'',''],
+		[defensores[6].defensor, defensores[6].juzgado, defensores[6].asesoriasTotal, defensores[6].asesoriasT,'','', defensores[6].asesoriasO,'',''],
+		[defensores[7].defensor, defensores[7].juzgado, defensores[7].asesoriasTotal, defensores[7].asesoriasT,'','', defensores[7].asesoriasO,'',''],
+		[defensores[8].defensor, defensores[8].juzgado, defensores[8].asesoriasTotal, defensores[8].asesoriasT,'','', defensores[8].asesoriasO,'',''],
+		[defensores[9].defensor, defensores[9].juzgado, defensores[9].asesoriasTotal, defensores[9].asesoriasT,'','', defensores[9].asesoriasO,'',''] 
+	];
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	return tabla;
+}
+function getTablaEdad(){
+	edades = getNumEdadUsuarios(jsonInf);
+	totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
     totalEdad2 =  edades['edades2T'] +  edades['edades2O'];
     totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
     totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
@@ -74,13 +106,117 @@ function constructor(jsonInforme){
     totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T']+  edades['edades7T']+  edades['edades8T']+  edades['edades9T'];
     totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O']+  edades['edades7O']+  edades['edades8O']+  edades['edades9O'];
 	totalEdadS = totalEdadT + totalEdadO;
-
 	totalHT = edades['edades1tH'] + edades['edades2tH'] + edades['edades3tH'] + edades['edades4tH']+ edades['edades5tH']+ edades['edades6tH']+ edades['edades7tH']+ edades['edades8tH']+ edades['edades9tH'];
 	totalMT = edades['edades1tM'] + edades['edades2tM'] + edades['edades3tM'] + edades['edades4tM']+ edades['edades5tM']+ edades['edades6tM']+ edades['edades7tM']+ edades['edades8tM']+ edades['edades9tM'];
 	totalHO = edades['edades1OH'] + edades['edades2OH'] + edades['edades3OH'] + edades['edades4OH']+ edades['edades5OH']+ edades['edades6OH']+ edades['edades7OH']+ edades['edades8OH']+ edades['edades9OH'];
 	totalMO = edades['edades1OM'] + edades['edades2OM'] + edades['edades3OM'] + edades['edades4OM']+ edades['edades5OM']+ edades['edades6OM']+ edades['edades7OM']+ edades['edades8OM']+ edades['edades9OM'];
+	
+	var tabla ={};
+	var tablaGeneral={};
+	tablaGeneral.widths= ['auto', 'auto', 'auto', 'auto','auto', 'auto', 'auto', 'auto'];
+	tablaGeneral.headerRows= 3;
+	tablaGeneral.body = [
+		[
+			{ text: 'Edad', rowSpan:3, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Sistema de justicia', colSpan:7, style: 'tableHeader', alignment: 'center' },
+			{},{},{},{},{},{}
+		],
+		[
+			{},
+			{ text: 'Total', rowSpan:2, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Tradicional',colSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{},
+			{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{}
+		],
+		[
+			{},
+			{},
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'H', style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' },
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'H', style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' }
+		],
+		['18 A 24 AÑOS',	totalEdad1, edades['edades1T'], edades['edades1tH'],edades['edades1tM'], edades['edades1O'],edades['edades1OH'],edades['edades1OM']],
+		['25 A 29 AÑOS',	totalEdad2, edades['edades2T'], edades['edades2tH'],edades['edades2tM'], edades['edades2O'],edades['edades2OH'],edades['edades2OM']],
+		['30 A 34 AÑOS',	totalEdad3, edades['edades3T'], edades['edades3tH'],edades['edades3tM'], edades['edades3O'],edades['edades3OH'],edades['edades3OM']],
+		['35 A 39 AÑOS',	totalEdad4, edades['edades4T'], edades['edades4tH'],edades['edades4tM'], edades['edades4O'],edades['edades4OH'],edades['edades4OM']],
+		['40 A 44 AÑOS',	totalEdad5, edades['edades5T'], edades['edades5tH'],edades['edades5tM'], edades['edades5O'],edades['edades5OH'],edades['edades5OM']],
+		['45 A 49 AÑOS',	totalEdad6, edades['edades6T'], edades['edades6tH'],edades['edades6tM'], edades['edades6O'],edades['edades6OH'],edades['edades6OM']],
+		['50 A 54 AÑOS',	totalEdad7, edades['edades7T'], edades['edades7tH'],edades['edades7tM'], edades['edades7O'],edades['edades7OH'],edades['edades7OM']],
+		['55 A 59 AÑOS',	totalEdad8, edades['edades8T'], edades['edades8tH'],edades['edades8tM'], edades['edades8O'],edades['edades8OH'],edades['edades8OM']],
+		['DE 60 O MAS AÑOS',totalEdad9, edades['edades9T'], edades['edades9tH'],edades['edades9tM'], edades['edades9O'],edades['edades9OH'],edades['edades9OM']],
+		['TOTAL', 			totalEdadS, totalEdadT,totalHT,totalMT,totalEdadO,totalHO,totalMO]
+	];
+
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	return tabla;
 }
-function getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexosNumMascT, sexosNumMascO,sexosNumFemT, sexosNumFemO){
+function getTablaDiscapacidad(){
+	discapacidades = getNumDiscapacidadUsuarios(jsonInf);
+	totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
+    totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
+    totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
+	totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
+	totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
+    totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
+    totalDiscapacidad = totalDisT + totalDisO;
+	var tabla ={};
+
+	var tablaGeneral={};
+	tablaGeneral.widths=  ['auto', 'auto', 'auto', 'auto','auto', 'auto', 'auto', 'auto'];
+	tablaGeneral.headerRows= 3;
+	tablaGeneral.body = [
+		[
+			{ text: 'Discapacidades', rowSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Sistema de justicia', colSpan:7, style: 'tableHeader', alignment: 'center' },
+			{},{},{},{},{},{}
+		],
+		[
+			{},
+			{ text: 'Total', rowSpan:2, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Tradicional',colSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{},
+			{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{}
+		],
+		[
+			{},
+			{},
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'H', style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' },
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'H', style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' }	
+		],
+		['Sensoriales y de la comunicación', totalSen,  discapacidades['numSensorialesT'],'h','m'  ,discapacidades['numSensorialesO'],'',''],
+		['Motrices', totalMot, discapacidades['numMotricesT'],'','',  discapacidades['numMotricesO'],'',''],
+		['Mentales', totalMen,  discapacidades['numMentalesT'],'','',  discapacidades['numMentalesO'],'',''],
+		['Multiples', totalMul,  discapacidades['numMultiplesT'],'','',  discapacidades['numMultiplesO'],'',''],
+		['Total', totalDiscapacidad, totalDisT,'','', totalDisO,'','']
+	];
+
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	return tabla;
+}
+function getTablaSexo(){
+	sexos = getNumSexoUsuarios(jsonInf);
+	totalH = sexos['numMascT'] + sexos['numMascO'];
+    totalM = sexos['numFemT'] + sexos['numFemO'];
+    totalSexo = totalH + totalM;
+    totalSexoT = sexos['numMascT'] + sexos['numFemT'];
+    totalSexoO = sexos['numMascO'] + sexos['numFemO'];
 	var tabla ={};
 
 	var tablaGeneral={};
@@ -98,8 +234,8 @@ function getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexosNumMa
 			{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
 			{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
 		],
-		['Hombre', totalH, sexosNumMascT, sexosNumMascO],
-		['Mujer', totalM, sexosNumFemT, sexosNumFemO],
+		['Hombre', totalH, sexos['numMascT'], sexos['numMascO']],
+		['Mujer', totalM, sexos['numFemT'], sexos['numFemO']],
 		['Total', totalSexo, totalSexoT, totalSexoO]
 	];
 
@@ -108,10 +244,19 @@ function getTablaSexo(totalH, totalM,totalSexo,totalSexoT, totalSexoO,sexosNumMa
 	tabla.table = tablaGeneral;
 	return tabla;
 }
-function getTablaGenero(totalLesbico, totalGay,totalBisexual,totalTransexual, totalTransgenero,totalTravesti,
-						totalIntersexual, totalG, gNumLesbicoT, gNumLesbicoO, gNumGayT, gNumGayO, gNumBisexualT, gNumBisexualO,
-						gNumTransexualT, gNumTransexualO, gNumTransgeneroT, gNumTransgeneroO, gNumTravestiT, gNumTravestiO,
-						gNumIntersexualT, gNumIntersexualO){
+function getTablaGenero(){
+	generos = getNumGeneroUsuarios(jsonInf);
+	totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
+    totalGay = generos['numGayT'] + generos['numGayO'];
+    totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
+    totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
+    totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
+    totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
+    totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
+    totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
+    totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
+	totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
+	
 	var tabla ={};
 	var tablaGeneral={};
 	tablaGeneral.widths=  [150, 'auto', 'auto', 'auto'];
@@ -129,13 +274,13 @@ function getTablaGenero(totalLesbico, totalGay,totalBisexual,totalTransexual, to
 			{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
 			{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
 		],
-		['Lésbico', totalLesbico, gNumLesbicoT, gNumLesbicoO],
-		['Gay', totalGay, gNumGayT, gNumGayO],
-		['Bisexual', totalBisexual, gNumBisexualT,gNumBisexualO],
-		['Transexual', totalTransexual, gNumTransexualT, gNumTransexualO],
-		['Transgénero', totalTransgenero, gNumTransgeneroT, gNumTransgeneroO],
-		['Travestí', totalTravesti, gNumTravestiT, gNumTravestiO],
-		['Intersexual', totalIntersexual, gNumIntersexualT, gNumIntersexualO],
+		['Lésbico', totalLesbico, generos['numLesbicoT'],  generos['numLesbicoO']],
+		['Gay', totalGay, generos['numGayT'], generos['numGayO']],
+		['Bisexual', totalBisexual, generos['numBisexualT'],generos['numBisexualO']],
+		['Transexual', totalTransexual, generos['numTransexualT'], generos['numTransexualO']],
+		['Transgénero', totalTransgenero, generos['numTransgeneroT'], generos['numTransgeneroO']],
+		['Travestí', totalTravesti,  generos['numTravestiT'],  generos['numTravestiO']],
+		['Intersexual', totalIntersexual, generos['numIntersexualT'], generos['numIntersexualO']],
 		['Total', totalG, totalGenerosT, totalGenerosO]
 	];
 
@@ -145,7 +290,37 @@ function getTablaGenero(totalLesbico, totalGay,totalBisexual,totalTransexual, to
 	//console.log(tabla);
 	return tabla;
 }
+function getTablaEtnias(){
+	etnias = getNumEtniasUsuarios(jsonInf);
+	etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInf), jsonInf);
+	var tabla ={};
+
+	var tablaGeneral={};
+	tablaGeneral.widths=  [150, 'auto', 'auto', 'auto','auto', 'auto', 'auto','auto'];
+	tablaGeneral.headerRows= 3;
+	tablaGeneral.body = generarRowsEtnias(etnias, etniasSistema);
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	return tabla;
+}
+function getTablaIdiomas(){
+    idiomas = getNumIdiomasUsuarios(jsonInf);
+    idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInf), jsonInf);	
+	var tabla ={};
+
+	var tablaGeneral={};
+	tablaGeneral.widths=  [150, 'auto', 'auto', 'auto','auto', 'auto', 'auto','auto'];
+	tablaGeneral.headerRows= 3;
+	tablaGeneral.body = generarRowsIdiomas(idiomas, idiomasSistema);
+
+	tabla.style = 'tableExample';
+	tabla.color = 'black';
+	tabla.table = tablaGeneral;
+	return tabla;
+}
 function getDefensores(jsonInforme) {
+	var numHT, numHO, numFT, numFO;
 	var arrDefensores = [];	
 	$.each(jsonInforme, function (KEY, VALOR) {
 		var obj = {};
@@ -156,7 +331,6 @@ function getDefensores(jsonInforme) {
 		obj['asesoriasTotal'] = 0;
 		obj['juzgado'] = '';
 		arrDefensores.push(obj);
-
 	});
 	var hash = {};
 	arrDefensores = arrDefensores.filter(function (current) {
@@ -166,25 +340,42 @@ function getDefensores(jsonInforme) {
 	});
 
 	$.each(arrDefensores, function (LLAVE, VAL) {
-		var aseT=0, aseO=0, audT=0,audO=0, visT=0, visO=0 ;
+		var aseT=0, aseO=0, audT=0,audO=0, visT=0, visO=0;
+		numHT=0, numHO=0,numFT=0, numFO=0;
 		$.each(jsonInforme, function (KEY, VALOR) {
 			if(VAL.idDef == VALOR.idDef){
 				if(VALOR.sistema == 'TRADICIONAL'){
 					if (VALOR.latAse != null || VALOR.longAse != undefined) {
+						if(VALOR.sexo == 'MASCULINO'){
+							numHT++;
+							arrDefensores[LLAVE].asesoriaHT=numHT;
+						}else{
+							numFT++;
+							arrDefensores[LLAVE].asesoriaFT=numFT;
+						}
 						aseT++;
 						arrDefensores[LLAVE].asesoriasT = aseT;
 					}
 				}else{
 					if (VALOR.latAse != null || VALOR.longAse != undefined) {
+						if(VALOR.sexo == 'MASCULINO'){
+							numHO++;
+							arrDefensores[LLAVE].asesoriasHO = numHO;
+						}else{
+							numFO++;
+							arrDefensores[LLAVE].asesoriasFO = numFO;
+						}	
 						aseO++;						
 						arrDefensores[LLAVE].asesoriasO = aseO;
 					}
 				}
 				arrDefensores[LLAVE].juzgado = VALOR.juzgado;
 				arrDefensores[LLAVE].asesoriasTotal = aseT + aseO;
+				
 			}
 		});
 	});
+	
 	arrDefensores.sort(function (a, b) {
 		if (a.asesoriasTotal < b.asesoriasTotal) {
 		  return 1;
@@ -195,6 +386,7 @@ function getDefensores(jsonInforme) {
 		// a must be equal to b
 		return 0;
 	  });
+	  console.log(arrDefensores);
 	return arrDefensores;
 }
 function getNumAsesoriasTO(jsonInforme) {
@@ -789,29 +981,44 @@ function getNumEtniasUsuarios(jsonInforme) {
 function generarRowsIdiomas(jsonData, idiomasSistema) {
 	//console.log(etniasSistema[0]['CHATINO'], ' cuantos chatino tradicional ');
 	var body = new Array();
-	var rowHeader1 = [], rowHeader2 = [];
+	var rowHeader1 = [], rowHeader2 = [],rowHeader3 = [];
 
 	rowHeader1.push(
-		{ text: 'Idioma o Lengua', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-		{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-		{},
-		{}
+		{ text: 'Idioma o Lengua', rowSpan:3, style: 'tableHeader', alignment: 'center' },
+		{ text: 'Sistema de justicia', colSpan:7, style: 'tableHeader', alignment: 'center' },
+		{},{},{},{},{},{}
 	);
 	rowHeader2.push(
 		{},
+			{ text: 'Total', rowSpan:2, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Tradicional',colSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{},
+			{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{}
+	);
+	rowHeader3.push(
+		{},
+		{},
 		{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
+		{ text: 'H', style: 'tableHeader', alignment: 'center' },
+		{ text: 'M',style: 'tableHeader', alignment: 'center' },
+		{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+		{ text: 'H', style: 'tableHeader', alignment: 'center' },
+		{ text: 'M',style: 'tableHeader', alignment: 'center' }
+
 	);
 	body.push(rowHeader1);
 	body.push(rowHeader2);
+	body.push(rowHeader3);
 	var content = [];
 	var totalF = 0, totalT = 0, totalO = 0;
 	for (var obj in jsonData) {
 		if (jsonData.hasOwnProperty(obj)) {
 			for (var prop in jsonData[obj]) {
 				if (jsonData[obj].hasOwnProperty(prop)) {
-					content = [prop, jsonData[obj][prop], idiomasSistema[0][prop], idiomasSistema[1][prop]];
+					content = [prop, jsonData[obj][prop], idiomasSistema[0][prop], '','',idiomasSistema[1][prop],'',''];
 					body.push(content);
 					totalF += jsonData[obj][prop];
 					totalT += idiomasSistema[0][prop];
@@ -820,36 +1027,51 @@ function generarRowsIdiomas(jsonData, idiomasSistema) {
 			}
 		}
 	}
-	content = ['TOTAL', totalF, totalT, totalO];
+	content = ['TOTAL', totalF, totalT, '','',totalO,'',''];
 	body.push(content);
 	return body;
 }
 function generarRowsEtnias(jsonData, etniasSistema) {
 	//console.log(etniasSistema[0]['CHATINO'], ' cuantos chatino tradicional ');
 	var body = new Array();
-	var rowHeader1 = [], rowHeader2 = [];
+	var rowHeader1 = [], rowHeader2 = [], rowHeader3=[];
 
 	rowHeader1.push(
-		{ text: 'Etnías', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-		{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-		{},
-		{}
+		{ text: 'Etnias', rowSpan:3, style: 'tableHeader', alignment: 'center' },
+		{ text: 'Sistema de justicia', colSpan:7, style: 'tableHeader', alignment: 'center' },
+		{},{},{},{},{},{}
 	);
 	rowHeader2.push(
-		{},
-		{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-		{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
+			{},
+			{ text: 'Total', rowSpan:2, style: 'tableHeader', alignment: 'center' },
+			{ text: 'Tradicional',colSpan: 3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{},
+			{ text: 'Acusatorío y oral', colSpan:3, style: 'tableHeader', alignment: 'center' },
+			{},
+			{}
+	);
+	rowHeader3.push(
+			{},
+			{},
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'H', style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' },
+			{ text: 'Total', style: 'tableHeader', alignment: 'center' },
+			{ text: 'H', style: 'tableHeader', alignment: 'center' },
+			{ text: 'M',style: 'tableHeader', alignment: 'center' }
+
 	);
 	body.push(rowHeader1);
 	body.push(rowHeader2);
+	body.push(rowHeader3);
 	var content = [];
 	var totalF = 0, totalT = 0, totalO = 0;
 	for (var obj in jsonData) {
 		if (jsonData.hasOwnProperty(obj)) {
 			for (var prop in jsonData[obj]) {
 				if (jsonData[obj].hasOwnProperty(prop)) {
-					content = [prop, jsonData[obj][prop], etniasSistema[0][prop], etniasSistema[1][prop]];
+					content = [prop, jsonData[obj][prop], etniasSistema[0][prop],'','', etniasSistema[1][prop],'',''];
 					body.push(content);
 					totalF += jsonData[obj][prop];
 					totalT += etniasSistema[0][prop];
@@ -858,7 +1080,7 @@ function generarRowsEtnias(jsonData, etniasSistema) {
 			}
 		}
 	}
-	content = ['TOTAL', totalF, totalT, totalO];
+	content = ['TOTAL', totalF, totalT,'','', totalO,'',''];
 	body.push(content);
 	return body;
 }
