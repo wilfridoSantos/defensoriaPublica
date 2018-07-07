@@ -24,6 +24,9 @@ include "../controlador/sesion.php";
     echo'<script language="javascript">window.location="defensor/index.php"</script>';
 }
 }else{
+  
+  //session_destroy();
+  //$_SESSION["autentificado"] = false;
     header("Location: ../index.php");
   }
 ?>

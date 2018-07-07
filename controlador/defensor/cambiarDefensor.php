@@ -7,6 +7,6 @@ include '../../modelo/expediente.php';
     //echo $expedientes;    
     session_start();
     $_SESSION['post_data'] = 1; 
-    header('Location: ../../vistas/administrador/index.php');
+ header('Location: ../../vistas/administrador/index.php');
     //echo '<script>$("#dialogoCambio").dialog("close")</script>';
 ?>

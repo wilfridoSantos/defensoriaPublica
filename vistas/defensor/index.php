@@ -26,7 +26,7 @@ include "../../Controlador/sesion.php";
       <link href="../../recursos/css/style.css" rel="stylesheet"/>  -->
     <!-- jQuery -->
     <!-- <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> ESTA ESTO Y SE CAMBIO POR LO DE ABAJO-->
-    <script src="../../recursos/js/jquery-1.11.2.min.js"></script> 
+    <script  type="text/javascript"  src="../../recursos/js/jquery-1.11.2.min.js"></script> 
     <!-- Bootstrap -->
     <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
@@ -114,7 +114,7 @@ include "../../Controlador/sesion.php";
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
              
-              <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../index.php">
+              <a data-toggle="tooltip" data-placement="top" title="Salir" href="../../controlador/salir.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -144,7 +144,7 @@ include "../../Controlador/sesion.php";
                       </a>
                     </li>
 
-                    <li><a href="../../index.php"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
+                    <li><a href="../../controlador/salir.php"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
                   </ul>
                 </li>
 
@@ -229,8 +229,9 @@ include "../../Controlador/sesion.php";
 
                   <div class="x_content">
                     
-                      
-                    <div align ="center">
+                  <!-- <iframe id="myFrame" width="1000" height="450" src="/default.asp"></iframe>
+                   -->  
+                   <div align ="center">
                    <img id="img_index_coord"src="../../recursos/images/LOGO_PRINCIPAL.png">
                     <p class="text-justify">
                       MISIÓN
@@ -323,36 +324,36 @@ include "../../Controlador/sesion.php";
 
 
     <!-- Bootstrap -->
-    <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
+    <script  type="text/javascript" src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../../recursos/vendors/nprogress/nprogress.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
-    <script src="../../recursos/vendors/iCheck/icheck.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
-    <script src="../../recursos/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../recursos/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../../recursos/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../../recursos/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script><!-- 
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/jszip/dist/jszip.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/vendors/pdfmake/build/vfs_fonts.js"></script><!-- 
     <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script> -->
     <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
     <!-- Custom Theme Scripts -->
-    <script src="../../recursos/js/custom.min.js"></script>
-    <script src="../../recursos/js/herramienta.js"></script>
-    <script src="../../recursos/js/defensor/atendiendoDefensor.js"></script>
-    <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
-    <script src="../../recursos/js/main.js"></script>
+    <script  type="text/javascript"  src="../../recursos/js/custom.min.js"></script>
+    <script  type="text/javascript"  src="../../recursos/js/herramienta.js"></script>
+    <script  type="text/javascript"  src="../../recursos/js/defensor/atendiendoDefensor.js"></script>
+    <script  type="text/javascript"  src="../../recursos/js/jquery-ui.1.12.1.js"></script>
+    <script  type="text/javascript"  src="../../recursos/js/main.js"></script>
   </body>
 </html>

@@ -153,7 +153,7 @@ function checkNoti(){
 function DeleteNotificacion($id_expediente ){
   $sql = "delete from  notificaciones where id_expediente=".$id_expediente;//num notis
   $nums = consulta($sql);
- echo $sql;
+ //echo $sql;
   return $nums;
 }
 
@@ -161,16 +161,26 @@ function finalizarExpediente($datos){
   $sql="update expediente set estado='finalizado',fecha_final='".$datos['fecha_final']."', observaciones='".$datos['observaciones']."'
   where id_expediente='".$datos['id_expediente']."'";
   $lista = consulta($sql);
-  echo $sql;
+ // echo $sql;
   return $lista;
 }
-function bajaExpediente($id_expediente, $motivacion){
-    $sql="update expediente set estado='Suspensión', observaciones='".$motivacion."'
-          where id_expediente='".$id_expediente."'";
+
+function bajaExpediente($respuesta){
+    $sql="update expediente set estado='".$respuesta['estado']."', observaciones='".$respuesta['observaciones']."'
+          ,fecha_final='".$respuesta['fecha_baja']."',  motivos='".$respuesta['motivos']."' where id_expediente='".$respuesta['id_expediente']."'";
           $lista = consulta($sql);
-          //echo $sql;
+        //  echo $sql;
           return $lista;
 }
+
+function estadoEnProceso($id_expediente){
+  $sql="update expediente set estado='PROCESO'
+        where id_expediente='".$id_expediente."'";
+        $lista = consulta($sql);
+        //echo $sql;
+        return $lista;
+}
+
  /* function listar_expediente_x_defensor($idDefensor){
    
     $sql = "select exp.estado,exp.fecha_final,exp.fecha_inicio, exp.num_expediente, exp.materia,exp.id_usuario_servicio,defensor.id_juzgado   defensor.estado from expediente as exp inner join 

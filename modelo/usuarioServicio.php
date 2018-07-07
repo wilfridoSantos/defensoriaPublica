@@ -37,20 +37,25 @@ function getUsuarioByCurp($curp){
 
     
     //Definimos una funcion que acutualice al usuarioServicio
- function actualizar_usuarioServicio($defensor){
-        
-        $sql = "UPDATE  defensor as d inner join personal as p using(id_personal) inner join juzgado as j using(id_juzgado)".
-        "SET p.nombre='".$defensor['nombre']."', p.ap_paterno='".$defensor['ap_paterno']."', p.ap_materno='".$defensor['ap_materno']."',".
-        "p.curp='".$defensor['curp']."', p.calle='".$defensor['calle']."', p.numero_ext='".$defensor['numero_ext']."',".
-        "p.numero_int='".$defensor['numero_int']."',p.colonia='".$defensor['colonia']."',p.municipio='".$defensor['municipio']."',".
-        "p.nup='".$defensor['nup']."',p.nue='".$defensor['nue']."',p.genero='".$defensor['genero']."',p.telefono='".$defensor['telefono']."',".
-        "p.corre_electronico='".$defensor['corre_electronico']."',j.juzgado='".$defensor['juzgado']."'".
-        " where id_defensor = '".$defensor['id_defensor']."'";
-        $lista=consulta($sql);
-        //echo $defensor['id_defensor'].' => Ah sido actualizado';
-        //echo $sql;
-        return $lista;
- }
+    function actualizar_usuario_servicio($usuario_servicio){
+        $sql = "update usuario_servicio set ";
+        $sql.= "nombre='".$usuario_servicio['nombre']."',";
+        $sql.= "ap_paterno='".$usuario_servicio['apellido_paterno']."',";
+        $sql.= "ap_materno='".$usuario_servicio['apellido_materno']."',";
+        $sql.= "etnia='".$usuario_servicio['etnia']."',";
+        $sql.= "idioma='".$usuario_servicio['idioma']."',";
+        $sql.= "calle='".$usuario_servicio['calle']."',";
+        $sql.= "colonia='".$usuario_servicio['colonia']."',";
+        $sql.= "municipio='".$usuario_servicio['municipio']."',";
+        $sql.= "telefono='".$usuario_servicio['telefono']."',";
+        $sql.= "genero='".$usuario_servicio['genero']."',";
+        $sql.= "discapacidad='".$usuario_servicio['discapacidad']."',";
+        $sql.= "correo_electronico='".$usuario_servicio['email']."'";
+      $sql.=" where id_usuario_servicio='".$usuario_servicio['id_usuario_servicio']."'";
+      $lista = consulta($sql);
+      //echo $sql;
+      return $lista;
+     }
 
     //Definimos una funcion que borrar defensor
     function eliminar_usuarioServicio($id_defensor){

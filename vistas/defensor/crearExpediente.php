@@ -92,8 +92,8 @@ session_start();
   function cambiarVista(){
     var sistema=document.getElementById('tipoSistema').value;
     var materia=document.getElementById('tipoMateria').value;
-    console.log(sistema);
-    console.log(materia);
+  //  console.log(sistema);
+    //console.log(materia);
     if(sistema==="ORAL"&&materia==="PENAL"){
        console.log("SE AGREGARA EL ELEMENTO TIPO DE EXPEDIENTE");
        $("#divExpediente").after('<div id="divTipoExpediente" class="form-horizontal form-label-left"> <div   class="form-group">'+

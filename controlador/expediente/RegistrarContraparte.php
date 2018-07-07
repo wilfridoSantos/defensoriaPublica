@@ -18,10 +18,10 @@
             "correo"         =>$_POST['email'],                
             "calle"          =>$_POST['calle'],
                           
-            "numero_int"     =>"",
+            "numero_int"     =>$_POST['calle'],
             "numero_ext"     =>"",
-            "colonia"        =>'',
-           "municipio"      =>'',         
+            "colonia"        =>$_POST['colonia'],
+           "municipio"      =>$_POST['municipio'],         
             "curp"           =>$_POST['curp'],
             "estado"           =>$_POST['estado'],
             "edad"            =>$edadNumero,
@@ -36,7 +36,8 @@
       $detalle_contraparte=Array(
         'id_expediente'=> $_POST['id_expediente'],
         'id_contraparte'=>$_POST['id_contraparte'],
-        'tipo_contraparte'=>$_POST['tipo_contraparte']
+        'tipo_contraparte'=>$_POST['tipo_contraparte'],
+        'parentesco'=>$_POST['parentesco']
       );
       //print_r($usuario);
       //print_r($detalle_contraparte);

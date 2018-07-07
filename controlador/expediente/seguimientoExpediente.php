@@ -1,7 +1,8 @@
 <?php
 
 include_once('../../modelo/respuesta/respuesta.php');
-
+include_once('../../modelo/expediente.php');
+include '../../libreria/herramientas.php';
 
 /* echo "respuesta<br>";
 echo $_POST['respuesta'];
@@ -21,11 +22,14 @@ echo $_POST['id_pregunta'];
     "accion_implementar"  =>$_POST['accion_implementar']
    
 );
+
+$respuesta =  array_map( "cadenaToMayuscula",$respuesta);
 $mensaje=['tipo'   =>"error",
               'mensaje'=>"Esta pregunta ya se encuentra registrada"];
 $verificarRegistro=existeRespuestaExpediente($_POST['id_expediente'],$_POST['id_pregunta']);
 if($verificarRegistro==0)// 0 INDICA QUE NO EXITE LA RESPUESTA A UNA PREGUNTA DE UN DICHO EXPEDIENTE
    {RegistrarRespuesta($respuesta);
+    estadoEnProceso($_POST['id_expediente']);
     $mensaje=['tipo'   =>"exito",
               'mensaje'=>"Registro exitoso"];
    //   echo "el registro es exitoso" ;  

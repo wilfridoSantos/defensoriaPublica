@@ -99,6 +99,7 @@ function agrega(){
 
       console.log(curp.substr(0,13));
       var claseCurp=document.getElementById("curp");
+      claseCurp.value=curp;
       claseCurp.setAttribute("pattern",curp.substr(0,13)+'[A-Za-z]{3}[0-9]{2}');
      
  }
@@ -126,10 +127,12 @@ function agrega(){
 
                       
 
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Numero<span class="required">*</span></label>
-                        </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[1-9][0-9]*" maxlength="5" minlength="1" data-error="solo numero intero con maxicmo 5 digito" class="form-control" required  placeholder="" name="numero">
+                     
+
+                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >calle<span class="required">*</span></label>
+                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  onkeyup="mayusculas(event, this)" maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" required placeholder="" name="calle">
                           <div  class="help-block with-errors"></div></div>
                       </div>
                       
@@ -140,14 +143,14 @@ function agrega(){
                             <div  class="help-block with-errors"></div></div>
                        </div>
                        
-
-                
-                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
-                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Telefono<span class="required">*</span></label>
-                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" required placeholder="" name="telefono">
-                          <div  class="help-block with-errors"></div> </div>
+                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Numero<span class="required">*</span></label>
+                        </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" pattern="[1-9][0-9]*" maxlength="5" minlength="1" data-error="solo numero intero con maxicmo 5 digito" class="form-control" required  placeholder="" name="numero">
+                          <div  class="help-block with-errors"></div></div>
                       </div>
+                
+                      
 
                          <div class="item form-group  col-md-6 col-sm-6 col-xs-12 form-group">
                         <h4>  <label class="control-label col-md-4 col-sm-3 col-xs-1 " >Apellido Materno<span class="required">*</span></label>
@@ -164,7 +167,7 @@ function agrega(){
                       </div> 
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Entidad federativa<span class="required">*</span></label>
+                        <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Entidad federativa de nacimiento<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                       <select id="entidad" name="estado" required   class="select2_group form-control textbox">
                       <option value="">- Seleccione -</option> 
@@ -185,23 +188,12 @@ function agrega(){
                       </div>
                      
                      
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                                    <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Discapacidad<span class="required">*</span></label>
-                                    </h4> <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-                                    <select required id="discapacidad" name="discapacidad"  class="select2_group form-control">
-                                            <option value="ninguno">- Seleccione -</option> 
-                                            <option value="sensorial">Discapacidades sensoriales y de la comunicación</option> 
-                                            <option value="motrices"> Discapacidades motrices</option>   
-                                            <option value="mental"> Discapacidades mentales</option>   
-                                            <option value="multiples"> Discapacidades multiples </option>   
-                                            <option value="ninguno"> Ninguno </option>   
-                                           
-                                    </select>
-
-                                        </div>
-                           </div>
+                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Telefono<span class="required">*</span></label>
+                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
+                          <input id="telefono" type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" required placeholder="" name="telefono">
+                          <div  class="help-block with-errors"></div> </div>
+                      </div>
 
                        <div class=" form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
                            <h4> <label for="inputEmail" class="control-label col-md-4 col-sm-3 col-xs-12 " >Fecha nacimiento<span class="required">*</span></label>
@@ -215,7 +207,7 @@ function agrega(){
                       <div class="item form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Curp<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" id="curp" onkeyup="mayusculas(event, this)" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"  onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)"  maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
+                          <input type="text" id="curp" onkeyup="mayusculas(event, this)" onblur="validarCurps()" tidata-error=": el formato debe ser alfanumerico con 18 digitos"    maxlength="18" pattern=""class="form-control  text-uppercase"  required placeholder="curp" name="curp">
                           <div  class="help-block with-errors"></div> </div>
                       </div>
 
@@ -250,33 +242,78 @@ function agrega(){
                         </div>
                       </div>
 
-                  <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                <!--   <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Municipio<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                           <input onkeyup="mayusculas(event, this)" type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="municipio">
-<!--                           <input type="text" data-error=":  solo letras de maximo 50 caracter"pattern="+[A-Za-z ]{3,50}" class="form-control  text-uppercase"  required placeholder="" name="municipio">
- -->
+
+                        </div>
+                      </div> -->
+
+             
+                   
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Codigo postal<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+                       <input type="text" data-error="solo numeros" pattern="[0-9 ]+"  onmouseout="consumirCodigoPostal(this)" maxlength="10" minlength="1"  class="form-control  text-uppercase"  required placeholder="" name="municipio">
+                       <div  class="help-block with-errors"></div>
+                          </div></div>
+
+                         
+                 
+   
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                                    <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Discapacidad<span class="required">*</span></label>
+                                    </h4> <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <select required id="discapacidad" name="discapacidad"  class="select2_group form-control">
+                                            <option value="ninguno">- Seleccione -</option> 
+                                            <option value="sensorial">Discapacidades sensoriales y de la comunicación</option> 
+                                            <option value="motrices"> Discapacidades motrices</option>   
+                                            <option value="mental"> Discapacidades mentales</option>   
+                                            <option value="multiples"> Discapacidades multiples </option>   
+                                            <option value="ninguno"> Ninguno </option>   
+                                           
+                                    </select>
+
+                                        </div>
+                           </div>
+                 <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Municipio<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input onkeyup="mayusculas(event, this)" id="municipio" type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="municipio">
+
                         </div>
                       </div>
-
-                   
-                   
 
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Etnia</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                       <input type="text" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  novalidate onkeyup="mayusculas(event, this)" placeholder="" name="etnia">
+                       <select  novalidate id="etnia"  name="etnia"  class="select2_group form-control">
+                             <option value="">- Seleccione -</option> 
+                             <option value="Mixteco">Mixteco</option> 
+                             <option value="Zapoteco">Zapoteco</option>   
+                             <option value="Amuzgos">Amuzgos</option>   
+                             <option value="Chatino">Transexual</option>   
+                             <option value="Chinantecos">Transgénero</option>   
+                             <option value="Chochos">Chochos </option>   
+                             <option value="Chontales">Chontales </option>
+                             <option value="Cuicatecos">Cuicatecos </option>
+                             <option value="Huaves">Huaves </option>
+                             <option value="Ixcatecos">Ixcatecos </option>
+                             <option value="Mazatecos ">Mazatecos </option>
+                             <option value="Mixe">Mixe </option>
+                             <option value="Nahua">Nahua </option>
+                             <option value="Triqui">Triqui </option>
+                             <option value="Zoques">Zoques </option>
+                             <option value="Ninguno">Ninguno </option>
+                          </select>
                         </div>
-                      </div>
-                                
+                        
+                      </div>        
                     
-               
-                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Colonia<span class="required">*</span></label>
-                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" onkeyup="mayusculas(event, this)" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="colonia">
-                        </div>
-                      </div>
+                      
+
+                   
                        
                      
                      <!--  <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
@@ -285,24 +322,23 @@ function agrega(){
                           <input type="text" data-error=": solo numero mayor a 14 no maxicmo a 100 años" pattern="(1(00|[5-9])|([2-9]([0|1-9])))"class="form-control "  required placeholder="" name="edad">
                         </div>
                       </div> -->
-                      
+                      <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Colonia<span class="required">*</span></label>
+                       </h4> <div class="col-md-8 col-sm-9 col-xs-12">
+                          <input type="text" onkeyup="mayusculas(event, this)" id="colonia" data-error=":  solo letras de maximo 50 caracter" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="colonia">
+                        </div>
+                      </div>
+
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
                         <h4><label class="control-label col-md-4 col-sm-3 col-xs-12 ">Idioma/lengua</label>
                        </h4> <div class="col-md-8 col-sm-9 col-xs-12">
                         <input onkeyup="mayusculas(event, this)"  type="text" data-error=":  solo letras de maximo 50 caracter"  pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  maxlength="50" minlength="3"  class="form-control  text-uppercase"  required placeholder="" name="idioma">
                          </div>
                       </div>
+
+                     
                      
                     
-                     
-                     
-                      <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group ">
-                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >calle<span class="required">*</span></label>
-                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
-                          <input type="text" pattern="[a-zA-ZáéėíóúūñÁÉÍÓÚÜÑ ]+"  onkeyup="mayusculas(event, this)" maxlength="50" minlength="4"  data-error=": solo palabras de minimo 4 carácter "class="form-control" required placeholder="" name="calle">
-                          <div  class="help-block with-errors"></div></div>
-                      </div>
-
 
                     
                       <div class="ln_solid"></div>

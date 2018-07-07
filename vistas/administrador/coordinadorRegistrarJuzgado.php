@@ -26,7 +26,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >Nombre <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text"  pattern="[A-Za-z ]{1,30}" onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)" id="nombre_juzgado" required name="juzgado" class="form-control  has-feedback-left col-md-7 col-xs-12">
+                          <input type="text"  pattern="[A-Za-z ]{1,100}" onkeyup="mayusculas(event, this)" onblur="mayusculas(event, this)" id="nombre_juzgado" required name="juzgado" class="form-control  has-feedback-left col-md-7 col-xs-12">
                              <span class="" aria-hidden="true"></span>
                         </div>
                       </div>

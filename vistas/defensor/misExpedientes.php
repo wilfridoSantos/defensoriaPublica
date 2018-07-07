@@ -33,8 +33,9 @@ $idpersonal=$_SESSION['personal'];
       <link href="../../recursos/css/style.css" rel="stylesheet"/>
 
       <script>
-      cargarMisExpedientes(<?php echo $idpersonal[0]['id_personal']?>);
-
+      $(document).ready(function () {
+          cargarMisExpedientes(<?php echo $idpersonal[0]['id_personal']?>);
+      });
       </script>
 
 <body onload="">
@@ -107,7 +108,7 @@ $idpersonal=$_SESSION['personal'];
 
  
 
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="mostrarusuarioServicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -126,8 +127,9 @@ $idpersonal=$_SESSION['personal'];
                         <th >    Nombre    </th>
                         <th >     Apellido paterno </th>
                         <th >     Apellido Materno </th>
-                        <th >    Correo     </th>
-                        <th >    Teléfono     </th></tr>
+                        <th >    Teléfono     </th>
+                        <th >    Acción     </th>
+                        </tr>
                         </thead>
                       <tbody id="datosUsuarioServicio">
                         
@@ -144,6 +146,110 @@ $idpersonal=$_SESSION['personal'];
   </div>
 </div> 
 
+<!-- FIN DE LO OTRO INIICIO PARA EDITAR CONTRAPARTE -->
+
+                     <div class="modal fade" id="modalEditarUsuarioServicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Usuario(s)</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                              <div id="miEditarUsuarioUsuario" class="table-responsive x_content" title="infomación detallada">
+                                  <!--  <table id="exampleuser" lass="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                  --> 
+                                    
+                                    
+                                          </div>
+                                          <form id="EditarUsuarioServicio" data-toggle="validator" role="form" class="example_form form-horizontal form-label-left"
+                                            enctype="multipart/form-data" object="defensor">
+                                        
+                                        </form>
+                                          <div  id="EditarContraparte">
+                                      
+                                      </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                              </div>
+                            </div>
+                          </div>
+                    </div> 
+
+
+<!-- FIN DE LO OTRO INIICIO PARA DAR BAJA EXPEDIENTE -->
+
+                   <div class="modal fade" id="modalBajaExpediente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                              <div id="miEditarUsuarioUsuario" class="table-responsive x_content" title="infomación detallada">
+                                  </div>
+                                          <form id="formBajaExpediente" name="formBajaExpediente" data-toggle="validator" role="form" class="example_form form-horizontal form-label-left"
+                                            enctype="multipart/form-data" object="defensor">
+                                            <div class="form-group"> 
+
+                                              <label  class="control-label col-md-3 col-sm-3 col-xs-4">Fecha de baja<span class="required">*</span></label> 
+                                              <div  class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback"> 
+                                              <input  type="date" class="form-control " required="" id="fecha_baja" placeholder="Id personal" name="fecha_baja"> 
+                                             
+                                              <span class ="help-block"> <span	> 
+                                              </div> 
+                                              </div>  
+
+                                              <div id="gradoTipoBaja" class="form-horizontal form-label-left"> <div   class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Motivo de baja <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                  <select required="" id="id_motivoBaja"   name="motivoBaja"  class="form-control ">
+                                                    <option value="">--SELECCIONE UNA OPCIÓN-</option>
+                                                    <option value="FALTA DE INTERES">Falta de interes</option>
+                                                    <option value="REVOACIÓN DEL DEFENSOR">Revocación del defensor</option>
+                                                    
+                                                    
+                                                  </select>
+                                                  </div></div> </div>
+
+                                               <div class="form-group"> 
+                                              <label  class="control-label col-md-3 col-sm-3 col-xs-4">observación<span class="required">*</span></label> 
+                                              <div  class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback"> 
+                                              <textarea  id="observacionBaja" required="" name="observacion" pattern="[A-Za-z0-9.,:áéíóú ]+" data-error="solo numeros o letras con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describa las observaciones de baja"></textarea>
+                     
+                                              <span class ="help-block"> <span	> 
+                                              </div> 
+                                              </div> 
+
+                                            <input class="" type="hidden" name="id_expedienteBaja" id="id_expedienteBaja" value=""></input>  
+                                                  
+                                              <div class="form-group"> 
+                                                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"> 
+                                                  <input class="btn btn-succes btn btn-success btn-lg" type="button" name="botonUpdate" onclick="enviarBajaExpediente()" id="enviarBaja" value="Enviar"></input>  
+                                                  </div> 
+                                                  </div>
+                                        
+                                        </form>
+                                          
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                              </div>
+                            </div>
+                          </div>
+                    </div> 
+
+
+
 
      </body>
           </html>
@@ -153,7 +259,7 @@ $idpersonal=$_SESSION['personal'];
 
 
 
-
+      <script src="../../recursos/js/defensor/gestionUsuarioServicio.js"></script>
           
 <script>//	$("#miUsuarioServicio").hide();</script>
 

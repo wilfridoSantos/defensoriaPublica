@@ -82,7 +82,7 @@
          console.log(seleccionado);
          
       $("#rrellenarPregunta").children().remove();
-
+      $("#rrellenarPregunta").show();
 		   $("#registroContraparte").empty();
      var tipo= seleccionado.getAttribute('tipo');    
      var typeData="";
@@ -198,6 +198,10 @@
         console.log("num de expe ",expe);
  
   function iniciarPregunta(){
+      $("#preguntas").empty();
+   
+  $("#preguntasAmparo").empty();
+  $("#preguntas").show();
             $('#preguntas').append(
                    '<div id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">'+
                            '<h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " > Registrar/Actualizar datos para '+
@@ -209,14 +213,45 @@
             $.get("../../controlador/expediente/lista_preguntas.php?conOpcion=true&id_materia="+user[0].id_materia+"&id_expediente="+expe,function(data){
                var jsonMisExp =JSON.parse(data);// jQuery.parseJSON(data);
                   resultadoConsulta=jsonMisExp;// guardo el formato json para usarlo posteriomente para crear los input
+                  
+        $("#opcionPreguntas").children().remove();;
                 $.each(jsonMisExp, function (KEY, VALOR) {
                      var varpreguntas=  $('<option value="'+VALOR.id_pregunta_materia+'" name="opcionpregunta" tipo="'+VALOR.identificador+'">  ').text(VALOR.pregunta);
                      $('#opcionPreguntas').append(varpreguntas);
         
-			      	   });		
+			      	   });	$("select").select2({
+                  width:'100%'
+                });	
             });
    }
 iniciarPregunta();
+function registrarAmparo(){
+  $("#preguntas").empty();
+  $("#preguntasAmparo").empty();
+  $("#preguntasAmparo").show();
+  
+  $('#preguntasAmparo').append(
+                   '<div id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">'+
+                           '<h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " > Registrar amparo '+
+                           '<span class="required">*</span></label>'+
+                           '</h4><div class="col-md-6   col-sm-6 col-xs-12">'+
+                           '<select id="opcionPreguntas" onchange="eventoPregunta(this)" required=""  name="actividad"  class="form-control " >'+
+                           ' </select>  </div></div>  </div> '
+                          );
+ 
+    $.get("../../controlador/expediente/lista_preguntas.php?conOpcion=true&id_materia=24&id_expediente="+expe,function(data){
+     	var jsonMisExp =JSON.parse(data);// jQuery.parseJSON(data);
+          resultadoConsulta=jsonMisExp;// guardo el formato json para usarlo posteriomente para crear los input
+          //console.log(resultadoConsulta)
+
+        $("#opcionPreguntas").children().remove();
+          $.each(jsonMisExp, function (KEY, VALOR) {
+             var varpreguntas=  $('<option value="'+VALOR.id_pregunta_materia+'" name="opcionpregunta" tipo="'+VALOR.identificador+'">  ').text(VALOR.pregunta);
+              $('#opcionPreguntas').append(varpreguntas);
+        
+				   });		        
+     });
+}
 </script>
    
   
@@ -258,15 +293,27 @@ iniciarPregunta();
                         <!-- /.col -->
                       </div>
                       <div class="row invoice-info">
-                        <div class="col-sm-4 invoice-col">
+                        <div class="col-sm-12 invoice-col">
                           
                           <address>
-                            <button id="agregarContraparte" type="button">Agregar Contraparte</button>
+                          <!--   <button id="agregarContraparte" type="button">Agregar Contraparte</button>
                                          <input style="display:none;"id="numExpedienteGlobal"></input>
+                                         <input style="display:none;"id="expediente"></input>
                            <button id="visualizarContraparte" type="button">Visualizar contrapartes</button>
                             <button id="respuestasContestadas" type="button"> Contestadas</button>
                             <button id="idSeguimiento" type="button"> seguimiento</button>
-                            <button id="finalizar" type="button" onclick="verFinalizar()"> Finalizar expediente</button>
+                            <button id="finalizar" type="button" onclick="verFinalizar()"> Finalizar expediente</button> -->
+                            <ul class="nav nav-pills">
+   
+                            <li id="agregarContraparte" class="" role="presentation" type="li"><a href="#">Agregar Contraparte</a></li>
+                              <input style="display:none;"id="numExpedienteGlobal"></input>
+                              <input style="display:none;"id="expediente"></input>
+                            <li id="visualizarContraparte" role="presentation" class=" " type="li"><a href="#">Visualizar contrapartes</a></li>
+                            <li id="respuestasContestadas" role="presentation" class=" " type="li"><a href="#"> Contestadas</a></li>
+                            <li id="idSeguimiento" role="presentation" class="active botonContraparte" type="li"> <a href="#">seguimiento</a></li>
+                            <li id="registroAmparo" role="presentation" class=" " type="li" onclick="registrarAmparo()"><a href="#"> Registrar amparo</a></li>
+                            <li id="finalizar" role="presentation" class=" " type="li" onclick="verFinalizar()"><a href="#"> Finalizar expediente</a></li>
+                          </ul>
                             
                             </address>
                         </div>
@@ -274,6 +321,10 @@ iniciarPregunta();
                       </div>
                       <div class="row">
                         <div class="col-xs-12 table">
+                            <div id="preguntasAmparo"><!-- PREGUNTAS PARA AMPARO -->
+                            
+                            </div>
+
                           <div id="preguntas">
                             
                           </div>
@@ -316,7 +367,8 @@ iniciarPregunta();
                                                 <th >     Apellido paterno </th>
                                                 <th >     Apellido Materno </th>
                                                 <th >    Idioma/lengua     </th>
-                                                <th >    Etnia     </th></tr>
+                                                <th >    Etnia             </th>
+                                                <th >    Acción     </th></tr>
                                                 </thead>
                                               <tbody id="datosUsuarioServicio">
                                                 
@@ -460,7 +512,7 @@ $('#myform').validator()
 $('#myubicacion').hide()
 $('#personal').hide()
 $('#mycomprobante').hide()
-$("#idSeguimiento").hide()
+//$("#idSeguimiento").hide()
 $('#resultado').keyup(validateTextarea);
 
 /* $('.selectpicker').selectpicker({

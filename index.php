@@ -1,8 +1,9 @@
-<?php
-if (session_start()) {
-  session_destroy();
-  $_SESSION["autentificado"] = false;
-}
+<?php if (   session_start()) {
+      if(isset($_SESSION["autentificado"]) == true) {
+          echo'<script language="javascript">window.location="vistas/baseIndex.php"</script>';
+  }
+  
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en">

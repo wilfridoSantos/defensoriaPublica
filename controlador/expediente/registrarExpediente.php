@@ -20,7 +20,9 @@
             "grado_delito"  =>$_POST["grado_delito"]
            
         );
-        print_r($expediente);
+        //print_r($expediente);
+        
+ $expediente =  array_map( "cadenaToMayuscula",$expediente);/// convierte todo a mayusculas
     //////// CUANDO ES EJECUCION DE SANCIONES SE DEBE DE REGISTRAR LA FECHA EN QUE SE CREO EL EXPEDIENTE
     $mensaje=['tipo'=>"error",
     'mensaje'=>"expediente ya existe"];

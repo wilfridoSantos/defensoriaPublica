@@ -1,6 +1,5 @@
 <?php
  //include_once( '../../controlador/juzgado/actividad_juzgado.php');
- include_once( '../../controlador/defensor/controladorListaDef.php');
 
  session_start();
 // print_r($_SESSION['personal']);
@@ -11,11 +10,14 @@
 
  
 ?>
-   <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+
+  <!--  <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script> -->
 <script src="../../recursos/js/herramienta.js"></script>
+<script src="../../recursos/js/defensor/actividad.js"></script>
+
  <script>
   
-    
+    /* 
     var varUsuario=[];
     var datos = jQuery.parseJSON(window.Global_usuarios_servicios);
     $.each(datos, function (KEY, VALOR) {
@@ -136,8 +138,8 @@ var ul=document.createElement('li');
   intano=parseInt(ano);
 
   
-   console.log( date.getYear());
-}
+   console.log( date.getYear()); 
+}*/
 
 </script>
      <div class="row">
@@ -263,8 +265,7 @@ var ul=document.createElement('li');
                   </div>
                 </div>
 
-<!-- <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> -->
-  <!--   <script src="../../recursos/js/custom.min.js"></script> -->
+
     <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>
     <script src="../../recursos/js/actividad/gestionActividad.js"></script>

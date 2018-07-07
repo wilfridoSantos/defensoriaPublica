@@ -5,6 +5,11 @@ $(document).ready(function () {
 	function registrarActividad() {
 	   
 		 $('#menuContainer').load("registrarActividadDefensor.php");
+		// $('#menuContainer').append(" <iframe  src='registrarActividadDefensor.php'></iframe>");
+	//	$('#menuContainer').append(" <object type='text/html' data='registrarActividadDefensor.php' width='330 px' height='860 px'></object>");
+		
+		// document.getElementById("myFrame").src = "registrarActividadDefensor.php";
+
 	};
 	var RegistrarUsuario=document.getElementById('registrarUsuarioServicio');
 	RegistrarUsuario.addEventListener('click', registrarUsuarioServicio, false);
@@ -42,21 +47,7 @@ $(document).ready(function () {
 		//console.log(idDef);
 		//crarExpediente(curpUser);
 	});
-	function newExpediente (curpUser) {
-		$.get("crearExpediente.php",function(data){
-				  $("#mostrarCrearExpediente").html(replazarParametro(data,[{curp:curpUser}]));
-		  
-		});
-			   
-	  $("#mostrarCrearExpediente").dialog({
-		  resizable: true,
-		  height: "auto",
-		  width: "auto",
-		  modal: true,
-		  
-	  });
-	
-  }
+
 // ELIMINAR UN USUARIO EN LA LISTA DE ASIGANACION PARA CREARCION DE EXPEDIENT
 $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
 //		  var target= $(event.target);
@@ -91,6 +82,7 @@ $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
 $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
 	  var target= $(this);
 	   var id_expediente = $(this).closest('tr').find('#id_expediente').text();
+
 	   $.ajax({
 		url: "../../controlador/usuario_servicio/listaUsuario.php",
 		type: "GET",
@@ -109,15 +101,18 @@ $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
 					  $('#datosUsuarioServicio').append(
 						'<tr><td>'+valor.nombre+'</td>'+
 						'<td>'+valor.ap_paterno+'</td>'+
-						'<td>'+valor.ap_materno+'</td>'+
-						'<td>'+valor.correo_electronico+'</td>'+                                                    
-						'<td>'+valor.telefono+'</td></tr>'                                                    
+						'<td>'+valor.ap_materno+'</td>'+                                                  
+						'<td>'+valor.telefono+'</td>'+
+						'<td><button type="button" class="btn btn-primary" onclick="editarUsuarioServicio(this)"'+
+						' id_usuario_servicio="'+valor.id_usuario_servicio+'" id="id_usuario_servicio" title="infomación detallada" name="idContraparte">'+
+						'<span title="infomación detallada" class="glyphicon glyphicon-user" aria-hidden="true"></span></button></td>'+
+           				'</tr>'                                                   
 						
 					);
 				 }); 
 				
 		   },complete:function(){
-			$('#exampleModalLong').modal('show');
+			$('#mostrarusuarioServicio').modal('show');
 		   
 		
 		}
@@ -136,9 +131,97 @@ $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
 	///ABRE LA VISTA PARA DAR DE ALTA A UN USARIO DE SERVICIO
 
 
+	$('#tebody').on('click', '.botonBaja', function (evst) {// SE DARA BAJA AL EXPEDIENTE
+		
+		var id_expediente = $(this).closest('tr').find('#id_expediente').text();
+		$("#modalBajaExpediente").modal('show');
+		
+		document.formBajaExpediente.elements.id_expedienteBaja.value=id_expediente;
+	});//final del metodo de baja expediente
+
+
+	
+
 
 });///fin de document.ready
 
+function enviarBajaExpediente(){
+	var sendInfo = {
+		
+	id_expediente    : document.formBajaExpediente.elements.id_expedienteBaja.value,
+	fecha_baja       :document.formBajaExpediente.elements.fecha_baja.value,
+	motivoBaja       :document.formBajaExpediente.elements.motivoBaja.value,
+	observacion      :document.formBajaExpediente.elements.observacion.value
+	//telefono         : document.formBajaExpediente.elements.fecha_baja,
+	//email            : document.formBajaExpediente.elements.fecha_baja
+
+}; 
+var correcto=true;
+
+console.log("datos a enviar ",sendInfo);
+
+
+ 	Object.entries(sendInfo).forEach(([key, value]) => {//recorro el arreglo y verifico si hay alguno que este vacio
+	console.log("FFEE",  ((`${value}`)==="")); // "a 5", "b 7", "c 9"
+	if((`${value}`)===""){
+		correcto=false;
+		console.log("dentro",  ((`${value}`)==="")); // "a 5", "b 7", "c 9"
+		$("#enviarBaja").attr("type","submit");
+		return false
+	}else
+	$("#enviarBaja").attr("type","button");
+	   
+	return true;
+ }) ;
+ console.log("correcto ",correcto);
+ 
+
+ if(correcto===true)
+ $.ajax({
+	type: "POST",
+	url: "../../controlador/expediente/bajaExpediente.php",
+	dataType: "html",
+	success: function (data) {
+		var json=jQuery.parseJSON(data)
+		console.log(data);
+			var alert="";
+
+			  if(json['tipo']==="exito")
+				 alert="alert alert-success";
+
+			  //$alert='alert alert-danger';
+			   if(json['tipo']==="error")
+				 alert="alert alert-danger";
+
+				if(json['tipo']==="juzgado")
+				  alert="alert alert-danger";
+				  
+				 $("#contenedorMensaje").attr("class",""+alert);
+		
+
+				$("#contenedorMensaje").append('<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+				'<div class="modal-dialog modal-dialog-centered" role="document">'+
+					'<div class="modal-content">'+
+					'<strong align="center" id="id_Mensaje" class="alert-dismissible fade in '+alert+'"></strong>'+
+					
+					'<div class="modal-footer">'+
+					' <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>'+
+					'</div></div> </div></div>');
+					$("#id_Mensaje").text(json['mensaje']);
+					console.log(json['mensaje']," fue esto");
+				
+					$('#enviarBaja').modal('hide');
+					$('#exampleModalLong').modal('show');
+					console.log("ffef en always ",json['tipo']);
+			  $("#modalBajaExpediente").modal('hide');
+				if(json['tipo']==="exito")
+				  $("#formBajaExpediente").children().remove();  
+	  
+	},
+
+	data: sendInfo
+}); 
+}//final de baja expediente
 
 
 function cargaDefensorPorMateria(e, elemento) {
@@ -250,25 +333,33 @@ function cargarMisExpedientes(idpersonal) {
 // alert("atendiendoDef");
 //  $('#tebody').children().remove();
 
-$.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idpersonal,function(data){
+$.get("../../controlador/defensor/controladorListarExp.php?id_defensor="+idpersonal+"&xpregunta="+true,function(data){
 	var jsonMisExp = jQuery.parseJSON(data);
 	$('#tebody').children().remove();
 	var materia;
 	var sistema;
 	  $.each(jsonMisExp, function (KEY, VALOR) {
 				var nomBoton;
-				console.log("lista de exp ",VALOR);
+					console.log("lista de exp ",VALOR);
 				 //nomBoton = $('<button>Seguimiento<button/>');
 				 
 				var nuevoBoton = document.createElement('button');
 				 materia=VALOR.materia;
 				 sistema=VALOR.sistema;
-				 console.log(VALOR.estado);
+				 console.log("observacion ",VALOR.estado);
 				 
-				 if (VALOR.num_expediente!=""&VALOR.estado!="finalizado") {
-					 
-				 
-				 
+		      if (VALOR.num_expediente!=""&VALOR.estado!="finalizado") {
+				var vistaEstado="glyphicon glyphicon-save";
+				var vistaTipoDanger="btn btn-danger";
+				
+				if(VALOR.estado==="BAJA"){
+				  vistaEstado="glyphicon glyphicon-open";
+				  vistaTipoDanger="btn btn-success";
+				
+				}
+				var observacion=((VALOR.observaciones!=null)?VALOR.observaciones:" ");
+					//console.log("observacion ",observacion);
+					
 				 $('#tebody').append(
 					'<tr role="row" class="odd gradeA" > '+
 					'<td id="idPersonal" style="display:none;">'+VALOR.id_personal+'</td>'+
@@ -276,9 +367,10 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 					'<td > <textarea id="num_expediente"   rows="1%"  disabled cols="10" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.num_expediente+'</textarea></td>'+
 					'<td > <textarea    rows="1%"  disabled cols="30" minlength="10" maxlength="250"   style="background-color:transparent;overflow: auto; color:#000000; border:none; resize: none;" readonly class="form-control col-md-3 col-xs-12"> '+VALOR.nombre_delito+'</textarea></td>'+
 					'<td> <textarea 	rows="1%"  disabled cols="35" minlength="10" maxlength="250" style="background-color:transparent; border:none; auto; color:#000000;resize: none;" readonly class="form-control col-md-5 col-xs-12" >'+VALOR.tipo_delito+'</textarea></td>'+
-					'<td> <textarea 	rows="1%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+VALOR.observaciones+'</textarea></td>'+                                                     
+					'<td> <textarea 	rows="1%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+observacion+'</textarea></td>'+                                                     
 					' <td><button type="button" class="btn btn-primary botonDetalleUsuario" id="detalleUsuario" name="botonDetalleUsuario">Detalle Usuario</button>'+
-					' <button type="button" class="btn btn-primary botonSeguimiento" name="botonSeguimiento" id="idSeguimiento" name="botonSeguimiento">Seguimiento</button></td></tr>'
+					' <button type="button" class="btn btn-primary botonSeguimiento" name="botonSeguimiento" id="idSeguimiento" name="botonSeguimiento">Seguimiento</button>'+
+					'<button type="button" title="Baja al expediente" class=" botonActivar '+vistaTipoDanger+'" btn btn-danger" id="botonBaja" name="botonActivar"><span title="Activar expediente" class="'+vistaEstado+'" aria-hidden="true"></span></button></td></tr>'
 				 
 					/* ' <button type="button" class="btn btn-primary botonSeguimiento" id="idSeguimiento" onready='+muestraSeguimiento()+'name="botonSeguimiento">Seguimiento</button></td></tr>' */
 				 
@@ -297,6 +389,7 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 							//funcionExpediente
 							
 				 			 var id_usuario_expedienteGlobal = $(this).closest('tr').find('#id_expediente').text();
+				 			 var num_expediente = $(this).closest('tr').find('#num_expediente').text();
 				            num_expedienteGlobal=id_usuario_expedienteGlobal;			
 							if(materia==="EJECUCION"){
 								console.log("holaEjecucion");
@@ -307,7 +400,9 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 									success: function (data) {
 										$( "#menuContainer" ).html(data);	
 										$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+										$("#expediente").text(num_expediente);
 										$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
+										
 									   }
 									   
 									}); 
@@ -323,6 +418,7 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 										success: function (data) {
 											$( "#menuContainer" ).html(data);	
 											$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+											$("#expediente").text(num_expediente);
 											$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
 											
 										   }
@@ -341,6 +437,26 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 											success: function (data) {
 												$( "#menuContainer" ).html(data);	
 												$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+												$("#expediente").text(num_expediente);
+												$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
+												
+											   }
+											   
+											}); 
+		
+											
+										} 
+									else
+									if(materia==="MIXTO"){
+										console.log("holaAgrario");
+										 $.ajax({
+											url: "materia/mixto.php",
+											type: "GET",
+																					
+											success: function (data) {
+												$( "#menuContainer" ).html(data);	
+												$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+												$("#expediente").text(num_expediente);
 												$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
 												
 											   }
@@ -357,6 +473,7 @@ $.get("../../controlador/defensor/controladorListarExp.php?idPersonal="+idperson
 											success: function (data) {
 												$( "#menuContainer" ).html(data);	
 												$("#numExpedienteGlobal").text(id_usuario_expedienteGlobal);
+												$("#expediente").text(num_expediente);
 												$("#numExpedienteGlobal").val(id_usuario_expedienteGlobal);
 											   }
 											   
@@ -561,3 +678,4 @@ function editarObservaciones(idAct) {
 		}
 	});
 }
+///VERSION 1

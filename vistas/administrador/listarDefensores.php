@@ -99,7 +99,7 @@ language: {
                 <div class="row">      
                     <div class="col-sm-12">
                         <div id="dialogo" title="Confirma eliminar"><span id="msnDialog" style="display:none"> Tiene al menos un expediente</span></div>
-                        <table id="example" class="table  dt-responsive ui table" cellspacing="0" width="100%">
+                        <table id="example" class="table nowrap ui table" cellspacing="0" width="100%">
                        <!--  <table id="example" class="table ui table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                      -->
                     <!--     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"

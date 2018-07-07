@@ -62,7 +62,7 @@ $(document).ready(function () {
       //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
         },
         error: function () {
-            alert('Error peticion Ajax ');
+           // alert('Error peticion Ajax ');
         }
         });
     }
@@ -103,7 +103,7 @@ function dataDefensor(){
   //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
     },
     error: function () {
-        alert('Error peticion Ajax ');
+       // alert('Error peticion Ajax ');
     }
     });
   }
@@ -119,13 +119,17 @@ function dataDefensor(){
         //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
           },
           error: function () {
-              alert('Error peticion Ajax ');
+            //  alert('Error peticion Ajax ');
           }
           });
     }
 
     pedirContraparte();// llamao a la funcion para almacenar estos datos
+   
+    
 
+    
+    
     $('#tablaAsinacionExpedienteusuario').on('click', '.eliminar', function (evst) {
       //		  var target= $(event.target);
         var target= $(this);
@@ -143,3 +147,37 @@ function dataDefensor(){
         $("#project").val("");
   });
 });
+
+
+function consumirCodigoPostal(elemento){
+  if(elemento.value){
+  $.ajax({
+    type: 'GET',
+    url: 'https://api-codigos-postales.herokuapp.com/v2/codigo_postal/'+elemento.value,
+    success: function (data) {
+      console.log($("#municipio"));
+      
+     $("#municipio").val(data.municipio);
+     $("#colonia").val(data.colonias[0]);
+
+    },
+    error: function () {
+      //  alert('Error peticion Ajax ');
+    }
+    });
+  } $("#municipio").val("");
+  $("#colonia").val(" ");
+}
+
+var consumirPagina=function(url){
+  return $.get(url) 
+}
+
+function createXMLHttpRequest(){
+	var xmlHttp=null;
+	if (window.ActiveXObject) 
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	else if (window.XMLHttpRequest) 
+		xmlHttp = new XMLHttpRequest();
+	return xmlHttp;
+}
