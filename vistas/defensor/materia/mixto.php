@@ -8,8 +8,9 @@
   $nombre = $_SESSION['personal'][0]['nombre'];
   //echo $id_personal;
   //echo $nombre;
-?>
 
+ 
+?>
 <script >
   var  resultadoConsulta;
   function enviarRespuesta(elemento){
@@ -27,7 +28,9 @@
             observacion        : observacion.val(), 
             accion_implementar : accion_implementar.val(), 
   };
-  console.log(sendInfo);
+//  console.log("ENVIANDO DATOS DE ABAJO");
+  
+  //console.log(sendInfo);
   $.ajax({
     type: "POST",
     url: "../../controlador/expediente/seguimientoExpediente.php",
@@ -85,15 +88,13 @@
      var tipo= seleccionado.getAttribute('tipo');    
      var typeData="";
      if(tipo==="fecha")//AUNQUE TODO TIENEN EL id opcionesRespuesta SOLO ES UTIL CUANDO ESL TIPO ES select
-        typeData=" <input id='opcionesRespuesta'  respuesta='valor' type='date' name='respuesta' class='form-control col-md-7 col-xs-12' >";
+        typeData=" <input id='opcionesRespuesta'  pattern='[A-Za-z0-9 éíóúūñÁÉÍÓÚÜÑ]+' respuesta='valor' type='date' name='respuesta' class='form-control col-md-7 col-xs-12' >";
   
      if(tipo==="select")
-        typeData="<select id='opcionesRespuesta' respuesta='valor' required=' ' name='respuesta'      class=' form-control'></select>";
-     
-        /* '<select id="opcionPreguntas" onchange="eventoPregunta(this)" required=""  name="actividad"  class="form-control " >'+ */
-                             
+        typeData="<select id='opcionesRespuesta' respuesta='valor' required=' ' name='respuesta' class='form-control '></select>";
+        
      if(tipo==="texto")
-          typeData=" <input id='opcionesRespuesta' respuesta='valor' type='text' name='respuesta' class='form-control col-md-7 col-xs-12' >";  
+          typeData=" <input id='opcionesRespuesta' pattern='[A-Za-z0-9 éíóúūñÁÉÍÓÚÜÑ]+' respuesta='valor' type='text' name='respuesta' class='form-control col-md-7 col-xs-12' >";  
 
       var id_expediente= document.getElementById('numExpedienteGlobal').value;  
      $("#rrellenarPregunta").append(
@@ -130,6 +131,11 @@
                         '</div> </div>'
 
              );
+             //console.log(resultadoConsulta," EN DONDE BUSCAR");
+            // console.log(seleccionado.value," QUE BUSCAR");
+             
+             //console.log(resultadoConsulta[seleccionado.value]);
+          
       var opciones=resultadoConsulta[seleccionado.value].opcion;
                  
       if(opciones!=""){               
@@ -140,7 +146,7 @@
                     });
         }
 
-         if(seleccionado.value==="4"){           
+         if(seleccionado.value==="324"){           
                   
             $("#idRespuestaCambio").children().remove();
             $('#idRespuestaCambio').append("<select id='opcionesRespuesta'  required=' ' name='respuesta' class='form-control '>"+
@@ -179,28 +185,36 @@
                        
                        $('#opcionesRespuesta').append(temp);
                          })//echo  '</optgroup>';
+                         $("select").select2({
+                  width:'100%'
+                });	
                 });
             
           }
              
-          $("select").select2({
-    width:'100%'
-  });
 
             
   }// CIERRE DE LA FUNCION */
 
-  console.log("lista de las preguntas");
-  var user=JSON.parse(window.Global_user_basic); 
+  console.log("lista de las preguntas...");
+  var user=JSON.parse(window.Global_user_basic);
   var expe=window.num_expedienteGlobal;
         console.log("num de expe ",expe);
- 
-  function iniciarPregunta(){
-      $("#preguntas").empty();
+
+  function iniciarPregunta(elemento){
+    console.log("dentoro de la preguntas que se tiene que contestar");
+    $('#preguntas').empty();
+
+    $("#preguntasAmparo").empty();
+  $("#preguntas").hide();
+  $("#divMateria").show();
+   var materia=$(elemento).val();
+
+ if(materia!=undefined){
    
-  $("#preguntasAmparo").empty();
-  $("#preguntas").show();
-            $('#preguntas').append(
+   console.log("materia que se selecciona",materia);
+
+  $('#preguntas').append(
                    '<div id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">'+
                            '<h4> <label for="inputEmail" class="control-label col-md-3 col-sm-3 col-xs-12 " > Registrar/Actualizar datos para '+
                            '<span class="required">*</span></label>'+
@@ -208,25 +222,28 @@
                            '<select id="opcionPreguntas" onchange="eventoPregunta(this)" required=""  name="actividad"  class="form-control " >'+
                            ' </select>  </div></div>  </div> '
                           );
-            $.get("../../controlador/expediente/lista_preguntas.php?conOpcion=true&id_materia="+user[0].id_materia+"&id_expediente="+expe,function(data){
-               var jsonMisExp =JSON.parse(data);// jQuery.parseJSON(data);
-                  resultadoConsulta=jsonMisExp;// guardo el formato json para usarlo posteriomente para crear los input
-                  
-        $("#opcionPreguntas").children().remove();;
-                $.each(jsonMisExp, function (KEY, VALOR) {
-                     var varpreguntas=  $('<option value="'+VALOR.id_pregunta_materia+'" name="opcionpregunta" tipo="'+VALOR.identificador+'">  ').text(VALOR.pregunta);
-                     $('#opcionPreguntas').append(varpreguntas);
+                       
+  $.get("../../controlador/expediente/lista_preguntas.php?conOpcion=true&id_materia="+materia+"&id_expediente="+expe,function(data){
+	      	var jsonMisExp =JSON.parse(data);// jQuery.parseJSON(data);
+          resultadoConsulta=jsonMisExp;// guardo el formato json para usarlo posteriomente para crear los input
+     
+         
+          $("#opcionPreguntas").children().remove();
+          $.each(jsonMisExp, function (KEY, VALOR) {
+             var varpreguntas=  $('<option value="'+VALOR.id_pregunta_materia+'" name="opcionpregunta" tipo="'+VALOR.identificador+'">  ').text(VALOR.pregunta);
+              $('#opcionPreguntas').append(varpreguntas);
         
-			      	   });	$("select").select2({
-                  width:'100%'
-                });	
-            });
-   }
-iniciarPregunta();
+				   });		
+     });
+     $("#preguntas").show()
+    }
+}
+
 function registrarAmparo(){
   $("#preguntas").empty();
   $("#preguntasAmparo").empty();
   $("#preguntasAmparo").show();
+  $("#divMateria").hide();
   
   $('#preguntasAmparo').append(
                    '<div id="actividad" class=" form-horizontal form-label-left form-group  "><div class="form-group ">'+
@@ -250,6 +267,7 @@ function registrarAmparo(){
 				   });		        
      });
 }
+//iniciarPregunta();
 </script>
    
   
@@ -294,36 +312,51 @@ function registrarAmparo(){
                         <div class="col-sm-12 invoice-col">
                           
                           <address>
-                          <!--   <button id="agregarContraparte" type="button">Agregar Contraparte</button>
+                            <!-- <button id="agregarContraparte" type="button">Agregar Contraparte</button>
                                          <input style="display:none;"id="numExpedienteGlobal"></input>
                                          <input style="display:none;"id="expediente"></input>
-                           <button id="visualizarContraparte" type="button">Visualizar contrapartes</button>
-                            <button id="respuestasContestadas" type="button"> Contestadas</button>
-                            <button id="idSeguimiento" type="button"> seguimiento</button>
-                            <button id="finalizar" type="button" onclick="verFinalizar()"> Finalizar expediente</button> -->
-                            <ul class="nav nav-pills">
+                             <button id="visualizarContraparte" type="button">Visualizar contrapartes</button>
+                             <button id="respuestasContestadas" type="button"> Contestadas</button>
+                             <button id="idSeguimiento" type="button"> seguimiento</button>
+                            
+                             <button id="finalizar" type="button" onclick="verFinalizar()"> Finalizar expediente</button> -->
+                             <ul class="nav nav-pills">
    
                             <li id="agregarContraparte" class="" role="presentation" type="li"><a href="#">Agregar Contraparte</a></li>
-                              <input style="display:none;"id="numExpedienteGlobal"></input>
-                              <input style="display:none;"id="expediente"></input>
-                            <li id="visualizarContraparte" role="presentation" class=" " type="li"><a href="#">Visualizar contrapartes</a></li>
-                            <li id="respuestasContestadas" role="presentation" class=" " type="li"><a href="#"> Contestadas</a></li>
-                            <li id="idSeguimiento" role="presentation" class="active botonContraparte" type="li"> <a href="#">seguimiento</a></li>
-                            <li id="registroAmparo" role="presentation" class=" " type="li" onclick="registrarAmparo()"><a href="#"> Registrar amparo</a></li>
-                            <li id="finalizar" role="presentation" class=" " type="li" onclick="verFinalizar()"><a href="#"> Finalizar expediente</a></li>
-                          </ul>
-                            
+                                <input style="display:none;"id="numExpedienteGlobal"></input>
+                                <input style="display:none;"id="expediente"></input>
+                                <li id="visualizarContraparte" role="presentation" class=" " type="li"><a href="#">Visualizar contrapartes</a></li>
+                                <li id="respuestasContestadas" role="presentation" class=" " type="li"><a href="#"> Contestadas</a></li>
+                                <li id="idSeguimiento" role="presentation" class="active botonContraparte" type="li"> <a href="#">seguimiento</a></li>
+                                <li id="registroAmparo" role="presentation" class=" " type="li" onclick="registrarAmparo()"><a href="#"> Registrar amparo</a></li>
+                                <li id="finalizar" role="presentation" class=" " type="li" onclick="verFinalizar()"><a href="#"> Finalizar expediente</a></li>
+                            </ul>
                             </address>
                         </div>
                         
                       </div>
                       <div class="row">
                         <div class="col-xs-12 table">
-                            <div id="preguntasAmparo"><!-- PREGUNTAS PARA AMPARO -->
+
+                         <div id="divMateria"class="form-horizontal form-label-left">     <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="respuesta">Materia
+                         </label>
+                          <div  id="idRespuestaCambio" class="col-md-6 col-sm-6 col-xs-12">
+                          <select id='agrarioIntancia' onchange="iniciarPregunta(this)" respuesta='valor' required=' ' class='form-control '>
+                                             <option value="NIGUNO" >- Seleccione -</option> 
+                                            <option value="5">CIVIL</option> 
+                                            <option value="7">AGRARIO</option>   
+                                            <option value="1">PENAL</option>   
+                                            <option value="3">FAMILIAR</option>   
+                                            <option value="9">EJECUCIÓN DE SANCIONES</option>   
+                                    
+                                             
+                          </select>
+                          <div  class="help-block with-errors"></div></div> </div>  </div>
+                          <div id="preguntasAmparo"><!-- PREGUNTAS PARA AMPARO -->
                             
                             </div>
-
-                          <div id="preguntas">
+                          <div id="preguntas"><!-- SE PINTA LAS PREGUNTAS QUE SE TIENE QUE CONTESTAR(RRELLENAR PREGUNTAS) -->
                             
                           </div>
                          <!--  <div id="rrellenarPregunta">
@@ -331,6 +364,8 @@ function registrarAmparo(){
                           </div> -->
                           <!-- <form  id="rrellenarPregunta"  data-toggle="validator"enctype="multipart/form-data" role="form" class="" action ="../../controlador/expediente/seguimientoExpediente.php" object="defensor" method="post">
                            -->
+                         
+
                            <form  id="rrellenarPregunta"  data-toggle="validator" enctype="multipart/form-data" role="form" class=""  object="pregunta">
                            
                           </form> 
@@ -342,7 +377,6 @@ function registrarAmparo(){
                        </div>
                       </div>
                       
-
                       <!-- VISUALIZAR LOS USUARIOS DE CONTRAPARTE -->
 
                 <div class="modal fade" id="modalContraparte" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -365,8 +399,7 @@ function registrarAmparo(){
                                                 <th >     Apellido paterno </th>
                                                 <th >     Apellido Materno </th>
                                                 <th >    Idioma/lengua     </th>
-                                                <th >    Etnia             </th>
-                                                <th >    Acción     </th></tr>
+                                                <th >    Etnia     </th></tr>
                                                 </thead>
                                               <tbody id="datosUsuarioServicio">
                                                 
@@ -417,7 +450,7 @@ function registrarAmparo(){
                           </div>
                     </div> 
 
-                    <!-- FIN DE LO OTRO INIICIO PARA ver finalizar expediente -->
+                     <!-- FIN DE LO OTRO INIICIO PARA ver finalizar expediente -->
 
                      <div class="modal fade" id="modalFinalExpediente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -466,9 +499,7 @@ function registrarAmparo(){
                                                   </div> 
                                                   </div>
                                         </form>
-                                          <div  id="EditarContraparte">
-                                      
-                                      </div>
+                                          
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -492,17 +523,14 @@ function registrarAmparo(){
 
 <!-- <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script> -->
   <!--   <script src="../../recursos/js/custom.min.js"></script> -->
-  
+    <script src="../../recursos/js/curp.js"></script>
     <script src="../../recursos/js/jquery-validator.js"></script>
     <script src="../../recursos/js/defensor/atendiendoExpediente.js"></script>
-    
     <script src="../../recursos/js/expediente/gestionContraparte.js"></script>
-
-
-   <script src="../../recursos/js/select2.js"></script>
+    
+    
+    <script src="../../recursos/js/select2.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
-
-
 
     <script>
 
@@ -511,16 +539,8 @@ $('#myubicacion').hide()
 $('#personal').hide()
 $('#mycomprobante').hide()
 //$("#idSeguimiento").hide()
+$("#preguntas").hide()
 $('#resultado').keyup(validateTextarea);
-
-/* $('.selectpicker').selectpicker({
-  style: 'btn-info',
-  size: 4
-}); */
-$("select").select2({
-    width:'100%'
-  });
-
 
 function validateTextarea() {
     var errorMsg = "Please match the format requested.";
@@ -546,4 +566,3 @@ function validateTextarea() {
     });
 }
 </script>
-

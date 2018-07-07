@@ -15,11 +15,11 @@ include "../../Controlador/sesion.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Modulo ADMINISTRADOR</title>
-    
-
+    <title>Modulo ADMINISTRADOR</title>    
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
       <link href="../../recursos/css/style.css" rel="stylesheet"/> 
+      
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!--     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
  -->    <script src="../../recursos/js/jquery-1.11.2.min.js"></script>
@@ -40,6 +40,8 @@ include "../../Controlador/sesion.php";
 
 
     <link href="../../recursos/css/custom.css" rel="stylesheet"/> 
+
+ 
   </head>
 
   <body class="nav-md" style="background-color:black;">
@@ -73,15 +75,12 @@ include "../../Controlador/sesion.php";
               <div class="menu_section">
                 <ul class="nav side-menu">
 
-                  <li><a><i class="fa fa-home"></i> Generar Informe <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Generar Informes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a id="informeActividades">Generar Informe de Actividades</a></li>  
-                    <!-- <li><a id="informeAnual">Generar Informe Anual</a></li>
-                      <li><a id="informeMensual">Generar Informe Mensual</a></li>
-                      <li><a id="informeEspecifico">Generar Informe Especifico</a></li>
-
-                      <li><a id="tarjetaInformativa">Generar Tarjeta Informativa</a></li>-->
-                      
+                    <li><a id="informeGAct">Generar I general de actividades</a></li>  
+                     <li><a id="informeGExp">Generar I general de expedientes</a></li>
+                      <li><a id="informePAct">Generar I parcial de actividades</a></li>
+                      <li><a id="informePExp">Generar I parcial de expedientes</a></li>                      
                     </ul>
                   </li>
 
@@ -363,7 +362,7 @@ include "../../Controlador/sesion.php";
               </div>
             </div>
           </div>
-          
+        
          
         </div>
         <!-- /page content --> 
@@ -423,15 +422,3 @@ include "../../Controlador/sesion.php";
   unset($_SESSION['post_data']);
   }  
 ?>
-<script type="text/javascript">
-  /* setTimeout(function() {
-//	$.notifyClose();
-console.log("hola");
-
-$.notify("Hello World"); 
-}, 100); */
-
-
-
-//$.notify("Hello World");  
-</script>

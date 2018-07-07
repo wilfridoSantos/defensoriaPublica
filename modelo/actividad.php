@@ -8,6 +8,198 @@ include_once('../../libreria/conexion.php');
                                                 ) as numAses
             from actividades left join.....
 */
+function getActividadesByDefCompleto($def){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+        U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor, P.id_personal as idDef,  P.ap_paterno as apDefP, P.ap_materno as apDefM,
+        U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+        A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+        Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+        vis.foto as fotoVis, act.id_actividad as idAct
+        from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join personal_campo as pc using(id_personal) 
+        left join materia as m using(id_materia)
+        left join usuario_servicio as U using(id_usuario_servicio)
+        where pc.id_personal='".$def."'  order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesGC(){
+    $sql = "SELECT pc.juzgado,sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+    U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,P.id_personal as idDef, P.ap_paterno as appDef, P.ap_materno as apmDef,
+    U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+    A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+    Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+    vis.foto as fotoVis, act.id_actividad as idAct
+    from actividad as act left join asesoria as A using(id_actividad) 
+    left join audiencias as Au using(id_actividad)
+    left join visitas_carcelarias as vis using(id_actividad) 
+    left join personal as P using(id_personal)
+    left join (select * from personal_campo inner join juzgado using(id_juzgado)) AS pc using(id_personal) 
+    left join materia as m using(id_materia)
+    left join usuario_servicio as U using(id_usuario_servicio) order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+
+function getActividadesByPeriodoCP($fi,$ff, $sistema, $atributos){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU,
+        U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,
+        U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+        A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+        Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+        vis.foto as fotoVis, act.id_actividad as idAct
+        from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join personal_campo as pc using(id_personal) 
+        left join materia as m using(id_materia)
+        left join usuario_servicio as U using(id_usuario_servicio)
+        where (fecha_registro between '".$fi."' and '".$ff."')
+                and m.sistema='".$sistema."' order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesPC($sistema, $atributos){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+        U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,
+        U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+        A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+        Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+        vis.foto as fotoVis, act.id_actividad as idAct
+        from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join personal_campo as pc using(id_personal) 
+        left join materia as m using(id_materia)
+        left join usuario_servicio as U using(id_usuario_servicio)
+        where and m.sistema='".$sistema."' order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesByDefPC($def, $sistema, $atributos){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+        U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,
+        U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+        A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+        Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+        vis.foto as fotoVis, act.id_actividad as idAct
+        from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join personal_campo as pc using(id_personal) 
+        left join materia as m using(id_materia)
+        left join usuario_servicio as U using(id_usuario_servicio)
+        where pc.id_personal='".$def."' 
+                and m.sistema='".$sistema."' order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesByDefPeriodoP($fi,$ff,$def, $sistema, $atributos){
+    $sql = " SELECT pc.juzgado,sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+    U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,P.id_personal as idDef, P.ap_paterno as apDefP, P.ap_materno as apDefM,
+    U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+    A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+    Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+    vis.foto as fotoVis, act.id_actividad as idAct
+    from actividad as act left join asesoria as A using(id_actividad) 
+    left join audiencias as Au using(id_actividad)
+    left join visitas_carcelarias as vis using(id_actividad) 
+    left join personal as P using(id_personal)
+    left join (select * from personal_campo inner join juzgado using(id_juzgado)) AS pc using(id_personal) 
+    left join materia as m using(id_materia)
+    left join usuario_servicio as U using(id_usuario_servicio)
+        where (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."' 
+                and m.sistema='".$sistema."' order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesByDefPeriodo($fi,$ff,$def){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+        U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor, P.ap_paterno as apDefP,P.ap_materno as apDefM, 
+        U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+        A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+        Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+        vis.foto as fotoVis, act.id_actividad as idAct
+        from actividad as act left join asesoria as A using(id_actividad) 
+        left join audiencias as Au using(id_actividad)
+        left join visitas_carcelarias as vis using(id_actividad) 
+        left join personal as P using(id_personal)
+        left join personal_campo as pc using(id_personal) 
+        left join materia as m using(id_materia)
+        left join usuario_servicio as U using(id_usuario_servicio)
+        where (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."'  order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesByPeriodo($fi,$ff){
+    $sql = " SELECT pc.juzgado,sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+    U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,P.id_personal as idDef, P.ap_paterno as appDef, P.ap_materno as apmDef,
+    U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+    A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+    Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+    vis.foto as fotoVis, act.id_actividad as idAct
+    from actividad as act left join asesoria as A using(id_actividad) 
+    left join audiencias as Au using(id_actividad)
+    left join visitas_carcelarias as vis using(id_actividad) 
+    left join personal as P using(id_personal)
+    left join (select * from personal_campo inner join juzgado using(id_juzgado)) AS pc using(id_personal) 
+    left join materia as m using(id_materia)
+    left join usuario_servicio as U using(id_usuario_servicio)
+        where fecha_registro between '".$fi."' and '".$ff."'  order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesCompletoBydef($def){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+                    U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,
+                    U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+                    A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+                    Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+                    vis.foto as fotoVis, act.id_actividad as idAct
+            from actividad as act left join asesoria as A using(id_actividad) 
+                left join audiencias as Au using(id_actividad)
+                left join visitas_carcelarias as vis using(id_actividad) 
+                left join personal as P using(id_personal)
+                left join personal_campo as pc using(id_personal) 
+                left join materia as m using(id_materia)
+                left join usuario_servicio as U using(id_usuario_servicio)
+                    where pc.id_personal='".$def."' order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
+function getActividadesCompleto(){
+    $sql = " SELECT sistema,U.sexo,U.genero as generoU,U.edad as edadU,U.etnia as etniaU, 
+                    U.discapacidad as discapacidadU, U.idioma as idiomaU,P.nombre as Defensor,
+                    U.nombre as Usuario, fecha_registro, observacion, A.id_actividad as idAse,
+                    A.latitud as latAse, A.longitud as longAse, Au.id_actividad as idAud,
+                    Au.latitud as latAud, Au.longitud as longAud, vis.id_actividad as idAct,
+                    vis.foto as fotoVis, act.id_actividad as idAct
+            from actividad as act left join asesoria as A using(id_actividad) 
+                    left join audiencias as Au using(id_actividad)
+                    left join visitas_carcelarias as vis using(id_actividad) 
+                    left join personal as P using(id_personal)
+                    left join personal_campo as pc using(id_personal) 
+                    left join materia as m using(id_materia)
+                    left join usuario_servicio as U using(id_usuario_servicio)order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+}
 
 function getActividades(){
     $sql = "select act.fecha_registro as fechaR, act.observacion as observaciones,act.id_actividad as idAct,

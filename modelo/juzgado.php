@@ -24,21 +24,14 @@ function listar_juzgado_x_id($id){
        // global $conexion;
       $sql = "INSERT INTO juzgado ";
         $sql.= "SET juzgado='".$objetoEntidad['juzgado']."', region='".$objetoEntidad['region']."',";
-        $sql.= "calle='".$objetoEntidad['calle']."', num_extension='".$objetoEntidad['numero_ext']."',";
+        $sql.= "calle='".$objetoEntidad['calle']."', num_juzgado='".$objetoEntidad['numero_juzgado']."',";
         $sql.= " municipio='".$objetoEntidad['municipio']."',"; 
         $sql.= "cp='".$objetoEntidad['cp']."', num_telefono='".$objetoEntidad['num_telefono']."',";
-        $sql.= "colonia='".$objetoEntidad['colonia']."'";
+        $sql.= "colonia='".$objetoEntidad['colonia']."', num_extension='".$objetoEntidad['numero_extension']."'";
         //return consulta($sql, $conexion);
     
       registro($sql); 
-    //  return 
-     /// $conexion->query($sql);
- //       return consulta($sql, $conexion);
-
-  // $sql="INSERT INTO  juzgado values()";			
-
-  // $lista=consulta($sql);
-  // return $lista;
+        print_r($sql);
     }
     
 
