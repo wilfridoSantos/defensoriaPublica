@@ -1,7 +1,1697 @@
 <?php
 
 include_once ('../../libreria/conexion.php');
+function etniaBySistema($valor, $fi, $ff, $def){
+  switch($valor){
+      case 'PERIODO':
+           $sql = "SELECT U.etnia AS etniaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+          (SELECT COUNT(A.id_actividad)
+           FROM actividad AS act
+                   INNER JOIN asesoria AS A USING (id_actividad)
+                   INNER JOIN (SELECT *
+                           FROM
+                           personal_campo
+                               INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                   INNER JOIN materia AS m USING (id_materia)
+                   INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                           where  (fecha_registro between '".$fi."' and '".$ff."') and
+                               U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaHombreT,
+          (SELECT COUNT(A.id_actividad)
+           FROM actividad AS act
+                   INNER JOIN asesoria AS A USING (id_actividad)
+                   INNER JOIN (SELECT *
+                           FROM
+                           personal_campo
+                               INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                   INNER JOIN materia AS m USING (id_materia)
+                   INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                           where  (fecha_registro between '".$fi."' and '".$ff."') and
+                               U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaHombreO,
+       (SELECT COUNT(A.id_actividad)
+           FROM actividad AS act
+                   INNER JOIN asesoria AS A USING (id_actividad)
+                   INNER JOIN (SELECT *
+                           FROM
+                           personal_campo
+                               INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                   INNER JOIN materia AS m USING (id_materia)
+                   INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                       where  (fecha_registro between '".$fi."' and '".$ff."') and
+                                           U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaMujerT,
+       (SELECT COUNT(A.id_actividad)
+           FROM actividad AS act
+                   INNER JOIN asesoria AS A USING (id_actividad)
+                   INNER JOIN (SELECT *
+                           FROM
+                           personal_campo
+                               INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                   INNER JOIN materia AS m USING (id_materia)
+                   INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                       where  (fecha_registro between '".$fi."' and '".$ff."') and
+                                           U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaMujerO
+               FROM		
+               actividad AS act
+                   LEFT JOIN asesoria AS A USING (id_actividad)
+                   LEFT JOIN personal AS P USING (id_personal)
+                   LEFT JOIN
+                       (SELECT *
+                           FROM
+                           personal_campo
+                               INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                               LEFT JOIN materia AS m USING (id_materia)
+                               LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                               where  (fecha_registro between '".$fi."' and '".$ff."')
+               GROUP BY etniaU
+               ORDER BY sistema;";
+      return $sql; 
+      break;
+      case 'PERIODODEF': 
+              $sql = "SELECT U.etnia AS etniaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                                  where  (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."' and
+                                      U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaHombreT,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                                  where  (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."' and
+                                      U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaHombreO,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                              where  (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."' and
+                                                  U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaMujerT,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                              where  (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."' and
+                                                  U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaMujerO
+                      FROM		
+                      actividad AS act
+                          LEFT JOIN asesoria AS A USING (id_actividad)
+                          LEFT JOIN personal AS P USING (id_personal)
+                          LEFT JOIN
+                              (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                                      LEFT JOIN materia AS m USING (id_materia)
+                                      LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                      where  (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal='".$def."'
+                      GROUP BY pc.id_personal
+                      ORDER BY sistema;";
+              return $sql; 
+      break;
+      case 'DEFENSOR': 
+              $sql = "SELECT U.etnia AS etniaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                                  where pc.id_personal='".$def."' and
+                                      U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaHombreT,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                                  where pc.id_personal='".$def."' and
+                                      U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaHombreO,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                              where  pc.id_personal='".$def."' and
+                                                  U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaMujerT,
+              (SELECT COUNT(A.id_actividad)
+                  FROM actividad AS act
+                          INNER JOIN asesoria AS A USING (id_actividad)
+                          INNER JOIN (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          INNER JOIN materia AS m USING (id_materia)
+                          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                              where pc.id_personal='".$def."' and
+                                                  U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaMujerO
+                      FROM		
+                      actividad AS act
+                          LEFT JOIN asesoria AS A USING (id_actividad)
+                          LEFT JOIN personal AS P USING (id_personal)
+                          LEFT JOIN
+                              (SELECT *
+                                  FROM
+                                  personal_campo
+                                      INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                                      LEFT JOIN materia AS m USING (id_materia)
+                                      LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                      where pc.id_personal='".$def."'
+                      GROUP BY pc.id_personal
+                      ORDER BY sistema;";
+              return $sql; 
+      break;
+      case 'ALL': 
+      $sql = "SELECT U.etnia AS etniaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                          where U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaHombreT,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                          where  U.sexo = 'MASCULINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaHombreO,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                      where U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='TRADICIONAL') AS etniaMujerT,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                      where U.sexo = 'FEMENINO' AND U.etnia = etniaU and m.sistema='ORAL') AS etniaMujerO
+              FROM		
+              actividad AS act
+                  LEFT JOIN asesoria AS A USING (id_actividad)
+                  LEFT JOIN personal AS P USING (id_personal)
+                  LEFT JOIN
+                      (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                              LEFT JOIN materia AS m USING (id_materia)
+                              LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)                    
+              GROUP BY etniaU
+              ORDER BY sistema;";
+      return $sql; 
+      break;
+  }
+  
+}
+function idiomaBySistema($valor, $fi, $ff, $def){
+  switch($valor){
+  case'PERIODO': 
+          $sql = "SELECT U.idioma AS idiomaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+          (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                          where  (fecha_registro between '".$fi."' and '".$ff."') and
+                              U.sexo = 'MASCULINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaHombreT,
+         (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                          where  (fecha_registro between '".$fi."' and '".$ff."') and
+                              U.sexo = 'MASCULINO' AND U.idioma= idiomaU and m.sistema='ORAL') AS idiomaHombreO,
+          (SELECT COUNT(A.id_actividad)
+              FROM actividad AS act
+                      INNER JOIN asesoria AS A USING (id_actividad)
+                      INNER JOIN (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                      INNER JOIN materia AS m USING (id_materia)
+                      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                          where  (fecha_registro between '".$fi."' and '".$ff."') and
+                                              U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaMujerT,
+          (SELECT COUNT(A.id_actividad)
+              FROM actividad AS act
+                      INNER JOIN asesoria AS A USING (id_actividad)
+                      INNER JOIN (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                      INNER JOIN materia AS m USING (id_materia)
+                      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                          where  (fecha_registro between '".$fi."' and '".$ff."') and
+                                              U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='ORAL') AS idiomaMujerO
+                  FROM		
+                  actividad AS act
+                      LEFT JOIN asesoria AS A USING (id_actividad)
+                      LEFT JOIN personal AS P USING (id_personal)
+                      LEFT JOIN
+                          (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                                  LEFT JOIN materia AS m USING (id_materia)
+                                  LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                  where  (fecha_registro between '".$fi."' and '".$ff."')
+                  GROUP BY idiomaU
+                  ORDER BY sistema;";
+          return $sql;
+  break;
+  case'PERIODODEF': 
+          $sql = "SELECT U.idioma AS idiomaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                          where  (fecha_registro between '".$fi."' and '".$ff."')  and pc.id_personal ='".$def."' and
+                              U.sexo = 'MASCULINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaHombreT,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                          where  (fecha_registro between '".$fi."' and '".$ff."')  and pc.id_personal ='".$def."' and
+                              U.sexo = 'MASCULINO' AND U.idioma= idiomaU and m.sistema='ORAL') AS idiomaHombreO,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                      where  (fecha_registro between '".$fi."' and '".$ff."')  and pc.id_personal ='".$def."' and
+                                          U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaMujerT,
+      (SELECT COUNT(A.id_actividad)
+          FROM actividad AS act
+                  INNER JOIN asesoria AS A USING (id_actividad)
+                  INNER JOIN (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                  INNER JOIN materia AS m USING (id_materia)
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                      where  (fecha_registro between '".$fi."' and '".$ff."')  and pc.id_personal ='".$def."' and
+                                          U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='ORAL') AS idiomaMujerO
+              FROM		
+              actividad AS act
+                  LEFT JOIN asesoria AS A USING (id_actividad)
+                  LEFT JOIN personal AS P USING (id_personal)
+                  LEFT JOIN
+                      (SELECT *
+                          FROM
+                          personal_campo
+                              INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                              LEFT JOIN materia AS m USING (id_materia)
+                              LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and pc.id_personal ='".$def."'
+              GROUP BY pc.id_personal
+              ORDER BY sistema;";
+      return $sql;
+  break;
+  case'DEFENSOR': 
+          $sql = "SELECT U.idioma AS idiomaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+          (SELECT COUNT(A.id_actividad)
+              FROM actividad AS act
+                      INNER JOIN asesoria AS A USING (id_actividad)
+                      INNER JOIN (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                      INNER JOIN materia AS m USING (id_materia)
+                      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                              where pc.id_personal ='".$def."' and
+                                  U.sexo = 'MASCULINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaHombreT,
+          (SELECT COUNT(A.id_actividad)
+              FROM actividad AS act
+                      INNER JOIN asesoria AS A USING (id_actividad)
+                      INNER JOIN (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                      INNER JOIN materia AS m USING (id_materia)
+                      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                              where pc.id_personal ='".$def."' and
+                                  U.sexo = 'MASCULINO' AND U.idioma= idiomaU and m.sistema='ORAL') AS idiomaHombreO,
+          (SELECT COUNT(A.id_actividad)
+              FROM actividad AS act
+                      INNER JOIN asesoria AS A USING (id_actividad)
+                      INNER JOIN (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                      INNER JOIN materia AS m USING (id_materia)
+                      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                          where  pc.id_personal ='".$def."' and
+                                              U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaMujerT,
+          (SELECT COUNT(A.id_actividad)
+              FROM actividad AS act
+                      INNER JOIN asesoria AS A USING (id_actividad)
+                      INNER JOIN (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                      INNER JOIN materia AS m USING (id_materia)
+                      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                          where pc.id_personal ='".$def."' and
+                                              U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='ORAL') AS idiomaMujerO
+                  FROM		
+                  actividad AS act
+                      LEFT JOIN asesoria AS A USING (id_actividad)
+                      LEFT JOIN personal AS P USING (id_personal)
+                      LEFT JOIN
+                          (SELECT *
+                              FROM
+                              personal_campo
+                                  INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                                  LEFT JOIN materia AS m USING (id_materia)
+                                  LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                  where pc.id_personal ='".$def."'
+                  GROUP BY pc.id_personal
+                  ORDER BY sistema;";
+          return $sql;
+  break;
+  case'ALL': 
+  $sql = "SELECT U.idioma AS idiomaU, COUNT(A.id_Actividad) AS asesoriaPorSistema,
+  (SELECT COUNT(A.id_actividad)
+      FROM actividad AS act
+              INNER JOIN asesoria AS A USING (id_actividad)
+              INNER JOIN (SELECT *
+                      FROM
+                      personal_campo
+                          INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+              INNER JOIN materia AS m USING (id_materia)
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                      where U.sexo = 'MASCULINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaHombreT,
+  (SELECT COUNT(A.id_actividad)
+      FROM actividad AS act
+              INNER JOIN asesoria AS A USING (id_actividad)
+              INNER JOIN (SELECT *
+                      FROM
+                      personal_campo
+                          INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+              INNER JOIN materia AS m USING (id_materia)
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)						
+                      where U.sexo = 'MASCULINO' AND U.idioma= idiomaU and m.sistema='ORAL') AS idiomaHombreO,
+  (SELECT COUNT(A.id_actividad)
+      FROM actividad AS act
+              INNER JOIN asesoria AS A USING (id_actividad)
+              INNER JOIN (SELECT *
+                      FROM
+                      personal_campo
+                          INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+              INNER JOIN materia AS m USING (id_materia)
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                  where U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='TRADICIONAL') AS idiomaMujerT,
+  (SELECT COUNT(A.id_actividad)
+      FROM actividad AS act
+              INNER JOIN asesoria AS A USING (id_actividad)
+              INNER JOIN (SELECT *
+                      FROM
+                      personal_campo
+                          INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+              INNER JOIN materia AS m USING (id_materia)
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                                  where  U.sexo = 'FEMENINO' AND U.idioma = idiomaU and m.sistema='ORAL') AS idiomaMujerO
+          FROM		
+          actividad AS act
+              LEFT JOIN asesoria AS A USING (id_actividad)
+              LEFT JOIN personal AS P USING (id_personal)
+              LEFT JOIN
+                  (SELECT *
+                      FROM
+                      personal_campo
+                          INNER JOIN juzgado USING (id_juzgado)) AS pc USING (id_personal)
+                          LEFT JOIN materia AS m USING (id_materia)
+                          LEFT JOIN usuario_servicio AS U USING (id_usuario_servicio)                                
+          GROUP BY idiomaU
+          ORDER BY sistema;";
+  return $sql;
+  break;
 
+  }
+  
+}
+function discapacidadBySistema($valor, $fi, $ff, $def){
+  switch($valor){
+      case 'PERIODO': 
+              $sql = "SELECT matSistemaG,  COUNT(U.id_usuario_servicio) AS discapTotal,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'SENSORIALES' AND 													
+                                      matSistema=matSistemaG
+              ) AS tablaSensorial,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'SENSORIALES' AND 													
+                                      matSistema=matSistemaG AND U.sexo='MASCULINO'
+              ) AS tablaSensorialM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'SENSORIALES' AND 													
+                                      matSistema=matSistemaG AND U.sexo='FEMENINO'
+              ) AS tablaSensorialF,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MOTRICES' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaMotriz,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MOTRICES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='MASCULINO'
+              ) AS tablaMotrizM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MOTRICES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='FEMENINO'
+              ) AS tablaMotrizF,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MENTALES' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaMental,
+              
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MENTALES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='MASCULINO'
+              ) AS tablaMentalM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MENTALES' AND 
+                                              matSistema=matSistemaG and U.sexo = 'FEMENINO'
+              ) AS tablaMentalF,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MULTIPLES' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaMultiple,					(
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MULTIPLES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='MASCULINO'
+              ) AS tablaMultipleM,
+                                  (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'MULTIPLES' AND 
+                                              matSistema=matSistemaG and U.sexo='FEMENINO'
+              ) AS tablaMultipleF,
+              
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'NINGUNO' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaNinguno,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'NINGUNO' AND 
+                                              matSistema=matSistemaG and U.sexo='MASCULINO'
+              ) AS tablaNingunoM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and U.discapacidad = 'NINGUNO' AND 
+                                              matSistema=matSistemaG and U.sexo = 'FEMENINO'
+              ) AS tablaNingunoF
+          FROM		
+          actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mate.sistema as matSistemaG
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mate using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  (fecha_registro between '".$fi."' and '".$ff."') group by  matSistemaG order by matSistemaG;";
+              return $sql;
+      break;
+      case 'PERIODODEF': 
+              $sql = "SELECT matSistemaG,  COUNT(U.id_usuario_servicio) AS discapTotal,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'SENSORIALES' AND 													
+                                      matSistema=matSistemaG
+              ) AS tablaSensorial,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'SENSORIALES' AND 													
+                                      matSistema=matSistemaG AND U.sexo='MASCULINO'
+              ) AS tablaSensorialM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'SENSORIALES' AND 													
+                                      matSistema=matSistemaG AND U.sexo='FEMENINO'
+              ) AS tablaSensorialF,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MOTRICES' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaMotriz,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MOTRICES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='MASCULINO'
+              ) AS tablaMotrizM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MOTRICES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='FEMENINO'
+              ) AS tablaMotrizF,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MENTALES' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaMental,
+              
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MENTALES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='MASCULINO'
+              ) AS tablaMentalM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer= '".$def."' and U.discapacidad = 'MENTALES' AND 
+                                              matSistema=matSistemaG and U.sexo = 'FEMENINO'
+              ) AS tablaMentalF,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MULTIPLES' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaMultiple,					(
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'MULTIPLES' AND 
+                                              matSistema=matSistemaG AND U.sexo ='MASCULINO'
+              ) AS tablaMultipleM,
+                                  (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer= '".$def."' and U.discapacidad = 'MULTIPLES' AND 
+                                              matSistema=matSistemaG and U.sexo='FEMENINO'
+              ) AS tablaMultipleF,
+              
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer= '".$def."' and U.discapacidad = 'NINGUNO' AND 
+                                              matSistema=matSistemaG
+              ) AS tablaNinguno,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' and U.discapacidad = 'NINGUNO' AND 
+                                              matSistema=matSistemaG and U.sexo='MASCULINO'
+              ) AS tablaNingunoM,
+              (
+                  select count(AA.id_actividad)
+                  from
+                      actividad as act
+                  INNER JOIN asesoria AS AA USING (id_actividad)
+                  INNER JOIN  
+                              (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                      from personal_campo as pcc
+                                          inner join personal per using(id_personal)										
+                                          inner join materia as mat using(id_materia)
+                              ) AS tabla1 on act.id_personal = idPer              
+                  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                              where  (fecha_registro between '".$fi."' and '".$ff."') and idPer= '".$def."' and U.discapacidad = 'NINGUNO' AND 
+                                              matSistema=matSistemaG and U.sexo = 'FEMENINO'
+              ) AS tablaNingunoF
+          FROM		
+          actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mate.sistema as matSistemaG
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mate using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  (fecha_registro between '".$fi."' and '".$ff."') and idPer = '".$def."' group by  matSistemaG order by matSistemaG;";
+              return $sql;
+      break;
+      case'DEFENSOR':                     
+          $sql = "SELECT matSistemaG,  COUNT(U.id_usuario_servicio) AS discapTotal,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where    idPer= '".$def."' and U.discapacidad = 'SENSORIALES' AND 													
+                                  matSistema=matSistemaG
+          ) AS tablaSensorial,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where    idPer = '".$def."' and U.discapacidad = 'SENSORIALES' AND 													
+                                  matSistema=matSistemaG AND U.sexo='MASCULINO'
+          ) AS tablaSensorialM,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where    idPer = '".$def."' and U.discapacidad = 'SENSORIALES' AND 													
+                                  matSistema=matSistemaG AND U.sexo='FEMENINO'
+          ) AS tablaSensorialF,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MOTRICES' AND 
+                                          matSistema=matSistemaG
+          ) AS tablaMotriz,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MOTRICES' AND 
+                                          matSistema=matSistemaG AND U.sexo ='MASCULINO'
+          ) AS tablaMotrizM,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MOTRICES' AND 
+                                          matSistema=matSistemaG AND U.sexo ='FEMENINO'
+          ) AS tablaMotrizF,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer= '".$def."' and U.discapacidad = 'MENTALES' AND 
+                                          matSistema=matSistemaG
+          ) AS tablaMental,
+          
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MENTALES' AND 
+                                          matSistema=matSistemaG AND U.sexo ='MASCULINO'
+          ) AS tablaMentalM,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MENTALES' AND 
+                                          matSistema=matSistemaG and U.sexo = 'FEMENINO'
+          ) AS tablaMentalF,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MULTIPLES' AND 
+                                          matSistema=matSistemaG
+          ) AS tablaMultiple,					(
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'MULTIPLES' AND 
+                                          matSistema=matSistemaG AND U.sexo ='MASCULINO'
+          ) AS tablaMultipleM,
+                              (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where  idPer = '".$def."' and U.discapacidad = 'MULTIPLES' AND 
+                                          matSistema=matSistemaG and U.sexo='FEMENINO'
+          ) AS tablaMultipleF,
+          
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where  idPer = '".$def."' and U.discapacidad = 'NINGUNO' AND 
+                                          matSistema=matSistemaG
+          ) AS tablaNinguno,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'NINGUNO' AND 
+                                          matSistema=matSistemaG and U.sexo='MASCULINO'
+          ) AS tablaNingunoM,
+          (
+              select count(AA.id_actividad)
+              from
+                  actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)										
+                                      inner join materia as mat using(id_materia)
+                          ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                          where idPer = '".$def."' and U.discapacidad = 'NINGUNO' AND 
+                                          matSistema=matSistemaG and U.sexo = 'FEMENINO'
+          ) AS tablaNingunoF
+      FROM		
+      actividad as act
+      INNER JOIN asesoria AS AA USING (id_actividad)
+      INNER JOIN  
+                  (select pcc.id_personal idPer, per.nombre as nombreDef, mate.sistema as matSistemaG
+                          from personal_campo as pcc
+                              inner join personal per using(id_personal)										
+                              inner join materia as mate using(id_materia)
+                  ) AS tabla1 on act.id_personal = idPer              
+      INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                  where idPer = '".$def."' group by  matSistemaG order by matSistemaG;";
+          return $sql;
+      break;
+      case'ALL': 
+      
+      $sql = "SELECT matSistemaG,  COUNT(U.id_usuario_servicio) AS discapTotal,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'SENSORIALES' AND 													
+                              matSistema=matSistemaG
+      ) AS tablaSensorial,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'SENSORIALES' AND 													
+                              matSistema=matSistemaG AND U.sexo='MASCULINO'
+      ) AS tablaSensorialM,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'SENSORIALES' AND 													
+                              matSistema=matSistemaG AND U.sexo='FEMENINO'
+      ) AS tablaSensorialF,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'MOTRICES' AND 
+                                      matSistema=matSistemaG
+      ) AS tablaMotriz,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'MOTRICES' AND 
+                                      matSistema=matSistemaG AND U.sexo ='MASCULINO'
+      ) AS tablaMotrizM,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'MOTRICES' AND 
+                                      matSistema=matSistemaG AND U.sexo ='FEMENINO'
+      ) AS tablaMotrizF,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'MENTALES' AND 
+                                      matSistema=matSistemaG
+      ) AS tablaMental,
+      
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where  U.discapacidad = 'MENTALES' AND 
+                                      matSistema=matSistemaG AND U.sexo ='MASCULINO'
+      ) AS tablaMentalM,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'MENTALES' AND 
+                                      matSistema=matSistemaG and U.sexo = 'FEMENINO'
+      ) AS tablaMentalF,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'MULTIPLES' AND 
+                                      matSistema=matSistemaG
+      ) AS tablaMultiple,					(
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'MULTIPLES' AND 
+                                      matSistema=matSistemaG AND U.sexo ='MASCULINO'
+      ) AS tablaMultipleM,
+                          (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'MULTIPLES' AND 
+                                      matSistema=matSistemaG and U.sexo='FEMENINO'
+      ) AS tablaMultipleF,
+      
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'NINGUNO' AND 
+                                      matSistema=matSistemaG
+      ) AS tablaNinguno,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'NINGUNO' AND 
+                                      matSistema=matSistemaG and U.sexo='MASCULINO'
+      ) AS tablaNingunoM,
+      (
+          select count(AA.id_actividad)
+          from
+              actividad as act
+          INNER JOIN asesoria AS AA USING (id_actividad)
+          INNER JOIN  
+                      (select pcc.id_personal idPer, per.nombre as nombreDef, mat.sistema as matSistema 
+                              from personal_campo as pcc
+                                  inner join personal per using(id_personal)										
+                                  inner join materia as mat using(id_materia)
+                      ) AS tabla1 on act.id_personal = idPer              
+          INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+                      where U.discapacidad = 'NINGUNO' AND 
+                                      matSistema=matSistemaG and U.sexo = 'FEMENINO'
+      ) AS tablaNingunoF
+  FROM		
+  actividad as act
+  INNER JOIN asesoria AS AA USING (id_actividad)
+  INNER JOIN  
+              (select pcc.id_personal idPer, per.nombre as nombreDef, mate.sistema as matSistemaG
+                      from personal_campo as pcc
+                          inner join personal per using(id_personal)										
+                          inner join materia as mate using(id_materia)
+              ) AS tabla1 on act.id_personal = idPer              
+  INNER JOIN usuario_servicio AS U USING (id_usuario_servicio)
+             group by  matSistemaG order by matSistemaG;";
+      return $sql;
+      break;
+  }
+  
+}
+function topDefensoresBySistema($valor, $fi, $ff, $def){
+  switch($valor){
+      case'PERIODO': 
+      $sql = "SELECT matSistema as sistemaM, nombreDef AS nombreP,tabla1.idPer as idDeff, nombreJuz, COUNT(AA.id_Actividad) AS asesoriaPorSistema,
+      (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                      (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where  (fecha_registro between '".$fi."' and '".$ff."') and
+                          cv.sexo = 'FEMENINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS mujeres,
+          (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where  (fecha_registro between '".$fi."' and '".$ff."') and
+                          cv.sexo = 'MASCULINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS hombres
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)
+                          where  (fecha_registro between '".$fi."' and '".$ff."') 
+          GROUP BY idDeff
+          ORDER BY sistemaM;";
+      return $sql;
+      break;
+      case'PERIODODEF': 
+      $sql = "SELECT matSistema as sistemaM, nombreDef AS nombreP,tabla1.idPer as idDeff, nombreJuz, COUNT(AA.id_Actividad) AS asesoriaPorSistema,
+      (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                      (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where  (fecha_registro between '".$fi."' and '".$ff."') and pcc.id_personal='".$def."' and
+                          cv.sexo = 'FEMENINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS mujeres,
+          (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where  (fecha_registro between '".$fi."' and '".$ff."') and pcc.id_personal='".$def."' and
+                          cv.sexo = 'MASCULINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS hombres
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)
+                          where  (fecha_registro between '".$fi."' and '".$ff."') and pcc.id_personal='".$def."' 
+          GROUP BY idDeff
+          ORDER BY sistemaM;";
+      return $sql;
+      break;
+      case'DEFENSOR': 
+      $sql = "SELECT matSistema as sistemaM, nombreDef AS nombreP,tabla1.idPer as idDeff, nombreJuz, COUNT(AA.id_Actividad) AS asesoriaPorSistema,
+      (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                      (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where    pcc.id_personal='".$def."' and
+                          cv.sexo = 'FEMENINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS mujeres,
+          (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where    pcc.id_personal='".$def."' and
+                          cv.sexo = 'MASCULINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS hombres
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)
+                          where pcc.id_personal='".$def."' 
+          GROUP BY idDeff
+          ORDER BY sistemaM;";
+      return $sql;
+      break;
+      case'ALL': 
+      $sql = "SELECT matSistema as sistemaM, nombreDef AS nombreP,tabla1.idPer as idDeff, nombreJuz, COUNT(AA.id_Actividad) AS asesoriaPorSistema,
+      (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                      (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where cv.sexo = 'FEMENINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS mujeres,
+          (SELECT COUNT(AA.id_actividad)
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)						
+                      where cv.sexo = 'MASCULINO' AND tabla1.idPer = idDeff and matSistema = sistemaM) AS hombres
+          FROM actividad as act
+              INNER JOIN asesoria AS AA USING (id_actividad)
+              INNER JOIN  
+                          (select pcc.id_personal idPer, juz.id_juzgado as idJuz, juz.juzgado as nombreJuz, per.nombre as nombreDef, mat.sistema as matSistema 
+                                  from personal_campo as pcc
+                                      inner join personal per using(id_personal)
+                                      INNER JOIN juzgado  juz USING (id_juzgado)
+                                      inner join materia as mat using(id_materia)
+                           ) AS tabla1 on act.id_personal = idPer              
+              INNER JOIN usuario_servicio AS cv USING (id_usuario_servicio)
+          GROUP BY idDeff
+          ORDER BY sistemaM;";
+      return $sql;
+      break;
+  }
+  
+}
+function getExpedientesByDefPeriodo($fi,$ff,$def){
+}
+function getExpedientesByPeriodo($fi,$ff){
+}
+function getExpedientesByDefCompleto($def){
+}
+function getExpedientesGC(){
+  $lista = array();
+  $sqlExpGeneral='call tablaExpGeneral();';
+  $listaExpGeneral = consulta($sqlExpGeneral);
+  $sqlExpMateria = 'call tablaExpMateria()';
+  $listaExpMateria = consulta($sqlExpMateria);
+  $sqlExpRegion = 'call tablaExpRegion()';
+  $listaExpRegion = consulta($sqlExpRegion);
+  $sexoBySistema =  'call tablaExpSexo()';//sexoBySistema('ALL','', '', '');
+  $listaExpSexo = consulta($sexoBySistema);
+  $actBySistema =  'call tablaExpActividades()';
+  $listaExpAct =  consulta($actBySistema);
+  $generoBySistema =  'call tablaExpGenero()';
+  $listaExpGenero =  consulta($generoBySistema);
+  $edadBySistema =  'call tablaExpEdad()';
+  $listaExpEdad =  consulta($edadBySistema);
+  $etniaBySistema =  'call tablaExpEtnia()';
+  $listaExpEtnia =  consulta($etniaBySistema);
+  $idiomaBySistema =  'call tablaExpIdioma()';
+  $listaExpIdioma =  consulta($idiomaBySistema);
+
+
+      $lista['tablaActExp'] = $listaExpAct;      
+      $lista['tablaSexoExp'] = $listaExpSexo;
+      $lista['tablaGeneroExp'] = $listaExpGenero;      
+      $lista['tablaEdadExp']= $listaExpEdad;      
+      $lista['tablaActEtnia'] = $listaExpEtnia;
+      $lista['tablaIdiomaExp'] = $listaExpAct; 
+      $lista['tablaGeneralExp'] = $listaExpGeneral;
+      $lista['tablaMateriaExp'] =$listaExpMateria;
+      return $lista;
+}
+function getExpedientesByDefPeriodoP($fi,$ff,$def, $sistema, $atributos){
+
+}
+function getExpedientesByPeriodoCP($fi,$ff, $sistema, $atributos){
+
+}
+function getExpedientesByDefPC($def, $sistema, $atributos){
+
+}
+function getExpedientesPC($sistema, $atributos){
+
+}
 function getExpedientesByRangoFecha($fechaI, $fechaF){
   $sql = " select * from expediente as exp inner join personal as p using(id_personal)
   inner join( SELECT * from personal_campo as pc inner join materia as m using(id_materia)
