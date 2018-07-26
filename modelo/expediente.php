@@ -1647,50 +1647,92 @@ function getExpedientesByDefPeriodo($fi,$ff,$def){
 function getExpedientesByPeriodo($fi,$ff){
 }
 function getExpedientesByDefCompleto($def){
+    $lista = array();
+  $sqlExpGeneral='call tablaExpGeneral("DEFENSOR","'.$def.'","0000-00-00","0000-00-00");';
+  $listaExpGeneral = consulta($sqlExpGeneral);
+  $sqlExpMateria = 'call tablaExpMateria("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpMateria = consulta($sqlExpMateria);
+  $sqlExpRegion = 'call tablaExpRegion("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpRegion = consulta($sqlExpRegion);
+  $sexoBySistema =  'call tablaExpSexo("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';//sexoBySistema('ALL','', '', '');
+  $listaExpSexo = consulta($sexoBySistema);
+  $actBySistema =  'call tablaExpActividades("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpAct =  consulta($actBySistema);
+  $generoBySistema =  'call tablaExpGenero("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpGenero =  consulta($generoBySistema);
+  $edadBySistema =  'call tablaExpEdad("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpEdad =  consulta($edadBySistema);
+  $etniaBySistema =  'call tablaExpEtnia("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpEtnia =  consulta($etniaBySistema);
+  $idiomaBySistema =  'call tablaExpIdioma("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpIdioma =  consulta($idiomaBySistema);
+  $discapacidadBySistema =  'call tablaExpDiscapacidad("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpDiscapacidad =  consulta($discapacidadBySistema);
+  $regionBySistema =  'call tablaExpRegion("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
+  $listaExpRegion=  consulta($regionBySistema);
+  $nombre = 'call nombreDefExp("'.$def.'")';
+    $listaNom = consulta($nombre);
+       $lista['nombreDef'] = $listaNom;
+      $lista['tablaRegionExpDef'] = $listaExpRegion;     
+      $lista['tablaActExpDef'] = $listaExpAct;      
+      $lista['tablaSexoExpDef'] = $listaExpSexo;
+      $lista['tablaGeneroExpDef'] = $listaExpGenero;      
+      $lista['tablaEdadExpDef']= $listaExpEdad;      
+      $lista['tablaEtniaExpDef'] = $listaExpEtnia;
+      $lista['tablaIdiomaExpDef'] = $listaExpIdioma; 
+      $lista['tablaGeneralExpDef'] = $listaExpGeneral;
+      $lista['tablaMateriaExpDef'] =$listaExpMateria;
+      $lista['tablaDiscapacidadExpDef'] =$listaExpDiscapacidad;
+      
+      return $lista;
 }
 function getExpedientesGC(){
   $lista = array();
-  $sqlExpGeneral='call tablaExpGeneral();';
+  $sqlExpGeneral='call tablaExpGeneral("COMPLETO","","0000-00-00","0000-00-00");';
   $listaExpGeneral = consulta($sqlExpGeneral);
-  $sqlExpMateria = 'call tablaExpMateria()';
+  $sqlExpMateria = 'call tablaExpMateria("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpMateria = consulta($sqlExpMateria);
-  $sqlExpRegion = 'call tablaExpRegion()';
+  $sqlExpRegion = 'call tablaExpRegion("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpRegion = consulta($sqlExpRegion);
-  $sexoBySistema =  'call tablaExpSexo()';//sexoBySistema('ALL','', '', '');
+  $sexoBySistema =  'call tablaExpSexo("COMPLETO","","0000-00-00","0000-00-00")';//sexoBySistema('ALL','', '', '');
   $listaExpSexo = consulta($sexoBySistema);
-  $actBySistema =  'call tablaExpActividades()';
+  $actBySistema =  'call tablaExpActividades("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpAct =  consulta($actBySistema);
-  $generoBySistema =  'call tablaExpGenero()';
+  $generoBySistema =  'call tablaExpGenero("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpGenero =  consulta($generoBySistema);
-  $edadBySistema =  'call tablaExpEdad()';
+  $edadBySistema =  'call tablaExpEdad("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpEdad =  consulta($edadBySistema);
-  $etniaBySistema =  'call tablaExpEtnia()';
+  $etniaBySistema =  'call tablaExpEtnia("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpEtnia =  consulta($etniaBySistema);
-  $idiomaBySistema =  'call tablaExpIdioma()';
+  $idiomaBySistema =  'call tablaExpIdioma("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpIdioma =  consulta($idiomaBySistema);
-
-
+  $discapacidadBySistema =  'call tablaExpDiscapacidad("COMPLETO","","0000-00-00","0000-00-00")';
+  $listaExpDiscapacidad =  consulta($discapacidadBySistema);
+  $regionBySistema =  'call tablaExpRegion("COMPLETO","","0000-00-00","0000-00-00")';
+  $listaExpRegion=  consulta($regionBySistema);
+  $topBySistema =  'call tablaExpTop()';
+  $listaExpTop=  consulta($topBySistema);
+      $lista['tablaTopExp'] = $listaExpTop;   
+      $lista['tablaRegionExp'] = $listaExpRegion;     
       $lista['tablaActExp'] = $listaExpAct;      
       $lista['tablaSexoExp'] = $listaExpSexo;
       $lista['tablaGeneroExp'] = $listaExpGenero;      
       $lista['tablaEdadExp']= $listaExpEdad;      
-      $lista['tablaActEtnia'] = $listaExpEtnia;
-      $lista['tablaIdiomaExp'] = $listaExpAct; 
+      $lista['tablaEtniaExp'] = $listaExpEtnia;
+      $lista['tablaIdiomaExp'] = $listaExpIdioma; 
       $lista['tablaGeneralExp'] = $listaExpGeneral;
       $lista['tablaMateriaExp'] =$listaExpMateria;
+      $lista['tablaDiscapacidadExp'] =$listaExpDiscapacidad;
+      
       return $lista;
 }
 function getExpedientesByDefPeriodoP($fi,$ff,$def, $sistema, $atributos){
-
 }
 function getExpedientesByPeriodoCP($fi,$ff, $sistema, $atributos){
-
 }
 function getExpedientesByDefPC($def, $sistema, $atributos){
-
 }
 function getExpedientesPC($sistema, $atributos){
-
 }
 function getExpedientesByRangoFecha($fechaI, $fechaF){
   $sql = " select * from expediente as exp inner join personal as p using(id_personal)
@@ -1704,11 +1746,11 @@ function getExpedientesByRangoFecha($fechaI, $fechaF){
         select * from contraparte_expediente as co 
                               inner join contraparte using(id_contraparte)
                               ) as tablaContraparte using(id_expediente)
-where fecha_registro between '".$fechaI."' and '".$fechaF."'  order by generoU";
-  $lista= consulta($sql);
-  //print_r($sql);
-  return $lista;
-}
+    where fecha_registro between '".$fechaI."' and '".$fechaF."'  order by generoU";
+    $lista= consulta($sql);
+    //print_r($sql);
+    return $lista;
+    }
 
 function getExpedienteByNum($numExp){
       $sql = " select * from respuesta inner join preguntas using(id_pregunta) inner join expediente using(id_expediente)
@@ -1727,8 +1769,7 @@ function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia){
        //  print_r($lista);
          return $lista;
   }
-
-  function listar_UsuarioServicioByExpediente($id_expediente){
+ function listar_UsuarioServicioByExpediente($id_expediente){
   
     $sql = "   select * from detalle_usuario_expediente 
                 inner join usuario_servicio using(id_usuario_servicio)
@@ -1737,8 +1778,7 @@ function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia){
      //  print_r($lista);
        return $lista;
 }
-
-  function listar_x_num_expediente_($num_expediente){
+function listar_x_num_expediente_($num_expediente){
    
     $sql = "select * from expediente  inner join 
                           usuario_servicio using(id_usuario_servicio)
@@ -1781,7 +1821,6 @@ function listar_expedientes_x_estado($estado){
   $lista=consulta($sql);
   return $lista;
 }
-
 function listar_expedientes_EM($estado, $materia){
   switch($estado){
     case 1:
@@ -1839,49 +1878,34 @@ function checkNoti(){
   
   return $nums;
 }
-
 function DeleteNotificacion($id_expediente ){
   $sql = "delete from  notificaciones where id_expediente=".$id_expediente;//num notis
   $nums = consulta($sql);
  //echo $sql;
   return $nums;
 }
-
 function finalizarExpediente($datos){
   $sql="update expediente set estado='finalizado',fecha_final='".$datos['fecha_final']."', observaciones='".$datos['observaciones']."'
   where id_expediente='".$datos['id_expediente']."'";
   $lista = consulta($sql);
  // echo $sql;
   return $lista;
-}
-
+    }
 function bajaExpediente($respuesta){
     $sql="update expediente set estado='".$respuesta['estado']."', observaciones='".$respuesta['observaciones']."'
           ,fecha_final='".$respuesta['fecha_baja']."',  motivos='".$respuesta['motivos']."' where id_expediente='".$respuesta['id_expediente']."'";
           $lista = consulta($sql);
         //  echo $sql;
           return $lista;
-}
-
+    }
 function estadoEnProceso($id_expediente){
   $sql="update expediente set estado='PROCESO'
         where id_expediente='".$id_expediente."'";
         $lista = consulta($sql);
         //echo $sql;
         return $lista;
-}
-
- /* function listar_expediente_x_defensor($idDefensor){
-   
-    $sql = "select exp.estado,exp.fecha_final,exp.fecha_inicio, exp.num_expediente, exp.materia,exp.id_usuario_servicio,defensor.id_juzgado   defensor.estado from expediente as exp inner join 
-                          personal_campo  ad defensor using(id_personal)
-                           where id_personal='".$idDefensor."'";
-   // echo $sql;
-    $lista=consulta($sql);
-  //  print_r($lista);
-    return $lista;
- } */
- function listar_expediente_x_defensor($idDefensor){
+    }
+function listar_expediente_x_defensor($idDefensor){
    
     $sql = "select exp.id_expediente,exp.estado,exp.nombre_delito,exp.tipo_delito,exp.observaciones,exp.fecha_final,exp.fecha_inicio, exp.num_expediente,
                 defensor.id_juzgado,     defensor.estado AS estadoDefensor,defensor.id_personal,mate.materia,mate.sistema
@@ -1895,28 +1919,27 @@ function estadoEnProceso($id_expediente){
     $lista=consulta($sql);
   //  print_r($lista);
     return $lista;
- }
-  
-  function listar_expediente_asesoria($id_expediente){
+    }
+function listar_expediente_asesoria($id_expediente){
         global $conexion;
         $sql = "select * from expediente inner join compra_proveedor using(id_expediente) inner join asesoria using(id_expediente) where nombre='".$id_expediente."'";
         $consulta = consulta($sql, $conexion);
         return $consulta;
     }
-    function listar_expediente_visitas($id_expediente){
+function listar_expediente_visitas($id_expediente){
         global $conexion;
         $sql = "select * from expediente inner join compra_proveedor using(id_expediente) inner join visitas using(id_expediente) where nombre='".$id_expediente."'";
         $consulta = consulta($sql, $conexion);
         return $consulta;
     }
-    function listar_expediente_adudiencia($id_expediente){
+ function listar_expediente_adudiencia($id_expediente){
         global $conexion;
         $sql = "select * from expediente inner join compra_proveedor using(id_expediente) inner join audiencia using(id_expediente) where nombre='".$id_expediente."'";
         $consulta = consulta($sql, $conexion);
         return $consulta;
     }
     
-    function listar_pregunta($id_materia){
+function listar_pregunta($id_materia){
      
         $sql = "select pregunta.id_pregunta,pregunta.id_materia,pregunta.id_pregunta,pregunta.pregunta,pregunta.identificador
                     from preguntas as pregunta
@@ -1925,7 +1948,7 @@ function estadoEnProceso($id_expediente){
         return $consulta;
     }
     
-    function listar_preguntaConOpciones($id_materia,$id_expediente){
+function listar_preguntaConOpciones($id_materia,$id_expediente){
      
         /*  $sql = "select pregunta.id_pregunta,pregunta.pregunta,detalle.id_materia,detalle.id_pregunta_materia,detalle.identificador,op.opcion
                 from pregunta as pregunta
@@ -1961,7 +1984,7 @@ function estadoEnProceso($id_expediente){
     }
     
 
-    function alta_expediente($objetoEntidad){
+function alta_expediente($objetoEntidad){
       
         $sql = "INSERT INTO expediente ";
         $sql.= " SET id_personal='".$objetoEntidad['id_defensor']."', nombre_delito='".$objetoEntidad['nombre_delito']."' ,";
@@ -1975,13 +1998,13 @@ function estadoEnProceso($id_expediente){
 
     //Definimos la funciones sobre el objeto crear_expediente
     
-    function ultimoExpedinteCreatado(){
+function ultimoExpedinteCreatado(){
         $sql = "SELECT MAX(id_expediente) AS id FROM expediente";
         $id=consulta($sql);
         // print_r($id);
       return $id[0]['id']; 
 
-    }
+ }
 
 
 

@@ -53,21 +53,21 @@ $(document).ready(function () {
 		var inputProject = $('#project').val();
 		var checkDef = $('#checkId').get(0).checked;                                                              		
 
-		if(this.id == "inputRadio3"){//informe por periodo			
+		if(this.id == "inputRadio1"){//informe por periodo			
 			$("#divPeriodo").removeAttr('style');
-			if(checkDef){
-				if(inputProject != '' && myFunctionDate('') != false && selectSistema !=''){
+			/* if(checkDef){
+				if(inputProject != '' && myFunctionDate('')){
 					desc.disabled= false;
 				}
 			}else{
-				if(myFunctionDate('') != false && selectSistema != ''){
+				if(myFunctionDate('') != false){
 					desc.disabled= false;
 				}
-			}						
+			} */						
 		}
-		if(this.id == "inputRadio4"){//informe  completo				
+		if(this.id == "inputRadio2"){//informe  completo				
 			$("#divPeriodo").attr('style','display:none');
-			console.log(inputProject, ' valor del input project');
+			/* console.log(inputProject, ' valor del input project');
 			if(checkDef){ 
 				if(inputProject != '' && selectSistema != ''){
 					desc.disabled= false;
@@ -76,10 +76,9 @@ $(document).ready(function () {
 				if(selectSistema != ''){
 					desc.disabled= false;
 				}
-			}	
+			}	 */
 		}
     }); 
-
 	$('#tebody').on('click', '.botonExp', function (evst) {
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
 		console.log(idDef, ' id del defensor');
@@ -465,7 +464,6 @@ $(document).ready(function () {
 			}
 		});
 	});
-	
 	function eliminarDefensor(idDef) {
 		//console.log(idDef, 'i defensor');
 		$.ajax({
@@ -918,993 +916,6 @@ function initialize(lat, lon) {
 		}
 	});
 };
-function generarPDFExpedientes() {
-	var fechaI = document.getElementById('inputInicio').value;
-	var fechaFi = document.getElementById('inputFinal').value;
-	var fecha1 = new Date(fechaI);
-	var fecha2 = new Date(fechaFi);
-	var actividades;
-	var asesoriasTO, discapacidades;
-	var sexos, generos, etnias, etniasR, etniasSistema, edades, idiomasR, idiomas, idiomasSistema;
-	var totalH, totalM, totalSexoT, totalSexoO, totalSexo, totalSen, totalMot,totalMen, totalMul, totalDisT,totalDisO, totalDiscapacidad;
-	var totalLesbico, totalGay, totalBisexual, totalTransexual, 
-		totalTransgenero, totalTravesti, totalIntersexual,
-		totalGenerosT, totalGenerosO, totalG, totalEdadT, 
-		totalEdadO, totalEdadS,totalEdad1, totalEdad2, totalEdad3, totalEdad4, totalEdad5, totalEdad6 ;
-	var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Nomviembre", "Diciembre"];
-	console.log(fecha1.getUTCDate(), meses[fecha1.getUTCMonth()]);
-	//console.log(getBase64FromImageUrl('../../recursos/images/cabecera.png'));
-	$.ajax({
-		url: "../../controlador/personal_campo/controladorInformeExp.php",
-		type: "POST",
-		data: "fechaI=" + fechaI + "&fechaF=" + fechaFi,
-		success: function (data) {
-			var base64 = globalHeaderPDF;
-			var jsonInforme = jQuery.parseJSON(data);
-
-			/* actividades = getNumActividades(jsonInforme);
-			asesoriasTO = getNumAsesoriasTO(jsonInforme);
-			sexos = getNumSexoUsuarios(jsonInforme);
-			discapacidades = getNumDiscapacidadUsuarios(jsonInforme);
-			generos = getNumGeneroUsuarios(jsonInforme);
-			etnias = getNumEtniasUsuarios(jsonInforme);
-			idiomas = getNumIdiomasUsuarios(jsonInforme);
-			idiomasSistema = getIdiomasBySistema(getArrayIdiomasSystem(jsonInforme), jsonInforme);						
-			etniasSistema = getEtniasBySistema(getArrayEtniasSystem(jsonInforme), jsonInforme);
-			idiomasR = generarRowsIdiomas(idiomas, idiomasSistema);
-			etniasR = generarRowsEtnias(etnias, etniasSistema);
-			edades = getNumEdadUsuarios(jsonInforme);
-			console.log(edades, ' edades por sistema');
-			console.log(etniasR, '  CUERPO DE LA TABLA ETNIAS');			
-			console.log(idiomasR, '  CUERPO DE LA TABLA IDIOMAS');
-
-			totalH = sexos['numMascT'] + sexos['numMascO'];
-			totalM = sexos['numFemT'] + sexos['numFemO'];
-			totalSexo = totalH + totalM;
-			totalSexoT = sexos['numMascT'] + sexos['numFemT'];
-			totalSexoO = sexos['numMascO'] + sexos['numFemO'];
-
-
-			totalSen = discapacidades['numSensorialesT'] + discapacidades['numSensorialesO'];			
-			totalMot = discapacidades['numMotricesT'] + discapacidades['numMotricesO'];			
-			totalMen = discapacidades['numMentalesT'] + discapacidades['numMentalesO'];
-			totalMul = discapacidades['numMultiplesT'] + discapacidades['numMultiplesO'];	
-
-			totalDisT = discapacidades['numSensorialesT'] + discapacidades['numMotricesT'] + discapacidades['numMentalesT']+discapacidades['numMultiplesT'];
-			totalDisO =  discapacidades['numSensorialesO'] + discapacidades['numMotricesO'] + discapacidades['numMentalesO']+discapacidades['numMultiplesO'];
-			totalDiscapacidad = totalDisT + totalDisO;
-
-
-			totalLesbico = generos['numLesbicoT'] + generos['numLesbicoO'];
-			totalGay = generos['numGayT'] + generos['numGayO'];
-			totalBisexual = generos['numBisexualT'] + generos['numBisexualO'];
-			totalTransexual = generos['numTransexualT'] + generos['numTransexualO'];
-			totalTransgenero = generos['numTransgeneroT'] + generos['numTransgeneroO'];
-			totalTravesti = generos['numTravestiT'] + generos['numTravestiO'];
-			totalIntersexual = generos['numIntersexualT'] + generos['numIntersexualO'];
-			totalGenerosT = generos['numLesbicoT'] + generos['numGayT'] + generos['numBisexualT'] + generos['numTransexualT'] + generos['numTransgeneroT'] + generos['numTravestiT'] + generos['numIntersexualT'];
-			totalGenerosO = generos['numLesbicoO'] + generos['numGayO'] + generos['numBisexualO'] + generos['numTransexualO'] + generos['numTransgeneroO'] + generos['numTravestiO'] + generos['numIntersexualO'];
-
-			totalG = totalLesbico + totalGay + totalBisexual + totalTransexual + totalTransgenero + totalTravesti + totalIntersexual;
-			totalEdad1 =  edades['edades1T'] +  edades['edades1O'];
-			totalEdad2 =  edades['edades2T'] +  edades['edades2O'];
-			totalEdad3 =  edades['edades3T'] +  edades['edades3O'];
-			totalEdad4 =  edades['edades4T'] +  edades['edades4O'];
-			totalEdad5 =  edades['edades5T'] +  edades['edades5O'];
-			totalEdad6 =  edades['edades6T'] +  edades['edades6O'];
-			totalEdadT = edades['edades1T'] + edades['edades2T'] + edades['edades3T'] + edades['edades4T'] + edades['edades5T'] +  edades['edades6T'];
-			totalEdadO =  edades['edades1O'] + edades['edades2O'] + edades['edades3O'] + edades['edades4O'] + edades['edades5O'] +  edades['edades6O'];
-			totalEdadS = totalEdadT + totalEdadO;
- */
-
-			//console.log(arrays, ' arrays prueba 1');
-
-			/* 	
-									['total', '302','123','1232'],
-									['total', '302','123','1232']
-			'numMascT',
-				'numFemT',
-				'numMascO',
-			'numFemO',
-						var contenido = '';
-						$.each(jsonInforme, function (KEY, VALOR) {
-							contenido += 'Nombre del defensor: ' + VALOR.Defensor + '\n';
-							contenido += 'Nombre del usuario de servicio: ' + VALOR.Usuario + '\n';
-							contenido += 'Fecha de registro: ' + VALOR.fecha_registro + '\n';
-							contenido += 'Observaciones: ' + VALOR.observacion + '\n\n';
-						}); 
-			*/
-			var fecha = new Date();
-			var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-			var fechaF = fecha.toLocaleDateString("es-ES", options);
-
-			var primerM = fechaF.charAt(0).toUpperCase();
-			var siguiente = fechaF.slice(1).toLowerCase();
-			var dd = {
-				watermark: { text: 'www oaxaca gob mx', color: 'gray', opacity: 0.3, bold: true, italics: false },
-				pageSize: 'A4',
-				pageOrientation: 'portrait',
-				header: {
-					margin: [105, 20, 100, 0],
-					columns: [
-						{
-							// usually you would use a dataUri instead of the name for client-side printing
-							// sampleImage.jpg however works inside playground so you can play with it
-							image: 'data:image/png;base64,' + base64, width: 400, height: 60
-						}
-					]
-				},
-				footer: function (currentPage, pageCount) {
-					return {
-						table: {
-							widths: ['*', 00],
-							body: [
-								[
-									{ text: 'Pág. ' + currentPage + ' de ' + pageCount + '   ', alignment: 'center', bold: true, color: 'gray' }
-								]
-							]
-						},
-						layout: 'noBorders',
-					};
-				},
-				// [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-				pageMargins: [80, 60, 40, 60],
-				content: [
-					{
-						stack: [
-							'“2018, AÑO DE LA ERRADICACIÓN DEL TRABAJO INFANTIL”',
-							{
-								text: 'Reyes Mantecón, San Bartolo Coyotepec, Oax; ' + primerM + siguiente + '.\n' +
-									'Periodo de ' + fechaI + ' a ' + fechaFi, style: 'subheader'
-							},
-						],
-						style: 'header'
-					},
-					{ text: '1.- INFORME GENERAL DE EXPEDIENTES', style: 'subheader2' },
-					{ text: 'Con el objetivo de contribuir a una justicia pronta, expedita e imparcial, durante el periodo que comprende del ' + fecha1.getUTCDate() + ' de ' + meses[fecha1.getUTCMonth()] + ' al ' + fecha2.getUTCDate() + ' de ' + meses[fecha2.getUTCMonth()] + ' del presente año, la Defensoría Pública brindó N servicios gratuitos de asesorías jurídicas generales, lo anterior se detalla de la siguiente manera:', style: 'textoJustificado' },// actividades['asesorias'] 
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							headerRows: 1,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Sistema de justicia', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorio y oral', style: 'tableHeader', alignment: 'center' },
-								],
-								['Usuarios atendidos', '',''],//asesoriasTO['asesTradicional'], asesoriasTO['asesOral']],
-							]
-						}
-					},
-					{ text: 'Del total general de usuarios atendidos, a continuación se desglosan los atributos de los beneficiarios:', style: 'textoJustificado' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: [200, 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Sexo', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-									{}, {}
-								],
-								[
-									{},
-									{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['Hombre', '','',''],
-								['Mujer',  '','',''],
-								['Total', '','','']
-							]
-						}
-					},
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: [200, 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Género', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-									{}, {}
-								],
-								[
-									{},
-									{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['Lésbico',  '','',''],
-								['Gay',  '','',''],
-								['Bisexual',  '','',''],
-								['Transexual',  '','',''],
-								['Transgénero',  '','',''],//totalTransgenero, generos['numTransgeneroT'], generos['numTransgeneroO']],
-								['Travestí', '','',''],// totalTravesti, generos['numTravestiT'], generos['numTravestiO']],
-								['Intersexual',  '','',''],//totalIntersexual, generos['numIntersexualT'], generos['numIntersexualO']],
-								['Total', '','',''] //totalG, totalGenerosT, totalGenerosO]
-							]
-						}
-					},
-					{ text: '\n ', style: 'saltoLinea' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: [200, 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Edad', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-									{}, {}
-								],
-								[
-									{},
-									{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['0-7 Años',	 '','',''],//totalEdad1, edades['edades1T'], edades['edades1O']],
-								['8-12 Años',	'','',''],//totalEdad2, edades['edades2T'], edades['edades2O']],
-								['13-18 Años',	'','',''],//totalEdad3, edades['edades3T'], edades['edades3O']],
-								['19-25 Años',	'','',''],//totalEdad4, edades['edades4T'], edades['edades4O']],
-								['26-30 Años',	'','',''],//totalEdad5, edades['edades5T'], edades['edades5O']],
-								['31-90 Años',	'','',''],//totalEdad6, edades['edades6T'], edades['edades6O']],
-								['Total', 		'','','']//totalEdadS, totalEdadT,totalEdadO]
-							]
-						}
-					},
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {//etnias
-							widths: [200, 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: //etniasR
-							[
-								[
-									{ text: 'Etnias', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-									{}, {}
-								],
-								[
-									{},
-									{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['Etnia 1','','',''], //totalSen,  discapacidades['numSensorialesT'],  discapacidades['numSensorialesO']],
-								['Etnia 2', '','',''],//totalMot, discapacidades['numMotricesT'],  discapacidades['numMotricesO']],
-								['Etnia 3', '','',''],//totalMen,  discapacidades['numMentalesT'],  discapacidades['numMentalesO']],
-								['Etnia 4','','',''],// totalMul,  discapacidades['numMultiplesT'],  discapacidades['numMultiplesO']],
-								['Total','','','']// totalDiscapacidad, totalDisT, totalDisO]
-							]
-						}
-					},
-					{ text: '\n\n', style: 'saltoLinea' }, { text: '\n\n', style: 'saltoLinea' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: [200, 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: //idiomasR
-							[
-								[
-									{ text: 'Idioma o Lengua', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-									{}, {}
-								],
-								[
-									{},
-									{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['Idioma 1','','',''], //totalSen,  discapacidades['numSensorialesT'],  discapacidades['numSensorialesO']],
-								['Idioma 2', '','',''],//totalMot, discapacidades['numMotricesT'],  discapacidades['numMotricesO']],
-								['Idioma 3', '','',''],//totalMen,  discapacidades['numMentalesT'],  discapacidades['numMentalesO']],
-								['Idioma 4','','',''],// totalMul,  discapacidades['numMultiplesT'],  discapacidades['numMultiplesO']],
-								['Total','','','']// totalDiscapacidad, totalDisT, totalDisO]
-							]
-						}
-					},		
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Discapacidades', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 3, style: 'tableHeader', alignment: 'center' },
-									{}, {}
-								],
-								[
-									{},
-									{ text: 'Total', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['Sensoriales y de la comunicación','','',''], //totalSen,  discapacidades['numSensorialesT'],  discapacidades['numSensorialesO']],
-								['Motrices', '','',''],//totalMot, discapacidades['numMotricesT'],  discapacidades['numMotricesO']],
-								['Mentales', '','',''],//totalMen,  discapacidades['numMentalesT'],  discapacidades['numMentalesO']],
-								['Multiples','','',''],// totalMul,  discapacidades['numMultiplesT'],  discapacidades['numMultiplesO']],
-								['Total','','','']// totalDiscapacidad, totalDisT, totalDisO]
-							]
-						}
-					},
-					{ text: '\n ', style: 'saltoLinea' },
-					{ text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de asesorías jurídicas brindadas en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos en  asesorías jurídicas, esto también por sistema. ', style: 'textoJustificado' },
-					{ text: '10 DEFENSORES CON ALTO NÚMERO DE ASESORÍAS JURÍDICAS' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Asesorías brindadas', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{}
-								],
-								[
-									{},
-									{},
-									{},
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['1', ' ', ' ', ' ', ' '],
-								['2', ' ', ' ', ' ', ' '],
-								['3', ' ', ' ', ' ', ''],
-								['4', ' ', ' ', ' ', ''],
-								['5', ' ', ' ', ' ', ''],
-								['6', ' ', ' ', ' ', ''],
-								['7', ' ', ' ', ' ', ''],
-								['8', ' ', ' ', ' ', ''],
-								['9', ' ', ' ', ' ', ''],
-								['10', ' ', ' ', ' ', '']
-							]
-						}
-					},
-					{ text: '\n ', style: 'saltoLinea' },
-					{ text: '10 DEFENSORES CON UN BAJO NÚMERO DE ASESORÍAS JURÍDICAS' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Asesorías brindadas', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{}
-								],
-								[
-									{},
-									{},
-									{},
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['1', ' ', ' ', ' ', ' '],
-								['2', ' ', ' ', ' ', ' '],
-								['3', ' ', ' ', ' ', ''],
-								['4', ' ', ' ', ' ', ''],
-								['5', ' ', ' ', ' ', ''],
-								['6', ' ', ' ', ' ', ''],
-								['7', ' ', ' ', ' ', ''],
-								['8', ' ', ' ', ' ', ''],
-								['9', ' ', ' ', ' ', ''],
-								['10', ' ', ' ', ' ', '']
-							]
-						}
-					},
-			
-					{ text: '2.- AUDIENCIAS', style: 'subheader2' },
-					{
-						text: 'Durante el periodo que comprende del ___ de _______ al ____ de ________ del 			presente año, los Defensores Públicos asistieron a _______ audiencias celebradas.', style: 'textoJustificado'
-					},
-					{ text: 'Por sistema__________ Sistema Tradicional: materia penal _____; materia civil ________; materia familiar _______; materia administrativa _______; materia agraria ________; materia ejecución de sanciones ________; tribunal de alzada _______. Sistema Acusatorio y oral: materia penal adultos __________; materia penal adolescentes ________; materia ejecución de sanciones ________.', style: 'textoJustificado' },
-					{ text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de asistencia a audiencias en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos de asistencia en audiencias, esto también por sistema.', style: 'textoJustificado' },
-					{ text: '\n ', style: 'saltoLinea' },
-					{ text: '10 DEFENSORES CON ALTO NÚMERO DE AUDIENCIAS' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Asistencia \nde audiencias', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{}
-								],
-								[
-									{},
-									{},
-									{},
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['1', ' ', ' ', ' ', ''],
-								['2', ' ', ' ', ' ', ''],
-								['3', ' ', ' ', ' ', ''],
-								['4', ' ', ' ', ' ', ''],
-								['5', ' ', ' ', ' ', ''],
-								['6', ' ', ' ', ' ', ''],
-								['7', ' ', ' ', ' ', ''],
-								['8', ' ', ' ', ' ', ''],
-								['9', ' ', ' ', ' ', ''],
-								['10', ' ', ' ', ' ', '']
-							]
-						}
-					},
-			
-					{ text: '10 DEFENSORES CON UN BAJO NÚMERO DE AUDIENCIAS' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Asistencia \nde audiencias', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{}
-								],
-								[
-									{},
-									{},
-									{},
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['1', ' ', ' ', ' ', ' '],
-								['2', ' ', ' ', ' ', ' '],
-								['3', ' ', ' ', ' ', ''],
-								['4', ' ', ' ', ' ', ''],
-								['5', ' ', ' ', ' ', ''],
-								['6', ' ', ' ', ' ', ''],
-								['7', ' ', ' ', ' ', ''],
-								['8', ' ', ' ', ' ', ''],
-								['9', ' ', ' ', ' ', ''],
-								['10', ' ', ' ', ' ', '']
-							]
-						}
-					},
-					{ text: '\n ', style: 'saltoLinea' },
-					{ text: '3.- VISITAS CARCELARÍAS', style: 'subheader2' },
-					{
-						text: 'Durante el periodo que comprende del ___ de _______ al ____ de ________ del presente año, los Defensores Públicos realizaron ___________ visitas carcelarias a sus internos.', style: 'textoJustificado'
-					},
-					{ text: 'Por sistema__________ Sistema Tradicional: materia penal _____; materia ejecución de sanciones ________ Sistema Acusatorio y oral: materia penal adultos __________; materia penal adolescentes ________; materia ejecución de sanciones ________.', style: 'textoJustificado' },
-					{ text: '* Mostrar listado de los 10 defensores públicos que reportan un alto número de visitas carcelarias  en el periodo establecido en la búsqueda, así como los 10 defensores que reportan los números más bajos en visitas carcelarias , esto también por sistema.', style: 'textoJustificado' },
-					{ text: '10 DEFENSORES CON ALTO NÚMERO DE VISITAS CARCELARÍAS' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Visitas \n Carcelarías', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{}
-								],
-								[
-									{},
-									{},
-									{},
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['1', ' ', ' ', ' ', ' '],
-								['2', ' ', ' ', ' ', ' '],
-								['3', ' ', ' ', ' ', ''],
-								['4', ' ', ' ', ' ', ''],
-								['5', ' ', ' ', ' ', ''],
-								['6', ' ', ' ', ' ', ''],
-								['7', ' ', ' ', ' ', ''],
-								['8', ' ', ' ', ' ', ''],
-								['9', ' ', ' ', ' ', ''],
-								['10', ' ', ' ', ' ', '']
-							]
-						}
-					},
-					{ text: '\n\n\n ', style: 'saltoLinea' },
-					{ text: '10 DEFENSORES CON UN BAJO NÚMERO DE VISITAS CARCELARÍAS' },
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
-							headerRows: 2,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'Defensor público', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Visitas \n Carcelarías', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Lugar de adscripción', rowSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{ text: 'Sistema de justicia', colSpan: 2, style: 'tableHeader', alignment: 'center' },
-									{}
-								],
-								[
-									{},
-									{},
-									{},
-									{ text: 'Tradicional', style: 'tableHeader', alignment: 'center' },
-									{ text: 'Acusatorío y oral', style: 'tableHeader', alignment: 'center' }
-								],
-								['1', ' ', ' ', ' ', ' '],
-								['2', ' ', ' ', ' ', ' '],
-								['3', ' ', ' ', ' ', ''],
-								['4', ' ', ' ', ' ', ''],
-								['5', ' ', ' ', ' ', ''],
-								['6', ' ', ' ', ' ', ''],
-								['7', ' ', ' ', ' ', ''],
-								['8', ' ', ' ', ' ', ''],
-								['9', ' ', ' ', ' ', ''],
-								['10', ' ', ' ', ' ', '']
-							]
-						}
-					},
-					{
-						style: 'tableExample',
-						color: 'black',
-						table: {
-							headerRows: 1,
-							// keepWithHeaderRows: 1,
-							body: [
-								[
-									{ text: 'C.c.p.-', style: ['quote', 'small'] },
-									{
-										text: 'Mtro. Jesús Gerardo Herrera Pérez.- Director de la Defensoría 		Pública del Estado de Oaxaca.- 		Para su conocimiento e intervención.- 	Presente.-C.P Pablo R. López Santos.- Secretario Técnico.- Para 	mismo 	fin.- Presente	Exp. y minutario.', style: ['quote', 'small']
-									}
-								]
-							]
-						}, layout: 'noBorders'
-					}
-				],
-				styles: {
-					header: {
-						fontSize: 8,
-						bold: false,
-						alignment: 'center',
-						margin: [0, 40, 0, 10]
-					},
-					subheader: {
-						fontSize: 10,
-						alignment: 'right',
-						margin: [0, 10, 0, 0]
-					},
-					textoJustificado: {
-						fontSize: 11,
-						alignment: 'justify',
-						margin: [0, 0, 15, 15],
-					},
-					subheader2: {
-						fontSize: 11,
-						alignment: 'left',
-						margin: [0, 0, 15, 15],
-						bold: 'true'
-					},
-					tableExample: {
-						margin: [0, 5, 0, 15]
-					},
-					tableHeader: {
-						bold: true,
-						fontSize: 13,
-						color: 'black'
-					},
-					saltoLinea: {
-						margin: [0, 200, 0, 0]
-					},
-					quote: {
-						italics: true
-					},
-					small: {
-						fontSize: 8
-					}
-				},
-				defaultStyle: {
-					// alignment: 'justify'
-				}
-			
-			}
-			//console.log(fecha1, ' fecha actual ');
-
-			// print the PDF
-			//pdfMake.createPdf(docDefinition).print();
-
-			// download the PDF
-			//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-			pdfMake.createPdf(dd).open();
-		}
-	});
-	console.timeEnd('Test performance');
-};
-function generarPDFExpedientesGeneral(){
-	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
-	var checkDef = $('#checkId').get(0).checked;
-	console.time('TEST PERFORMANCE');
-	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
-	var r2 = $('#inputRadio2').get(0).checked;//informe general completo
-	
-	if(r1){//informe por periodo
-		fechaI = document.getElementById('inputInicio').value;
-		fechaFi = document.getElementById('inputFinal').value;
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();
-			console.log('PETICION AJAX  PERIODO + DEFENSOR');
-			console.log($('#idDefensor').val(), 'id del defensor');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
-					   "radio1":r1, "check":checkDef},
-				success: function (data) {							
-					var jsonInforme = jQuery.parseJSON(data);					
-					var pdfExp;
-					console.log(jsonInforme, ' informe por defensor');
-					constructor(jsonInforme);
-					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
-					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
-					var sistema= jsonInforme['nombreDef'][0].sistema;
-					var expedientes= jsonInforme['expBySistemaDef'][0];
-					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
-					  pdfExp = informeGByDefPeriodo(nombreDef, sistema, expedientes);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					  pdfMake.createPdf(pdfExp).open();					
-				}
-			});
-		}else{//solo esta las fechas y sera general
-			console.log('PETICION AJAX ONLY PERIODO');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
-				success: function (data) {	
-					//console.log(data, ' DATA DEV');
-					 var jsonInforme = jQuery.parseJSON(data);
-					 console.log(jsonInforme, ' DATA JSONNNN');
-					 var totalAsesorias = parseInt(jsonInforme['expBySistema'][1].actAsesoria) + parseInt(jsonInforme['expBySistema'][0].actAsesoria);
-
-					constructor(jsonInforme);
-					var actividades= jsonInforme['expBySistema'];
-					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					pdfMake.createPdf(pdfAct).open();
-				}
-			});
-		}
-	}
-	if(r2){// informe completo
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
-				success: function (data) {
-
-					var jsonInforme = jQuery.parseJSON(data);					
-					console.log(jsonInforme, ' JSON DE DATA');
-					constructor(jsonInforme);
-					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
-					var sistema= jsonInforme['nombreDef'][0].sistema;
-					var actividades= jsonInforme['actBySistemaDef'][0];
-					var pdfAct= informeGByDefCompleto(nombreDef, sistema, actividades);
-					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-				  
-						pdfMake.createPdf(pdfAct).open();			
-				}
-			});
-		}else{//shacer ajax informe completo sin filtros
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"radio2":r2, "check":checkDef},
-				success: function (data) {	
-					var jsonInforme = jQuery.parseJSON(data);
-					console.log('completo FULL ', jsonInforme);
-					//var totalAsesorias = parseInt(jsonInforme['expBySistema'][1].actAsesoria) + parseInt(jsonInforme['expBySistema'][0].actAsesoria);
-					//constructor(jsonInforme);
-					//var actividades= jsonInforme['expBySistema'];
-					//var pdfAct = informeGCompleto(totalAsesorias, actividades);					  
-						// print the PDF
-						//pdfMake.createPdf(docDefinition).print();
-						// download the PDF
-						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
-					  //pdfMake.createPdf(pdfAct).open();					
-				}
-			});
-		}
-	}
-	console.timeEnd('TEST PERFORMANCE');
-}
-function generarPDFActividadesGeneral() {
-	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
-	var checkDef = $('#checkId').get(0).checked;
-	console.time('TEST PERFORMANCE');
-	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
-	var r2 = $('#inputRadio2').get(0).checked;//informe general completo
-	
-	if(r1){//informe por periodo
-		fechaI = document.getElementById('inputInicio').value;
-		fechaFi = document.getElementById('inputFinal').value;
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();
-			console.log('PETICION AJAX  PERIODO + DEFENSOR');
-			console.log($('#idDefensor').val(), 'id del defensor');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
-					   "radio1":r1, "check":checkDef},
-				success: function (data) {							
-					var jsonInforme = jQuery.parseJSON(data);					
-					var pdfAct;
-					console.log(jsonInforme, ' informe por defensor');
-					constructor(jsonInforme);
-					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
-					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
-					var sistema= jsonInforme['nombreDef'][0].sistema;
-					var actividades= jsonInforme['actBySistemaDef'][0];
-					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
-					  pdfAct = informeGByDefPeriodo(nombreDef, sistema, actividades);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					  pdfMake.createPdf(pdfAct).open();					
-				}
-			});
-		}else{//solo esta las fechas y sera general
-			console.log('PETICION AJAX ONLY PERIODO');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
-				success: function (data) {	
-					//console.log(data, ' DATA DEV');
-					 var jsonInforme = jQuery.parseJSON(data);
-					 console.log(jsonInforme, ' DATA JSONNNN');
-					 var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
-
-					constructor(jsonInforme);
-					var actividades= jsonInforme['actBySistema'];
-					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					pdfMake.createPdf(pdfAct).open();
-				}
-			});
-		}
-	}
-	if(r2){// informe completo
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
-				success: function (data) {
-
-					var jsonInforme = jQuery.parseJSON(data);					
-					console.log(jsonInforme, ' JSON DE DATA');
-					constructor(jsonInforme);
-					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
-					var sistema= jsonInforme['nombreDef'][0].sistema;
-					var actividades= jsonInforme['actBySistemaDef'][0];
-					var pdfAct= informeGByDefCompleto(nombreDef, sistema, actividades);
-					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
-				  
-						pdfMake.createPdf(pdfAct).open();			
-				}
-			});
-		}else{//shacer ajax informe completo sin filtros
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"radio2":r2, "check":checkDef},
-				success: function (data) {	
-					var jsonInforme = jQuery.parseJSON(data);
-					console.log('completo FULL ', jsonInforme);
-					var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
-					constructor(jsonInforme);
-					var actividades= jsonInforme['actBySistema'];
-					var pdfAct = informeGCompleto(totalAsesorias, actividades)					  
-						// print the PDF
-						//pdfMake.createPdf(docDefinition).print();
-						// download the PDF
-						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
-					  pdfMake.createPdf(pdfAct).open();					
-				}
-			});
-		}
-	}
-	console.timeEnd('TEST PERFORMANCE');
-};
-function generarPDFActividadesParcial() {
-	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
-	var checkDef = $('#checkId').get(0).checked;
-	console.time('TEST PERFORMANCE');
-	var r3 = $('#inputRadio3').get(0).checked;//informe general con periodo
-	var r4 = $('#inputRadio4').get(0).checked;//informe general completo
-	fechaI = document.getElementById('inputInicio').value;
-	fechaFi = document.getElementById('inputFinal').value;
-	selectSistema = $('#selectSistema').val();
-	selectAtributos = $('#selectAtributos').val();	
-	
-	if(r3){//informe PARCIAL por periodo
-		if(checkDef){	//informe por defensor
-			//inputProject = $('#project').val();//ajax con fechas y input con defensor unico
-			inputProject = $('#idDefensor').val();			
-			console.log('vallor atributos');
-			console.log('PETICION AJAX  PERIODO + UN DEFENSOR + UN SISTEMA + ATRIBUTOS');
-			console.log($('#idDefensor').val(), 'id del defensor');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi, 
-					 "defensor":inputProject, "radio3":r3,
-					 "check":checkDef, "atributos":selectAtributos, "sistema":selectSistema},
-				success: function (data) {			
-					console.log(data, ' resultado r3 por defensor' );
-					var jsonInforme = jQuery.parseJSON(data);					
-					console.log(jsonInforme,' valor jsonInfr');
-					constructor(jsonInforme);
-					var pdfAct= informePByDefPeriodo(jsonInforme,selectAtributos);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					  pdfMake.createPdf(pdfAct).open();
-
-				}
-			});
-		}else{//no activado check defensor
-			console.log('PETICION AJAX parcial periodo varios defensores ');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio3":r3, 
-						"check":checkDef,"atributos":selectAtributos, "sistema":selectSistema},
-				success: function (data) {	
-					console.log(data, ' resultado r3 varios defensores');		
-					var jsonInforme = jQuery.parseJSON(data);
-					console.log('solopor periodo ', jsonInforme);
-					var pdfAct= informePPeriodo(jsonInforme);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					pdfMake.createPdf(pdfAct).open();
-				}
-			});
-		}
-	}
-	if(r4){// informe parcial sin periodo
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
-			console.log(inputProject, ' id defensor especificooo');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"defensor":inputProject,"radio4":r4, "check":checkDef, "atributos":selectAtributos,
-						"sistema":selectSistema},
-				success: function (data) {			
-					var jsonInforme = jQuery.parseJSON(data);
-					constructor(jsonInforme);
-					switch(selectSistema){
-						case 'TRADICIONAL':
-							var pdfAct= informeByDefCompletoParcialT(selectAtributos);
-							pdfMake.createPdf(pdfAct).open();
-						break;
-						case 'ORAL':
-							var pdfAct= informeByDefCompletoParcialO(jsonInforme);
-							pdfMake.createPdf(pdfAct).open();
-						break;
-						case 'JUSTICIA':
-							var pdfAct= informeByDefCompletoParcialJ(jsonInforme);
-							pdfMake.createPdf(pdfAct).open();
-						break;
-						default://todos
-							var pdfAct= informeByDefCompletoParcialALL(jsonInforme);
-							pdfMake.createPdf(pdfAct).open();
-						break;
-					}	
-				}
-			});
-		}else{//shacer ajax informe completo sin filtros
-			console.log(selectAtributos, ' atributos seleccionados');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeAct.php",
-				type: "POST",
-				data: {"radio4":r4, "check":checkDef,  "atributos":selectAtributos,
-				"sistema":selectSistema},
-				success: function (data) {
-					var jsonInforme = jQuery.parseJSON(data);
-					constructor(jsonInforme);
-					switch(selectSistema){
-						case 'TRADICIONAL':
-							var pdfAct= informeCompletoParcialT(jsonInforme)
-							pdfMake.createPdf(pdfAct).open();
-						break;
-						case 'ORAL':
-							var pdfAct= informeCompletoParcialO(jsonInforme)
-							pdfMake.createPdf(pdfAct).open();
-						break;
-						case 'JUSTICIA':
-							var pdfAct= informeCompletoParcialJ(jsonInforme)
-							pdfMake.createPdf(pdfAct).open();
-						break;
-						default://todos
-							var pdfAct= informeCompletoParcialALL(jsonInforme)
-							pdfMake.createPdf(pdfAct).open();
-						break;
-					}	
-			
-
-					
-				}
-			});
-		}
-	}
-	console.timeEnd('TEST PERFORMANCE');
-};
 function generarPDF2() {
 	var content = [];
 	var simpleHtm = $('#partePDF').get(0).innerHTML;
@@ -2311,7 +1322,7 @@ function estadoInput(val){
 	var check = $('#checkId').get(0).checked;
 	var rGeneralC = $('#inputRadio2').get(0).checked;
 	var rGeneralP = $('#inputRadio1').get(0).checked;
-/* 	var rParcialC = $('#inputRadio4').get(0).checked;
+	/* 	var rParcialC = $('#inputRadio4').get(0).checked;
 	var rParcialP = $('#inputRadio3').get(0).checked; */
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
@@ -2410,16 +1421,21 @@ function seleccionarUnDefensor(val){//checkdefensor especifico
 	var desc = $('#botonDesc').get(0);	
 	var rGeneralC = $('#inputRadio2').get(0).checked;
 	var rGeneralP = $('#inputRadio1').get(0).checked;
+	var selectAtributos =$('#selectAtributos');
 	//var rParcialC = $('#inputRadio4').get(0).checked;
 	//var rParcialP = $('#inputRadio3').get(0).checked;
 	var inicio = $('#inputInicio')[0].value;
 	var final = $('#inputFinal')[0].value;
 	var inputProject = $('#project').val();
 	if(val){
-		$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
+		$('#idCheckDefensor').removeAttr('style'); 
 		dataDefensor();
+		//entonces muestra su input
+		//$('#sistemaAtributos').attr('style','display:none');
+		$("#selectAtributos option[value='TOP']").remove();
 	}else{
-		$("#idCheckDefensor").attr('style','display:none');
+		$("#idCheckDefensor").attr('style','display:none');	
+		selectAtributos.append('<option value="TOP">Top Defensores</option>');
 	}
 	if(rGeneralC){
 		$("#divPeriodo").attr('style', 'display:none;');		
@@ -2624,53 +1640,110 @@ function filtroActividades(str) {
 			$('#verFotoVisita').addEventListener('click', verFotoVisita, false);
 		} */
 }
-function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en que se encuentra
-	var inicio = $('#inputInicio').val();
-	var final = $('#inputFinal').val();
-	var check = $('#checkId').get(0).checked;
-	var rParcialC = $('#inputRadio4').get(0).checked;
-	var rParcialP = $('#inputRadio3').get(0).checked;
-	var selectProject = $('#project').val();
-	var selectSistema = $('#selectSistema').get(0); 
-	var desc = $('#botonDesc').get(0);   
-	console.log(check, "valor seleccionadpo");
-	if(rParcialP){//esta activado por periodo
-		if(check){
-			if(	selectProject != '' && myFunctionDate('') != false && val !=''){
-				desc.disabled = false;
-				return true;
+function seleccionFiltro(val){
+	console.log(val);
+	switch(val){
+		case 'MATERIA':
+			if($('#selectSistema').val()!=''){
+				$.ajax({
+					url: "../../controlador/consultas/parciales.php",
+					type: "POST",
+					data: {"filtro":$('#selectSistema').val()},
+					success: function (data) {							
+						var jsonInforme = jQuery.parseJSON(data);										
+						//console.log(data, ' resultado consulta');
+						$('#selectMateria').empty();
+						$.each(jsonInforme, function(k,v){
+
+							$('#selectMateria').append('<option value='+v.materia+'> '+v.materia+' </option>');	
+						});
+					}
+				});
 			}
-			desc.disabled = true;
-			return false;
-		}else{
-			if( myFunctionDate('') != false && val !=''){
-				desc.disabled = false;
-				return true;
+			$('#vistaRegion').attr('style','display:none');
+			$('#vistaMateria').removeAttr('style');
+		break;
+		case 'REGION':
+			if($('#selectSistema').val()!=''){
+				$.ajax({
+					url: "../../controlador/consultas/parciales.php",
+					type: "POST",
+					data: {"filtro":$('#selectSistema').val()},
+					success: function (data) {							
+						var jsonInforme = jQuery.parseJSON(data);										
+						//console.log(data, ' resultado consulta');
+						$('#selectMateria').empty();
+						console.log('llenando materia');
+						$.each(jsonInforme, function(k,v){
+							
+							$('#selectMateria').append('<option value='+v.materia+'> '+v.materia+' </option>');	
+						});
+					}
+				});
 			}
-			desc.disabled = true;
-			return false;
-		}
-	} 
-	if(rParcialC){//esta activado por periodo
-		if(check){
-			if(	selectProject != ''  && val !=''){
-				desc.disabled = false;
-				return true;
-			}
-			desc.disabled = true;
-			return false;
-		}else{
-			if(val !=''){
-				desc.disabled = false;
-				return true;
-			}
-			desc.disabled = true;
-			return false;
-		}
-	} 
-	desc.disabled = true;
-	return false;
+			$('#vistaMateria').attr('style','display:none');
+			$('#vistaRegion').removeAttr('style');
+		break;
+		case 'AMBAS':
+			$('#vistaMateria').removeAttr('style');
+			$('#vistaRegion').removeAttr('style');			
+		break;
+		case 'NINGUNO':			
+			$('#vistaMateria').attr('style','display:none');
+			$('#vistaRegion').attr('style','display:none');
+		break;
+		default:
+		break;
+	}
 };
+function seleccionRegion(val){
+	console.log(val);
+};
+function seleccionMateria(val){
+	console.log(val);
+};
+function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en que se encuentra
+		if(val!=''){
+			switch($('#selectFiltro').val()){
+				case 'MATERIA':
+					
+						$.ajax({
+							url: "../../controlador/consultas/parciales.php",
+							type: "POST",
+							data: {"filtro":$('#selectSistema').val()},
+							success: function (data) {							
+								var jsonInforme = jQuery.parseJSON(data);										
+								//console.log(data, ' resultado consulta');
+								$('#selectMateria').empty();
+								console.log('llenando materia');
+								$.each(jsonInforme, function(k,v){
+									
+									$('#selectMateria').append('<option value='+v.materia+'> '+v.materia+' </option>');	
+								});
+							}
+						});
+					
+					$('#vistaRegion').attr('style','display:none');
+					$('#vistaMateria').removeAttr('style');
+				break;
+				case 'REGION':
+					$('#vistaMateria').attr('style','display:none');
+					$('#vistaRegion').removeAttr('style');
+				break;
+				case 'AMBAS':
+					$('#vistaMateria').removeAttr('style');
+					$('#vistaRegion').removeAttr('style');			
+				break;
+				case 'NINGUNO':			
+					$('#vistaMateria').attr('style','display:none');
+					$('#vistaRegion').attr('style','display:none');
+				break;
+				default:
+				break;
+			}
+	}
+};
+
 function myFunctionSistema(val){// aqui tambien debe checar por radio en que se encuentra
 	var inicio = $('#inputInicio').val();
 	var final = $('#inputFinal').val();
@@ -2761,3 +1834,446 @@ function myFunctionSistema(val){// aqui tambien debe checar por radio en que se 
 	} 
 };
 
+function generarPDFExpedientesParcial() {
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
+	var checkDef = $('#checkId').get(0).checked;
+	console.time('TEST PERFORMANCE PARCIAL');
+	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
+	var r2 = $('#inputRadio2').get(0).checked;//informe general completo	
+	if(r1){//informe por periodo
+		fechaI = document.getElementById('inputInicio').value;
+		fechaFi = document.getElementById('inputFinal').value;
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();
+			console.log('PETICION AJAX  PERIODO + DEFENSOR');
+			console.log($('#idDefensor').val(), 'id del defensor');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
+					   "radio1":r1, "check":checkDef},
+				success: function (data) {							
+					var jsonInforme = jQuery.parseJSON(data);					
+					var pdfExp;
+					console.log(jsonInforme, ' informe por defensor');
+					constructor(jsonInforme);
+					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
+					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
+					var sistema= jsonInforme['nombreDef'][0].sistema;
+					var expedientes= jsonInforme['expBySistemaDef'][0];
+					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+					  pdfExp = informeGByDefPeriodo(nombreDef, sistema, expedientes);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					  pdfMake.createPdf(pdfExp).open();					
+				}
+			});
+		}else{//solo esta las fechas y sera general
+			console.log('PETICION AJAX ONLY PERIODO');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
+				success: function (data) {	
+					//console.log(data, ' DATA DEV');
+					 var jsonInforme = jQuery.parseJSON(data);
+					 console.log(jsonInforme, ' DATA JSONNNN');
+					 var totalAsesorias = parseInt(jsonInforme['expBySistema'][1].actAsesoria) + parseInt(jsonInforme['expBySistema'][0].actAsesoria);
+
+					constructor(jsonInforme);
+					var actividades= jsonInforme['expBySistema'];
+					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					pdfMake.createPdf(pdfAct).open();
+				}
+			});
+		}
+	}
+	if(r2){// informe completo
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
+				success: function (data) {
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo POR DEFENSOR ', jsonInforme);
+					// funciion validar(jsonInforme) return json
+					var totalExp = parseInt(jsonInforme['tablaGeneralExpDef'][0].expedientesPorSistema);
+						constructor(jsonInforme);
+					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;					
+					var sistema = jsonInforme['nombreDef'][0].sistema;
+					var pdfAct= informeGByDefCompleto(nombreDef, sistema, totalExp);
+						pdfMake.createPdf(pdfAct).open();			
+				}
+			});
+		}else{//shacer ajax informe completo sin filtros
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"radio2":r2, "check":checkDef},
+				success: function (data) {	
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo FULL ', jsonInforme);
+					// funciion validar(jsonInforme) return json
+					var totalExp = parseInt(jsonInforme['tablaGeneralExp'][0].expedientesPorSistema) + parseInt(jsonInforme['tablaGeneralExp'][1].expedientesPorSistema);
+					constructor(jsonInforme);
+					//var actividades= jsonInforme['expBySistema'];
+					var pdfAct = informeExpGCompleto(totalExp);					  
+						// print the PDF
+						//pdfMake.createPdf(docDefinition).print();
+						// download the PDF
+						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
+					  pdfMake.createPdf(pdfAct).open();					
+				}
+			});
+		}
+	}
+	console.timeEnd('TEST PERFORMANCE PARCIAL');
+};
+function generarPDFExpedientesGeneral(){
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
+	var checkDef = $('#checkId').get(0).checked;
+	console.time('TEST PERFORMANCE');
+	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
+	var r2 = $('#inputRadio2').get(0).checked;//informe general completo	
+	if(r1){//informe por periodo
+		fechaI = document.getElementById('inputInicio').value;
+		fechaFi = document.getElementById('inputFinal').value;
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();
+			console.log('PETICION AJAX  PERIODO + DEFENSOR');
+			console.log($('#idDefensor').val(), 'id del defensor');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
+					   "radio1":r1, "check":checkDef},
+				success: function (data) {							
+					var jsonInforme = jQuery.parseJSON(data);					
+					var pdfExp;
+					console.log(jsonInforme, ' informe por defensor');
+					constructor(jsonInforme);
+					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
+					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
+					var sistema= jsonInforme['nombreDef'][0].sistema;
+					var expedientes= jsonInforme['expBySistemaDef'][0];
+					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+					  pdfExp = informeGByDefPeriodo(nombreDef, sistema, expedientes);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					  pdfMake.createPdf(pdfExp).open();					
+				}
+			});
+		}else{//solo esta las fechas y sera general
+			console.log('PETICION AJAX ONLY PERIODO');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
+				success: function (data) {	
+					//console.log(data, ' DATA DEV');
+					 var jsonInforme = jQuery.parseJSON(data);
+					 console.log(jsonInforme, ' DATA JSONNNN');
+					 var totalAsesorias = parseInt(jsonInforme['expBySistema'][1].actAsesoria) + parseInt(jsonInforme['expBySistema'][0].actAsesoria);
+
+					constructor(jsonInforme);
+					var actividades= jsonInforme['expBySistema'];
+					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					pdfMake.createPdf(pdfAct).open();
+				}
+			});
+		}
+	}
+	if(r2){// informe completo
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
+				success: function (data) {
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo POR DEFENSOR ', jsonInforme);
+					// funciion validar(jsonInforme) return json
+					var totalExp = parseInt(jsonInforme['tablaGeneralExpDef'][0].expedientesPorSistema);
+						constructor(jsonInforme);
+					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;					
+					var sistema = jsonInforme['nombreDef'][0].sistema;
+					var pdfAct= informeGByDefCompleto(nombreDef, sistema, totalExp);
+						pdfMake.createPdf(pdfAct).open();			
+				}
+			});
+		}else{//shacer ajax informe completo sin filtros
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"radio2":r2, "check":checkDef},
+				success: function (data) {	
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo FULL ', jsonInforme);
+					// funciion validar(jsonInforme) return json
+					var totalExp = parseInt(jsonInforme['tablaGeneralExp'][0].expedientesPorSistema) + parseInt(jsonInforme['tablaGeneralExp'][1].expedientesPorSistema);
+					constructor(jsonInforme);
+					//var actividades= jsonInforme['expBySistema'];
+					var pdfAct = informeExpGCompleto(totalExp);					  
+						// print the PDF
+						//pdfMake.createPdf(docDefinition).print();
+						// download the PDF
+						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
+					  pdfMake.createPdf(pdfAct).open();					
+				}
+			});
+		}
+	}
+	console.timeEnd('TEST PERFORMANCE');
+}
+function generarPDFActividadesGeneral() {
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
+	var checkDef = $('#checkId').get(0).checked;
+	console.time('TEST PERFORMANCE');
+	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
+	var r2 = $('#inputRadio2').get(0).checked;//informe general completo
+	
+	if(r1){//informe por periodo
+		fechaI = document.getElementById('inputInicio').value;
+		fechaFi = document.getElementById('inputFinal').value;
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();
+			console.log('PETICION AJAX  PERIODO + DEFENSOR');
+			console.log($('#idDefensor').val(), 'id del defensor');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
+					   "radio1":r1, "check":checkDef},
+				success: function (data) {							
+					var jsonInforme = jQuery.parseJSON(data);					
+					var pdfAct;
+					console.log(jsonInforme, ' informe por defensor');
+					constructor(jsonInforme);
+					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
+					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
+					var sistema= jsonInforme['nombreDef'][0].sistema;
+					var actividades= jsonInforme['actBySistemaDef'][0];
+					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+					  pdfAct = informeGByDefPeriodo(nombreDef, sistema, actividades);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					  pdfMake.createPdf(pdfAct).open();					
+				}
+			});
+		}else{//solo esta las fechas y sera general
+			console.log('PETICION AJAX ONLY PERIODO');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
+				success: function (data) {	
+					//console.log(data, ' DATA DEV');
+					 var jsonInforme = jQuery.parseJSON(data);
+					 console.log(jsonInforme, ' DATA JSONNNN');
+					 var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
+
+					constructor(jsonInforme);
+					var actividades= jsonInforme['actBySistema'];
+					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					pdfMake.createPdf(pdfAct).open();
+				}
+			});
+		}
+	}
+	if(r2){// informe completo
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
+				success: function (data) {
+
+					var jsonInforme = jQuery.parseJSON(data);					
+					console.log(jsonInforme, ' JSON DE DATA');
+					constructor(jsonInforme);
+					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
+					var sistema= jsonInforme['nombreDef'][0].sistema;
+					var actividades= jsonInforme['actBySistemaDef'][0];
+					var pdfAct= informeGByDefCompleto(nombreDef, sistema, actividades);
+					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+				  
+						pdfMake.createPdf(pdfAct).open();			
+				}
+			});
+		}else{//shacer ajax informe completo sin filtros
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"radio2":r2, "check":checkDef},
+				success: function (data) {	
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo FULL ', jsonInforme);
+					var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
+					constructor(jsonInforme);
+					var actividades= jsonInforme['actBySistema'];
+					var pdfAct = informeGCompleto(totalAsesorias, actividades)					  
+						// print the PDF
+						//pdfMake.createPdf(docDefinition).print();
+						// download the PDF
+						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
+					  pdfMake.createPdf(pdfAct).open();					
+				}
+			});
+		}
+	}
+	console.timeEnd('TEST PERFORMANCE');
+};
+function generarPDFActividadesParcial() {
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
+	var checkDef = $('#checkId').get(0).checked;
+	console.time('TEST PERFORMANCE');
+	var r3 = $('#inputRadio3').get(0).checked;//informe general con periodo
+	var r4 = $('#inputRadio4').get(0).checked;//informe general completo
+	fechaI = document.getElementById('inputInicio').value;
+	fechaFi = document.getElementById('inputFinal').value;
+	selectSistema = $('#selectSistema').val();
+	selectAtributos = $('#selectAtributos').val();	
+	
+	if(r3){//informe PARCIAL por periodo
+		if(checkDef){	//informe por defensor
+			//inputProject = $('#project').val();//ajax con fechas y input con defensor unico
+			inputProject = $('#idDefensor').val();			
+			console.log('vallor atributos');
+			console.log('PETICION AJAX  PERIODO + UN DEFENSOR + UN SISTEMA + ATRIBUTOS');
+			console.log($('#idDefensor').val(), 'id del defensor');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi, 
+					 "defensor":inputProject, "radio3":r3,
+					 "check":checkDef, "atributos":selectAtributos, "sistema":selectSistema},
+				success: function (data) {			
+					console.log(data, ' resultado r3 por defensor' );
+					var jsonInforme = jQuery.parseJSON(data);					
+					console.log(jsonInforme,' valor jsonInfr');
+					constructor(jsonInforme);
+					var pdfAct= informePByDefPeriodo(jsonInforme,selectAtributos);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					  pdfMake.createPdf(pdfAct).open();
+
+				}
+			});
+		}else{//no activado check defensor
+			console.log('PETICION AJAX parcial periodo varios defensores ');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio3":r3, 
+						"check":checkDef,"atributos":selectAtributos, "sistema":selectSistema},
+				success: function (data) {	
+					console.log(data, ' resultado r3 varios defensores');		
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('solopor periodo ', jsonInforme);
+					var pdfAct= informePPeriodo(jsonInforme);					  
+					  // print the PDF
+					  //pdfMake.createPdf(docDefinition).print();
+					  // download the PDF
+					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
+					pdfMake.createPdf(pdfAct).open();
+				}
+			});
+		}
+	}
+	if(r4){// informe parcial sin periodo
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			console.log(inputProject, ' id defensor especificooo');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"defensor":inputProject,"radio4":r4, "check":checkDef, "atributos":selectAtributos,
+						"sistema":selectSistema},
+				success: function (data) {			
+					var jsonInforme = jQuery.parseJSON(data);
+					constructor(jsonInforme);
+					switch(selectSistema){
+						case 'TRADICIONAL':
+							var pdfAct= informeByDefCompletoParcialT(selectAtributos);
+							pdfMake.createPdf(pdfAct).open();
+						break;
+						case 'ORAL':
+							var pdfAct= informeByDefCompletoParcialO(jsonInforme);
+							pdfMake.createPdf(pdfAct).open();
+						break;
+						case 'JUSTICIA':
+							var pdfAct= informeByDefCompletoParcialJ(jsonInforme);
+							pdfMake.createPdf(pdfAct).open();
+						break;
+						default://todos
+							var pdfAct= informeByDefCompletoParcialALL(jsonInforme);
+							pdfMake.createPdf(pdfAct).open();
+						break;
+					}	
+				}
+			});
+		}else{//shacer ajax informe completo sin filtros
+			console.log(selectAtributos, ' atributos seleccionados');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeAct.php",
+				type: "POST",
+				data: {"radio4":r4, "check":checkDef,  "atributos":selectAtributos,
+				"sistema":selectSistema},
+				success: function (data) {
+					var jsonInforme = jQuery.parseJSON(data);
+					constructor(jsonInforme);
+					switch(selectSistema){
+						case 'TRADICIONAL':
+							var pdfAct= informeCompletoParcialT(jsonInforme)
+							pdfMake.createPdf(pdfAct).open();
+						break;
+						case 'ORAL':
+							var pdfAct= informeCompletoParcialO(jsonInforme)
+							pdfMake.createPdf(pdfAct).open();
+						break;
+						case 'JUSTICIA':
+							var pdfAct= informeCompletoParcialJ(jsonInforme)
+							pdfMake.createPdf(pdfAct).open();
+						break;
+						default://todos
+							var pdfAct= informeCompletoParcialALL(jsonInforme)
+							pdfMake.createPdf(pdfAct).open();
+						break;
+					}	
+			
+
+					
+				}
+			});
+		}
+	}
+	console.timeEnd('TEST PERFORMANCE');
+};

@@ -3,13 +3,13 @@ function informeGCompleto(totalAse, actividades){
 	var tablaSexo={}, tablaGenero={},tablaGeneral={}, tablaEdad={}, tablaEtnia={}, tablaIdioma={}, tablaDiscapacidad={};
 	var tablaTop = {};
 	tablaGeneral = getTablaGeneral();
-	tablaSexo = getTablaSexo();
+	 tablaSexo = getTablaSexo();
 	tablaGenero=getTablaGenero();
 	tablaEdad = getTablaEdad();
 	tablaEtnia = getTablaEtnias();
 	tablaIdioma = getTablaIdiomas();
 	tablaDiscapacidad = getTablaDiscapacidad();
-	tablaTop = getTablaTopTen();
+	//tablaTop = getTablaTopTen(); 
 	var registro = parseInt(actividades[0].actividadesPorSistema)+parseInt(actividades[1].actividadesPorSistema);
 	var audiencias, visitas;
 	audiencias = parseInt(actividades[0].actAudiencia) +  parseInt(actividades[1].actAudiencia);

@@ -5,7 +5,7 @@
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
 
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-<script src="../../recursos/js/coordinador/funcionesGeneralesPDF.js"></script>
+<script src="../../recursos/js/coordinador/funcionesExpGeneralesPDF.js"></script>
 
 <script src="../../recursos/js/coordinador/pdfExpedientesGByDefPeriodo.js"></script>
 <script src="../../recursos/js/coordinador/pdfExpedientesGPeriodo.js"></script>

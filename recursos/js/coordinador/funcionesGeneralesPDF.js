@@ -956,15 +956,18 @@ function getTablaDiscapacidad(valor){
 		break;
 		default:
 		var dis=jsonInf['discapacidadBySistema'];
+		var lista = getListaDiscapacidad();
+		dis = validarDiscapacidad(lista,dis);
 		var totalSenT,totalSenO, totalMotT, totalMotO, totalMenT, totalMenO, totalMulT, totalMulO, totalNinT,totalNinO,
 		totalSen, totalMot, totalMen, totalMul, totalNin, totalFinal;
-		totalSen= parseInt(dis[0].tablaSensorial)+parseInt(dis[1].tablaSensorial);
+
+/* 		totalSen= parseInt(dis[0].tablaSensorial)+parseInt(dis[1].tablaSensorial);
 		totalMot= parseInt(dis[0].tablaMotriz)+parseInt(dis[1].tablaMotriz);
 		totalMen= parseInt(dis[0].tablaMental)+parseInt(dis[1].tablaMental);
 		totalMul= parseInt(dis[0].tablaMultiple)+parseInt(dis[1].tablaMultiple);
 		totalNin= parseInt(dis[0].tablaNinguno)+parseInt(dis[1].tablaNinguno);
 		totalFinal = totalSen+ totalMot +totalMen+ totalMul+ totalNin;
-		//console.log(' DENTRO TABLA DEFAULT');
+ */		//console.log(' DENTRO TABLA DEFAULT');
 			tablaGeneral.widths=  ['auto', 'auto', 'auto', 'auto','auto', 'auto', 'auto', 'auto'];
 			tablaGeneral.body = [
 				[
@@ -992,12 +995,12 @@ function getTablaDiscapacidad(valor){
 					{ text: 'H', style: 'tableHeader', alignment: 'center' },
 					{ text: 'M',style: 'tableHeader', alignment: 'center' }	
 				],
-['Sensoriales y de la comunicación',	totalSen,	dis[1].tablaSensorial,		dis[1].tablaSensorialM,	dis[1].tablaSensorialF,	dis[0].tablaSensorial,	dis[0].tablaSensorialM,	dis[0].tablaSensorialF	],
-						['Motrices',	totalMot,	dis[1].tablaMotriz,			dis[1].tablaMotrizM,	dis[1].tablaMotrizF,	dis[0].tablaMotriz,		dis[0].tablaMotrizM,	dis[0].tablaMotrizF		],
-						['Mentales',	totalMen,	dis[1].tablaMental, 		dis[1].tablaMentalM,	dis[1].tablaMentalF, 	dis[0].tablaMental, 	dis[0].tablaMentalM,	dis[0].tablaMentalF 	],
-						['Multiples',	totalMul,	dis[1].tablaMultiple,	 	dis[1].tablaMultipleM,	dis[1].tablaMultipleF,	dis[0].tablaMultiple, 	dis[0].tablaMultipleM,	dis[0].tablaMultipleF 	],
-						['Ninguno',		totalNin,	dis[1].tablaNinguno, 		dis[1].tablaNingunoM,	dis[1].tablaNingunoF, 	dis[0].tablaNinguno, 	dis[0].tablaNingunoM,	dis[0].tablaNingunoF	],
-						['Total',		totalFinal,	dis[1].discapTotal, 		'',						'',						dis[0].discapTotal,'',				'']
+['Sensoriales y de la comunicación',	dis[2]['SENSORIALESTotal'],dis[1]['SENSORIALES'].totalUsuarios,	dis[1]['SENSORIALES'].hombres,dis[1]['SENSORIALES'].mujeres,dis[0]['SENSORIALES'].totalUsuarios,	dis[0]['SENSORIALES'].hombres,dis[0]['SENSORIALES'].mujeres],
+						['Motrices',	dis[2]['MOTRICESTotal'],dis[1]['MOTRICES'].totalUsuarios,	dis[1]['MOTRICES'].hombres,dis[1]['MOTRICES'].mujeres,dis[0]['MOTRICES'].totalUsuarios,	dis[0]['MOTRICES'].hombres,dis[0]['MOTRICES'].mujeres],
+						['Mentales',	dis[2]['MENTALESTotal'],dis[1]['MENTALES'].totalUsuarios,	dis[1]['MENTALES'].hombres,dis[1]['MENTALES'].mujeres,dis[0]['MENTALES'].totalUsuarios,	dis[0]['MENTALES'].hombres,dis[0]['MENTALES'].mujeres],
+						['Multiples',	dis[2]['MULTIPLESTotal'],dis[1]['MULTIPLES'].totalUsuarios,	dis[1]['MULTIPLES'].hombres,dis[1]['MULTIPLES'].mujeres,dis[0]['MULTIPLES'].totalUsuarios,	dis[0]['MULTIPLES'].hombres,dis[0]['MULTIPLES'].mujeres],
+						['Ninguno',		dis[2]['NINGUNOTotal'],dis[1]['NINGUNO'].totalUsuarios,		dis[1]['NINGUNO'].hombres,dis[1]['NINGUNO'].mujeres,dis[0]['NINGUNO'].totalUsuarios,	dis[0]['NINGUNO'].hombres,dis[0]['NINGUNO'].mujeres],
+						['Total',		dis[2]['totalFinal'],dis[2]['totalTra'],dis[2]['totalTH'],dis[2]['totalTM'],dis[2]['totalOra'],dis[2]['totalOH'],dis[2]['totalOM']]
 			];
 		
 		break;
@@ -1007,6 +1010,90 @@ function getTablaDiscapacidad(valor){
 	tabla.color = 'black';
 	tabla.table = tablaGeneral;
 	return tabla;
+}
+function getListaDiscapacidad(){
+	var et=[];
+	et.push('NINGUNO');
+	et.push('SENSORIALES');
+	et.push('MOTRICES');
+	et.push('MENTALES');
+	et.push('MULTIPLES');
+	
+	return et;
+}
+function validarDiscapacidad(lista,data){
+	var arrT={};
+	var arrO={};
+	var arrTotales={};
+	var arr = [];
+	for(var i=0; i<lista.length; i++){
+		arrT[lista[i]] = {
+							'totalUsuarios':0,
+							'hombres':0,
+							'mujeres':0
+						 };
+		arrT['sistema'] = 'TRADICIONAL';
+	}
+	
+	for(var i=0; i<lista.length; i++){
+		arrO[lista[i]] 	= {
+							'totalUsuarios':0,
+							'hombres':0,
+							'mujeres':0
+						  };
+		arrO['sistema'] ='ORAL';
+	}
+
+	for(var i=0; i<lista.length+1; i++){		
+		$.each(data, function(k,v){			
+			//console.log(Object.keys(arrT)[i], 'discapacidad', v.discapacidadUs);
+			if(v.sis == 'TRADICIONAL' && v.discapacidadUs==Object.keys(arrT)[i]){
+				arrT[v.discapacidadUs]['totalUsuarios']   = v.totalUsuarios;
+				arrT[v.discapacidadUs]['hombres'] = v.hombres;
+				arrT[v.discapacidadUs]['mujeres'] = v.mujeres;
+
+			}
+			if(v.sis == 'ORAL' && v.discapacidadUs==Object.keys(arrO)[i]){
+				//arr[0].totalUsuarios = v.totalUsuarios;				
+				//console.log(Object.keys(arrO)[i], v.etniaUs,' etnias iguales', v.totalUsuarios);				
+				
+				arrO[v.discapacidadUs]['totalUsuarios']=    v.totalUsuarios;
+				arrO[v.discapacidadUs]['hombres'] = v.hombres;
+				arrO[v.discapacidadUs]['mujeres'] = v.mujeres;
+			}
+			if(v.sis == 'ORAL' && v.discapacidadUs==Object.keys(arrO)[i]){
+				//arr[0].totalUsuarios = v.totalUsuarios;				
+				//console.log(Object.keys(arrO)[i], v.etniaUs,' etnias iguales', v.totalUsuarios);				
+				
+				arrO[v.discapacidadUs]['totalUsuarios']=    v.totalUsuarios;
+				arrO[v.discapacidadUs]['hombres'] = v.hombres;
+				arrO[v.discapacidadUs]['mujeres'] = v.mujeres;
+			}
+
+		});
+	}
+	arrTotales['totalFinal'] =0;
+	arrTotales['totalTra'] =0;  arrTotales['totalOra'] =0;
+	arrTotales['totalTH'] =0;	arrTotales['totalTM'] =0;
+	arrTotales['totalOH'] =0;	arrTotales['totalOM'] =0;
+	for(var i=0; i<lista.length; i++){
+		arrTotales[lista[i]+'Total']= parseInt(arrT[lista[i]].totalUsuarios)+parseInt(arrO[lista[i]].totalUsuarios);
+		arrTotales['totalFinal'] += arrTotales[lista[i]+'Total'];
+		arrTotales['totalTra'] += parseInt(arrT[lista[i]].totalUsuarios);
+		arrTotales['totalOra'] += parseInt(arrO[lista[i]].totalUsuarios);
+		
+		arrTotales['totalTH'] += parseInt(arrT[lista[i]].hombres);
+		arrTotales['totalTM'] += parseInt(arrT[lista[i]].mujeres);
+		arrTotales['totalOH'] += parseInt(arrO[lista[i]].hombres);
+		arrTotales['totalOM'] += parseInt(arrO[lista[i]].mujeres);
+	}
+		arr.push(arrO);
+		arr.push(arrT);
+		arr.push(arrTotales);
+
+	console.log(arr, 'VALOR ARRR');
+	//console.log(Object.keys(arrT), 'LLAVES ARR T');
+	return arr;
 }
 function getTablaTopTen(valor){
 	//def = jsonInf['topDefensoresBySystema'];

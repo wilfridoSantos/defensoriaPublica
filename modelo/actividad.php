@@ -3190,7 +3190,7 @@ function getActividadesGC(){
     $listaEdadBySistema =  consulta($edadBySistema);
     $etniaBySistema = etniaBySistema('ALL','', '', '');
     $listaEtniaBySistema =  consulta($etniaBySistema);
-    $discapacidadBySistema = discapacidadBySistema('ALL','', '', '');
+    $discapacidadBySistema =" CALL tablaExpDiscapacidad('COMPLETO','', '', '')";
     $listaDiscapacidadBySistema =  consulta($discapacidadBySistema);
     $idiomaBySistema = idiomaBySistema('ALL','', '', '');
     $listaIdiomaBySistema =  consulta($idiomaBySistema);    
