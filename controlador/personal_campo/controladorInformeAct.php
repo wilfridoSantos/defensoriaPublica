@@ -20,6 +20,7 @@
                 }
             }else{//informe by periodo solamente
                 $informeByPeriodo = getActividadesByPeriodo($fi,$ff);
+                //print_r($informeByPeriodo);
                 $informeEncode = json_encode($informeByPeriodo);
                 print_r($informeEncode);
                         //echo 'kjashdkjahskdjhaskjh';

@@ -6,7 +6,8 @@
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
 <script src="../../recursos/js/coordinador/funcionesGeneralesPDF.js"></script>
 <script src="../../recursos/js/coordinador/pdfActividadesByDefParcialPeriodo.js"></script>
-
+<script src="../../recursos/js/coordinador/pdfActividadesCompletoParcial.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesByDefCompletoParcial.js"></script>
 <!-- <script src="../../recursos/js/herramienta.js"></script> 
  -->
 
@@ -19,7 +20,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>Generar informe parcial de actividades<b></h2>                    
+                    <h2><b>Generar informe parcial de expedientes<b></h2>                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">         

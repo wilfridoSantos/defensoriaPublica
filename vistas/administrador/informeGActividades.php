@@ -6,17 +6,14 @@
 
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
 <script src="../../recursos/js/coordinador/funcionesGeneralesPDF.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesByDefPeriodo.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividades.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesByDefCompleto.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesCompleto.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesParcial.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesByDefCompleto.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesCompletoParcial.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividadesByDefCompletoParcial.js"></script>
 
-<!-- <script src="../../recursos/js/herramienta.js"></script> 
- -->
+<script src="../../recursos/js/coordinador/pdfActividadesGByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesGPeriodo.js"></script>
+
+<script src="../../recursos/js/coordinador/pdfActividadesGByDefCompleto.js"></script>
+<script src="../../recursos/js/coordinador/pdfActividadesGCompleto.js"></script>
+
+
 
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
 <script src="../../recursos/js/jquery-validator.js"></script>

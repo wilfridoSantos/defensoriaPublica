@@ -28,9 +28,75 @@ function registrarEstudio($objetoEntidad){
 //print_r($sql);
 return $lista;
 }
+function listar_defensoresSisMat($sis, $mat){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d
+         inner join personal as p using(id_personal)
+         inner join materia as ma using(id_materia)
+                    inner join juzgado as j using(id_juzgado) where id_cargo =4
+                        and ma.sistema='".$sis."' and ma.materia='".$mat."'";			
 
+$lista=consulta($sql);
+//print_r($sql.' sql sismat');
+return $lista;
+}
+function listar_defensoresSisReg($sis, $reg){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d
+         inner join personal as p using(id_personal)
+         inner join materia as ma using(id_materia)
+                    inner join juzgado as j using(id_juzgado) where id_cargo =4
+                        and ma.sistema='".$sis."' and j.region='".$reg."'";			
 
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
+function listar_defensoresSisRegMat($sis, $reg, $mat){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d
+         inner join personal as p using(id_personal)
+         inner join materia as ma using(id_materia)
+                    inner join juzgado as j using(id_juzgado) where id_cargo =4
+                        and ma.sistema='".$sis."' and j.region='".$reg."' and ma.materia='".$mat."'";			
 
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
+function listar_defensoresRM($reg, $mat){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d
+         inner join personal as p using(id_personal)
+         inner join materia as ma using(id_materia)
+                    inner join juzgado as j using(id_juzgado) where id_cargo =4
+                        and j.region='".$reg."' and ma.materia='".$mat."'";			
+
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
+
+function listar_defensoresMateria($mat){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d 
+            inner join personal as p using(id_personal)
+            inner join materia as ma using(id_materia)
+                    inner join juzgado as j using(id_juzgado) 
+
+                    where id_cargo =4 and ma.materia='".$mat."'";			
+
+$lista=consulta($sql);
+//print_r($sql.' only materiass');
+return $lista;
+}
+function listar_defensoresRegion($reg){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d 
+            inner join personal as p using(id_personal)
+            inner join materia as ma using(id_materia)
+                    inner join juzgado as j using(id_juzgado) 
+
+                    where id_cargo =4 and j.region='".$reg."'";			
+
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
 function listar(){
     $sql="SELECT * FROM personal_campo as d inner join personal as p using(id_personal)
                         inner join juzgado as j using(id_juzgado) where p.id_cargo =4";			

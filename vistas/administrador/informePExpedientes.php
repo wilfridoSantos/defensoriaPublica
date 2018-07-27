@@ -3,48 +3,102 @@
 <script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
-<script src="../../recursos/js/coordinador/pdfActividades.js"></script>
+
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
-<!-- <script src="../../recursos/js/herramienta.js"></script> 
- -->
+<script src="../../recursos/js/coordinador/funcionesExpGeneralesPDF.js"></script>
+
+<script src="../../recursos/js/coordinador/pdfExpedientesGByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/pdfExpedientesGPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/pdfExpedientesGByDefCompleto.js"></script>
+<script src="../../recursos/js/coordinador/pdfExpedientesGCompleto.js"></script>
+
+
 
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
 <script src="../../recursos/js/jquery-validator.js"></script>
 <!-- <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
  -->
- <script>seleccionarUnDefensor(true)</script>
+ <script>//seleccionarUnDefensor(true)</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>Generar informe parcial de expedientes<b></h2>
-                    
+                    <h2><b>Generar informe parcial de expedientes<b></h2>                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">         
                     <form id="myform" data-toggle="validator" class="form-horizontal form-label-left" novalidate="">
                         <div class="form-group col-md-12">
                             <label class="radio-inline">
-                                <input type="radio" id="inputRadio1" name="optradio" >Informe general con periodo de tiempo
+                                <input type="radio" id="inputRadio1" name="optradioP" >Informe general con periodo de tiempo
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" id="inputRadio2" name="optradio" checked="checked">Informe general completo
-                            </label>
-                            <br>
-                    
-                            <label class="radio-inline">
-                                <input type="radio" id="inputRadio3" name="optradio" >Informe parcial con periodo de tiempo
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" id="inputRadio4" name="optradio" >Informe parcial completo.
-                            </label>
+                                <input type="radio" id="inputRadio2" name="optradioP" checked="checked">Informe general completo
+                            </label>                            
                         </div>
                         
+                         <div  class= "form-group col-md-12" id='sistemaAtributos'>
+                                <div class="form-group col-md-4">
+                                    <label class="col-md-4">Sistema <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required"  id="selectSistema" name="selectSistema" data-error="Seleccione un sistema." aria-controls="datatable-responsive" class="form-control input-sm" onchange="myFunctionSistemaParcial(this.value)">
+                                                <option value="">Seleccione un sistema</option>
+                                                <option value="TRADICIONAL">Tradicional</option>
+                                                <option value="ORAL">Acusatorio y Oral</option>
+                                                <option value="ALL">Todos</option>
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-md-4">Filtro <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required"  id="selectFiltro" name="selectFiltro" data-error="Seleccione un filtro." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionFiltro(this.value)">
+                                                <option value="">Seleccione un filtro</option>
+                                                <option value="MATERIA">Materia</option>
+                                                <option value="REGION">Region</option>
+                                                <option value="AMBAS">Ambas</option>
+                                                <option value="NINGUNO" selected>Ninguno</option>
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group col-md-4" id="vistaMateria" style="display:none">
+                                    <label class="col-md-4">Materia <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required" id="selectMateria" name="selectMateria" data-error="Seleccione una materia." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionMateria(this.value)">
+                                                <option value="">Seleccione una materia</option>
+
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4" id="vistaRegion" style="display:none">
+                                    <label class="col-md-4">Región <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required"   id="selectRegion" name="selectRegion" data-error="Seleccione una materia." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionRegion(this.value)">
+                                            <option value="">Seleccione una region</option>
+                                            <option value="CAÑADA">Cañada</option>
+                                            <option value="COSTA">Costa</option>
+                                            <option value="ISTMO">Istmo</option>
+                                            <option value="SIERRA NORTE">Sierra Norte</option>
+                                            <option value="SIERRA SUR">Sierra Sur</option>
+                                            <option value="VALLES">Valles Centrales</option>
+                                            <option value="PAPALOAPAN">Papaloapan</option>
+                                            <option value="MIXTECA">Mixteca</option>
+
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                            
+                        </div>
                         <div class="form-group col-md-12" id="checkDefensor" name="checkDefensor">
                             
                             <div class="form-group col-md-4">
                                 <label class="form-check-label" >Defensor en especifico? 
-                                    <input type="checkbox" checked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
+                                    <input type="checkbox" unchecked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
                                 </label>
                             </div>
                             <div class="form-group col-md-6" id="idCheckDefensor" name="idCheckDefensor" style="display:none;">
@@ -63,42 +117,26 @@
                                     </div>
                                 </div>
                                 <input type="text" name="usuarios" id="usuarios"   style="display:none;" class="form-control col-md-7 col-xs-12"/>                    
-                                <input type="text" name="idDefensor" id="idDefensor" style="display:none;" />   
-
+                                <input type="text" name="idDefensor" id="idDefensor" style="display:none;" />       
                             </div>
                         </div> 
-
-
-                        <div style="display:none;" id="divParcial" class= "form-group col-md-12">
-                                <div class="form-group col-md-4">
-                                    <label class="col-md-4">Sistema <span class="required">*</span></label>
-                                    <div class="col-md-7">                        
-                                            <select required="required"  id="selectSistema" name="selectSistema" data-error="Seleccione un sistema." aria-controls="datatable-responsive" class="form-control input-sm" onchange="myFunctionSistema(this.value)">
-                                                <option value="">Seleccione un sistema</option>
-                                                <option value="T">Tradicional</option>
-                                                <option value="O">Acusatorio y Oral</option>
-                                                <option value="J">Justicia para Adolecentes</option>
-                                                <option value="ALL">Todos</option>
-                                            </select>
-                                            <div  class="help-block with-errors"></div> 
-                                    </div>
-                                </div>
-                            <div class="form-group col-md-8">
-                                <label class="col-md-3">Atributos a solicitar <span class="required">*</span>
+                        <div class="form-group col-md-8">
+                                <label class="col-md-3">Tablas <span class="required">*</span>
                                 </label>
                                 <div class="col-md-4">                        
                                         <select required="required" id="selectAtributos" name="selectAtributos" style="height:110px;" data-error="Seleccione uno o mas atributos." name="datatable-responsive_length" multiple="multiple" aria-controls="datatable-responsive" class="form-control input-sm">                                                                        
-                                            <option value="SEX" selected="selected">Sexo</option>
-                                            <option value="GEN">Genero</option>
-                                            <option value="EDA">Edad</option>
-                                            <option value="ETN">Etnia</option>
-                                            <option value="IDI">Idioma o Lengua</option>
-                                            <option value="DIS">Discapacidad</option>                                    
+                                            <option value="SEXO" selected="selected">Sexo</option>
+                                            <option value="GENERO">Genero</option>
+                                            <option value="EDAD">Edad</option>
+                                            <option value="ETNIA">Etnia</option>
+                                            <option value="IDIOMA">Idioma o Lengua</option>
+                                            <option value="DISCAPACIDAD">Discapacidad</option>
+                                            <option value="ACTIVIDADES">Actividades</option> 
+                                            <option value="TOP">Top Defensores</option>                                    
                                         </select>
                                         <div  class="help-block with-errors"></div> 
                             </div>
                             </div>
-                        </div>
                         <div class="form-group" style="display:none;" id="divPeriodo">
                             <div class="form-group" >PERIODO*<br>
                                 <label class="form-check-label" > Fecha inicial*
@@ -112,10 +150,11 @@
                                 </label>
                             </div>                            
                         </div>                                              
+                        <div id="errorValidacion" style="display:none"></div>
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
-						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFActividades();" style="margin-right: 5px;">
+						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFExpedientesParcial();" style="margin-right: 5px;">
 						<i class="fa fa-download"></i> Generar PDF</button>
 					             </div>
 						           </div>

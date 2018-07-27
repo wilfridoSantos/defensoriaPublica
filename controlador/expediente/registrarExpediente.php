@@ -11,17 +11,14 @@
 //     $materia=listar_defensor_x_id($_POST['defensor'])[0]['materia'];
      $materia=listar_defensor_x_id($_POST['defensor']);
      //print_r($materia);
-//     $usuario=split(",",$_POST['usuarios']  );
-     $usuario=explode(',', $_POST['usuarios']);
+     $usuario=explode(",",$_POST['usuarios']  );
     $expediente = Array(
             "id_defensor"          =>$_POST['defensor'],
             "num_expediente"       =>((isset($_POST['expediente']))?$_POST['expediente']:""),
             "nombre_delito"        =>$_POST["delito"],
             "tipo_expediente"      =>$_POST["tipo_expediente"],
-            "grado_delito"  =>$_POST["grado_delito"]
-           
+            "grado_delito"  =>$_POST["grado_delito"]           
         );
-        //print_r($expediente);
         
  $expediente =  array_map( "cadenaToMayuscula",$expediente);/// convierte todo a mayusculas
     //////// CUANDO ES EJECUCION DE SANCIONES SE DEBE DE REGISTRAR LA FECHA EN QUE SE CREO EL EXPEDIENTE
@@ -47,9 +44,6 @@
             $dirigir="asignar_defensor";
         }
     }
-
-
-
 if(isset($_GET['tipo'])){
         
     if($_GET['tipo']=="html"){

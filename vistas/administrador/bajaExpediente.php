@@ -19,7 +19,6 @@
                                     <option value="">Materia</option>
                                     <option value="REVOCACION">Revocación del defensor</option>
                                     <option value="FALTA">Falta de interés</option>     
-
                                 </select>
                               </label>
                                <div id="mensajeSelectCausa" style="color:red;"></div>
