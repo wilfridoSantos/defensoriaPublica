@@ -66,7 +66,7 @@ $(document).ready(function () {
   data();// llamao a la funcion para almacenar estos datos
 
 
-/* 
+ 
     function userBAsico(){
           var user=document.getElementById('id_personalUser');
         $.ajax({
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     userBAsico();// llamao a la funcion para almacenar estos datos
 
-  */
+  
 
 
 

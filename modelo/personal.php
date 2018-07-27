@@ -3,9 +3,15 @@
 //include '../../libreria/conexion.php';
 include_once ('../../libreria/conexion.php');
 function listar_personal(){
-        $sql="SELECT * FROM defensor inner join personal using(id_personal)
+        $sql="SELECT * FROM personal_campo inner join personal using(id_personal)
                                         inner join juzgado using(id_juzgado)
                                         inner join estudios using (id_personal)";			
+
+   $lista=consulta($sql);
+             return $lista;
+}
+function listar_personalById($id_personal){
+        $sql="SELECT * FROM personal where id_personal= ".$id_personal;			
 
    $lista=consulta($sql);
              return $lista;

@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+	var registroEstudio=document.getElementById('configuracionDefensor');/// mostrar vista para registrar estudio
+	registroEstudio.addEventListener('click', funcionRegistroEstudio, false);
+	function funcionRegistroEstudio() {
+	  	// $('#menuContainer').load("registrarActividadDefensor.php");
+		 //$('#menuContainer').append(" ");
+		 $('#xContent').empty();
+		 $('#xContent').append("<object id='myFrame class='mi-iframe' type='text/html' data='registrarEstudio.php' width='1000 px' height='860 px'></object>");
+		//<object data="registrarEstudio.php" type="text/html"><p>This is the fallback code!</p></object>
+                   
+		// document.getElementById("myFrame").src = "registrarActividadDefensor.php";
+
+	};
 	var actividad=document.getElementById('registrarActividad');
 	actividad.addEventListener('click', registrarActividad, false);
 	function registrarActividad() {
@@ -131,12 +143,66 @@ $('#tebody').on('click', '.botonDetalleUsuario', function (evst) {
 	///ABRE LA VISTA PARA DAR DE ALTA A UN USARIO DE SERVICIO
 
 
+
+
 	$('#tebody').on('click', '.botonBaja', function (evst) {// SE DARA BAJA AL EXPEDIENTE
 		
 		var id_expediente = $(this).closest('tr').find('#id_expediente').text();
 		$("#modalBajaExpediente").modal('show');
+		console.log("que pasando por esta cosa");
 		
 		document.formBajaExpediente.elements.id_expedienteBaja.value=id_expediente;
+	});//final del metodo de baja expediente
+
+	//// EVENTO PARA DAR ACTIVAR A UN EXPEDIENTE EXISTENTE EN ESTADO DE BAJA
+	$('#tebody').on('click', '.botonActivar', function (evst) {// SE DARA BAJA AL EXPEDIENTE
+		
+		var id_expediente = $(this).closest('tr').find('#id_expediente').text();
+		sendInfo="id_expediente="+id_expediente;
+		$.ajax({
+			type: "GET",
+			url: "../../controlador/expediente/activarExpediente.php",
+			dataType: "html",
+			success: function (data) {
+				var json=jQuery.parseJSON(data)
+				console.log(data);
+					var alert="";
+		
+					  if(json['tipo']==="exito")
+						 alert="alert alert-success";
+		
+					  //$alert='alert alert-danger';
+					   if(json['tipo']==="error")
+						 alert="alert alert-danger";
+		
+						if(json['tipo']==="juzgado")
+						  alert="alert alert-danger";
+						  
+						 $("#contenedorMensaje").attr("class",""+alert);
+				
+		
+						$("#contenedorMensaje").append('<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+						'<div class="modal-dialog modal-dialog-centered" role="document">'+
+							'<div class="modal-content">'+
+							'<strong align="center" id="id_Mensaje" class="alert-dismissible fade in '+alert+'"></strong>'+
+							
+							'<div class="modal-footer">'+
+							' <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>'+
+							'</div></div> </div></div>');
+							$("#id_Mensaje").text(json['mensaje']);
+							console.log(json['mensaje']," fue esto");
+						
+							$('#exampleModalLong').modal('show');
+							console.log("ffef en always ",json['tipo']);
+				
+						if(json['tipo']==="exito")
+						 $(this).closest('tr').find('#botonBajaActiva').removeClass('botonActivar btn btn-success').addClass('botonBaja btn btn-danger'); 
+			  
+			},
+		
+			data:"id_expediente="+id_expediente
+		}); 
+	
 	});//final del metodo de baja expediente
 
 
@@ -350,12 +416,13 @@ $.get("../../controlador/defensor/controladorListarExp.php?id_defensor="+idperso
 				 
 		      if (VALOR.num_expediente!=""&VALOR.estado!="finalizado") {
 				var vistaEstado="glyphicon glyphicon-save";
-				var vistaTipoDanger="btn btn-danger";
+				var vistaTipoDanger="botonBaja btn btn-danger";
+				var titulo="Baja al expediente";
 				
 				if(VALOR.estado==="BAJA"){
 				  vistaEstado="glyphicon glyphicon-open";
-				  vistaTipoDanger="btn btn-success";
-				
+				  vistaTipoDanger="botonActivar btn btn-success";
+				  titulo="Activar al expediente";
 				}
 				var observacion=((VALOR.observaciones!=null)?VALOR.observaciones:" ");
 					//console.log("observacion ",observacion);
@@ -370,7 +437,7 @@ $.get("../../controlador/defensor/controladorListarExp.php?id_defensor="+idperso
 					'<td> <textarea 	rows="1%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+observacion+'</textarea></td>'+                                                     
 					' <td><button type="button" class="btn btn-primary botonDetalleUsuario" id="detalleUsuario" name="botonDetalleUsuario">Detalle Usuario</button>'+
 					' <button type="button" class="btn btn-primary botonSeguimiento" name="botonSeguimiento" id="idSeguimiento" name="botonSeguimiento">Seguimiento</button>'+
-					'<button type="button" title="Baja al expediente" class=" botonActivar '+vistaTipoDanger+'" btn btn-danger" id="botonBaja" name="botonActivar"><span title="Activar expediente" class="'+vistaEstado+'" aria-hidden="true"></span></button></td></tr>'
+					'<button type="button" title="'+titulo+'" class="  '+vistaTipoDanger+'" btn btn-danger" id="botonBajaActiva" name="botonActivar"><span title="Activar expediente" class="'+vistaEstado+'" aria-hidden="true"></span></button></td></tr>'
 				 
 					/* ' <button type="button" class="btn btn-primary botonSeguimiento" id="idSeguimiento" onready='+muestraSeguimiento()+'name="botonSeguimiento">Seguimiento</button></td></tr>' */
 				 

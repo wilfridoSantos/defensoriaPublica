@@ -236,7 +236,7 @@ function agrega(){
                              <option value="Transgenero">Transgénero</option>   
                              <option value="Travesti">Travesti </option>   
                              <option value="Intersexual">Intersexual </option>
-                             <option value="Intersexual">Ninguno </option>
+                             <option value="Ninguno">Ninguno </option>
                           </select>
 
                         </div>
@@ -293,9 +293,9 @@ function agrega(){
                              <option value="Mixteco">Mixteco</option> 
                              <option value="Zapoteco">Zapoteco</option>   
                              <option value="Amuzgos">Amuzgos</option>   
-                             <option value="Chatino">Transexual</option>   
-                             <option value="Chinantecos">Transgénero</option>   
-                             <option value="Chochos">Chochos </option>   
+                             <option value="Chatino">Chatino</option>   
+                             <option value="Chinantecos">Chinantecos</option>   
+                             <option value="Chochol">Chochol </option>   
                              <option value="Chontales">Chontales </option>
                              <option value="Cuicatecos">Cuicatecos </option>
                              <option value="Huaves">Huaves </option>
@@ -305,6 +305,12 @@ function agrega(){
                              <option value="Nahua">Nahua </option>
                              <option value="Triqui">Triqui </option>
                              <option value="Zoques">Zoques </option>
+                             <option value="Chocholtecos">Chocholtecos </option>
+                             <option value="Tacuates">Tacuates </option>
+                             <option value="Afromexicano">Afromexicano </option>
+                             <option value="Afromestizos">Afromestizos </option>
+                             <option value="Tzotziles">Tzotziles </option>
+                             <option value="Popoloca">Popoloca </option>
                              <option value="Ninguno">Ninguno </option>
                           </select>
                         </div>

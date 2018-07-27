@@ -139,8 +139,8 @@ include "../../Controlador/sesion.php";
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                    <!--  <li><a href="javascript:;"> Perfil</a></li> -->
                     <li>
-                      <a href="javascript:;">
-                       <!--  <span>Configuracion</span> -->
+                      <a id="configuracionDefensor">
+                        <span>Configuracion</span> 
                       </a>
                     </li>
 
@@ -214,6 +214,45 @@ include "../../Controlador/sesion.php";
                  $_SESSION['mensaje']['mensaje']='';
                }
                ?>
+               <style>
+               .embed-container {
+                    position: relative;
+                    padding-bottom: 56.25%;
+                    height: 0;
+                    overflow: hidden;
+                }
+                .embed-container iframe {
+                    position: absolute;
+                    top:0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .mi-iframe {
+                  width: 250px;
+                  height: 50px;
+                }
+
+                /* CSS pantallas de 320px o superior */
+                @media (min-width: 320px) {
+
+                  .mi-iframe {
+                    width: 300px;
+                    height: 150px;
+                  } 
+
+                }
+
+                /* CSS pantalla 768px o superior */
+                @media (min-width: 768px) {
+
+                  .mi-iframe {
+                    width: 500px;
+                    height: 250px;
+                  } 
+
+                }
+               </style>
             <div class="row" id="menuContainer">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">               
@@ -227,12 +266,20 @@ include "../../Controlador/sesion.php";
                   </div>
                   
 
-                  <div class="x_content">
+                  <div class="x_content" id='xContent'>
                     
-                  <!-- <iframe id="myFrame" width="1000" height="450" src="/default.asp"></iframe>
-                   -->  
+                     
+                   
                    <div align ="center">
-                   <img id="img_index_coord"src="../../recursos/images/LOGO_PRINCIPAL.png">
+                   <!-- <div class="embed-container"> -->
+                   <!-- <object data="registrarEstudio.php" type="text/html"><p>This is the fallback code!</p></object>
+                    --><div class="mi-iframe">
+                    <!--  <iframe width="560" height="315" src="registrarEstudio.php" frameborder="0" allowfullscreen></iframe>
+                    -->  <!--  <iframe id="myFrame" width="1000" height="450" src="registrarEstudio.php"></iframe> -->
+                    <img  class="mi-iframe" id="img_index_coord"src="../../recursos/images/LOGO_PRINCIPAL.png">    
+                    </div>
+                 
+                  
                     <p class="text-justify">
                       MISIÓN
                       <br/>

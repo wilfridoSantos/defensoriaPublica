@@ -52,17 +52,7 @@ include '../../controlador/defensor/controladorListarExp.php';
            
             <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-2">
-                        <div class="dataTables_length" id="datatable-responsive_length">
-                            <label># Entradas
-                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select></label>
-                        </div>
-                    </div>
+                    
                     <div class="col-sm-3">
                         <div class="dataTables_length Filtro" id="datatable-responsive_length">
                             <label>Filtro 1
@@ -124,50 +114,106 @@ include '../../controlador/defensor/controladorListarExp.php';
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="dataTables_info" id="datatable-responsive_info1" role="status" aria-live="polite">
-                     
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button previous disabled" id="datatable-responsive_previous">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="0" tabindex="0">Previous</a>
-                                </li>
-                                <li class="paginate_button active">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">1</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="2" tabindex="0">2</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="3" tabindex="0">3</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="4" tabindex="0">4</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="5" tabindex="0">5</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="6" tabindex="0">6</a>
-                                </li>
-                                <li class="paginate_button next" id="datatable-responsive_next">
-                                    <a href="#" aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
+
+
+
+
     </div>
 </div>
             <div id="dialogoCambio" > </div>
             <div id="dialogoPreguntas" style="display:none;"> </div>
             <div id="dialogoBaja" style="display:none;"> </div>
 
+
+  <div class="modal fade" id="modalVisualizarExpediente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">información del expediente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                              <div id="miFinalizar" class="table-responsive x_content" title="infomación">
+                                  <!--  <table id="exampleuser" lass="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                  --> 
+                                    
+                                    
+                                          </div>
+                                         
+
+
+ 
+               
+                  <div class="x_content">
+
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Seguimiento</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Resumen</a>
+                        </li>
+<!--                         <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
+ -->                        </li>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
+                            synth. Cosby sweater eu banh mi, qui irure terr.</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                            <div   style="word-wrap: break-word;">
+                                
+                            <address id="id_tarjetaInformativa" >
+                              Número de expediente: <p id="numExpediente"> </p>
+                              Delito:<p id="delito"></p>
+                              Esuario del servicio(s):<p id="usuarioServicio"></p>
+                              Involucrado(s):<p id="involucrado"></p>
+                              Situación actual:<p id="situacionActual"></p>
+                              Acción a implementar:<p id="accionImplementar"></p>
+                              Situación anterior:<p id="situacionAnterior"></p>
+                              Acción a implementar:<p id="accionImplementarAnterior"></p>
+                             
+                              </div>
+
+                            </address>
+                         
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+            
+            
+
+
+
+
+
+
+
+
+                                              <div class="form-group"> 
+                                                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"> 
+                                                  <input class="btn btn-succes btn btn-success btn-lg" type="button" name="botonUpdate" onclick="finalizarExpedinte()" id="botonUpdate" value="finalizar"></input>  
+                                                  </div> 
+                                                  </div>
+                                       
+                                          <div  id="EditarContraparte">
+                                      
+                                      </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                              </div>
+                            </div>
+                          </div>
+                    </div> 
           </body>
           </html>

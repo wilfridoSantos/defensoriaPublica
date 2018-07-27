@@ -327,7 +327,7 @@ if(datosDelUsuario.materia==="EJECUCION"){
                              <option value="Transgenero">Transgénero</option>   
                              <option value="Travesti">Travesti </option>   
                              <option value="Intersexual">Intersexual </option>
-                             <option value="Intersexual">Ninguno </option>
+                             <option value="Ninguno">Ninguno </option>
                           </select>
 
                         </div>
@@ -386,7 +386,7 @@ if(datosDelUsuario.materia==="EJECUCION"){
                              <option value="AMUZGOS">AMUZGOS</option>   
                              <option value="CHATINO">CHATINO</option>   
                              <option value="CHINANTECOS">CHINANTECOS</option>   
-                             <option value="CHOCHOS">CHOCHOS </option>   
+                             <option value="CHOCHOL">CHOCHOL </option>   
                              <option value="CHONTALES">CHONTALES </option>
                              <option value="CUICATECOS">CUICATECOS </option>
                              <option value="HUAVES">HUAVES </option>
@@ -396,6 +396,12 @@ if(datosDelUsuario.materia==="EJECUCION"){
                              <option value="NAHUA">NAHUA </option>
                              <option value="TRIQUI">TRIQUI </option>
                              <option value="ZOQUES">ZOQUES </option>
+                             <option value="CHOCHOLTECOS">CHOCHOLTECOS </option>
+                             <option value="TACUATES">TACUATES </option>
+                             <option value="AFROMEXICANO">AFROMEXICANO </option>
+                             <option value="AFROMESTIZOS">AFROMESTIZOS </option>
+                             <option value="TZOTZILES">TZOTZILES </option>
+                             <option value="POPOLOCA">POPOLOCA </option>
                              <option value="NINGUNO">NINGUNO </option>
                           </select>
                         </div>

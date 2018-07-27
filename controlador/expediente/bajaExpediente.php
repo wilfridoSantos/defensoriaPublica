@@ -20,9 +20,11 @@ $respuesta =  array_map( "cadenaToMayuscula",$respuesta);/// convierte todo a ma
    //$verificarRegistro=existeRespuestaExpediente($_POST['id_expediente'],$_POST['id_pregunta']);
    //if($verificarRegistro==0)// 0 INDICA QUE NO EXITE LA RESPUESTA A UNA PREGUNTA DE UN DICHO EXPEDIENTE
     //print_r($respuesta);
-      {bajaExpediente($respuesta);
+      {
+         // bajaExpediente($respuesta); se cambio por esto
+         setBajaActivoExpediente($respuesta);
        $mensaje=['tipo'   =>"exito",
-                 'mensaje'=>"finalizacion exitoso"];
+                 'mensaje'=>"Baja de expediente exitoso"];
         // echo "el registro es exitoso" ;  
    }
    //print_r($respuesta);

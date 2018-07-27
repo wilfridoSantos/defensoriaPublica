@@ -205,9 +205,9 @@ $(document).ready(function () {
 		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
 		//console.log(idDef);
-		verInfo(idDef);
+		verInfoDefensor(idDef);
 	});
-	function verInfo(idDef) {
+	function verInfoDefensor(idDef) {
 		$.ajax({
 			url: "../../controlador/defensor/controlDefensor.php",
 			type: "GET",
@@ -309,7 +309,7 @@ $(document).ready(function () {
 						'<div class="form-group profile_details ">' +
 						'<label for="exampleInputFile" class="control-label col-md-3 col-sm-3 col-xs-12">Foto de Perfil<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12 well profile_view form-group has-feedback">' +
-						'<p align="center"><img src="../../recursos/uploads/' + VALOR.foto + '"  alt="Imagen responsive" class="img-circle img-responsive"> </p>' +
+						'<p align="center"><img src="../../recursos/uploads/' + VALOR.foto + '"  alt="Imagen responsive" class="img-circle img-responsive"' +
 						foto +
 						'<input style="display:none;" type="text" class="form-control " id="imagen" placeholder="imagen" name="imagen" value="' + VALOR.foto + '" >' +
 
@@ -1869,36 +1869,67 @@ function cambiarDefensor(botn) {
 };
 function verPreguntasExp(botn) {
 	console.log(botn, ' ver preguntas del expediente');
-	$("#dialogoCambio").dialog({
-		resizable: true,
-		height: "auto",
-		width: "auto",
-		modal: true,
-		show: {
-			effect: "blind",
-			duration: 1000
-		},
-		hide: {
-			effect: "explode",
-			duration: 1000
-		},
-		position: {
-			my: "left top",
-			at: "left bottom",
-			of: $('#tebody')
-		},
-		buttons: {
-			"Cancelar": function () {
-				$(this).dialog("close");
+	$('#modalVisualizarExpediente').modal('show');
+	var idExpediente=$(botn).closest('tr')[0].children[1].getAttribute('id_expediente');
+	var idPersonal=$(botn).closest('tr')[0].children[1].getAttribute('id_personal');
+     console.log(idExpediente);
+     console.log(idPersonal);
+	// $(this).closest('tr')[0].children[0].getAttribute("id_usuario_eliminar")
+	 //idPersonal=19;
+	 //idExpediente=9;
+	$.ajax({
+		url: "../../controlador/coordinador/tarjetaInformativa.php",
+		type: "GET",
+		data: "id_personal=" + idPersonal + "& id_expediente=" + idExpediente,
+		success: function (data) {
+			console.log(data,' resultado de data');
+			if (data != 0) {
+				//var jsonExpDef = jQuery.parseJSON(data);
+				//descarga.on("click", function(){ descargarPDF(jsonExpDef); });
+				//console.log(data,' resultado de data');
+				//$('#id_tarjetaInformativa').empty();
+				$("#usuarioServicio").empty()
+				$("#involucrado").empty()
+				$("#situacionAnterior").empty();
+				$("#accionImplementarAnterior").empty();
+				$("#situacionActual").empty();
+				$("#accionImplementar").empty();
+
+				$("#numExpediente").empty().html(data.expediente[0].num_expediente);
+				$("#delito").empty().html(data.expediente[0].nombre_delito)
+				$.each(data.usuarioServicio, function (KEY, VALOR) {
+					
+				$("#usuarioServicio").append("<p>"+VALOR.nombreCompleto+"</p>")
+				});
+				$.each(data.usuarioContraparte, function (KEY, VALOR) {
+					
+					$("#involucrado").append("<p>"+VALOR.nombreCompleto+"</p>")
+				});
+				console.log("respusta 2 ",data.respuestas[1]);
+				console.log("respusta 1",data.respuestas[0]);
+
+				if(data.respuestas[1]!==undefined){
+					$("#situacionAnterior").empty().html(data.respuestas[1].respuesta)
+					$("#accionImplementarAnterior").empty().html(data.respuestas[1].accion_implementar);
+				}
+				if(data.respuestas[0]!==undefined){
+					$("#situacionActual").empty().html(data.respuestas[0].respuesta)
+					$("#accionImplementar").empty().html(data.respuestas[0].accion_implementar);
+			    }
+			
+
+			} else {
+				$('#tebody').empty();
+			
 			}
-		},
-		open: function () {
-			$(this).empty();
-			//$(this).append(data);					
-			$(this).append('hoooola ');
 		}
 	});
 };
+
+
+
+
+
 function bajaExpediente(botn) {
 	console.log(botn, ' id del expediente ');
 	$("#dialogoBaja").dialog({
@@ -1937,6 +1968,9 @@ function bajaExpediente(botn) {
 function showUser(str) {
 	var filtro2 = $('#filtro2')[0].value;
 	var botonDess = $('#botonDesc').get(0);
+	console.log(str);
+	console.log(filtro2,"segundo filtro");
+	
 	if (str == "" && filtro2 == "") {
 
 		botonDess.disabled = true;
@@ -1957,7 +1991,7 @@ function showUser(str) {
 					//console.log(data,' resultado de data');
 					$('#tebody').empty();
 					$.each(jsonExpDef, function (KEY, VALOR) {
-						//console.log(VALOR, ' valor ');
+						//	console.log(VALOR, ' valor ');
 						var nomBoton;
 						var id_expediente = VALOR.id_expediente;
 						if (VALOR.id_personal < 0) {
@@ -1969,9 +2003,9 @@ function showUser(str) {
 						$('#tebody').append(
 							'<tr> ' +
 							'<td id="nuePersonal" style="display:none;">' + VALOR.nue + ' </td>' +
-							'<td>' + VALOR.num_expediente + '</td>' +
+							'<td id_expediente="'+VALOR.id_expediente+'" id_personal="'+VALOR.id_personal+'">' + VALOR.num_expediente + '</td>' +
 							'<td>' + VALOR.materia + '</td>' +
-							'<td>' + VALOR.fecha_inicio + '</td>' +
+							'<td>' + VALOR.fecha_registro + '</td>' +
 							'<td>' + VALOR.estado + '</td>' +
 							'<td> <textarea rows="2%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+VALOR.observaciones+'</textarea></td>'+                                                     
 					

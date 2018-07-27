@@ -11,7 +11,8 @@
 //     $materia=listar_defensor_x_id($_POST['defensor'])[0]['materia'];
      $materia=listar_defensor_x_id($_POST['defensor']);
      //print_r($materia);
-     $usuario=split(",",$_POST['usuarios']  );
+//     $usuario=split(",",$_POST['usuarios']  );
+     $usuario=explode(',', $_POST['usuarios']);
     $expediente = Array(
             "id_defensor"          =>$_POST['defensor'],
             "num_expediente"       =>((isset($_POST['expediente']))?$_POST['expediente']:""),
@@ -30,7 +31,7 @@
     if((listar_x_num_expediente_($expediente['num_expediente'])==0)||($expediente['num_expediente']=="")){
          //echo "validando   ".existenciaUsuario($usuario,$materia[0]['id_materia']);
         if(existenciaUsuario($usuario,$materia[0]['id_materia'])==false)
-        {   echo "entro valido personal materia";
+        {//   echo "entro valido personal materia";
             alta_expediente($expediente);
             foreach ($usuario as $key => $value) {
              alta_DetalleExpedinte(ultimoExpedinteCreatado(),$value);
