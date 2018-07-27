@@ -19,7 +19,7 @@
 <!-- <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
  -->
- <script>seleccionarUnDefensor(true)</script>
+ <script>//seleccionarUnDefensor(true)</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -79,14 +79,14 @@
                                     <div class="col-md-7">                        
                                             <select required="required"   id="selectRegion" name="selectRegion" data-error="Seleccione una materia." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionRegion(this.value)">
                                             <option value="">Seleccione una region</option>
-                                            <option value="CA">Cañada</option>
-                                            <option value="CO">Costa</option>
-                                            <option value="IS">Istmo</option>
-                                            <option value="SIN">Sierra Norte</option>
-                                            <option value="SIS">Sierra Sur</option>
-                                            <option value="VA">Valles Centrales</option>
-                                            <option value="PA">Papaloapan</option>
-                                            <option value="MI">Mixteca</option>
+                                            <option value="CAÑADA">Cañada</option>
+                                            <option value="COSTA">Costa</option>
+                                            <option value="ISTMO">Istmo</option>
+                                            <option value="SIERRA NORTE">Sierra Norte</option>
+                                            <option value="SIERRA SUR">Sierra Sur</option>
+                                            <option value="VALLES">Valles Centrales</option>
+                                            <option value="PAPALOAPAN">Papaloapan</option>
+                                            <option value="MIXTECA">Mixteca</option>
 
                                             </select>
                                             <div  class="help-block with-errors"></div> 
@@ -98,7 +98,7 @@
                             
                             <div class="form-group col-md-4">
                                 <label class="form-check-label" >Defensor en especifico? 
-                                    <input type="checkbox" checked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
+                                    <input type="checkbox" unchecked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
                                 </label>
                             </div>
                             <div class="form-group col-md-6" id="idCheckDefensor" name="idCheckDefensor" style="display:none;">
@@ -131,7 +131,8 @@
                                             <option value="ETNIA">Etnia</option>
                                             <option value="IDIOMA">Idioma o Lengua</option>
                                             <option value="DISCAPACIDAD">Discapacidad</option>
-                                            <option value="ACTIVIDADES">Discapacidad</option>                                    
+                                            <option value="ACTIVIDADES">Actividades</option> 
+                                            <option value="TOP">Top Defensores</option>                                    
                                         </select>
                                         <div  class="help-block with-errors"></div> 
                             </div>
@@ -149,10 +150,11 @@
                                 </label>
                             </div>                            
                         </div>                                              
+                        <div id="errorValidacion" style="display:none"></div>
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
-						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFExpedientesGeneral();" style="margin-right: 5px;">
+						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFExpedientesParcial();" style="margin-right: 5px;">
 						<i class="fa fa-download"></i> Generar PDF</button>
 					             </div>
 						           </div>

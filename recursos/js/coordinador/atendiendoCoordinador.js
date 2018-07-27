@@ -1373,7 +1373,7 @@ function seleccionarUnDefensorParcial(val){//checkdefensor especifico
 	var inputProject = $('#project').val();
 	if(val){
 		$('#idCheckDefensor').removeAttr('style'); //entonces muestra su input
-		dataDefensor();
+		//dataDefensor();
 	}else{
 		$("#idCheckDefensor").attr('style','display:none');
 	}
@@ -1429,7 +1429,7 @@ function seleccionarUnDefensor(val){//checkdefensor especifico
 	var inputProject = $('#project').val();
 	if(val){
 		$('#idCheckDefensor').removeAttr('style'); 
-		dataDefensor();
+		//dataDefensor();
 		//entonces muestra su input
 		//$('#sistemaAtributos').attr('style','display:none');
 		$("#selectAtributos option[value='TOP']").remove();
@@ -1641,18 +1641,22 @@ function filtroActividades(str) {
 		} */
 }
 function seleccionFiltro(val){
-	console.log(val);
+	console.log($('#selectAtributos').val(), ' VALOR DE ATRIBUTOS');
+	var sistema = $('#selectSistema').val();
+	
+	var region = $('#selectRegion').val();
 	switch(val){
 		case 'MATERIA':
 			if($('#selectSistema').val()!=''){
 				$.ajax({
 					url: "../../controlador/consultas/parciales.php",
 					type: "POST",
-					data: {"filtro":$('#selectSistema').val()},
+					data: {"sistema":$('#selectSistema').val(),"filtro":$('#selectFiltro').val()},
 					success: function (data) {							
 						var jsonInforme = jQuery.parseJSON(data);										
 						//console.log(data, ' resultado consulta');
 						$('#selectMateria').empty();
+						$('#selectMateria').append('<option value=""> Seleccione una materia </option>');	
 						$.each(jsonInforme, function(k,v){
 
 							$('#selectMateria').append('<option value='+v.materia+'> '+v.materia+' </option>');	
@@ -1662,29 +1666,52 @@ function seleccionFiltro(val){
 			}
 			$('#vistaRegion').attr('style','display:none');
 			$('#vistaMateria').removeAttr('style');
+			
 		break;
 		case 'REGION':
+			/* if($('#selectSistema').val()!=''){
+				$.ajax({
+					url: "../../controlador/consultas/parciales.php",
+					type: "POST",
+					data: {"sistema":$('#selectSistema').val(),"filtro":$('#selectFiltro').val()},
+					success: function (data) {							
+						var jsonInforme = jQuery.parseJSON(data);										
+						//console.log(data, ' resultado consulta');
+						$('#selectRegion').empty();
+						console.log('llenando region');
+						$.each(jsonInforme, function(k,v){							
+							$('#selectRegion').append('<option value='+v.region+'> '+v.region+' </option>');	
+						});
+					}
+				});
+			} */
+			$('#vistaMateria').attr('style','display:none');
+			$('#vistaRegion').removeAttr('style');
+		break;
+		case 'AMBAS':
 			if($('#selectSistema').val()!=''){
 				$.ajax({
 					url: "../../controlador/consultas/parciales.php",
 					type: "POST",
-					data: {"filtro":$('#selectSistema').val()},
+					data: {"sistema":$('#selectSistema').val(),"filtro":'MATERIA'},
 					success: function (data) {							
 						var jsonInforme = jQuery.parseJSON(data);										
-						//console.log(data, ' resultado consulta');
+						//console.log(jsonInforme, ' resultado consulta');
+						//$('#selectRegion').empty();
+						//$('#selectMateria').empty();
+						//console.log('llenando region');
+						/* $.each(jsonInforme['region'], function(k,v){							
+							$('#selectRegion').append('<option value='+v.region+'> '+v.region+' </option>');	
+						});  */
 						$('#selectMateria').empty();
-						console.log('llenando materia');
+						$('#selectMateria').append('<option value=""> Seleccione una materia </option>');	
 						$.each(jsonInforme, function(k,v){
-							
+
 							$('#selectMateria').append('<option value='+v.materia+'> '+v.materia+' </option>');	
 						});
 					}
 				});
 			}
-			$('#vistaMateria').attr('style','display:none');
-			$('#vistaRegion').removeAttr('style');
-		break;
-		case 'AMBAS':
 			$('#vistaMateria').removeAttr('style');
 			$('#vistaRegion').removeAttr('style');			
 		break;
@@ -1697,24 +1724,98 @@ function seleccionFiltro(val){
 	}
 };
 function seleccionRegion(val){
-	console.log(val);
+	var filtro = $('#selectFiltro').val();
+	//console.log($('#selectSistema').val(), val, ' VALOR SISTEMA Y MATERIA');
+	if(val!=''){
+	switch(filtro){
+		case 'REGION':
+				//var checkDef = $('#checkId').get(0).checked;			
+					$.ajax({
+						type: 'GET',
+						url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+						data:"sistema="+$('#selectSistema').val()+"&region="+val,
+						success: function (data) {
+							if(data != 0 ){
+								console.log(data,'defensores by region');	
+								$('#project').val('');	 		
+								   functionInputDefensores(data);
+							}else{
+								$('#project').val('NO HAY DEFENSORES!');
+							}
+						},
+						error: function () {
+							alert('Error peticion Ajax ');
+						}
+						});
+		break;
+		case 'AMBAS':	
+						var materia = $('#selectMateria').val();
+						if(materia !=''){
+							$.ajax({
+								type: 'GET',
+								url: '../../controlador/defensor/controladorListaDef2.php?term=busqueda',
+								data:"sistema="+$('#selectSistema').val()+"&region="+val+"&materia="+materia,
+								success: function (data) {
+									console.log(data, '  FILTRO AMBAS REGION', val);
+									if(data != 0 ){
+										//console.log(data,'defensores BY 2 FILTRO');	
+										$('#project').val('');	 		
+										   functionInputDefensores(data);
+									}else{
+										$('#project').val('NO HAY DEFENSORES!');
+									}
+								},
+								error: function () {
+									alert('Error peticion Ajax ');
+								}
+								});
+						}
+		break;
+					}
+				}
 };
 function seleccionMateria(val){
-	console.log(val);
+	var filtro = $('#selectFiltro').val();
+	console.log($('#selectSistema').val(), val, ' VALOR SISTEMA Y MATERIA');
+	switch(filtro){
+		case 'MATERIA':
+			$.ajax({
+				type: 'GET',
+				url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+				data:"sistema="+$('#selectSistema').val()+"&materia="+val,
+				success: function (data) {
+					if(data != 0 ){
+						console.log(data,'defensores by filtroo MATERIA');	
+						$('#project').val('');	 		
+						functionInputDefensores(data);
+					}else{
+						$('#project').val('NO HAY DEFENSORES!');
+					}
+				},
+				error: function () {
+					alert('Error peticion Ajax ');
+				}
+			});			
+		break;
+
+	}
+							
+					
 };
 function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en que se encuentra
 		if(val!=''){
 			switch($('#selectFiltro').val()){
-				case 'MATERIA':
-					
+				case 'MATERIA':					
 						$.ajax({
 							url: "../../controlador/consultas/parciales.php",
 							type: "POST",
-							data: {"filtro":$('#selectSistema').val()},
+							data: {"sistema":$('#selectSistema').val(),"filtro":$('#selectFiltro').val() },
 							success: function (data) {							
 								var jsonInforme = jQuery.parseJSON(data);										
 								//console.log(data, ' resultado consulta');
 								$('#selectMateria').empty();
+								$('#selectMateria').append('<option value=""> Seleccione una materia </option>');	
+
 								console.log('llenando materia');
 								$.each(jsonInforme, function(k,v){
 									
@@ -1727,10 +1828,40 @@ function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en 
 					$('#vistaMateria').removeAttr('style');
 				break;
 				case 'REGION':
+				
+						/* $.ajax({
+							url: "../../controlador/consultas/parciales.php",
+							type: "POST",
+							data: {"sistema":$('#selectSistema').val(),"filtro":$('#selectFiltro').val()},
+							success: function (data) {							
+								var jsonInforme = jQuery.parseJSON(data);										
+								//console.log(data, ' resultado consulta');
+								$('#selectRegion').empty();
+								console.log('llenando region');
+								$.each(jsonInforme, function(k,v){							
+									$('#selectRegion').append('<option value='+v.region+'> '+v.region+' </option>');	
+								});
+							}
+						}); */
+					
 					$('#vistaMateria').attr('style','display:none');
 					$('#vistaRegion').removeAttr('style');
 				break;
 				case 'AMBAS':
+					$.ajax({
+						url: "../../controlador/consultas/parciales.php",
+						type: "POST",
+						data: {"sistema":$('#selectSistema').val(),"filtro":"MATERIA"},
+						success: function (data) {							
+							var jsonInforme = jQuery.parseJSON(data);										
+							console.log(jsonInforme, ' resultado consulta');
+							$('#selectMateria').empty();
+							$.each(jsonInforme, function(k,v){
+	
+								$('#selectMateria').append('<option value='+v.materia+'> '+v.materia+' </option>');	
+							});
+						}
+					});
 					$('#vistaMateria').removeAttr('style');
 					$('#vistaRegion').removeAttr('style');			
 				break;
@@ -1835,107 +1966,63 @@ function myFunctionSistema(val){// aqui tambien debe checar por radio en que se 
 };
 
 function generarPDFExpedientesParcial() {
-	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
-	var checkDef = $('#checkId').get(0).checked;
-	console.time('TEST PERFORMANCE PARCIAL');
-	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
-	var r2 = $('#inputRadio2').get(0).checked;//informe general completo	
-	if(r1){//informe por periodo
-		fechaI = document.getElementById('inputInicio').value;
-		fechaFi = document.getElementById('inputFinal').value;
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();
-			console.log('PETICION AJAX  PERIODO + DEFENSOR');
-			console.log($('#idDefensor').val(), 'id del defensor');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
-					   "radio1":r1, "check":checkDef},
-				success: function (data) {							
-					var jsonInforme = jQuery.parseJSON(data);					
-					var pdfExp;
-					console.log(jsonInforme, ' informe por defensor');
-					constructor(jsonInforme);
-					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
-					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
-					var sistema= jsonInforme['nombreDef'][0].sistema;
-					var expedientes= jsonInforme['expBySistemaDef'][0];
-					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
-					  pdfExp = informeGByDefPeriodo(nombreDef, sistema, expedientes);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					  pdfMake.createPdf(pdfExp).open();					
-				}
-			});
-		}else{//solo esta las fechas y sera general
-			console.log('PETICION AJAX ONLY PERIODO');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
-				success: function (data) {	
-					//console.log(data, ' DATA DEV');
-					 var jsonInforme = jQuery.parseJSON(data);
-					 console.log(jsonInforme, ' DATA JSONNNN');
-					 var totalAsesorias = parseInt(jsonInforme['expBySistema'][1].actAsesoria) + parseInt(jsonInforme['expBySistema'][0].actAsesoria);
+	var r1 = $('#inputRadio1').get(0).checked;
+	var r2 = $('#inputRadio2').get(0).checked;
+	var sistema = $('#selectSistema').val();
+	var filtro = $('#selectFiltro').val();
+	var materia = $('#selectMateria').val();
+	var region = $('#selectRegion').val();
+	var check = $('#checkId').get(0).checked;
+	var atributos = $('#selectAtributos').val();
+	if(r1){
 
-					constructor(jsonInforme);
-					var actividades= jsonInforme['expBySistema'];
-					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
-					  // print the PDF
-					  //pdfMake.createPdf(docDefinition).print();
-					  // download the PDF
-					  //pdfMake.createPdf(docDefinition).download('optionalName.pdf');				  
-					pdfMake.createPdf(pdfAct).open();
-				}
-			});
+	}
+	if(r2){
+		if(sistema != ''){
+			switch(filtro){
+				case 'MATERIA':
+					if(materia!=''){
+						if(check){//por sistema, materia y un defensor!
+							
+						}else{//por sistema, y materia nada mas!
+							$.ajax({
+								url: "../../controlador/informes/querys.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "materia":materia,
+									   "x":"XMATERIA",
+									   "atributos":atributos},
+								success: function (data) {							
+									var jsonInforme = jQuery.parseJSON(data);		
+
+								}
+							});
+						}
+					}
+				break;
+				case 'REGION':
+					if(region!=''){
+							
+					}
+				break;
+				case 'AMBAS':
+					if(materia!='' && region !=''){
+							//ajax
+					}
+				break;
+				case 'NINGUNO'://solo preguntas por defensor activado?
+					if(materia!='' && region !=''){
+							//ajax
+					}
+				break;
+				default:
+					//manda mensaje de error
+				break;
+			}
 		}
 	}
-	if(r2){// informe completo
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
-				success: function (data) {
-					var jsonInforme = jQuery.parseJSON(data);
-					console.log('completo POR DEFENSOR ', jsonInforme);
-					// funciion validar(jsonInforme) return json
-					var totalExp = parseInt(jsonInforme['tablaGeneralExpDef'][0].expedientesPorSistema);
-						constructor(jsonInforme);
-					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;					
-					var sistema = jsonInforme['nombreDef'][0].sistema;
-					var pdfAct= informeGByDefCompleto(nombreDef, sistema, totalExp);
-						pdfMake.createPdf(pdfAct).open();			
-				}
-			});
-		}else{//shacer ajax informe completo sin filtros
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"radio2":r2, "check":checkDef},
-				success: function (data) {	
-					var jsonInforme = jQuery.parseJSON(data);
-					console.log('completo FULL ', jsonInforme);
-					// funciion validar(jsonInforme) return json
-					var totalExp = parseInt(jsonInforme['tablaGeneralExp'][0].expedientesPorSistema) + parseInt(jsonInforme['tablaGeneralExp'][1].expedientesPorSistema);
-					constructor(jsonInforme);
-					//var actividades= jsonInforme['expBySistema'];
-					var pdfAct = informeExpGCompleto(totalExp);					  
-						// print the PDF
-						//pdfMake.createPdf(docDefinition).print();
-						// download the PDF
-						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
-					  pdfMake.createPdf(pdfAct).open();					
-				}
-			});
-		}
-	}
-	console.timeEnd('TEST PERFORMANCE PARCIAL');
+
+	
 };
 function generarPDFExpedientesGeneral(){
 	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
