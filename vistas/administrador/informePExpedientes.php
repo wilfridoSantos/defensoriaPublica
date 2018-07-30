@@ -19,7 +19,7 @@
 <!-- <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
  -->
- <script>//seleccionarUnDefensor(true)</script>
+ <script>//seleccionarUnDefensor2(true)</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -30,10 +30,10 @@
                     <form id="myform" data-toggle="validator" class="form-horizontal form-label-left" novalidate="">
                         <div class="form-group col-md-12">
                             <label class="radio-inline">
-                                <input type="radio" id="inputRadio1" name="optradioP" >Informe general con periodo de tiempo
+                                <input type="radio" id="inputRadio1" name="optradioP" >Informe parcial por periodo de tiempo
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" id="inputRadio2" name="optradioP" checked="checked">Informe general completo
+                                <input type="radio" id="inputRadio2" name="optradioP" checked="checked">Informe parcial completo
                             </label>                            
                         </div>
                         
@@ -58,7 +58,7 @@
                                                 <option value="MATERIA">Materia</option>
                                                 <option value="REGION">Region</option>
                                                 <option value="AMBAS">Ambas</option>
-                                                <option value="NINGUNO" selected>Ninguno</option>
+                                                <option value="NINGUNO">Ninguno</option>
                                             </select>
                                             <div  class="help-block with-errors"></div> 
                                     </div>
@@ -98,7 +98,7 @@
                             
                             <div class="form-group col-md-4">
                                 <label class="form-check-label" >Defensor en especifico? 
-                                    <input type="checkbox" unchecked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
+                                    <input type="checkbox" unchecked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor2(this.checked)" >                          
                                 </label>
                             </div>
                             <div class="form-group col-md-6" id="idCheckDefensor" name="idCheckDefensor" style="display:none;">
@@ -110,7 +110,7 @@
                                 <div class="form-horizontal form-label-left">
                                     <div class="form-group ">                                        
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <table required="" id="tablaAsinacionExpedienteusuario" class="table table-striped ">
+                                            <table required="" id="tablaAsinacionExpedienteusuarioP" class="table table-striped ">
                                                 <tbody required="" id="usuarioSeleccionados" style="height: 200px; overflow: auto;" class=" ui-widget-content"></tbody></table>
                                             
                                         </div>
@@ -125,14 +125,19 @@
                                 </label>
                                 <div class="col-md-4">                        
                                         <select required="required" id="selectAtributos" name="selectAtributos" style="height:110px;" data-error="Seleccione uno o mas atributos." name="datatable-responsive_length" multiple="multiple" aria-controls="datatable-responsive" class="form-control input-sm">                                                                        
-                                            <option value="SEXO" selected="selected">Sexo</option>
+                                        <option value="GENERAL" selected="selected">General</option>
+                                        <option value="ACTIVIDAD">Actividades</option> 
+                                        <option value="TOP">Top Defensores</option>  
+                                            <option value="SEXO">Sexo</option>
                                             <option value="GENERO">Genero</option>
                                             <option value="EDAD">Edad</option>
                                             <option value="ETNIA">Etnia</option>
                                             <option value="IDIOMA">Idioma o Lengua</option>
                                             <option value="DISCAPACIDAD">Discapacidad</option>
-                                            <option value="ACTIVIDADES">Actividades</option> 
-                                            <option value="TOP">Top Defensores</option>                                    
+                                            <!-- <option value="REGION">Region</option>
+                                            <option value="MATERIA">Materia</option> -->
+                                            
+                                                                              
                                         </select>
                                         <div  class="help-block with-errors"></div> 
                             </div>
@@ -153,8 +158,8 @@
                         <div id="errorValidacion" style="display:none"></div>
                     </form>
                     <div class="row no-print">
-						             <div class="col-xs-12">
-						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFExpedientesParcial();" style="margin-right: 5px;">
+						             <div class="col-xs-12" id="msnError">
+						               <button class="btn btn-success pull-right" id="botonDesc" onclick="generarPDFExpedientesParcial();" style="margin-right: 5px;">
 						<i class="fa fa-download"></i> Generar PDF</button>
 					             </div>
 						           </div>

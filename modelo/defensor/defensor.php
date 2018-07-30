@@ -8,6 +8,17 @@ function listar_defensores(){
    //print_r($sql);
    return $lista;
 }
+function listar_defensoresSis($sis){
+    $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,p.municipio,p.colonia 
+    FROM personal_campo as d 
+            inner join personal as p using(id_personal)
+            inner join materia as ma using(id_materia)  
+             where id_cargo =4 and ma.sistema='".$sis."' ";			
+
+$lista=consulta($sql);
+//print_r($sql);
+return $lista;
+}
 function listar_defensoresSisMat($sis, $mat){
     $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d
          inner join personal as p using(id_personal)

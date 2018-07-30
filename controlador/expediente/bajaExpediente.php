@@ -8,7 +8,7 @@
        "fecha_baja"         =>$_POST['fecha_baja'],
        "motivos"         =>$_POST['motivoBaja'],
        "estado"         =>"BAJA",
-       "observaciones"           =>$_POST['observacion']
+       "observaciones" =>$_POST['observacion']
        
    );
 
@@ -20,7 +20,7 @@ $respuesta =  array_map( "cadenaToMayuscula",$respuesta);/// convierte todo a ma
    //$verificarRegistro=existeRespuestaExpediente($_POST['id_expediente'],$_POST['id_pregunta']);
    //if($verificarRegistro==0)// 0 INDICA QUE NO EXITE LA RESPUESTA A UNA PREGUNTA DE UN DICHO EXPEDIENTE
     //print_r($respuesta);
-      {bajaExpediente($respuesta);
+      {setBajaActivoExpediente($respuesta);
        $mensaje=['tipo'   =>"exito",
                  'mensaje'=>"finalizacion exitoso"];
         // echo "el registro es exitoso" ;  

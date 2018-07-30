@@ -1891,7 +1891,7 @@ function finalizarExpediente($datos){
  // echo $sql;
   return $lista;
     }
-function bajaExpediente($respuesta){
+function setBajaActivoExpediente($respuesta){
     $sql="update expediente set estado='".$respuesta['estado']."', observaciones='".$respuesta['observaciones']."'
           ,fecha_final='".$respuesta['fecha_baja']."',  motivos='".$respuesta['motivos']."' where id_expediente='".$respuesta['id_expediente']."'";
           $lista = consulta($sql);

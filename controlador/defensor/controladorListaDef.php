@@ -32,6 +32,20 @@
                     break;
                 }
             }
+            if(isset($_GET['sistema']) && !isset($_GET['region']) && !isset($_GET['materia'])){
+                switch($_GET['sistema']){
+                    case'ALL':
+                        $listaDef = listar_defensores();
+                        $contenido = json_encode($listaDef);
+                        echo $contenido;
+                    break;
+                    case 'TRADICIONAL' || 'ORAL':
+                        $listaDef = listar_defensoresSis($_GET['sistema']);
+                        $contenido = json_encode($listaDef);
+                        echo $contenido;
+                    break;
+                }
+            }
     }else{
             echo $contenido;
     }
