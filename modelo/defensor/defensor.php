@@ -128,7 +128,7 @@ function getExpedientesById($id_defensor){
     p.calle as calleDef,p.numero_int as numDef, p.telefono as telDef, p.correo_electronico as emailDef,
     p.colonia as coloniaDef, p.municipio as muniDef,p.id_personal,
      e.num_expediente, m.materia,e.fecha_inicio, e.id_expediente,e.fecha_final,e.nombre_delito,
-    e.tipo_delito,e.estado, e.incidente,e.observaciones
+    e.tipo_delito,e.estado, e.motivos,e.observaciones
     from expediente as e inner join personal as p  using(id_personal)
     inner join personal_campo using(id_personal)
     inner join materia as m using(id_materia)

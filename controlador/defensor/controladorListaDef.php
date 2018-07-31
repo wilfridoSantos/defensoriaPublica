@@ -32,7 +32,8 @@
                     break;
                 }
             }
-    }else{
             echo $contenido;
-    }
+    } else{
+        //echo $contenido;
+    } 
 ?>

@@ -98,8 +98,8 @@ include '../../controlador/defensor/controladorListarExp.php';
                                         rowspan="1" colspan="1" style="width: 70px;" aria-label="Usuario: activate to sort column ascending">MATERIA</th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 155px;" aria-label="Fecha registro: activate to sort column ascending">FECHA DE REGISTRO</th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 155px;" aria-label="Estado: activate to sort column ascending">ESTADO EXP.</th>
+                                    <!-- <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
+                                        colspan="1" style="width: 155px;" aria-label="Estado: activate to sort column ascending">ESTADO EXP.</th> -->
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 66px;" aria-label="Observaciones: activate to sort column ascending">OBSERVACIONES</th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
@@ -154,19 +154,22 @@ include '../../controlador/defensor/controladorListarExp.php';
 
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Seguimiento</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Resumen</a>
-                        </li>
+                        <!-- <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Seguimiento</a>
+                        </li> -->
+                         <li role="presentation" class="active"><a href="#tab_content2" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Tarjeta Informativa</a>
+                        </li> 
+                        <!-- <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Resumen</a>
+                        </li> -->
 <!--                         <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
  -->                        </li>
                       </ul>
                       <div id="myTabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                        <!-- <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                           <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
                             synth. Cosby sweater eu banh mi, qui irure terr.</p>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                        </div> -->
+                        <!-- <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                         --><div role="tabpanel" class="tab-pane fade active in" id="tab_content2" aria-labelledby="home-tab">
                             <div   style="word-wrap: break-word;">
                                 
                             <address id="id_tarjetaInformativa" >
@@ -198,11 +201,11 @@ include '../../controlador/defensor/controladorListarExp.php';
 
 
 
-                                              <div class="form-group"> 
+                                             <!--  <div class="form-group"> 
                                                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"> 
                                                   <input class="btn btn-succes btn btn-success btn-lg" type="button" name="botonUpdate" onclick="finalizarExpedinte()" id="botonUpdate" value="finalizar"></input>  
                                                   </div> 
-                                                  </div>
+                                                  </div> -->
                                        
                                           <div  id="EditarContraparte">
                                       

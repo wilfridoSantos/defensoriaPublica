@@ -235,7 +235,7 @@ if(datosDelUsuario.materia==="EJECUCION"){
                        </div>
                        
                        <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Numero<span class="required">*</span></label>
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 "> Número<span class="required">*</span></label>
                         </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input type="text" pattern="[1-9][0-9]*" maxlength="5" id="numero" minlength="1" data-error="solo numero intero con maxicmo 5 digito" class="form-control" required  placeholder="" name="numero">
                           <div  class="help-block with-errors"></div></div>
@@ -280,7 +280,7 @@ if(datosDelUsuario.materia==="EJECUCION"){
                      
                      
                       <div class="form-group  col-md-6 col-sm-6 col-xs-12 form-group">
-                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Telefono<span class="required">*</span></label>
+                        <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 " >Teléfono<span class="required">*</span></label>
                          </h4><div class="col-md-8 col-sm-9 col-xs-12">
                           <input id="telefono" type="text"pattern="([0-9]{13})|([0-9]{10})" class="form-control " data-error=": solo numero telefonico" required placeholder="" name="telefono">
                           <div  class="help-block with-errors"></div> </div>
@@ -316,7 +316,7 @@ if(datosDelUsuario.materia==="EJECUCION"){
 
                   
                   <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Genero<span class="required">*</span></label>
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Género<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
                        <select novalidate id="genero" onkeyup="validarCurps()" onblur="validarCurps()" name="genero"  class="select2_group form-control">
                              <option value="">- Seleccione -</option> 
@@ -344,7 +344,7 @@ if(datosDelUsuario.materia==="EJECUCION"){
              
                    
                       <div class="form-group col-md-6 col-sm-6 col-xs-12 form-group ">
-                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Codigo postal<span class="required">*</span></label>
+                       <h4> <label class="control-label col-md-4 col-sm-3 col-xs-12 ">Código postal<span class="required">*</span></label>
                        </h4> <div class="col-md-8 col-sm-8 col-xs-12">
                        <input id="codigoPostal" type="text" data-error="solo numeros" pattern="[0-9 ]+"  onmouseout="consumirCodigoPostal(this)" maxlength="10" minlength="1"  class="form-control  text-uppercase"  required placeholder="" name="codigoPostal">
                        <div  class="help-block with-errors"></div>

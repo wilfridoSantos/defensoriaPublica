@@ -1,77 +1,160 @@
-
+<script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
 <script src='../../recursos/vendors/pdfmake/build/pdfmake.min.js'></script>
- 	<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
-
+<script src='../../recursos/vendors/pdfmake/build/vfs_fonts.js'></script>
 <script src="../../recursos/js/main.js"></script>
 <script src="../../recursos/js/coordinador/headerPDF.js"></script>
+
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
+<script src="../../recursos/js/coordinador/funcionesExpGeneralesPDF.js"></script>
+
+<script src="../../recursos/js/coordinador/pdfExpedientesGByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/pdfExpedientesGPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/pdfExpedientesGByDefCompleto.js"></script>
+<script src="../../recursos/js/coordinador/pdfExpedientesGCompleto.js"></script>
+
+
 
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
-
 <script src="../../recursos/js/jquery-validator.js"></script>
-<script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+<!-- <script type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
-
+ -->
+ <script>//seleccionarUnDefensor(true)</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>Generar informe parcial de expedientes<b></h2>
-                    
+                    <h2><b>Generar informe parcial de expedientes<b></h2>                    
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <br>
-                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-                    <label class="control-label " style="padding-left:300px;" >PERIODO 
-                        </label><br>
-                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha Inicio <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputInicio"  required="required" class="form-control controlFecha"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">                                                   
+                  <div class="x_content">         
+                    <form id="myform" data-toggle="validator" class="form-horizontal form-label-left" novalidate="">
+                        <div class="form-group col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" id="inputRadio1" name="optradioP" >Informe general con periodo de tiempo
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="inputRadio2" name="optradioP" checked="checked">Informe general completo
+                            </label>                            
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fecha Final <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="inputFinal" name="inputFinal" required="required" class="form-control controlFecha" data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate(this)" data-error="ingresa fecha menor a la final" step="1">
-                          <div id="labelFinal" class='block-help with-errors'></div>
-                        </div>
-                      </div>  
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sistema <span class="required">*</span>
-                        </label>
-                        <div class="col-md-2 col-sm-6 col-xs-12">                        
-                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
-                                    <option value="">Seleccione un sistema</option>
-                                    <option value="T">Tradicional</option>
-                                    <option value="O">Acusatorio y Oral</option>
-                                    <option value="J">Justicia para Adolecentes</option>
-                                    <option value="ALL">Todos</option>
-                                </select>
-                    </div>
-                      </div>
+                        
+                         <div  class= "form-group col-md-12" id='sistemaAtributos'>
+                                <div class="form-group col-md-4">
+                                    <label class="col-md-4">Sistema <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required"  id="selectSistema" name="selectSistema" data-error="Seleccione un sistema." aria-controls="datatable-responsive" class="form-control input-sm" onchange="myFunctionSistemaParcial(this.value)">
+                                                <option value="">Seleccione un sistema</option>
+                                                <option value="TRADICIONAL">Tradicional</option>
+                                                <option value="ORAL">Acusatorio y Oral</option>
+                                                <option value="ALL">Todos</option>
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-md-4">Filtro <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required"  id="selectFiltro" name="selectFiltro" data-error="Seleccione un filtro." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionFiltro(this.value)">
+                                                <option value="">Seleccione un filtro</option>
+                                                <option value="MATERIA">Materia</option>
+                                                <option value="REGION">Region</option>
+                                                <option value="AMBAS">Ambas</option>
+                                                <option value="NINGUNO" selected>Ninguno</option>
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group col-md-4" id="vistaMateria" style="display:none">
+                                    <label class="col-md-4">Materia <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required" id="selectMateria" name="selectMateria" data-error="Seleccione una materia." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionMateria(this.value)">
+                                                <option value="">Seleccione una materia</option>
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Atributos a solicitar <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">                        
-                                <select name="datatable-responsive_length" multiple="multiple" aria-controls="datatable-responsive" class="form-control input-sm">                                    
-                                    <option value="T">Sexo</option>
-                                    <option value="O">Genero</option>
-                                    <option value="J">Edad</option>
-                                    <option value="ALL">Etnia</option>
-                                    <option value="ALL">Idioma o Lengua</option>
-                                    <option value="ALL">Discapacidad</option>                                    
-                                </select>
-                    </div>
-                      </div>
-                    
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4" id="vistaRegion" style="display:none">
+                                    <label class="col-md-4">Región <span class="required">*</span></label>
+                                    <div class="col-md-7">                        
+                                            <select required="required"   id="selectRegion" name="selectRegion" data-error="Seleccione una materia." aria-controls="datatable-responsive" class="form-control input-sm" onchange="seleccionRegion(this.value)">
+                                            <option value="">Seleccione una region</option>
+                                            <option value="CAÑADA">Cañada</option>
+                                            <option value="COSTA">Costa</option>
+                                            <option value="ISTMO">Istmo</option>
+                                            <option value="SIERRA NORTE">Sierra Norte</option>
+                                            <option value="SIERRA SUR">Sierra Sur</option>
+                                            <option value="VALLES">Valles Centrales</option>
+                                            <option value="PAPALOAPAN">Papaloapan</option>
+                                            <option value="MIXTECA">Mixteca</option>
+
+                                            </select>
+                                            <div  class="help-block with-errors"></div> 
+                                    </div>
+                                </div>
+                            
+                        </div>
+                        <div class="form-group col-md-12" id="checkDefensor" name="checkDefensor">
+                            
+                            <div class="form-group col-md-4">
+                                <label class="form-check-label" >Defensor en especifico? 
+                                    <input type="checkbox" unchecked id="checkId" name="checkDefensor" class="form-check-input" onchange="seleccionarUnDefensor(this.checked)" >                          
+                                </label>
+                            </div>
+                            <div class="form-group col-md-6" id="idCheckDefensor" name="idCheckDefensor" style="display:none;">
+                                <div class="form-inline">
+                                    <label class="form-inline col-md-4" for="project">Eliga un defensor<span class="required">*</span></label>
+                                        <input  class="form-inline col-md-6" data-error="Seleccione un defensor" type="text"  id="project"  required onchange="estadoInput(this.value)">                                                                                              
+                                        <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-horizontal form-label-left">
+                                    <div class="form-group ">                                        
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <table required="" id="tablaAsinacionExpedienteusuario" class="table table-striped ">
+                                                <tbody required="" id="usuarioSeleccionados" style="height: 200px; overflow: auto;" class=" ui-widget-content"></tbody></table>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" name="usuarios" id="usuarios"   style="display:none;" class="form-control col-md-7 col-xs-12"/>                    
+                                <input type="text" name="idDefensor" id="idDefensor" style="display:none;" />       
+                            </div>
+                        </div> 
+                        <div class="form-group col-md-8">
+                                <label class="col-md-3">Tablas <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">                        
+                                        <select required="required" id="selectAtributos" name="selectAtributos" style="height:110px;" data-error="Seleccione uno o mas atributos." name="datatable-responsive_length" multiple="multiple" aria-controls="datatable-responsive" class="form-control input-sm">                                                                        
+                                            <option value="SEXO" selected="selected">Sexo</option>
+                                            <option value="GENERO">Genero</option>
+                                            <option value="EDAD">Edad</option>
+                                            <option value="ETNIA">Etnia</option>
+                                            <option value="IDIOMA">Idioma o Lengua</option>
+                                            <option value="DISCAPACIDAD">Discapacidad</option>
+                                            <option value="ACTIVIDADES">Actividades</option> 
+                                            <option value="TOP">Top Defensores</option>                                    
+                                        </select>
+                                        <div  class="help-block with-errors"></div> 
+                            </div>
+                            </div>
+                        <div class="form-group" style="display:none;" id="divPeriodo">
+                            <div class="form-group" >PERIODO*<br>
+                                <label class="form-check-label" > Fecha inicial*
+                                    <input type="date" id="inputInicio"  required="required"  data-error="Debe ser menor a la fecha Final." name="inputInicio" onblur="myFunctionDate(this)" onkeyup="myFunctionDate()" data-error="ingresa fecha menor a la final" step="1">                                                      
+                                </label>
+                                <br>
+                                <label class="form-check-label" > Fecha  final*   
+                                     <input type="date" id="inputFinal" name="inputFinal" required="required"  data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate()" data-error="ingresa fecha menor a la final" step="1">
+                                    <div class='block-help with-errors'></div>
+                                    <div id="labelFinal" class='block-help with-errors'></div>
+                                </label>
+                            </div>                            
+                        </div>                                              
+                        <div id="errorValidacion" style="display:none"></div>
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
-						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFActividades();" style="margin-right: 5px;">
+						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFExpedientesParcial();" style="margin-right: 5px;">
 						<i class="fa fa-download"></i> Generar PDF</button>
 					             </div>
 						           </div>
@@ -79,7 +162,6 @@
                 </div>
               </div>
 
-<!--
 <div class="col-md-12 col-sm-12 col-xs-12" id="tablaPanel">
     <div class="x_panel">
         <div class="x_title">
@@ -159,8 +241,7 @@
             </div>
         </div>
     </div>
-</div>
-                                      
+</div>                                     
 <div id="dialogoI">
                             <div id='mapa'>                      
                             </div>             
@@ -184,13 +265,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
 </div> 
-
-
 <div class="modal fade" id="exampleModalLongObs" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -205,9 +284,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
 </div> 
--->
+<script>
+
+$('#myform').validator()
+
+</script>

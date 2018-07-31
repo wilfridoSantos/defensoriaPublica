@@ -31,5 +31,18 @@ $respuesta =  array_map( "cadenaToMayuscula",$respuesta);/// convierte todo a ma
 
    
    echo json_encode($mensaje);
-
+   if(isset($_GET['pertenece']))
+      if($_GET['pertenece']=='admin')
+      {
+        $mensaje=['tipo'=>"exito",
+                  'mensaje'=>"Baja exitoso"
+                ];
+        $dirigir="asignar_defensor";
+        $_SESSION['mensaje'] = $mensaje;
+        
+      header("location: ../../vistas/administrador/index.php");
+    } 
+  else{
+    echo json_encode($mensaje);
+    }
 ?>

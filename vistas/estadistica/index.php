@@ -74,8 +74,8 @@ include "../../Controlador/sesion.php";
                 <li><a><i class="fa fa-home"></i> Expediente<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="consultas">Consultas</a></li>
-                      <li><a id="">Generar Informe general de Actividades</a></li>  
-                      <li><a id="">Generar informe de componentes de la o..</a></li>
+                      <!-- <li><a id="">Generar Informe general de Actividades</a></li>  
+                      <li><a id="">Generar informe de componentes de la o..</a></li> -->
                     </ul>
                   </li>
 
@@ -402,6 +402,12 @@ include "../../Controlador/sesion.php";
 
     <script src="../../recursos/js/estadistica/gestionandoVista.js"></script>
     <script src="../../recursos/js/bootstrap.notify.js"></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!--     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ -->   <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ -->
   </body>
 </html>
 <?php

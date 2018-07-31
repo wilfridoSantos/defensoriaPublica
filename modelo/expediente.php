@@ -1759,7 +1759,9 @@ function getExpedienteById($id_expediente){
     return $lista;    
 }
 function getExpedienteByNum($numExp){
-      $sql = " select * from respuesta inner join preguntas using(id_pregunta) inner join expediente using(id_expediente)
+      $sql = " select * from respuesta inner join pregunta_materia using(id_pregunta_materia)
+         inner join pregunta using(id_pregunta)
+         inner join expediente using(id_expediente)
        where num_expediente='".$numExp."' ";
     $lista=consulta($sql);
     return $lista;    
@@ -1963,13 +1965,16 @@ function listar_expediente_visitas($id_expediente){
     
 function listar_pregunta($id_materia){
      
-        $sql = "select pregunta.id_pregunta,pregunta.id_materia,pregunta.id_pregunta,pregunta.pregunta,pregunta.identificador
-                    from preguntas as pregunta
-                      where id_materia='".$id_materia."'";
+       /*  $sql = "select pregunta.id_pregunta,pregunta.id_materia,pregunta.pregunta,pregunta.identificador
+                    from pregunta as pregunta
+                      where id_materia='".$id_materia."'"; */
+         $sql = " select * from 
+                    pregunta_materia 
+                    INNER JOIN pregunta using(id_pregunta)
+                    where id_materia='".$id_materia."'"; 
         $consulta = consulta($sql);
         return $consulta;
     }
-    
 function listar_preguntaConOpciones($id_materia,$id_expediente){
      
         /*  $sql = "select pregunta.id_pregunta,pregunta.pregunta,detalle.id_materia,detalle.id_pregunta_materia,detalle.identificador,op.opcion
@@ -2015,6 +2020,15 @@ function alta_expediente($objetoEntidad){
       // echo $sql;
          $lista=registro($sql);
       return $lista;
+    }
+  
+function notificacionExpedienteSinAtencion(){
+    $sql="select resultado.num_expediente, nombre,ap_paterno,ap_materno,telefono,(Month(now())-Month(resultado.respuestaFecha)) as fechaRespuesta, (Month(now())-Month(resultado.fecha_registro)) as fecha_registro, respuestaFecha,fecha_registro,estado from 
+    (select exp.*, res.respuesta,MAX(res.fecha_registro) as respuestaFecha from (select * from expediente where estado='proceso' or estado='iniciado') as exp
+  left join respuesta as res using(id_expediente)   group by id_expediente) as resultado  inner join personal using(id_personal) 
+  WHERE (Month(now())-Month(resultado.respuestaFecha)) >=2 or (Month(now())-Month(resultado.fecha_registro))>=2 and (estado='proceso' or estado='iniciado')";
+ //echo $sql;
+  return consulta($sql);
     }
   
 
