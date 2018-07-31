@@ -14,7 +14,6 @@ function consulta($consulta){
   $sql->execute();  
   if($sql->rowCount()==0)
      return 0;
-  
   if($sql->rowCount()>0)
     //$datos = $sql->fetchAll(PDO::FETCH_ASSOC);
     return  $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -40,4 +39,6 @@ function consulta_obj($consulta){
     
     return $sql->rowCount();
  }
+
+ //$this->id = $conexion->lastInsertId(); segun esto me devuelte el ultimo id creado
 ?>

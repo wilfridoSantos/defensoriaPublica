@@ -1,24 +1,27 @@
     <title>Modulo Coordinador General</title>
-      <!-- <script src="../../recursos/js/main.js"></script>
-      <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
-   <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
-    <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    
+       <script src="../../recursos/js/main.js"></script>
+        <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css"> 
+    <!--
+         <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
+ <link href="../../recursos/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../recursos/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-      <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script> -->
+     --> 
       <!-- <link href="../../recursos/css/style.css" rel="stylesheet"/>
  -->
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-<!-- <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
- -->  
+ <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
+  
 
-  <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script> 
+<!--   <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script> 
+ -->  <script src="../../recursos/js/administrador/atendiendoListarDefensor.js"></script> 
    <script src="../../recursos/js/main.js"></script>
       <script src="../../recursos/js/jquery-ui.1.12.1.js"></script>
       <!-- <script  type="text/javascript" src="../../recursos/vendors/jquery/jquery-ui.js"></script>
-       --><link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+       <link href="../../recursos/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
     <link href="../../recursos/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../../recursos/css/custom.css" rel="stylesheet"/>
@@ -26,6 +29,8 @@
     <script src="../../recursos/js/main.js"></script><!-- 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+
 
 <script>
 
@@ -73,8 +78,8 @@ language: {
 }
 //});
           </script>
-     <link href="../../recursos/css/style.css" rel="stylesheet"/>
-
+    <!--  <link href="../../recursos/css/style.css" rel="stylesheet"/>
+ -->
 
       <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
@@ -130,13 +135,13 @@ language: {
                                     '<td>'.strtoupper($obj->juzgado).'</td>'.                                          
                                   
                                     '<td><button type="button" class="btn btn-primary botonExp" id="botonExp" name="expedientes">'.
-                                      '<span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span></button>'.
+                                      '<span class="glyphicon glyphicon-th-list" title="Ver Expedientes"aria-hidden="true"> </span></button>'.
                                     '<button type="button" class="btn btn-primary boton" id="boton" name="info">'.
-                                      '<span class="glyphicon glyphicon-user" aria-hidden="true"> </span></button>'.
+                                      '<span class="glyphicon glyphicon-user" title="Detalle del defensor"aria-hidden="true"> </span></button>'.
                                     '<button type="button" class="btn btn-warning botonUp" id="botonUp" name="botonUp">'.
-                                        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'.
+                                        '<span class="glyphicon glyphicon-pencil" title="Editar Defensor" aria-hidden="true"></span></button>'.
                                     '<button type="button" class="btn btn-danger botonDel" id="botonDel" name="botonDel">'.
-                                        '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'.
+                                        '<span class="glyphicon glyphicon-trash" title="Dar de baja" aria-hidden="true"></span></button>'.
                                     '</td> </tr>';
                                   }            
                                 } 

@@ -20,14 +20,29 @@ $respuesta =  array_map( "cadenaToMayuscula",$respuesta);/// convierte todo a ma
    //$verificarRegistro=existeRespuestaExpediente($_POST['id_expediente'],$_POST['id_pregunta']);
    //if($verificarRegistro==0)// 0 INDICA QUE NO EXITE LA RESPUESTA A UNA PREGUNTA DE UN DICHO EXPEDIENTE
     //print_r($respuesta);
-      {setBajaActivoExpediente($respuesta);
+      {
+         // bajaExpediente($respuesta); se cambio por esto
+         setBajaActivoExpediente($respuesta);
        $mensaje=['tipo'   =>"exito",
-                 'mensaje'=>"finalizacion exitoso"];
+                 'mensaje'=>"Baja de expediente exitoso"];
         // echo "el registro es exitoso" ;  
    }
    //print_r($respuesta);
 
    
    echo json_encode($mensaje);
-
+   if(isset($_GET['pertenece']))
+      if($_GET['pertenece']=='admin')
+      {
+        $mensaje=['tipo'=>"exito",
+                  'mensaje'=>"Baja exitoso"
+                ];
+        $dirigir="asignar_defensor";
+        $_SESSION['mensaje'] = $mensaje;
+        
+      header("location: ../../vistas/administrador/index.php");
+    } 
+  else{
+    echo json_encode($mensaje);
+    }
 ?>

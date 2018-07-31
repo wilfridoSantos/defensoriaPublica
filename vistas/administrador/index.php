@@ -16,10 +16,10 @@ include "../../Controlador/sesion.php";
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Modulo ADMINISTRADOR</title>    
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
-      <link href="../../recursos/css/style.css" rel="stylesheet"/> 
+     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzTOTwZBuaUzajwK5B3K-DGIOGpTu3FdU"></script>
+      --> <link href="../../recursos/css/style.css" rel="stylesheet"/> 
       
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 
 <!--     <script src="../../recursos/vendors/jquery/dist/jquery.min.js"></script>
  -->    <script src="../../recursos/js/jquery-1.11.2.min.js"></script>
@@ -155,65 +155,11 @@ include "../../Controlador/sesion.php";
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
+                    <span class="badge bg-green" id="cantidadExpediente"></span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                        asignacion de caso => defensor: xxx, fecha:
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php //echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          asignacion de caso => defensor: xxx, fecha:  
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php// echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../../recursos/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span><?php //echo $_SESSION['usuario'] ?></span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>Ver todas las notificaciones</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
+                    
+                   
                   </ul>
                 </li>
               </ul>
@@ -363,11 +309,30 @@ include "../../Controlador/sesion.php";
             </div>
           </div>
         
-         
         </div>
         <!-- /page content --> 
 
-
+          <!-- inicion de dialogo de notificacion -->
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalCenterTitle"><b> Expedientes sin antención </b></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                    <div id="notificacionsSinAtencion" class="table-responsive x_content" title="infomación"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- fin del dialogo notificacion -->
         <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -385,10 +350,10 @@ include "../../Controlador/sesion.php";
     <script src="../../recursos/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     
     <script src="../../recursos/vendors/fastclick/lib/fastclick.js"></script>
-    
+     
     <script src="../../recursos/vendors/nprogress/nprogress.js"></script>
-   
-    <script src="../../recursos/vendors/iCheck/icheck.min.js"></script>
+    
+    <script src="../../recursos/vendors/iCheck/icheck.min.js"></script> 
     <script src="../../recursos/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../recursos/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="../../recursos/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -417,6 +382,7 @@ include "../../Controlador/sesion.php";
  if( $_SESSION['post_data'] == 1 ){
 ?>
     <script>$("#menuContainer").load("listarExpedientes.php");</script>
+   <!--  <script>$("#exampleModalLong").modal('hide');</script> -->
 
 <?php
   unset($_SESSION['post_data']);

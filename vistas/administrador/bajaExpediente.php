@@ -11,11 +11,11 @@
             
                 </div>
                 <div class="x_content">                    
-                    <form  class="" action ="../../controlador/expediente/bajaExpediente.php" object="defensor" method="post">
+                    <form  class="" action ="../../controlador/expediente/bajaExpediente.php?pertenece=admin" object="defensor" method="post">
                         <div class="form-horizontal form-label-left">                     
                         <div class="col-md-6 col-xs-12">
                               <label>Causa
-                                <select id="causa" class="form-control" name="causa" onchange="validarSelect(this.value)">
+                                <select id="causa" class="form-control" name="motivoBaja" onchange="validarSelect(this.value)">
                                     <option value="">Materia</option>
                                     <option value="REVOCACION">Revocación del defensor</option>
                                     <option value="FALTA">Falta de interés</option>     
@@ -23,13 +23,28 @@
                               </label>
                                <div id="mensajeSelectCausa" style="color:red;"></div>
                             </div> 
+                            <div class="col-md-6 col-xs-12">
+                              <label>Fecha de baja
+                                <input type="date" name="fecha_baja" value="">
+                              </label>
+                               <div id="mensajeSelectCausa" style="color:red;"></div>
+                            </div>
+                        
+                            <div class="col-md-6 col-xs-12">
+                              <label>Observaciones
+
+                              </label>
+                                <textarea name="observacion"rows="" cols=""></textarea>
+                               <div id="obser" style="color:red;"></div>
+                            </div>
+                        
                             <br/>
                             <div id="selectMotivacion" class="col-md-7 col-xs-12">
                               
                             </div> 
                             
                            
-                            <input type="text" name="expedienteNum" id="expedienteNum" value="<?php echo $_GET['id_exp'] ?>"  style="display:none;" class="form-control col-sm-2 col-xs-12"/>                       
+                            <input type="text" name="id_expediente" id="expedienteNum" value="<?php echo $_GET['id_exp'] ?>"  style="display:none;" class="form-control col-sm-2 col-xs-12"/>                       
                         </div>
                 
                             <div class="form-group">

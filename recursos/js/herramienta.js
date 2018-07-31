@@ -66,9 +66,13 @@ $(document).ready(function () {
   data();// llamao a la funcion para almacenar estos datos
 
 
-/* 
+ 
     function userBAsico(){
           var user=document.getElementById('id_personalUser');
+        console.log("el usuario ",parseInt(user.value));
+        var valor=parseInt(user.value);
+        console.log("el usuario ",isNaN(valor));
+        if(!isNaN(parseInt(user.value)))
         $.ajax({
           type: 'GET',
           url: '../../controlador/datos_basicos.php?personal='+user.value,
@@ -77,7 +81,7 @@ $(document).ready(function () {
         //        Global_usuarios_servicios= data;//parsedData[0].NUMERO;
           },
           error: function () {
-                console.log("Error de ajax");
+                console.log("Error de ajax en usuario");
                 
               //alert('Error peticion Ajax ');
           }
@@ -86,7 +90,7 @@ $(document).ready(function () {
 
     userBAsico();// llamao a la funcion para almacenar estos datos
 
-  */
+  
 
 
 

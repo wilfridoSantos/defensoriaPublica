@@ -46,7 +46,8 @@
                     break;
                 }
             }
-    }else{
             echo $contenido;
+    }else{
+            
     }
 ?>

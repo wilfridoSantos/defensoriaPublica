@@ -28,7 +28,7 @@
     if((listar_x_num_expediente_($expediente['num_expediente'])==0)||($expediente['num_expediente']=="")){
          //echo "validando   ".existenciaUsuario($usuario,$materia[0]['id_materia']);
         if(existenciaUsuario($usuario,$materia[0]['id_materia'])==false)
-        {   echo "entro valido personal materia";
+        {//   echo "entro valido personal materia";
             alta_expediente($expediente);
             foreach ($usuario as $key => $value) {
              alta_DetalleExpedinte(ultimoExpedinteCreatado(),$value);

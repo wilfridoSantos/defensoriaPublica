@@ -1752,18 +1752,26 @@ function getExpedientesByRangoFecha($fechaI, $fechaF){
     return $lista;
     }
 
+function getExpedienteById($id_expediente){
+      $sql = " select * from expediente
+       where id_expediente='".$id_expediente."' ";
+    $lista=consulta($sql);
+    return $lista;    
+}
 function getExpedienteByNum($numExp){
-      $sql = " select * from respuesta inner join preguntas using(id_pregunta) inner join expediente using(id_expediente)
+      $sql = " select * from respuesta inner join pregunta_materia using(id_pregunta_materia)
+         inner join pregunta using(id_pregunta)
+         inner join expediente using(id_expediente)
        where num_expediente='".$numExp."' ";
     $lista=consulta($sql);
     return $lista;    
 }
-function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia){
+function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia,$num_expediente){
   
       $sql = " select * from expediente inner join personal_campo
                  using(id_personal) inner join detalle_usuario_expediente  using(id_expediente)
                  where id_materia='".$materia."' 
-                 and id_usuario_servicio='".$id_usuario_servicio."'";
+                 and id_usuario_servicio='".$id_usuario_servicio."' and num_expedient='".$num_expediente."'";
    // echo $sql;
          $lista=consulta($sql);
        //  print_r($lista);
@@ -1780,9 +1788,10 @@ function listar_expedienteByPersonalAndMateria($id_usuario_servicio,$materia){
 }
 function listar_x_num_expediente_($num_expediente){
    
-    $sql = "select * from expediente  inner join 
+    /* $sql = "select * from expediente  inner join 
                           usuario_servicio using(id_usuario_servicio)
-                           where num_expediente='".$num_expediente."'";
+                           where num_expediente='".$num_expediente."'"; */
+    $sql = "select * from expediente inner join detalle_usuario_expediente using(id_expediente) where num_expediente='".$num_expediente."'";
    // echo $sql;
     $lista=consulta($sql);
   //  print_r($lista);
@@ -1813,7 +1822,7 @@ function listar_expedientes_x_estado($estado){
                  inner join materia using(id_materia)where id_personal<0";
     break;
     case 3: 
-      $sql="SELECT e.id_expediente, e.num_expediente, m.materia, e.fecha_inicio, e.estado, p.id_personal, e.observaciones
+      $sql="SELECT p.nue,p.id_personal,e.id_expediente, e.num_expediente, m.materia, e.fecha_registro, e.estado, p.id_personal, e.observaciones
        FROM expediente as e inner join personal_campo as pc using(id_personal) inner join personal as p using(id_personal)
        inner join materia as m  using(id_materia)";
     break;
@@ -1890,22 +1899,37 @@ function finalizarExpediente($datos){
   $lista = consulta($sql);
  // echo $sql;
   return $lista;
-    }
+}
+
 function setBajaActivoExpediente($respuesta){
     $sql="update expediente set estado='".$respuesta['estado']."', observaciones='".$respuesta['observaciones']."'
           ,fecha_final='".$respuesta['fecha_baja']."',  motivos='".$respuesta['motivos']."' where id_expediente='".$respuesta['id_expediente']."'";
           $lista = consulta($sql);
         //  echo $sql;
           return $lista;
-    }
+}
+
+
 function estadoEnProceso($id_expediente){
   $sql="update expediente set estado='PROCESO'
         where id_expediente='".$id_expediente."'";
         $lista = consulta($sql);
         //echo $sql;
         return $lista;
-    }
-function listar_expediente_x_defensor($idDefensor){
+}
+
+  function listar_x_idExpedienteAndDefensor($id_personal,$id_expediente){
+   // SE OBTIENE LOS UTLIMOS 2 REGISTROS DE LAS PREGUNTAS CONTESTAS DE UN EXPEDIENTE EL PRIMERO ES ULTIMO Y EL SEGUNDO SERA EL PENULTIMO
+    $sql = "select  exp.num_expediente,exp.nombre_delito,exp.tipo_delito, res.respuesta,res.observaciones,res.accion_implementar,res.fecha_registro
+            from expediente as exp  
+            inner join respuesta as res using(id_expediente)
+            where id_personal='".$id_personal."' and id_expediente='".$id_expediente."'  order by  fecha_registro  desc limit 2";
+   // echo $sql;
+    $lista=consulta($sql);
+  //  print_r($lista);
+    return $lista;
+ } 
+ function listar_expediente_x_defensor($idDefensor){
    
     $sql = "select exp.id_expediente,exp.estado,exp.nombre_delito,exp.tipo_delito,exp.observaciones,exp.fecha_final,exp.fecha_inicio, exp.num_expediente,
                 defensor.id_juzgado,     defensor.estado AS estadoDefensor,defensor.id_personal,mate.materia,mate.sistema
@@ -1941,13 +1965,16 @@ function listar_expediente_visitas($id_expediente){
     
 function listar_pregunta($id_materia){
      
-        $sql = "select pregunta.id_pregunta,pregunta.id_materia,pregunta.id_pregunta,pregunta.pregunta,pregunta.identificador
-                    from preguntas as pregunta
-                      where id_materia='".$id_materia."'";
+       /*  $sql = "select pregunta.id_pregunta,pregunta.id_materia,pregunta.pregunta,pregunta.identificador
+                    from pregunta as pregunta
+                      where id_materia='".$id_materia."'"; */
+         $sql = " select * from 
+                    pregunta_materia 
+                    INNER JOIN pregunta using(id_pregunta)
+                    where id_materia='".$id_materia."'"; 
         $consulta = consulta($sql);
         return $consulta;
     }
-    
 function listar_preguntaConOpciones($id_materia,$id_expediente){
      
         /*  $sql = "select pregunta.id_pregunta,pregunta.pregunta,detalle.id_materia,detalle.id_pregunta_materia,detalle.identificador,op.opcion
@@ -1993,6 +2020,15 @@ function alta_expediente($objetoEntidad){
       // echo $sql;
          $lista=registro($sql);
       return $lista;
+    }
+  
+function notificacionExpedienteSinAtencion(){
+    $sql="select resultado.num_expediente, nombre,ap_paterno,ap_materno,telefono,(Month(now())-Month(resultado.respuestaFecha)) as fechaRespuesta, (Month(now())-Month(resultado.fecha_registro)) as fecha_registro, respuestaFecha,fecha_registro,estado from 
+    (select exp.*, res.respuesta,MAX(res.fecha_registro) as respuestaFecha from (select * from expediente where estado='proceso' or estado='iniciado') as exp
+  left join respuesta as res using(id_expediente)   group by id_expediente) as resultado  inner join personal using(id_personal) 
+  WHERE (Month(now())-Month(resultado.respuestaFecha)) >=2 or (Month(now())-Month(resultado.fecha_registro))>=2 and (estado='proceso' or estado='iniciado')";
+ //echo $sql;
+  return consulta($sql);
     }
   
 

@@ -114,7 +114,7 @@
                           '<div  class="help-block with-errors"></div></div> </div>  </div>'+
 
                           '<div class="form-horizontal form-label-left">     <div class="form-group">'+//ACCION A IMPLEMENTAR
-                        '<label class="control-label col-md-3 col-sm-3 col-xs-12" for="curp">Accion a tomar'+
+                        '<label class="control-label col-md-3 col-sm-3 col-xs-12" for="curp">Acción a implementar'+
                           '<span class="required">*</span></label>'+
                         '<div class="col-md-6 col-sm-6 col-xs-12">'+
                         '<textarea id="observacaccion_implementarion" name="accion_implementar" pattern="[A-Za-z0-9.,:áéíóú ]+" data-error="solo numeros o letras con minimo 10 caracter" rows="10" cols="150"  minlength="10" maxlength="250" class="form-control col-md-7 col-xs-12"  placeholder="describa la(s) accion que debe realizar "></textarea>'+
@@ -303,12 +303,12 @@ function registrarAmparo(){
                             <button id="finalizar" type="button" onclick="verFinalizar()"> Finalizar expediente</button> -->
                             <ul class="nav nav-pills">
    
-                            <li id="agregarContraparte" class="" role="presentation" type="li"><a href="#">Agregar Contraparte</a></li>
+                            <li id="agregarContraparte" class="" role="presentation" type="li"><a href="#">Agregar contraparte</a></li>
                               <input style="display:none;"id="numExpedienteGlobal"></input>
                               <input style="display:none;"id="expediente"></input>
                             <li id="visualizarContraparte" role="presentation" class=" " type="li"><a href="#">Visualizar contrapartes</a></li>
                             <li id="respuestasContestadas" role="presentation" class=" " type="li"><a href="#"> Contestadas</a></li>
-                            <li id="idSeguimiento" role="presentation" class="active botonContraparte" type="li"> <a href="#">seguimiento</a></li>
+                            <li id="idSeguimiento" role="presentation" class="active botonContraparte" type="li"> <a href="#">Seguimiento</a></li>
                             <li id="registroAmparo" role="presentation" class=" " type="li" onclick="registrarAmparo()"><a href="#"> Registrar amparo</a></li>
                             <li id="finalizar" role="presentation" class=" " type="li" onclick="verFinalizar()"><a href="#"> Finalizar expediente</a></li>
                           </ul>

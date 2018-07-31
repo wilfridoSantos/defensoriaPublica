@@ -8,10 +8,10 @@ function getContraparteById($id_contraparte){
     $lista = consulta($sql);
     return $lista;
 }
-function getContrapartesById($id_contraparte){
+function getContrapartesById($id_expediente){
     $sql = "select * from contraparte as contra 
     inner join contraparte_expediente  as detalle  using(id_contraparte)
-    where detalle.id_expediente='".$id_contraparte."'";
+    where detalle.id_expediente='".$id_expediente."'";
     //echo $sql;
     $lista = consulta($sql);
     return $lista;

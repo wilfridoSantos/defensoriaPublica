@@ -213,8 +213,8 @@ $idpersonal=$_SESSION['personal'];
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                   <select required="" id="id_motivoBaja"   name="motivoBaja"  class="form-control ">
                                                     <option value="">--SELECCIONE UNA OPCIÓN-</option>
-                                                    <option value="FALTA DE INTERES">Falta de interes</option>
-                                                    <option value="REVOACIÓN DEL DEFENSOR">Revocación del defensor</option>
+                                                    <option value="FALTA">Falta de interes</option>
+                                                    <option value="REVOACION">Revocación del defensor</option>
                                                     
                                                     
                                                   </select>

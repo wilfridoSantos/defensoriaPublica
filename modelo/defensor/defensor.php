@@ -7,6 +7,26 @@ function listar_defensores(){
    $lista=consulta($sql);
    //print_r($sql);
    return $lista;
+
+}
+
+function registrarEstudio($objetoEntidad){
+    $sql="INSERT INTO escolaridad(id_personal,grado_escolaridad,fecha_termino,instituto,descripcion_perfil_egreso,cedula_profesional,";
+    $sql.="perfil,documento_provatorio,nombre_estudio,especialidad) values(";
+    $sql.="'".$objetoEntidad['id_personal']."',"."'".$objetoEntidad['grado_escolaridad']."',"."'".$objetoEntidad['fecha_termino']."',";
+    $sql.="'".$objetoEntidad['instituto']."',"."'".$objetoEntidad['descripcion_perfil_egreso']."',"."'".$objetoEntidad['cedula_profesional']."',";
+    $sql.="'".$objetoEntidad['perfil']."',"."'".$objetoEntidad['documento_provatorio']."',"."'".$objetoEntidad['nombre_estudio']."',";
+    $sql.="'".$objetoEntidad['especialidad']."')";
+ 
+  
+     
+
+/*     $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,juzgado,p.municipio,p.colonia FROM personal_campo as d inner join personal as p using(id_personal)
+                    inner join juzgado as j using(id_juzgado) where id_cargo =4";			
+ */
+    $lista=registro($sql);
+//print_r($sql);
+return $lista;
 }
 function listar_defensoresSis($sis){
     $sql="SELECT id_personal, nombre, ap_paterno,ap_materno,estado,p.municipio,p.colonia 
@@ -119,7 +139,7 @@ function getExpedientesById($id_defensor){
     p.calle as calleDef,p.numero_int as numDef, p.telefono as telDef, p.correo_electronico as emailDef,
     p.colonia as coloniaDef, p.municipio as muniDef,p.id_personal,
      e.num_expediente, m.materia,e.fecha_inicio, e.id_expediente,e.fecha_final,e.nombre_delito,
-    e.tipo_delito,e.estado, e.incidente,e.observaciones
+    e.tipo_delito,e.estado, e.motivos,e.observaciones
     from expediente as e inner join personal as p  using(id_personal)
     inner join personal_campo using(id_personal)
     inner join materia as m using(id_materia)

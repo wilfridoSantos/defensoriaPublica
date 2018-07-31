@@ -1,5 +1,5 @@
 <?php 
-  //  header('Content-Type: application/json');
+   //header('Content-Type: application/json');
     include '../../modelo/juzgado.php';
     include '../../modelo/defensor/defensor.php';
     $listaJuzgado =   listar_juzgado();
@@ -11,21 +11,26 @@
    $juzgado = Array( );
   
    foreach($user as $values){
-    if($values->region!=$equals){
+//    if($values->region!=$equals){
+    if(isset($juzgado[$values->region])==false){
         $equals=$values->region;
         $valor =Array();
+//        $valor[]=juzgadosIdentificados($user,$values->region);
+  //      $juzgado[$values->region]=$valor;
+        $juzgado[$values->region]=juzgadosIdentificados($user,$values->region);
     }
     
-    $arrayJuzgado=Array();
+    /* $arrayJuzgado=Array();
     $arrayJuzgado['id_juzgado']=$values->id_juzgado;
     $arrayJuzgado['nombre']=$values->juzgado;
- 
-    $valor[]=$arrayJuzgado;
+  */
+//    $valor[]=$arrayJuzgado;
+   /*  $valor[]=juzgadosIdentificados($user,$values->region);
+    */
    
-    $juzgado[$values->region]=$valor;
    }
   $contenidojuzgado = json_encode($juzgado);
-   
+   //print_r($juzgado);
 
   //$mensaje="Registro exitoso";
   $mensaje=['tipo'=>"exito",
@@ -78,7 +83,23 @@ foreach($user as $values=>$key)
 }    
    
   
-}*/   
+}*/ 
+function juzgadosIdentificados($array,$region){
+  $arrayJuzgado=Array();
+
+  foreach ($array as  $value) {
+    
+      if ($value->region===$region) {
+        $juzgado = Array( );
+        $juzgado['id_juzgado']=$value->id_juzgado;
+        $juzgado['nombre']=$value->juzgado;
+        $juzgado['region']=$value->region;
+       array_push($arrayJuzgado, $juzgado);
+      }
+      
+   }
+ return $arrayJuzgado;
+}  
 
    // print_r(json_decode($contenidojuzgado));
 
