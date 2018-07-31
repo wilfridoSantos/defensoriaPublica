@@ -1,20 +1,346 @@
-SELECT * FROM bddefensoria.estudios;
-
--- CREATE
--- ADMINISTRADOR
-insert into estudios values(1, 'licenciatura', '2014-08-10', 'UABJO', '2004-2008' ,'descripcion de perfil de egreso', 'c3dul4Pr0f4io4L','Lic. en derecho', 'C:/xampp/htdocs/defensoriaPublica/ejemplo.jpg');
--- COORDINADOR
-insert into estudios values(2, 'licenciatura', '2012-08-10', 'universidad panamericana', '2004-2008' ,'descripcion de perfil de egreso', 'c3dul4Pr0f4io4L','Lic. en derecho', 'C:/xampp/htdocs/defensoriaPublica/ejemplo.jpg');
--- COORDINADOR-DEFENSO
-insert into estudios values(3, 'licenciatura', '2013-08-10', 'UNAM', '2010-2013' ,'descripcion de perfil de egreso', 'c3dul4Pr0f4io4L','Lic. en derecho', 'C:/xampp/htdocs/defensoriaPublica/ejemplo.jpg');
--- ESTADISTICA
-insert into estudios values(4, 'licenciatura', '2015-08-10', 'UNAM', '2011-2015' ,'descripcion de perfil de egreso', 'c3dul4Pr0f4io4L','Lic. en derecho', 'C:/xampp/htdocs/defensoriaPublica/ejemplo.jpg');
--- DEFENSOR
-insert into estudios values(5, 'licenciatura', '2016-08-10', 'UABJO', '2012-2016' ,'descripcion de perfil de egreso', 'c3dul4Pr0f4io4L','Lic. en derecho', 'C:/xampp/htdocs/defensoriaPublica/ejemplo.jpg');
-
-
--- UPDATE
-update estudios set instituto = 'universidad panamericana' where id_estudios=1;
-
--- REMOVE
-delete from estudios where id_estudios=1;
+IF(tipo='COMPLETOPERIODO') THEN
+	if(tipo2='COMPLETO') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+                                where  exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;	
+    if(tipo2='MATERIA') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+                                WHERE tablaPer.materia=mat  AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;	
+    if(tipo2='SISTEMATERIA') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+			WHERE tablaPer.materia=mat and tablaPer.sistema=sis AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;
+    if(tipo2='REGION') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado, ju.region  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+                                WHERE tablaPer.region=reg AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;	
+    if(tipo2='SISTEMAREG') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, ju.region,p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado, ju.region  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+			WHERE tablaPer.region=reg and tablaPer.sistema=sis AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;
+    if(tipo2='AMBAS') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado, ju.region  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+                                WHERE tablaPer.region=reg and tablaPer.materia=mat AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;	
+    if(tipo2='SISTEMAMBAS') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, ju.region,p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado, ju.region  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+			WHERE tablaPer.region=reg and tablaPer.sistema=sis and tablaPer.materia=mat AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;
+    if(tipo2='SISTEMANIN') THEN
+		select tablaPer.id_personal as id, tablaPer.nombre as defensor,tablaPer.juzgado as juzgado, tablaPer.materia,tablaPer.sistema as sis, count(distinct exp.id_expediente) as totExp,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, ju.region,p.nombre, ma.materia, ma.sistema  
+												from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema 
+                     
+                     ) as usuarios,
+							(select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema 
+														from personal_campo as pc 
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+									where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='MASCULINO'
+                           ) as hombres,
+                          (select count(de.id_usuario_servicio)
+								from expediente as exp
+									inner join detalle_usuario_expediente de using(id_expediente)										
+									inner join usuario_servicio as us using(id_usuario_servicio)
+									inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema, ju.juzgado  
+															from personal_campo as pc
+															inner join personal p using(id_personal)
+															inner join juzgado as ju using(id_juzgado)
+															inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+								where id= tablaPer.id_personal and sis = tablaPer.sistema and us.sexo='FEMENINO') as mujeres
+	from expediente as exp
+        inner join (select pc.id_personal, pc.id_materia,ju.id_juzgado, p.nombre, ma.materia, ma.sistema , ju.juzgado, ju.region  from personal_campo as pc 
+								inner join personal p using(id_personal)
+								inner join juzgado as ju using(id_juzgado)
+								inner join materia as ma using(id_materia)) as tablaPer using(id_personal)
+			WHERE tablaPer.sistema=sis AND exp.fecha_registro between fi and ff
+		group by tablaPer.id_personal, tablaPer.sistema;
+	END IF;
+END IF;

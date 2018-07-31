@@ -7,11 +7,23 @@
 <script src="../../recursos/js/coordinador/atendiendoCoordinador.js"></script>
 <script src="../../recursos/js/coordinador/funcionesExpGeneralesPDF.js"></script>
 
-<script src="../../recursos/js/coordinador/pdfExpedientesGByDefPeriodo.js"></script>
-<script src="../../recursos/js/coordinador/pdfExpedientesGPeriodo.js"></script>
-<script src="../../recursos/js/coordinador/pdfExpedientesGByDefCompleto.js"></script>
-<script src="../../recursos/js/coordinador/pdfExpedientesGCompleto.js"></script>
+<script src="../../recursos/js/coordinador/informeMatParcialByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeMatParcialPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeRegParcialByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeRegParcialPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeAmbasParcialByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeAmbasParcialPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeNingunoParcialByDefPeriodo.js"></script>
+<script src="../../recursos/js/coordinador/informeNingunoParcialPeriodo.js"></script>
 
+<script src="../../recursos/js/coordinador/informeMatParcialByDef.js"></script>
+<script src="../../recursos/js/coordinador/informeMatParcial.js"></script>
+<script src="../../recursos/js/coordinador/informeRegParcialByDef.js"></script>
+<script src="../../recursos/js/coordinador/informeRegParcial.js"></script>
+<script src="../../recursos/js/coordinador/informeAmbasParcialByDef.js"></script>
+<script src="../../recursos/js/coordinador/informeAmbasParcial.js"></script>
+<script src="../../recursos/js/coordinador/informeNingunoParcialByDef.js"></script>
+<script src="../../recursos/js/coordinador/informeNingunoParcial.js"></script>
 
 
 <link href="../../recursos/css/custom.css" rel="stylesheet" />
@@ -20,6 +32,7 @@
 <link rel="stylesheet" href="../../recursos/vendors/jquery/jquery-ui-themes-1.12.1/jquery-ui.css">
  -->
  <script>//seleccionarUnDefensor2(true)</script>
+ <script>listaMAtributos()</script>
 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -125,19 +138,17 @@
                                 </label>
                                 <div class="col-md-4">                        
                                         <select required="required" id="selectAtributos" name="selectAtributos" style="height:110px;" data-error="Seleccione uno o mas atributos." name="datatable-responsive_length" multiple="multiple" aria-controls="datatable-responsive" class="form-control input-sm">                                                                        
-                                        <option value="GENERAL" selected="selected">General</option>
-                                        <option value="ACTIVIDAD">Actividades</option> 
-                                        <option value="TOP">Top Defensores</option>  
-                                            <option value="SEXO">Sexo</option>
+                                            <!-- <option value="GENERAL" selected="selected">General</option>
+                                            <option value="ACTIVIDAD">Actividades</option>  -->
+                                            <option value="SEXO" selected>Sexo</option>
                                             <option value="GENERO">Genero</option>
                                             <option value="EDAD">Edad</option>
                                             <option value="ETNIA">Etnia</option>
                                             <option value="IDIOMA">Idioma o Lengua</option>
                                             <option value="DISCAPACIDAD">Discapacidad</option>
-                                            <!-- <option value="REGION">Region</option>
-                                            <option value="MATERIA">Materia</option> -->
-                                            
-                                                                              
+                                            <option value="MATERIA">Materia </option>  
+                                            <option value="REGION">Región</option>  
+                                            <option value="TOP">Top Defensores</option>                                                                           
                                         </select>
                                         <div  class="help-block with-errors"></div> 
                             </div>
@@ -167,7 +178,7 @@
                 </div>
               </div>
 
-<div class="col-md-12 col-sm-12 col-xs-12" id="tablaPanel">
+<!-- <div class="col-md-12 col-sm-12 col-xs-12" id="tablaPanel">
     <div class="x_panel">
         <div class="x_title">
             <h2><b>Lista de Actividades </b></h2>
@@ -270,7 +281,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
       </div>
     </div>
   </div>
@@ -289,11 +300,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> 
       </div>
     </div>
   </div>
-</div> 
+</div>  -->
 <script>
 
 $('#myform').validator()

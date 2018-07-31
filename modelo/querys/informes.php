@@ -4,72 +4,76 @@ include_once('../../libreria/conexion.php');
 
 function consultaMatNotSystem($mat, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','MATERIA','','','".$mat."','','','')";
+    $l = consulta($sql);
+    $lista['tablaActExp'] = $l;
+
+    $sql = "call tablaExpGeneralP('COMPLETO','MATERIA','','','".$mat."','','','')";
+    $l = consulta($sql);  
+    $lista['tablaGeneralExp'] = $l;   
+
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','MATERIA','','','".$mat."','','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','MATERIA','','','".$mat."','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                   
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             /* case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
             case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break;
 
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -78,72 +82,75 @@ function consultaMatNotSystem($mat, $atrib){
 }
 function consultaMatSystem($sis, $mat, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
+                $l = consulta($sql);                
+                $lista['tablaActExp'] = $l;
+
+                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;                
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
     /*             case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
             case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break;
             
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -154,72 +161,76 @@ function consultaMatSystem($sis, $mat, $atrib){
 }
 function consultaRegNotSystem($reg, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','REGION','','','','".$reg."','','')";
+                $l = consulta($sql);
+                $lista['tablaActExp'] = $l;
+
+
+                $sql = "call tablaExpGeneralP('COMPLETO','REGION','','','','".$reg."','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','REGION','','','','".$reg."','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','REGION','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','REGION','','','','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                    
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','REGION','','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -228,72 +239,74 @@ function consultaRegNotSystem($reg, $atrib){
 }
 function consultaRegSystem($sis, $reg, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
+                $l = consulta($sql);                
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
                 case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -304,72 +317,74 @@ function consultaRegSystem($sis, $reg, $atrib){
 }
 function consultaAmbasNotSystem($mat, $reg, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
+    $l = consulta($sql);
+    $lista['tablaActExp'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
+    $l = consulta($sql);  
+    $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','AMBAS','','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -378,72 +393,74 @@ function consultaAmbasNotSystem($mat, $reg, $atrib){
 }
 function consultaAmbasSystem($sis, $mat, $reg, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
+                $l = consulta($sql);                
+                $lista['tablaActExp'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
                 case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -454,72 +471,74 @@ function consultaAmbasSystem($sis, $mat, $reg, $atrib){
 }
 function consultaNingunoNotSystem($atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','COMPLETO','','','','','','')";
+    $l = consulta($sql);
+    $lista['tablaActExp'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETO','COMPLETO','','','','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','COMPLETO','','','','','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','COMPLETO','','','','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
 
-            /* case 'REGION':                 
+            case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
-            break; */
+                $lista['tablaRegionExp'] = $l;      
+            break; 
 
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -528,72 +547,74 @@ function consultaNingunoNotSystem($atrib){
 }
 function consultaNingunoSystem($sis, $atrib){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
+                $l = consulta($sql);                
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
                 $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
                 $sql = "call tablaExpEdadP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
                 $sql = "call tablaExpEtniaP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
                 $sql = "call tablaExpGeneroP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
                 $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
-                case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
+            case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('COMPLETO','COMPLETO','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; 
 
-            /* case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
+             case 'REGION':                 
+                $sql = "call bddefensoria.tablaExpRegionP('COMPLETO', 'SISTEMANIN', '', '".$sis."', '', '', '', '')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
-            break; */
+                $lista['tablaRegionExp'] = $l;      
+            break; 
             
             case 'SEXO':                 
                 $sql = "call tablaExpSexoP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }   
@@ -604,72 +625,74 @@ function consultaNingunoSystem($sis, $atrib){
 
 function consultaMatNotSystemDef($mat, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
+                $l = consulta($sql);
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                   
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
             /* case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
             case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpRegionP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExpDef'] = $l;      
             break;
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','','')";
+                $sql = "call tablaExpTopP('COMPLETO','MATERIA','".$id."','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
@@ -678,72 +701,74 @@ function consultaMatNotSystemDef($mat, $atrib, $id){
 }
 function consultaMatSystemDef($sis, $mat, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
+                $l = consulta($sql);                
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
     /*             case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
             case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpRegionP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExpDef'] = $l;      
             break;
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpTopP('COMPLETO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
@@ -754,146 +779,149 @@ function consultaMatSystemDef($sis, $mat, $atrib, $id){
 }
 function consultaRegNotSystemDef($reg, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
+    $l = consulta($sql);
+    $lista['tablaActExpDef'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l; 
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','REGIONDEF','".$id."','','".$reg."','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','REGION','".$id."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpMateriaP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExpDef'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpTopP('COMPLETO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
- 
     return $lista;
 }
 function consultaRegSystemDef($sis, $reg, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
+    $l = consulta($sql);                
+    $lista['tablaActExpDef'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
                 case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExpDef'] = $l;      
             break; 
 
             /* case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpTopP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
@@ -904,72 +932,74 @@ function consultaRegSystemDef($sis, $reg, $atrib, $id){
 }
 function consultaAmbasNotSystemDef($mat, $reg, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
+                $l = consulta($sql);
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpMateriaP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExpDef'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpTopP('COMPLETO','AMBAS','".$id."','','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
@@ -978,72 +1008,74 @@ function consultaAmbasNotSystemDef($mat, $reg, $atrib, $id){
 }
 function consultaAmbasSystemDef($sis, $mat, $reg, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
+    $l = consulta($sql);                
+    $lista['tablaActExpDef'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
+    $l = consulta($sql);  
+    $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
                 case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExpDef'] = $l;      
             break; 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','','')";
+                $sql = "call tablaExpTopP('COMPLETO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
@@ -1054,72 +1086,74 @@ function consultaAmbasSystemDef($sis, $mat, $reg, $atrib, $id){
 }
 function consultaNingunoNotSystemDef($atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','COMPLETO','".$id."','','','','','')";
+                $l = consulta($sql);
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','COMPLETO','".$id."','','','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpMateriaP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExpDef'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','COMPLETODEF','".$id."','','','','','')";
+                $sql = "call tablaExpTopP('COMPLETO','COMPLETO','".$id."','','','','','')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }
@@ -1128,72 +1162,74 @@ function consultaNingunoNotSystemDef($atrib, $id){
 }
 function consultaNingunoSystemDef($sis, $atrib, $id){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
+                $l = consulta($sql);                
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpEdadP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpEtniaP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpGeneroP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpIdiomaP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
                 case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExpDef'] = $l;      
             break; 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpSexoP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','','')";
+                $sql = "call tablaExpTopP('COMPLETO','SISTEMANIN','".$id."','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExpDef'] = $l;      
             break;
         }
     }   
@@ -1204,72 +1240,74 @@ function consultaNingunoSystemDef($sis, $atrib, $id){
 ///============================================================================================ PERIODO
 function consultaMatNotSystemP($mat, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','MATERIA','','','".$mat."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','MATERIA','','','".$mat."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                   
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             /* case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
             case 'REGION':                 
-                $sql = "call tablaExpRegionPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpRegionP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break;
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','MATERIA','','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1278,72 +1316,74 @@ function consultaMatNotSystemP($mat, $atrib, $fi, $ff){
 }
 function consultaMatSystemP($sis, $mat, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);                
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                   
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
     /*             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
             case 'REGION':                 
-                $sql = "call tablaExpRegionPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpRegionP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break;
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','SISTEMATERIA','','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1354,72 +1394,74 @@ function consultaMatSystemP($sis, $mat, $atrib, $fi, $ff){
 }
 function consultaRegNotSystemP($reg, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+    $l = consulta($sql);
+    $lista['tablaActExp'] = $l;
+    $sql = "call tablaExpGeneroP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneroExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','REGION','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','REGION','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneralP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                $lista['tablaGeneralExp'] = $l;      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
 
             /* case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','".$mat."','','')";
+                $sql = "call tablaExpRegionP('COMPLETOPERIODO','MATERIA','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','REGION','','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','REGION','','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1428,72 +1470,74 @@ function consultaRegNotSystemP($reg, $atrib, $fi, $ff){
 }
 function consultaRegSystemP($sis, $reg, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+    $l = consulta($sql);                
+    $lista['tablaActExp'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+    $l = consulta($sql);  
+    $lista['tablaGeneralExp'] = $l; 
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                    
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
                 case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','SISTEMAREG','','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1504,72 +1548,74 @@ function consultaRegSystemP($sis, $reg, $atrib, $fi, $ff){
 }
 function consultaAmbasNotSystemP($mat, $reg, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','AMBAS','','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1578,72 +1624,74 @@ function consultaAmbasNotSystemP($mat, $reg, $atrib, $fi, $ff){
 }
 function consultaAmbasSystemP($sis, $mat, $reg, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);                
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
                 case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','SISTEMAMBAS','','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1654,72 +1702,74 @@ function consultaAmbasSystemP($sis, $mat, $reg, $atrib, $fi, $ff){
 }
 function consultaNingunoNotSystemP($atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $l = consulta($sql);
+                $lista['tablaActExp'] = $l;
+                $sql = "call tablaExpGeneralP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                    
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
             case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','COMPLETO','','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','COMPLETO','','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }
@@ -1728,72 +1778,74 @@ function consultaNingunoNotSystemP($atrib, $fi, $ff){
 }
 function consultaNingunoSystemP($sis, $atrib, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+    $l = consulta($sql);                
+    $lista['tablaActExp'] = $l;
+    $sql = "call tablaExpGeneralP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExp'] = $l; 
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExp'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExp'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExp'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                     
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExp'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExp'] = $l;      
             break;
 
-                case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+            case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('COMPLETOPERIODO','COMPLETO','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; 
 
-            /* case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
+             case 'REGION':                 
+                $sql = "call tablaExpRegionP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
-            break; */
+                $lista['tablaRegionExp'] = $l;      
+            break; 
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExp'] = $l;      
             break;
 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
+                $lista['tablaTopExp'] = $l;      
             break;
         }
     }   
@@ -1804,73 +1856,76 @@ function consultaNingunoSystemP($sis, $atrib, $fi, $ff){
 
 function consultaMatNotSystemDefP($mat, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);
+                $lista['tablaActExpDef'] = $l;
+
+                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
             /* case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','MATERIA','','','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
-            case 'REGION':                 
-                $sql = "call tablaExpRegionPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+           /*  case 'REGION':                 
+                $sql = "call tablaExpRegionP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
-            break;
+                $lista['tablaRegionExp'] = $l;      
+            break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
-            case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','MATERIADEF','".$id."','','".$mat."','','".$fi."','".$ff."')";
+           /*  case 'TOP':                 
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','MATERIA','".$id."','','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
  
@@ -1878,73 +1933,75 @@ function consultaMatNotSystemDefP($mat, $atrib, $id, $fi, $ff){
 }
 function consultaMatSystemDefP($sis, $mat, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);                
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
-            break;
+                $lista['tablaIdiomaExpDef'] = $l;      
+            break; 
 
     /*             case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('COMPLETO','SISTEMATERIA','','".$sis."','".$mat."','','','')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break; */
 
-            case 'REGION':                 
-                $sql = "call tablaExpRegionPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+          /*   case 'REGION':                 
+                $sql = "call tablaExpRegionP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
-            break;
+                $lista['tablaRegionExpDef'] = $l;      
+            break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
-            case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMATERIADEF','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+            /* case 'TOP':                 
+                $sql = "call tablaExpTopP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
    
@@ -1954,73 +2011,75 @@ function consultaMatSystemDefP($sis, $mat, $atrib, $id, $fi, $ff){
 }
 function consultaRegNotSystemDefP($reg, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
+    $l = consulta($sql);
+    $lista['tablaActExpDef'] = $l;
+    $sql = "call tablaExpGeneralP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
+    $l = consulta($sql);  
+    $lista['tablaGeneralExpDef'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','REGIONF','".$id."','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','REGIONDEF','".$id."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','REGION','".$id."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                   
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','','')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
-            case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
+           /*  case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
-            break;
+                $lista['tablaMateriaExp'] = $l;      
+            break; */
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
-
+/* 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','REGIONDEF','".$id."','','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('DEFENSORPERIODO','REGION','".$id."','','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
  
@@ -2028,73 +2087,76 @@ function consultaRegNotSystemDefP($reg, $atrib, $id, $fi, $ff){
 }
 function consultaRegSystemDefP($sis, $reg, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);                
+                $lista['tablaActExpDef'] = $l;
+
+                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l; 
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                    
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
-                case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+              /*   case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
-            break; 
+                $lista['tablaMateriaExp'] = $l;      
+            break;  */
 
             /* case 'REGION':                 
-                $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','','')";
+                $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','".$id."','".$sis."','','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
-
+/* 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMAREGDEF','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('DEFENSORPERIODO','SISTEMAREG','".$id."','".$sis."','','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
    
@@ -2104,73 +2166,75 @@ function consultaRegSystemDefP($sis, $reg, $atrib, $id, $fi, $ff){
 }
 function consultaAmbasNotSystemDefP($mat, $reg, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+    $l = consulta($sql);
+    $lista['tablaActExpDef'] = $l;
+    $sql = "call tablaExpGeneralP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+               
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
-            case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+           /*  case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
-            break;
+                $lista['tablaMateriaExp'] = $l;      
+            break; */
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','MATERIA','','','','".$mat."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
-            case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','AMBASDEF','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
+           /*  case 'TOP':                 
+                $sql = "call tablaExpTopP('DEFENSORPERIODO','AMBAS','".$id."','','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
  
@@ -2178,73 +2242,77 @@ function consultaAmbasNotSystemDefP($mat, $reg, $atrib, $id, $fi, $ff){
 }
 function consultaAmbasSystemDefP($sis, $mat, $reg, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);                
+                $lista['tablaActExpDef'] = $l;
+
+
+                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
-
+/* 
                 case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpMateriaP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
-            break; 
+                $lista['tablaMateriaExp'] = $l;      
+            break;  */
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMAREG','','".$sis."','".$mat."','".$reg."','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
-
+/* 
             case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMAMBASDEF','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
+                $sql = "call tablaExpTopP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
    
@@ -2254,73 +2322,75 @@ function consultaAmbasSystemDefP($sis, $mat, $reg, $atrib, $id, $fi, $ff){
 }
 function consultaNingunoNotSystemDefP($atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
+                $l = consulta($sql);
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;  
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
-                $l = consulta($sql);
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                    
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
-            case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+           /*  case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
+                $lista['tablaMateriaExp'] = $l;      
             break;
-
+ */
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','COMPLETO','','','','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
 
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
-            case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','COMPLETODEF','".$id."','','','','".$fi."','".$ff."')";
+          /*   case 'TOP':                 
+                $sql = "call tablaExpTopP('DEFENSORPERIODO','COMPLETO','".$id."','','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }
  
@@ -2328,73 +2398,75 @@ function consultaNingunoNotSystemDefP($atrib, $id, $fi, $ff){
 }
 function consultaNingunoSystemDefP($sis, $atrib, $id, $fi, $ff){
     $lista = array();
+    $sql = "call tablaExpActividadesP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $l = consulta($sql);                
+                $lista['tablaActExpDef'] = $l;
+                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $l = consulta($sql);  
+                $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
         switch($val){
             case 'ACTIVIDAD':
-                $sql = "call tablaExpActividadesPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
-                $l = consulta($sql);                
-                $lista['expActividad'] = $l;
+                
             break;
 
             case 'DISCAPACIDAD':                 
-                $sql = "call tablaExpDiscapacidadPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpDiscapacidadP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expDiscapacidad'] = $l;      
+                $lista['tablaDiscapacidadExpDef'] = $l;      
             break;
 
             case 'EDAD':                 
-                $sql = "call tablaExpEdadPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEdadP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEdad'] = $l;      
+                $lista['tablaEdadExpDef'] = $l;      
              break;
 
              case 'ETNIA':                 
-                $sql = "call tablaExpEtniaPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpEtniaP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expEtnia'] = $l;      
+                $lista['tablaEtniaExpDef'] = $l;      
             break;
 
             case 'GENERAL':                 
-                $sql = "call tablaExpGeneralPP('COMPLETO','SISTEMANIN','','".$sis."','','','".$fi."','".$ff."')";
-                $l = consulta($sql);  
-                $lista['expGeneral'] = $l;      
+                      
             break;
 
             case 'GENERO':                 
-                $sql = "call tablaExpGeneroPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpGeneroP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expGenero'] = $l;      
+                $lista['tablaGeneroExpDef'] = $l;      
             break;
 
             case 'IDIOMA':                 
-                $sql = "call tablaExpIdiomaPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpIdiomaP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expIdioma'] = $l;      
+                $lista['tablaIdiomaExpDef'] = $l;      
             break;
 
-                case 'MATERIA':                 
-                $sql = "call tablaExpMateriaPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+               /*  case 'MATERIA':                 
+                $sql = "call tablaExpMateriaP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expMateria'] = $l;      
-            break; 
+                $lista['tablaMateriaExp'] = $l;      
+            break; */ 
 
             /* case 'REGION':                 
                 $sql = "call tablaExpRegionP('COMPLETO','SISTEMANIN','','".$sis."','','','','')";
                 $l = consulta($sql);  
-                $lista['expRegion'] = $l;      
+                $lista['tablaRegionExp'] = $l;      
             break; */
             
             case 'SEXO':                 
-                $sql = "call tablaExpSexoPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+                $sql = "call tablaExpSexoP('DEFENSORPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['expSexo'] = $l;      
+                $lista['tablaSexoExpDef'] = $l;      
             break;
 
-            case 'TOP':                 
-                $sql = "call tablaExpTopPP('COMPLETO','SISTEMANINDEF','".$id."','".$sis."','','','".$fi."','".$ff."')";
+           /*  case 'TOP':                 
+                $sql = "call tablaExpTopP('COMPLETOPERIODO','SISTEMANIN','".$id."','".$sis."','','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
-                $lista['exptTop'] = $l;      
-            break;
+                $lista['tablaTopExp'] = $l;      
+            break; */
         }
     }   
    // print_r($sql);

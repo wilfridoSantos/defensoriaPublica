@@ -1659,6 +1659,7 @@ function filtroActividades(str) {
 		} */
 }
 function seleccionFiltro(val){
+	var arr = listaMAtributos();
 	var selectAtributos =$('#selectAtributos');
 	console.log($('#selectAtributos').val(), ' VALOR DE ATRIBUTOS');
 	var sistema = $('#selectSistema').val();
@@ -1666,18 +1667,7 @@ function seleccionFiltro(val){
 	var region = $('#selectRegion').val();
 	switch(val){
 		case 'MATERIA':
-		$("#selectAtributos option[value='REGION']").remove();
-		selectAtributos.append('<option value="REGION">Region</option>');
-		$("#selectAtributos option[value='MATERIA']").remove();
-			/* if(check){
-				
 		
-				$("#selectAtributos option[value='REGION']").remove();
-				$("#selectAtributos option[value='MATERIA']").remove();
-			}else{
-				selectAtributos.append('<option value="MATERIA">Region</option>');
-				selectAtributos.append('<option value="REGION">Region</option>');
-			} */
 			if($('#selectSistema').val()!=''){
 				$.ajax({
 					url: "../../controlador/consultas/parciales.php",
@@ -1695,50 +1685,32 @@ function seleccionFiltro(val){
 					}
 				});
 			}
+			arr = listaMAtributos();
+			if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+				$("#selectAtributos option[value='MATERIA']").remove();
+				
+			}
+			if(arr.find(function(c){return (c=='REGION')}) == undefined){
+				selectAtributos.append('<option value="REGION">Region</option>');
+			}
 			$('#vistaRegion').attr('style','display:none');
 			$('#vistaMateria').removeAttr('style');
 			
 		break;
 		case 'REGION':
-			$("#selectAtributos option[value='MATERIA']").remove();
-			selectAtributos.append('<option value="MATERIA">Materia</option>');
-			$("#selectAtributos option[value='REGION']").remove();
-		/* 	if(check){						
-				$("#selectAtributos option[value='REGION']").remove();
-				$("#selectAtributos option[value='MATERIA']").remove();
-			}else{
-				selectAtributos.append('<option value="MATERIA">Region</option>');
-				selectAtributos.append('<option value="REGION">Region</option>');
-			} */
-			/* if($('#selectSistema').val()!=''){
-				$.ajax({
-					url: "../../controlador/consultas/parciales.php",
-					type: "POST",
-					data: {"sistema":$('#selectSistema').val(),"filtro":$('#selectFiltro').val()},
-					success: function (data) {							
-						var jsonInforme = jQuery.parseJSON(data);										
-						//console.log(data, ' resultado consulta');
-						$('#selectRegion').empty();
-						console.log('llenando region');
-						$.each(jsonInforme, function(k,v){							
-							$('#selectRegion').append('<option value='+v.region+'> '+v.region+' </option>');	
-						});
+				arr = listaMAtributos();
+					if(arr.find(function(c){return (c=='REGION')}) != undefined){
+						$("#selectAtributos option[value='REGION']").remove();
+						
 					}
-				});
-			} */
-			$('#vistaMateria').attr('style','display:none');
-			$('#vistaRegion').removeAttr('style');
+					if(arr.find(function(c){return (c=='MATERIA')}) == undefined){
+						selectAtributos.append('<option value="MATERIA">Materia</option>');
+					}
+					$('#vistaMateria').attr('style','display:none');
+
+					$('#vistaRegion').removeAttr('style');	
 		break;
 		case 'AMBAS':
-		$("#selectAtributos option[value='MATERIA']").remove();
-		$("#selectAtributos option[value='REGION']").remove();
-		/* if(check){						
-			$("#selectAtributos option[value='REGION']").remove();
-			$("#selectAtributos option[value='MATERIA']").remove();
-		}else{
-			selectAtributos.append('<option value="MATERIA">Region</option>');
-			selectAtributos.append('<option value="REGION">Region</option>');
-		} */
 			if($('#selectSistema').val()!=''){
 				$.ajax({
 					url: "../../controlador/consultas/parciales.php",
@@ -1762,6 +1734,13 @@ function seleccionFiltro(val){
 					}
 				});
 			}
+				arr = listaMAtributos();
+					if(arr.find(function(c){return (c=='REGION')}) != undefined){
+						$("#selectAtributos option[value='REGION']").remove();						
+					}
+					if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+						$("#selectAtributos option[value='MATERIA']").remove();						
+					}
 			$('#vistaMateria').removeAttr('style');
 			$('#vistaRegion').removeAttr('style');			
 		break;
@@ -1784,20 +1763,16 @@ function seleccionFiltro(val){
 				alert('Error peticion Ajax ');
 			}
 		});
-			$("#selectAtributos option[value='MATERIA']").remove();
-			$("#selectAtributos option[value='REGION']").remove();
-
-			selectAtributos.append('<option value="MATERIA">Materia</option>');
-			selectAtributos.append('<option value="REGION">Region</option>');
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='REGION')}) == undefined){
+					selectAtributos.append('<option value="REGION">Región</option>');						
+				}
+				if(arr.find(function(c){return (c=='MATERIA')}) == undefined){
+					selectAtributos.append('<option value="MATERIA">Materia</option>');
+				}
 			$('#vistaMateria').attr('style','display:none');
 			$('#vistaRegion').attr('style','display:none');
-			/* if(check){
-				$("#selectAtributos option[value='REGION']").remove();
-				$("#selectAtributos option[value='MATERIA']").remove();
-			}else{
-				selectAtributos.append('<option value="MATERIA">Region</option>');
-				selectAtributos.append('<option value="REGION">Region</option>');
-			} */
+			
 		break;
 		default:
 		break;
@@ -1885,14 +1860,14 @@ function seleccionMateria(val){
 					alert('Error peticion Ajax ');
 				}
 			});	
-			if(check){
+			/* if(check){
 				//selectAtributos.append('<option value="REGION">Region</option>');
 				$("#selectAtributos option[value='TOP']").remove();
 			}else{
 				selectAtributos.append('<option value="TOP">Top Defensores</option>');
 
 			}
-			selectAtributos.append('<option value="REGION">Región</option>');
+			selectAtributos.append('<option value="REGION">Región</option>'); */
 					
 		break;
 
@@ -1901,9 +1876,11 @@ function seleccionMateria(val){
 					
 };
 function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en que se encuentra
+		var arr = listaMAtributos();
 		if(val!=''){
 			switch($('#selectFiltro').val()){
-				case 'MATERIA':					
+				case 'MATERIA':
+				arr = listaMAtributos();					
 						$.ajax({
 							url: "../../controlador/consultas/parciales.php",
 							type: "POST",
@@ -1921,27 +1898,26 @@ function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en 
 								});
 							}
 						});
+					if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+						$("#selectAtributos option[value='MATERIA']").remove();
+						
+					}
+					if(arr.find(function(c){return (c=='REGION')}) == undefined){
+						selectAtributos.append('<option value="REGION">Region</option>');
+					}
 					
 					$('#vistaRegion').attr('style','display:none');
 					$('#vistaMateria').removeAttr('style');
 				break;
 				case 'REGION':
-				
-						/* $.ajax({
-							url: "../../controlador/consultas/parciales.php",
-							type: "POST",
-							data: {"sistema":$('#selectSistema').val(),"filtro":$('#selectFiltro').val()},
-							success: function (data) {							
-								var jsonInforme = jQuery.parseJSON(data);										
-								//console.log(data, ' resultado consulta');
-								$('#selectRegion').empty();
-								console.log('llenando region');
-								$.each(jsonInforme, function(k,v){							
-									$('#selectRegion').append('<option value='+v.region+'> '+v.region+' </option>');	
-								});
-							}
-						}); */
-					
+					arr = listaMAtributos();
+					if(arr.find(function(c){return (c=='REGION')}) != undefined){
+						$("#selectAtributos option[value='REGION']").remove();
+						
+					}
+					if(arr.find(function(c){return (c=='MATERIA')}) == undefined){
+						selectAtributos.append('<option value="MATERIA">Region</option>');
+					}
 					$('#vistaMateria').attr('style','display:none');
 					$('#vistaRegion').removeAttr('style');
 				break;
@@ -1960,10 +1936,25 @@ function myFunctionSistemaParcial(val){// aqui tambien debe checar por radio en 
 							});
 						}
 					});
+					arr = listaMAtributos();
+					if(arr.find(function(c){return (c=='REGION')}) != undefined){
+						$("#selectAtributos option[value='REGION']").remove();						
+					}
+					if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+						$("#selectAtributos option[value='MATERIA']").remove();						
+					}
 					$('#vistaMateria').removeAttr('style');
 					$('#vistaRegion').removeAttr('style');			
 				break;
-				case 'NINGUNO':			
+				case 'NINGUNO':
+					arr = listaMAtributos();
+					if(arr.find(function(c){return (c=='REGION')}) == undefined){
+						selectAtributos.append('<option value="REGION">Región</option>');						
+					}
+					if(arr.find(function(c){return (c=='MATERIA')}) == undefined){
+						selectAtributos.append('<option value="MATERIA">Materia</option>');
+					}					
+			
 					$('#vistaMateria').attr('style','display:none');
 					$('#vistaRegion').attr('style','display:none');
 				break;
@@ -2064,6 +2055,8 @@ function myFunctionSistema(val){// aqui tambien debe checar por radio en que se 
 function generarPDFExpedientesParcial() {
 	var r1 = $('#inputRadio1').get(0).checked;
 	var r2 = $('#inputRadio2').get(0).checked;
+	var f1=  $('#inputInicio').val();
+	var f2=  $('#inputFinal').val();
 	var sistema = $('#selectSistema').val();
 	var filtro = $('#selectFiltro').val();
 	var materia = $('#selectMateria').val();
@@ -2071,9 +2064,236 @@ function generarPDFExpedientesParcial() {
 	var check = $('#checkId').get(0).checked;
 	var atributos = $('#selectAtributos').val();
 	var id = $('#idDefensor').val();
-	console.log(sistema, filtro, materia, region, check, atributos, 'ID-> ',id);
-	if(r1){
+	console.log(sistema, filtro, materia, region, check, atributos, 'ID-> ',id, r1, r2);
 
+	if(r1){
+		if(sistema != '' && f1!='' && f2!=''){
+			switch(filtro){
+				case 'MATERIA':
+					if(materia!=''){
+						if(check){//por sistema, materia y un defensor!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "materia":materia,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+										"id":id,
+										"f1":f1,
+										"f2":f2},
+								success: function (data) {	
+									//console.log('filtro por materia y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON MATERIA X SISTEMA defnsorrr PERIODO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeMatByDefPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+
+								}
+							});
+						}else{//por sistema, y materia nada mas!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "materia":materia,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+									   "f1":f1,
+									   "f2":f2},
+								success: function (data) {	
+									//console.log('filtro por materia y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON MATERIA X SISTEMA PERIODO sin def');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeMatPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+
+								}
+							});
+						}
+					}
+				break;
+				case 'REGION':
+					if(region!=''){
+						if(check){//por sistema, materia y un defensor!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "region":region,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+										"id":id,
+										"f1":f1,
+										"f2":f2},
+								success: function (data) {	
+									//console.log('filtro por region y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON REGION X SISTEMA defensor PERIODO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeRegByDefPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+								}
+							});
+						}else{//por sistema, y materia nada mas!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "region":region,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+									   "f1":f1,
+									   "f2":f2},
+								success: function (data) {	
+									//console.log('filtro por region y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON REGION X SISTEMA PERIODO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeRegPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+
+								}
+							});
+						}
+					}
+				break;
+				case 'AMBAS':
+					if(materia!='' && region !=''){
+						if(check){//por sistema, materia y un defensor!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "region":region,
+									   "materia":materia,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+										"id":id,
+										"f1":f1,
+										"f2":f2},
+								success: function (data) {	
+									//console.log('filtro por region y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA DEFNSOR PERIDO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeAmbasByDefPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+								}
+							});
+						}else{//por sistema, y materia nada mas!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "region":region,
+									   "materia":materia,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+									   "f1":f1,
+									   "f2":f2},
+								success: function (data) {	
+									//console.log('filtro por region y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA PERIDO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeAmbasPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+								}
+							});
+						}
+					}
+				break;
+				case 'NINGUNO'://solo preguntas por defensor activado?
+					if(sistema!=''){
+						if(check){//por sistema, materia y un defensor!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+										"id":id,
+										"f1":f1,
+										"f2":f2},
+								success: function (data) {	
+									//console.log('filtro por region y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA DEFFENSOR PERIODO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeNingunoByDefPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+								}
+							});
+						}else{//por sistema, y materia nada mas!
+							$.ajax({
+								url: "../../controlador/informes/querys2.php",
+								type: "POST",
+								data: {"sistema":sistema,
+									   "filtro":filtro,
+									   "atributos":atributos,
+									   "check":check,
+									   "f1":f1,
+									   "f2":f2},
+								success: function (data) {	
+									//console.log('filtro por region y un sistema', data);						
+									var jsonInforme = jQuery.parseJSON(data);		
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA PERIODO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeNingunoPeriodo(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
+								}
+							});
+						}
+					}
+				break;
+				default:
+					//manda mensaje de error
+					//$('#msnError').append("RELLENE CORRECTAMENTE LOS CAMPOS QUE SON REQUERIDOS!");
+				break;
+			}
+		}
 	}
 	if(r2){
 		if(sistema != ''){
@@ -2093,8 +2313,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por materia y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON MATERIA X SISTEMA defnsorrr');
-
+									console.log(jsonInforme, ' JSON MATERIA X SISTEMA defnsorrr ');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeMatParcialByDef(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}else{//por sistema, y materia nada mas!
@@ -2109,8 +2335,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por materia y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON MATERIA X SISTEMA');
-
+									console.log(jsonInforme, ' JSON MATERIA X SISTEMA ');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeMatParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}
@@ -2131,8 +2363,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por region y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON REGION X SISTEMA defensorr');
-
+									console.log(jsonInforme, ' JSON REGION X SISTEMA defensorr PERIODO');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeRegByDefParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}else{//por sistema, y materia nada mas!
@@ -2147,8 +2385,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por region y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON REGION X SISTEMA');
-
+									console.log(jsonInforme, ' JSON REGION X SISTEMA ');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeRegParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}
@@ -2170,7 +2414,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por region y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON AMBAS X SISTEMA DEFNSOR');
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA DEFNSOR ');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeAmbasByDefParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 
 								}
 							});
@@ -2187,8 +2438,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por region y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON AMBAS X SISTEMA');
-
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA ' );
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeAmbasParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}
@@ -2208,8 +2465,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por region y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON AMBAS X SISTEMA DEFFENSOR');
-
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA DEFFENSOR ');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeNingunoByDefParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}else{//por sistema, y materia nada mas!
@@ -2223,8 +2486,14 @@ function generarPDFExpedientesParcial() {
 								success: function (data) {	
 									//console.log('filtro por region y un sistema', data);						
 									var jsonInforme = jQuery.parseJSON(data);		
-									console.log(jsonInforme, ' JSON AMBAS X SISTEMA');
-
+									console.log(jsonInforme, ' JSON AMBAS X SISTEMA ');
+									constructor(jsonInforme);
+									//var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;									
+									//var sistema= jsonInforme['nombreDef'][0].sistema;
+									//var expedientes= jsonInforme['expBySistemaDef'][0];
+									//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
+								 var pdfExp = informeNingunoParcial(sistema, atributos);					  											  
+									pdfMake.createPdf(pdfExp).open();
 								}
 							});
 						}
@@ -2580,8 +2849,28 @@ function generarPDFActividadesParcial() {
 	}
 	console.timeEnd('TEST PERFORMANCE');
 };
-
+function listaMAtributos(){
+	var arr=[];
+	$.each($('#selectAtributos').get(0).options, function(k,v){
+		//console.log(v.value, ' atributos existentes actualmente');
+		arr.push(v.value);
+	});
+/* 	arr.push('GENERAL');
+	arr.push('ACTIVIDAD');
+	arr.push('TOP');
+	arr.push('SEXO');
+	arr.push('GENERO');
+	arr.push('EDAD');
+	arr.push('ETNIA');
+	arr.push('IDIOMA');
+	arr.push('DISCAPACIDAD');
+	arr.push('MATERIA');
+	arr.push('REGION'); */
+	
+	return arr;
+}
 function seleccionarUnDefensor2(val){//checkdefensor especifico
+	var arr = listaMAtributos();
 	//var desc = $('#botonDesc').get(0);	
 	var filtro=$('#selectFiltro').val();
 	var sis = $('#selectSistema').val();
@@ -2589,89 +2878,100 @@ function seleccionarUnDefensor2(val){//checkdefensor especifico
 	var rGeneralC = $('#inputRadio2').get(0).checked;
 	var rGeneralP = $('#inputRadio1').get(0).checked;
 	var inputProject = $('#project').val();
+	var selectAtributos=$('#selectAtributos');
+	//console.log($('#selectAtributos').get(0).options[].value,' atributos del select');
+	//ar/r.find(function(c){return (c=='tradicional')})
 	if(val){
 		$('#idCheckDefensor').removeAttr('style');
+		$("#selectAtributos option[value='TOP']").remove();		
 		switch(filtro){
 			case 'MATERIA':
-					$("#selectAtributos option[value='TOP']").remove();
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
 					$("#selectAtributos option[value='MATERIA']").remove();
-					$("#selectAtributos option[value='REGION']").remove();
 					
-			break;
-			case 'REGION':
-					$("#selectAtributos option[value='TOP']").remove();
-					$("#selectAtributos option[value='MATERIA']").remove();
+				}
+				if(arr.find(function(c){return (c=='REGION')}) != undefined){
 					$("#selectAtributos option[value='REGION']").remove();
+				}
+			break;	
+			case 'REGION':
+			arr = listaMAtributos();
+			if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+				$("#selectAtributos option[value='MATERIA']").remove();
+				
+			}
+			if(arr.find(function(c){return (c=='REGION')}) != undefined){
+				$("#selectAtributos option[value='REGION']").remove();
+			}
+		break;			
+			case 'AMBAS':
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='REGION')}) != undefined){
+					$("#selectAtributos option[value='REGION']").remove();						
+				}
+				if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+					$("#selectAtributos option[value='MATERIA']").remove();						
+				}
 			break;
 			case 'NINGUNO':
-					//$("#selectAtributos option[value='TOP']").remove();
-					//$("#selectAtributos option[value='MATERIA']").remove();
-					//$("#selectAtributos option[value='REGION']").remove();
-					selectAtributos.append('<option value="MATERIA">Materia</option>');
-					selectAtributos.append('<option value="REGION">Región</option>');
-					selectAtributos.append('<option value="TOP">Top</option>');
-			break;
-			default:
-					//$("#selectAtributos option[value='']").remove();
-						$("#selectAtributos option[value='TOP']").remove();
-						$("#selectAtributos option[value='MATERIA']").remove();
-						$("#selectAtributos option[value='REGION']").remove();
-						selectAtributos.append('<option value="MATERIA">Materia</option>');
-						selectAtributos.append('<option value="REGION">Región</option>');
-
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='REGION')}) != undefined){
+					$("#selectAtributos option[value='REGION']").remove();
+				}
+				if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+					$("#selectAtributos option[value='MATERIA']").remove();
+				}
 			break;
 		}
 	}else{
 		$("#idCheckDefensor").attr('style','display:none');	
+			selectAtributos.append('<option value="TOP">Top Defensores</option>');
+		
 		switch(filtro){
 			case 'MATERIA':
-				console.log('entro materia def desact agregar topo defff');
-					$("#selectAtributos option[value='TOP']").remove();
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
 					$("#selectAtributos option[value='MATERIA']").remove();
-					$("#selectAtributos option[value='REGION']").remove();
-					selectAtributos.append('<option value="MATERIA">Materia</option>');
-					selectAtributos.append('<option value="REGION">Región</option>');
-					selectAtributos.append('<option value="TOP">Top Defensores</option>');
-					selectAtributos.append('<option value="TOP">Top Defensores</option>');
+					
+				}
+				if(arr.find(function(c){return (c=='REGION')}) == undefined){
+					selectAtributos.append('<option value="REGION">Region</option>');
+				}
 			break;
 			case 'REGION':
-					$("#selectAtributos option[value='TOP']").remove();
-					$("#selectAtributos option[value='MATERIA']").remove();
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='REGION')}) != undefined){
 					$("#selectAtributos option[value='REGION']").remove();
+					
+				}
+				if(arr.find(function(c){return (c=='MATERIA')}) == undefined){
+					selectAtributos.append('<option value="MATERIA">Materia</option>');
+				}
+					
+
+			break;
+			case 'AMBAS':
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='REGION')}) != undefined){
+					$("#selectAtributos option[value='REGION']").remove();						
+				}
+				if(arr.find(function(c){return (c=='MATERIA')}) != undefined){
+					$("#selectAtributos option[value='MATERIA']").remove();						
+				}
 			break;
 			case 'NINGUNO':
-					$("#selectAtributos option[value='TOP']").remove();
-					$("#selectAtributos option[value='MATERIA']").remove();
-					$("#selectAtributos option[value='REGION']").remove();
+				arr = listaMAtributos();
+				if(arr.find(function(c){return (c=='REGION')}) == undefined){
+					selectAtributos.append('<option value="REGION">Región</option>');						
+				}
+				if(arr.find(function(c){return (c=='MATERIA')}) == undefined){
 					selectAtributos.append('<option value="MATERIA">Materia</option>');
-					selectAtributos.append('<option value="REGION">Región</option>');
-					selectAtributos.append('<option value="TOP">Top Defensores</option>');
-			break;
-			default:
-					//$("#selectAtributos option[value='']").remove();
-						$("#selectAtributos option[value='TOP']").remove();
-						$("#selectAtributos option[value='MATERIA']").remove();
-						$("#selectAtributos option[value='REGION']").remove();
-						selectAtributos.append('<option value="MATERIA">Materia</option>');
-						selectAtributos.append('<option value="REGION">Región</option>');
-
+				}
 			break;
 		}
 	}
-	/* if(val){
-		 
-		//dataDefensor();
-		//entonces muestra su input
-		//$('#sistemaAtributos').attr('style','display:none');
-		$("#selectAtributos option[value='TOP']").remove();
-		$("#selectAtributos option[value='MATERIA']").remove();
-		$("#selectAtributos option[value='REGION']").remove();
-	}else{
-		$("#idCheckDefensor").attr('style','display:none');	
-		selectAtributos.append('<option value="TOP">Top Defensores</option>');
-		selectAtributos.append('<option value="MATERIA">Materia</option>');
-		selectAtributos.append('<option value="REGION">Región</option>');
-	} */
+	
 	if(rGeneralC){
 		$("#divPeriodo").attr('style', 'display:none;');		
 	}
