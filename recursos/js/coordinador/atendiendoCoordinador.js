@@ -135,8 +135,8 @@ $(document).ready(function () {
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Materia: </b>' + VALOR.materia + '</li>' +
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Inicio: </b>' + VALOR.fecha_inicio + '</li>' +
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Fecha de Finalizacion: </b>' + VALOR.fecha_final + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre del Delito: </b>' + VALOR.nombre_delito.toUpperCase() + '</li>' +
-							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Grado del Delito: </b>' + VALOR.grado_delito.toUpperCase() + ' </li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Nombre del Delito: </b>' + VALOR.nombre_delito + '</li>' +
+							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Grado del Delito: </b>' + VALOR.grado_delito + ' </li>' +
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Estado del Expediente: </b>' + VALOR.estado + ' </li>' +
 							'	<li><span class="glyphicon glyphicon-ok-sign"></span><b class="textoo"> Observaciones: </b>' + VALOR.observaciones + ' </li>' +
 							'	<li><button class="btn btn-success" onclick="verInfoUsuario(' + id + ')" name="botonVerUser" type="button" ><span class="glyphicon glyphicon-ok-sign"></span></button>' +
@@ -221,9 +221,9 @@ $(document).ready(function () {
 		//  var target= $(this.);
 		var idDef = $(this).closest('tr').find('#idPersonal').text();
 		//console.log(idDef);
-		verInfoDefensor(idDef);
+		verInfo(idDef);
 	});
-	function verInfoDefensor(idDef) {
+	function verInfo(idDef) {
 		$.ajax({
 			url: "../../controlador/defensor/controlDefensor.php",
 			type: "GET",
@@ -325,7 +325,7 @@ $(document).ready(function () {
 						'<div class="form-group profile_details ">' +
 						'<label for="exampleInputFile" class="control-label col-md-3 col-sm-3 col-xs-12">Foto de Perfil<span class="required">*</span></label>' +
 						'<div class="col-md-6 col-sm-6 col-xs-12 well profile_view form-group has-feedback">' +
-						'<p align="center"><img src="../../recursos/uploads/' + VALOR.foto + '"  alt="Imagen responsive" class="img-circle img-responsive"' +
+						'<p align="center"><img src="../../recursos/uploads/' + VALOR.foto + '"  alt="Imagen responsive" class="img-circle img-responsive"> </p>' +
 						foto +
 						'<input style="display:none;" type="text" class="form-control " id="imagen" placeholder="imagen" name="imagen" value="' + VALOR.foto + '" >' +
 
@@ -1098,11 +1098,6 @@ function verPreguntasExp(botn) {
 		}
 	});
 };
-
-
-
-
-
 function bajaExpediente(botn) {
 	console.log(botn, ' id del expediente ');
 	$("#dialogoBaja").dialog({
@@ -1141,9 +1136,6 @@ function bajaExpediente(botn) {
 function showUser(str) {
 	var filtro2 = $('#filtro2')[0].value;
 	var botonDess = $('#botonDesc').get(0);
-	console.log(str);
-	console.log(filtro2,"segundo filtro");
-	
 	if (str == "" && filtro2 == "") {
 
 		botonDess.disabled = true;
@@ -1164,28 +1156,28 @@ function showUser(str) {
 					//console.log(data,' resultado de data');
 					$('#tebody').empty();
 					$.each(jsonExpDef, function (KEY, VALOR) {
-							console.log(VALOR, ' valor ');
+						//console.log(VALOR, ' valor ');
 						var nomBoton;
 						var id_expediente = VALOR.id_expediente;
 						if (VALOR.id_personal < 0) {
-							nomBoton = '<button type="button" class="btn btn-danger"  id="botonReCambioDef" name="botonCambioDef" onclick="cambiarDefensor(' + id_expediente + ')"><span class="glyphicon glyphicon-share-alt" title="Cambiar Defensor" aria-hidden="true"></span></button>';
+							nomBoton = '<button type="button" class="btn btn-danger"  id="botonReCambioDef" name="botonCambioDef" onclick="cambiarDefensor(' + id_expediente + ')"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>';
 						} else {
-							nomBoton = '<button type="button" class="btn btn-primary " id="botonCambioDef" name="botonCambioDef" onclick="cambiarDefensor(' + id_expediente + ')"><span class="glyphicon glyphicon-share-alt" title="Asignar Defensor"aria-hidden="true"></span></button>';
+							nomBoton = '<button type="button" class="btn btn-primary " id="botonCambioDef" name="botonCambioDef" onclick="cambiarDefensor(' + id_expediente + ')"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>';
 						}
 
 						$('#tebody').append(
 							'<tr> ' +
 							'<td id="nuePersonal" style="display:none;">' + VALOR.nue + ' </td>' +
-							'<td id_expediente="'+VALOR.id_expediente+'" id_personal="'+VALOR.id_personal+'">' + VALOR.num_expediente.toUpperCase() + '</td>' +
-							'<td>' + VALOR.materia.toUpperCase()+ '</td>' +
-							'<td>' + VALOR.fecha_registro + '</td>' +
-							//'<td>' + VALOR.estado + '</td>' +
-							'<td> <textarea rows="2%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+VALOR.observaciones.toUpperCase()+'</textarea></td>'+                                                     
+							'<td>' + VALOR.num_expediente + '</td>' +
+							'<td>' + VALOR.materia + '</td>' +
+							'<td>' + VALOR.fecha_inicio + '</td>' +
+							'<td>' + VALOR.estado + '</td>' +
+							'<td> <textarea rows="2%"  disabled cols="45" minlength="10" maxlength="250"style="background-color:transparent; border:none;color:#000000; " readonly class="form-control col-md-5 col-xs-12">'+VALOR.observaciones+'</textarea></td>'+                                                     
 					
 							//'<td style="white-space:nowrap;">' + VALOR.observaciones + '</td>' +
 							'<td>' + nomBoton +
-							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp" onclick="verPreguntasExp(this)"><span class="glyphicon glyphicon-pencil" title=" Tarjeta informativa"aria-hidden="true"></span></button>' +
-							'<button type="button" class="btn btn-dark " id="botonBajaExp" name="botonBajaExp" onclick="bajaExpediente(' + id_expediente + ')"><span class="glyphicon glyphicon-arrow-down" title="Baja de expediente" aria-hidden="true"></span></button></td> </tr>'
+							'<button type="button" class="btn btn-dark " id="botonDetalleExp" name="botonDetalleExp" onclick="verPreguntasExp(this)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
+							'<button type="button" class="btn btn-dark " id="botonBajaExp" name="botonBajaExp" onclick="bajaExpediente(' + id_expediente + ')"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button></td> </tr>'
 						);
 					});
 
@@ -1251,19 +1243,16 @@ function showMateria(str) {
 function dataDefensor(){
     $.ajax({
       type: 'GET',
-      url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
-      success: function (data) {
-		 // console.log("data del defensor en ajax ",data);
-		  		 		
+      url: '../../controlador/defensor/controladorListaDeff.php?term=busqueda',
+      success: function (data) {		 		
 		 functionInputDefensores(data);
       },
       error: function () {
-		  alert('Error peticion Ajax en data defensor ');
+		  alert('Error peticion Ajax ');
       }
       });
       
 }
-dataDefensor();
 function functionInputDefensores(dataDefe){
 	var desc = $('#botonDesc').get(0);
     var varUsuario=[];
@@ -1483,7 +1472,7 @@ function seleccionarUnDefensor(val){//checkdefensor especifico
 	var inputProject = $('#project').val();
 	if(val){
 		$('#idCheckDefensor').removeAttr('style'); 
-		//dataDefensor();
+		dataDefensor();
 		//entonces muestra su input
 		//$('#sistemaAtributos').attr('style','display:none');
 		$("#selectAtributos option[value='TOP']").remove();
@@ -2559,10 +2548,6 @@ function generarPDFExpedientesGeneral(){
 			inputProject = $('#idDefensor').val();
 			console.log('PETICION AJAX  PERIODO + DEFENSOR');
 			console.log($('#idDefensor').val(), 'id del defensor');
-			var prueba={"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
-			"radio1":r1, "check":checkDef};
-			console.log(prueba," lo qu se esta enviADNO");
-			
 			$.ajax({
 				url: "../../controlador/personal_campo/controladorInformeExp.php",
 				type: "POST",
@@ -2571,8 +2556,6 @@ function generarPDFExpedientesGeneral(){
 				success: function (data) {							
 					var jsonInforme = jQuery.parseJSON(data);					
 					var pdfExp;
-					console.log("dta pedido ",data);
-					
 					console.log(jsonInforme, ' informe por defensor');
 					constructor(jsonInforme);
 					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
@@ -2655,204 +2638,6 @@ function generarPDFExpedientesGeneral(){
 	}
 	console.timeEnd('TEST PERFORMANCE');
 }
-
-
-
-function generarConsultaExpedientesGeneral(){
-	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
-	var checkDef = $('#checkId').get(0).checked;
-	console.time('TEST PERFORMANCE');
-	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
-	var r2 = $('#inputRadio2').get(0).checked;//informe general completo	
-	if(r1){//informe por periodo
-		fechaI = document.getElementById('inputInicio').value;
-		fechaFi = document.getElementById('inputFinal').value;
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();
-			console.log('PETICION AJAX  PERIODO + DEFENSOR');
-			console.log($('#idDefensor').val(), 'id del defensor');
-			var prueba={"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
-			"radio1":r1, "check":checkDef};
-			console.log(prueba," lo qu se esta enviADNO");
-			
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
-					   "radio1":r1, "check":checkDef},
-				success: function (data) {							
-					var jsonInforme = jQuery.parseJSON(data);					
-					var pdfExp;
-					console.log("dta pedido ",data);
-					
-					console.log(jsonInforme, ' informe por defensor');
-									
-				}
-			});
-		}else{//solo esta las fechas y sera general
-			console.log('PETICION AJAX ONLY PERIODO');
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
-				success: function (data) {	
-					//console.log(data, ' DATA DEV');
-					 var jsonInforme = jQuery.parseJSON(data);
-					 console.log(jsonInforme, ' DATA JSONNNN');
-					 
-				}
-			});
-		}
-	}
-	if(r2){// informe completo
-		if(checkDef){//informe por defensor
-			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
-				success: function (data) {
-					var jsonInforme = jQuery.parseJSON(data);
-					globalDatosEstadisticoPorDefensor=jsonInforme;
-					$("#divGeneralCompleto").hide();
-					$("#divGeneralCompletoDefensor").show();
-					console.log('completo POR DEFENSOR ', jsonInforme);
-					// funciion validar(jsonInforme) return json
-						
-				}
-			});
-		}else{//shacer ajax informe completo sin filtros
-			$.ajax({
-				url: "../../controlador/personal_campo/controladorInformeExp.php",
-				type: "POST",
-				data: {"radio2":r2, "check":checkDef},
-				success: function (data) {	
-					var jsonInforme = jQuery.parseJSON(data);
-					console.log('completo FULL ', jsonInforme);
-					$("#divGeneralCompleto").show();
-					$("#divGeneralCompletoDefensor").hide();
-					globalDatosEstadistico=jsonInforme;//ALMACENANDO LOS VALORES PARA REOUTILZARLO MAS ADELANTE EN gestionGrafica.js
-					//google.charts.load('current', {'packages':['bar']});
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart);
-
-					var array=jsonInforme.tablaRegionExp;
-					console.log("viendo data ",jsonInforme);
-					
-					var oral=array.filter(function(x){return (x.sis=='ORAL')});
-					var tradicional=array.filter(function(x){return (x.sis=='TRADICIONAL')});
-					var grafica=[['Región en sistema tradicional','Expediente','Hombres','Mujeres']];
-					    tradicional.forEach(element => {
-							var arrayNew=[];
-								   arrayNew.push(element.reg);
-								   arrayNew.push(parseInt(element.totExp));
-								   arrayNew.push(parseInt(element.hombres));
-								   arrayNew.push(parseInt(element.mujeres));
-							   grafica.push(arrayNew);	   
-						});
-					var graficatwo=[['Región en sistema oral','Expediente','Hombres','Mujeres']];
-					    oral.forEach(element => {
-							var arrayNew=[];
-								   arrayNew.push(element.reg);
-								   arrayNew.push(parseInt(element.totExp));
-								   arrayNew.push(parseInt(element.hombres));
-								   arrayNew.push(parseInt(element.mujeres));
-							   graficatwo.push(arrayNew);	   
-						});
-						console.log("emprimiento la grafica ",grafica);
-						
-						
-						 function drawChart() {
-							var data = google.visualization.arrayToDataTable(grafica);
-							var datatwo = google.visualization.arrayToDataTable(graficatwo);
-							/* var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Topping');
-							data.addColumn('number', 'Slices');
-							data.addRows([
-							  ['Mushrooms', 3],
-							  ['Onions', 1],
-							  ['Olives', 1],
-							  ['Zucchini', 1],
-							  ['Pepperoni', 2]
-							]); */
-							var piechart_options = {title:'Grafica de tradicional',
-										   subtitle:'fecha:2018-2018'};
-							
-							var piechart = new google.visualization.ColumnChart(document.getElementById('columnchart_one'));
-							   piechart.draw(data, piechart_options);
-							   //document.getElementById('buttonone').outerHTML = '<a href="' + piechart.getImageURI() + '" download="Grafica.jpg">Descargar</a>';
-							   $('#buttonone').append( '<a href="' + piechart.getImageURI() + '" download="Grafica.jpg">Descargar</a>');
-   
-							var barchart_options = {title:'Grafica de oral',
-										  	//   legend: 'none'
-										};
-						    //var chart = new google.visualization.Bar(document.getElementById('barchart_div'));
-							var barchart = new google.visualization.ColumnChart(document.getElementById('columnchart_two'));
-							//barchart.draw(data, barchart_options);
-							barchart.draw(datatwo, barchart_options);
-							$('#buttontwo').append( '<a href="' + barchart.getImageURI() + '" download="Grafica.jpg">Descargar</a>');
-   
-							//barchart.draw(data, google.charts.Bar.convertOptions(barchart_options));
-						}
-				 	//function drawChart() {
-                      //  var data = google.visualization.arrayToDataTable(grafica);
-						//d
-						/* var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Topping');
-						data.addColumn('number', 'Slices');
-						data.addRows([
-						  ['Mushrooms', 3],
-						  ['Onions', 1],
-						  ['Olives', 1],
-						  ['Zucchini', 1],
-						  ['Pepperoni', 2]
-						]); */
-						
- 					   /*  var data = google.visualization.arrayToDataTable([ 
-						["Región en sistema tradicional", "Expediente", "Hombre", "Mujeres"],
-						 ["Cañada", "16", "10", "8"],
-						 ["istmo", "33", "18", "20"],
-						 ["Sierra Norte", "5", "0", "7"],
-						 ["sierra sur", "5", "1", "6"],
-						 ["Valles Centrales", "1", "1", "0"],
-         
-					   ]);   */ 
- 				 	 /*  var data = google.visualization.arrayToDataTable([ 
-								['Year', 'Sales', 'Expenses', 'Profit'],
-								['2014', 16, 10,8],
-								['2015', 24, 12,17],
-								['2016', 33, 18,20],
-								['2014', 1, 1, 0]          
-					   ]); */
-			  
-					   /* var options = {
-						chart: {
-						  title: 'Grafica de tradicional',
-						  subtitle: 'fecha: 2018-2018',
-						}
-					  }; */
-					   /* 
-					  var optionstwo = {
-						chart: {
-						  title: 'Grafica de oral',
-						  subtitle: 'fecha: 2018-2018',
-						}
-					  }; */
-			  
-					  /* var chart = new google.charts.Bar(document.getElementById('barchart_div'));
-					  //var chartwro = new google.charts.Bar(document.getElementById('columnchart_two'));
-			  
-					  chart.draw(data, google.charts.Bar.convertOptions(options));//}
-					//  chartwro.draw(datatwo, google.charts.Bar.convertOptions(optionstwo));
-					}  */
-					// funciion validar(jsonInforme) return json
-										
-				}
-			});
-		}
-	}
-	console.timeEnd('TEST PERFORMANCE');
-}
 function generarPDFActividadesGeneral() {
 	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
 	var checkDef = $('#checkId').get(0).checked;
@@ -2900,6 +2685,9 @@ function generarPDFActividadesGeneral() {
 					//console.log(data, ' DATA DEV');
 					 var jsonInforme = jQuery.parseJSON(data);
 					 console.log(jsonInforme, ' DATA JSONNNN');
+					 if(jsonInforme['actBySistema'][1]==undefined || null){
+						jsonInforme['actBySistema'][1]={"actAsesoria":0};
+					 }
 					 var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
 
 					constructor(jsonInforme);
@@ -2947,6 +2735,9 @@ function generarPDFActividadesGeneral() {
 				success: function (data) {	
 					var jsonInforme = jQuery.parseJSON(data);
 					console.log('completo FULL ', jsonInforme);
+					if(jsonInforme['actBySistema'][1]==undefined || jsonInforme['actBySistema'][1]==null){
+						jsonInforme['actBySistema'][1]={"actAsesoria":0};
+					}
 					var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
 					constructor(jsonInforme);
 					var actividades= jsonInforme['actBySistema'];
@@ -3220,4 +3011,200 @@ function seleccionarUnDefensor2(val){//checkdefensor especifico
 		$("#divPeriodo").removeAttr('style');
 		
 	}
+}
+
+function generarConsultaExpedientesGeneral(){
+	var inputProject, fechaI, fechaFi,selectSistema, selectAtributos; 
+	var checkDef = $('#checkId').get(0).checked;
+	console.time('TEST PERFORMANCE');
+	var r1 = $('#inputRadio1').get(0).checked;//informe general con periodo
+	var r2 = $('#inputRadio2').get(0).checked;//informe general completo	
+	if(r1){//informe por periodo
+		fechaI = document.getElementById('inputInicio').value;
+		fechaFi = document.getElementById('inputFinal').value;
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();
+			console.log('PETICION AJAX  PERIODO + DEFENSOR');
+			console.log($('#idDefensor').val(), 'id del defensor');
+			var prueba={"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
+			"radio1":r1, "check":checkDef};
+			console.log(prueba," lo qu se esta enviADNO");
+			
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi, "defensor":inputProject,
+					   "radio1":r1, "check":checkDef},
+				success: function (data) {							
+					var jsonInforme = jQuery.parseJSON(data);					
+					var pdfExp;
+					console.log("dta pedido ",data);
+					
+					console.log(jsonInforme, ' informe por defensor');
+									
+				}
+			});
+		}else{//solo esta las fechas y sera general
+			console.log('PETICION AJAX ONLY PERIODO');
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"fechaI":fechaI, "fechaF":fechaFi,"radio1":r1, "check":checkDef},
+				success: function (data) {	
+					//console.log(data, ' DATA DEV');
+					 var jsonInforme = jQuery.parseJSON(data);
+					 console.log(jsonInforme, ' DATA JSONNNN');
+					 
+				}
+			});
+		}
+	}
+	if(r2){// informe completo
+		if(checkDef){//informe por defensor
+			inputProject = $('#idDefensor').val();//hacer ajax con el defensor en esp
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"defensor":inputProject,"radio2":r2, "check":checkDef},
+				success: function (data) {
+					var jsonInforme = jQuery.parseJSON(data);
+					globalDatosEstadisticoPorDefensor=jsonInforme;
+					$("#divGeneralCompleto").hide();
+					$("#divGeneralCompletoDefensor").show();
+					console.log('completo POR DEFENSOR ', jsonInforme);
+					// funciion validar(jsonInforme) return json
+						
+				}
+			});
+		}else{//shacer ajax informe completo sin filtros
+			$.ajax({
+				url: "../../controlador/personal_campo/controladorInformeExp.php",
+				type: "POST",
+				data: {"radio2":r2, "check":checkDef},
+				success: function (data) {	
+					var jsonInforme = jQuery.parseJSON(data);
+					console.log('completo FULL ', jsonInforme);
+					$("#divGeneralCompleto").show();
+					$("#divGeneralCompletoDefensor").hide();
+					globalDatosEstadistico=jsonInforme;//ALMACENANDO LOS VALORES PARA REOUTILZARLO MAS ADELANTE EN gestionGrafica.js
+					//google.charts.load('current', {'packages':['bar']});
+					google.charts.load('current', {'packages':['corechart']});
+					google.charts.setOnLoadCallback(drawChart);
+
+					var array=jsonInforme.tablaRegionExp;
+					console.log("viendo data ",jsonInforme);
+					
+					var oral=array.filter(function(x){return (x.sis=='ORAL')});
+					var tradicional=array.filter(function(x){return (x.sis=='TRADICIONAL')});
+					var grafica=[['Región en sistema tradicional','Expediente','Hombres','Mujeres']];
+					    tradicional.forEach(element => {
+							var arrayNew=[];
+								   arrayNew.push(element.reg);
+								   arrayNew.push(parseInt(element.totExp));
+								   arrayNew.push(parseInt(element.hombres));
+								   arrayNew.push(parseInt(element.mujeres));
+							   grafica.push(arrayNew);	   
+						});
+					var graficatwo=[['Región en sistema oral','Expediente','Hombres','Mujeres']];
+					    oral.forEach(element => {
+							var arrayNew=[];
+								   arrayNew.push(element.reg);
+								   arrayNew.push(parseInt(element.totExp));
+								   arrayNew.push(parseInt(element.hombres));
+								   arrayNew.push(parseInt(element.mujeres));
+							   graficatwo.push(arrayNew);	   
+						});
+						console.log("emprimiento la grafica ",grafica);
+						
+						
+						 function drawChart() {
+							var data = google.visualization.arrayToDataTable(grafica);
+							var datatwo = google.visualization.arrayToDataTable(graficatwo);
+							/* var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Topping');
+							data.addColumn('number', 'Slices');
+							data.addRows([
+							  ['Mushrooms', 3],
+							  ['Onions', 1],
+							  ['Olives', 1],
+							  ['Zucchini', 1],
+							  ['Pepperoni', 2]
+							]); */
+							var piechart_options = {title:'Grafica de tradicional',
+										   subtitle:'fecha:2018-2018'};
+							
+							var piechart = new google.visualization.ColumnChart(document.getElementById('columnchart_one'));
+							   piechart.draw(data, piechart_options);
+							   //document.getElementById('buttonone').outerHTML = '<a href="' + piechart.getImageURI() + '" download="Grafica.jpg">Descargar</a>';
+							   $('#buttonone').append( '<a href="' + piechart.getImageURI() + '" download="Grafica.jpg">Descargar</a>');
+   
+							var barchart_options = {title:'Grafica de oral',
+										  	//   legend: 'none'
+										};
+						    //var chart = new google.visualization.Bar(document.getElementById('barchart_div'));
+							var barchart = new google.visualization.ColumnChart(document.getElementById('columnchart_two'));
+							//barchart.draw(data, barchart_options);
+							barchart.draw(datatwo, barchart_options);
+							$('#buttontwo').append( '<a href="' + barchart.getImageURI() + '" download="Grafica.jpg">Descargar</a>');
+   
+							//barchart.draw(data, google.charts.Bar.convertOptions(barchart_options));
+						}
+				 	//function drawChart() {
+                      //  var data = google.visualization.arrayToDataTable(grafica);
+						//d
+						/* var data = new google.visualization.DataTable();
+						data.addColumn('string', 'Topping');
+						data.addColumn('number', 'Slices');
+						data.addRows([
+						  ['Mushrooms', 3],
+						  ['Onions', 1],
+						  ['Olives', 1],
+						  ['Zucchini', 1],
+						  ['Pepperoni', 2]
+						]); */
+						
+ 					   /*  var data = google.visualization.arrayToDataTable([ 
+						["Región en sistema tradicional", "Expediente", "Hombre", "Mujeres"],
+						 ["Cañada", "16", "10", "8"],
+						 ["istmo", "33", "18", "20"],
+						 ["Sierra Norte", "5", "0", "7"],
+						 ["sierra sur", "5", "1", "6"],
+						 ["Valles Centrales", "1", "1", "0"],
+         
+					   ]);   */ 
+ 				 	 /*  var data = google.visualization.arrayToDataTable([ 
+								['Year', 'Sales', 'Expenses', 'Profit'],
+								['2014', 16, 10,8],
+								['2015', 24, 12,17],
+								['2016', 33, 18,20],
+								['2014', 1, 1, 0]          
+					   ]); */
+			  
+					   /* var options = {
+						chart: {
+						  title: 'Grafica de tradicional',
+						  subtitle: 'fecha: 2018-2018',
+						}
+					  }; */
+					   /* 
+					  var optionstwo = {
+						chart: {
+						  title: 'Grafica de oral',
+						  subtitle: 'fecha: 2018-2018',
+						}
+					  }; */
+			  
+					  /* var chart = new google.charts.Bar(document.getElementById('barchart_div'));
+					  //var chartwro = new google.charts.Bar(document.getElementById('columnchart_two'));
+			  
+					  chart.draw(data, google.charts.Bar.convertOptions(options));//}
+					//  chartwro.draw(datatwo, google.charts.Bar.convertOptions(optionstwo));
+					}  */
+					// funciion validar(jsonInforme) return json
+										
+				}
+			});
+		}
+	}
+	console.timeEnd('TEST PERFORMANCE');
 }

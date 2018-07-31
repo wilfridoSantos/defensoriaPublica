@@ -46,8 +46,8 @@
                     break;
                 }
             }
-            echo $contenido;
-    }else{
             
+    }else{
+        //echo $contenido;
     }
 ?>

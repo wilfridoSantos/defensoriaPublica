@@ -127,6 +127,9 @@ function getTablaSexo(valor){
 			];
 		break;
 		default:
+		if(jsonInf['sexoBySistema'][1] == undefined || jsonInf['sexoBySistema'][1] == null){
+			jsonInf['sexoBySistema'][1]={"hombreAsesoria":0, "mujerAsesoria":0};
+		}
 		var totalHombreAse= parseInt(jsonInf['sexoBySistema'][1].hombreAsesoria)+ parseInt(jsonInf['sexoBySistema'][0].hombreAsesoria);
 		var totalmujerAse= parseInt(jsonInf['sexoBySistema'][1].mujerAsesoria)+ parseInt(jsonInf['sexoBySistema'][0].mujerAsesoria);
 		var totalAsesoriasSexo = totalHombreAse + totalmujerAse;
@@ -230,6 +233,10 @@ function getTablaGenero(valor){
 			];
 		break;
 		default:
+		if(jsonInf['generoBySistema'][1] == undefined || jsonInf['generoBySistema'][1] == null){
+			jsonInf['generoBySistema'][1]={"lesbicoAse":0, "bisexualAse":0,"gayAse":0, "interAse":0,
+										  "transexualAse":0, "transgeneroAse":0, "travestiAse":0};
+		}
 		totalLesbico = parseInt(jsonInf['generoBySistema'][1].lesbicoAse)+ parseInt(jsonInf['generoBySistema'][0].lesbicoAse);
 		totalBisexual = parseInt(jsonInf['generoBySistema'][1].bisexualAse)+ parseInt(jsonInf['generoBySistema'][0].bisexualAse);
 		totalGay = parseInt(jsonInf['generoBySistema'][1].gayAse)+ parseInt(jsonInf['generoBySistema'][0].gayAse);
@@ -384,6 +391,10 @@ function getTablaEdad(valor){
 		];
 		break;
 		default:
+		if(jsonInf['edadBySistema'][1] == undefined || jsonInf['edadBySistema'][1] == null){
+			jsonInf['edadBySistema'][1]={"totalSistema":0, "edad18_24H":0,"edad18_24M":0,"edad25_29H":0,"edad25_29M":0,"edad30_34H":0,"edad30_34M":0,"edad35_39H":0,"edad35_39M":0,"edad40_44H":0,"edad40_44M":0,
+			"edad45_49H":0,"edad45_49M":0,"edad50_54H":0,"edad50_54M":0,"edad55_59H":0,"edad55_59M":0,"edad60MasH":0,"edad60MasM":0};
+		}
 		var totalT1824 = parseInt(jsonInf['edadBySistema'][1].edad18_24H)+parseInt(jsonInf['edadBySistema'][1].edad18_24M);
 		var totalO1824 = parseInt(jsonInf['edadBySistema'][0].edad18_24H)+parseInt(jsonInf['edadBySistema'][0].edad18_24M);
 		var totalT2529 = parseInt(jsonInf['edadBySistema'][1].edad25_29H)+parseInt(jsonInf['edadBySistema'][1].edad25_29M);
