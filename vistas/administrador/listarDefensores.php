@@ -121,7 +121,7 @@ language: {
                             </thead>
                             <tbody id="tebody" >
 
-                            <?php include '../../controlador/defensor/controladorListaDef.php';
+                            <?php include '../../controlador/defensor/listatodosDefensores.php';
                                $defensores=json_decode($contenido);
                               //print_r($defensores);
                               foreach($defensores as $obj){

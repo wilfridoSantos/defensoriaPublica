@@ -1085,11 +1085,14 @@ function showMateria(str) {
 
 };
 function dataDefensor(){
+	//console.log("en data defensor");
+	
     $.ajax({
       type: 'GET',
-      url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+     //url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+      url: '../../controlador/defensor/listatodosDefensores.php?term=busqueda',
       success: function (data) {
-		 // console.log("data del defensor en ajax ",data);
+		  console.log("data del defensor en ajax ",data);
 		  		 		
 		 functionInputDefensores(data);
       },
@@ -1099,7 +1102,7 @@ function dataDefensor(){
       });
       
 }
-dataDefensor();
+//dataDefensor();
 function functionInputDefensores(dataDefe){
 	var desc = $('#botonDesc').get(0);
     var varUsuario=[];

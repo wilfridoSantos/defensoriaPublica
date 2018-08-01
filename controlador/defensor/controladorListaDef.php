@@ -5,13 +5,19 @@
 
     if(isset($_GET['term'])){
         if(isset($_GET['sistema']) && isset($_GET['materia'])){
+          //  print_r("imprimiendo datos queoijoi sisema ".$_GET['sistema'])." materia".isset($_GET['materia']);
             switch($_GET['sistema']){
-                case'ALL':
+                case 'ALL':
                     $listaDef = listar_defensoresMateria($_GET['materia']);
                     $contenido = json_encode($listaDef);
                     echo $contenido;
                 break;
-                case 'TRADICIONAL' || 'ORAL':
+                case 'TRADICIONAL':
+                    $listaDef = listar_defensoresSisMat($_GET['sistema'],$_GET['materia']);
+                    $contenido = json_encode($listaDef);
+                    echo $contenido;
+                    break;
+                 case 'ORAL':
                     $listaDef = listar_defensoresSisMat($_GET['sistema'],$_GET['materia']);
                     $contenido = json_encode($listaDef);
                     echo $contenido;
@@ -25,7 +31,12 @@
                         $contenido = json_encode($listaDef);
                         echo $contenido;
                     break;
-                    case 'TRADICIONAL' || 'ORAL':
+                    case 'TRADICIONAL':
+                        $listaDef = listar_defensoresSisReg($_GET['sistema'],$_GET['region']);
+                        $contenido = json_encode($listaDef);
+                        echo $contenido;
+                    break;
+                    case 'ORAL':
                         $listaDef = listar_defensoresSisReg($_GET['sistema'],$_GET['region']);
                         $contenido = json_encode($listaDef);
                         echo $contenido;
@@ -39,15 +50,20 @@
                         $contenido = json_encode($listaDef);
                         echo $contenido;
                     break;
-                    case 'TRADICIONAL' || 'ORAL':
+                    case 'TRADICIONA':
+                        $listaDef = listar_defensoresSis($_GET['sistema']);
+                        $contenido = json_encode($listaDef);
+                        echo $contenido;
+                    break;
+                    case  'ORAL':
                         $listaDef = listar_defensoresSis($_GET['sistema']);
                         $contenido = json_encode($listaDef);
                         echo $contenido;
                     break;
                 }
             }
-            echo $contenido;
+//            echo $contenido;
     }else{
-            
+       // echo $contenido;
     }
 ?>

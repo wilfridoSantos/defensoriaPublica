@@ -13,7 +13,7 @@ function informeGPeriodo(totalAse, actividades){
 	tablaEdad = getTablaEdad();
 	tablaEtnia = getTablaEtnias();
 	tablaIdioma = getTablaIdiomas();
-	tablaDiscapacidad = getTablaDiscapacidad();
+	tablaDiscapacidad = getTablaDiscapacidad2();
 	tablaTop = getTablaTopTen();
 	var registro = parseInt(actividades[0].actividadesPorSistema)+parseInt(actividades[1].actividadesPorSistema);
 	var audiencias, visitas;
@@ -82,14 +82,14 @@ function informeGPeriodo(totalAse, actividades){
 			},
 			{ text: 'Lista top de los defensores públicos que reportan un alto número de asistencia a audiencias en el periodo establecido en la búsqueda, así como los defensores que reportan los números más bajos de asistencia en audiencias.', style: 'textoJustificado' },
 			{ text: 'DEFENSORES CON ALTO NÚMERO DE AUDIENCIAS' },
-			{},
+			getTablaTopTen(),
 			{ text: '3.- VISITAS CARCELARÍAS', style: 'subheader2' },
 			{
                 text: 'Durante el periodo que comprende del ' + fecha1.getUTCDate() + ' de ' + meses[fecha1.getUTCMonth()] + ' al ' + fecha2.getUTCDate() + ' de ' + meses[fecha2.getUTCMonth()] +' de '+fecha2.getFullYear()+', los defensores públicos asistieron a '+visitas+' visitas carcelarias a sus internos.', style: 'textoJustificado'
 			},
 			{ text: 'Lista top de los defensores públicos que reportan un alto número de visitas carcelarias  en el periodo establecido en la búsqueda, así como los defensores que reportan los números más bajos en visitas carcelarias.', style: 'textoJustificado' },
 			{ text: 'DEFENSORES CON ALTO NÚMERO DE VISITAS CARCELARÍAS' },
-			{},	
+			getTablaTopTen(),	
 			{
 				style: 'tableExample',
 				color: 'black',

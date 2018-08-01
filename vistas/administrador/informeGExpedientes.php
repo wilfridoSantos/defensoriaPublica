@@ -79,7 +79,7 @@
                     </form>
                     <div class="row no-print">
 						             <div class="col-xs-12">
-						               <button class="btn btn-success pull-right" id="botonDesc" disabled onclick="generarPDFExpedientesGeneral();" style="margin-right: 5px;">
+						               <button class="btn btn-success pull-right" id="botonDesc"  onclick="generarPDFExpedientesGeneral();" style="margin-right: 5px;">
 						<i class="fa fa-download"></i> Generar PDF</button>
 					             </div>
 						           </div>

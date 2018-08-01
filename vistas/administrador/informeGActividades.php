@@ -73,7 +73,7 @@
                                 <br>
                                 <label class="form-check-label" > Fecha  final*   
                                      <input type="date" id="inputFinal" name="inputFinal" required="required"  data-error="Debe ser mayor a la fecha Inicial." onblur="myFunctionDate(this)" onkeyup="myFunctionDate()" data-error="ingresa fecha menor a la final" step="1">
-                                    <div class='block-help with-errors'></div>
+                                    <div id="labelFinal2" class='block-help with-errors'></div>
                                     <div id="labelFinal" class='block-help with-errors'></div>
                                 </label>
                             </div>                            

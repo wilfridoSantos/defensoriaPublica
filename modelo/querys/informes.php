@@ -1936,7 +1936,7 @@ function consultaMatSystemDefP($sis, $mat, $atrib, $id, $fi, $ff){
     $sql = "call tablaExpActividadesP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);                
                 $lista['tablaActExpDef'] = $l;
-                $sql = "call tablaExpGeneralP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
+    $sql = "call tablaExpGeneralP('DEFENSORPERIODO','SISTEMATERIA','".$id."','".$sis."','".$mat."','','".$fi."','".$ff."')";
                 $l = consulta($sql);  
                 $lista['tablaGeneralExpDef'] = $l;
     foreach($atrib as $val){
@@ -2289,7 +2289,7 @@ function consultaAmbasSystemDefP($sis, $mat, $reg, $atrib, $id, $fi, $ff){
                 $l = consulta($sql);  
                 $lista['tablaIdiomaExpDef'] = $l;      
             break;
-/* 
+    /* 
                 case 'MATERIA':                 
                 $sql = "call tablaExpMateriaP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  
@@ -2307,7 +2307,7 @@ function consultaAmbasSystemDefP($sis, $mat, $reg, $atrib, $id, $fi, $ff){
                 $l = consulta($sql);  
                 $lista['tablaSexoExpDef'] = $l;      
             break;
-/* 
+    /* 
             case 'TOP':                 
                 $sql = "call tablaExpTopP('DEFENSORPERIODO','SISTEMAMBAS','".$id."','".$sis."','".$mat."','".$reg."','".$fi."','".$ff."')";
                 $l = consulta($sql);  

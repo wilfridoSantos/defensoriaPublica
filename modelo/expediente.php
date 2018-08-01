@@ -1643,8 +1643,84 @@ function topDefensoresBySistema($valor, $fi, $ff, $def){
   
 }
 function getExpedientesByDefPeriodo($fi,$ff,$def){
+    $lista = array();
+  $sqlExpGeneral='call tablaExpGeneral("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpGeneral = consulta($sqlExpGeneral);
+  $sqlExpMateria = 'call tablaExpMateria("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpMateria = consulta($sqlExpMateria);
+  $sqlExpRegion = 'call tablaExpRegion("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpRegion = consulta($sqlExpRegion);
+  $sexoBySistema =  'call tablaExpSexo("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpSexo = consulta($sexoBySistema);
+  $actBySistema =  'call tablaExpActividades("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpAct =  consulta($actBySistema);
+  $generoBySistema =  'call tablaExpGenero("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpGenero =  consulta($generoBySistema);
+  $edadBySistema =  'call tablaExpEdad("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpEdad =  consulta($edadBySistema);
+  $etniaBySistema =  'call tablaExpEtnia("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpEtnia =  consulta($etniaBySistema);
+  $idiomaBySistema =  'call tablaExpIdioma("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpIdioma =  consulta($idiomaBySistema);
+  $discapacidadBySistema =  'call tablaExpDiscapacidad("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpDiscapacidad =  consulta($discapacidadBySistema);
+  $regionBySistema =  'call tablaExpRegion("DEFENSORP","'.$def.'","'.$fi.'","'.$ff.'");';
+  $listaExpRegion=  consulta($regionBySistema);
+  $nombre = 'call nombreDefExp("DEFENSOR","'.$def.'", "", "")';
+    $listaNom = consulta($nombre);
+       $lista['nombreDef'] = $listaNom;
+      $lista['tablaRegionExpDef'] = $listaExpRegion;     
+      $lista['tablaActExpDef'] = $listaExpAct;      
+      $lista['tablaSexoExpDef'] = $listaExpSexo;
+      $lista['tablaGeneroExpDef'] = $listaExpGenero;      
+      $lista['tablaEdadExpDef']= $listaExpEdad;      
+      $lista['tablaEtniaExpDef'] = $listaExpEtnia;
+      $lista['tablaIdiomaExpDef'] = $listaExpIdioma; 
+      $lista['tablaGeneralExpDef'] = $listaExpGeneral;
+      $lista['tablaMateriaExpDef'] =$listaExpMateria;
+      $lista['tablaDiscapacidadExpDef'] =$listaExpDiscapacidad;
+      
+      return $lista;
 }
 function getExpedientesByPeriodo($fi,$ff){
+    $lista = array();
+    $sqlExpGeneral='call tablaExpGeneral("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpGeneral = consulta($sqlExpGeneral);
+    $sqlExpMateria = 'call tablaExpMateria("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpMateria = consulta($sqlExpMateria);
+    $sqlExpRegion = 'call tablaExpRegion("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpRegion = consulta($sqlExpRegion);
+    $sexoBySistema =  'call tablaExpSexo("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpSexo = consulta($sexoBySistema);
+    $actBySistema =  'call tablaExpActividades("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpAct =  consulta($actBySistema);
+    $generoBySistema =  'call tablaExpGenero("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpGenero =  consulta($generoBySistema);
+    $edadBySistema =  'call tablaExpEdad("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpEdad =  consulta($edadBySistema);
+    $etniaBySistema =  'call tablaExpEtnia("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpEtnia =  consulta($etniaBySistema);
+    $idiomaBySistema =  'call tablaExpIdioma("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpIdioma =  consulta($idiomaBySistema);
+    $discapacidadBySistema =  'call tablaExpDiscapacidad("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpDiscapacidad =  consulta($discapacidadBySistema);
+    $regionBySistema =  'call tablaExpRegion("COMPLETOP","","'.$fi.'","'.$ff.'");';
+    $listaExpRegion=  consulta($regionBySistema);
+    $topBySistema =  'call tablaExpTop("COMPLETOP","","'.$fi.'","'.$ff.'")';
+    $listaExpTop=  consulta($topBySistema);
+        $lista['tablaTopExp'] = $listaExpTop;   
+        $lista['tablaRegionExp'] = $listaExpRegion;     
+        $lista['tablaActExp'] = $listaExpAct;      
+        $lista['tablaSexoExp'] = $listaExpSexo;
+        $lista['tablaGeneroExp'] = $listaExpGenero;      
+        $lista['tablaEdadExp']= $listaExpEdad;      
+        $lista['tablaEtniaExp'] = $listaExpEtnia;
+        $lista['tablaIdiomaExp'] = $listaExpIdioma; 
+        $lista['tablaGeneralExp'] = $listaExpGeneral;
+        $lista['tablaMateriaExp'] =$listaExpMateria;
+        $lista['tablaDiscapacidadExp'] =$listaExpDiscapacidad;
+        
+        return $lista;
 }
 function getExpedientesByDefCompleto($def){
     $lista = array();
@@ -1670,7 +1746,7 @@ function getExpedientesByDefCompleto($def){
   $listaExpDiscapacidad =  consulta($discapacidadBySistema);
   $regionBySistema =  'call tablaExpRegion("DEFENSOR","'.$def.'","0000-00-00","0000-00-00")';
   $listaExpRegion=  consulta($regionBySistema);
-  $nombre = 'call nombreDefExp("'.$def.'")';
+  $nombre = 'call nombreDefExp("DEFENSOR","'.$def.'", "", "")';
     $listaNom = consulta($nombre);
        $lista['nombreDef'] = $listaNom;
       $lista['tablaRegionExpDef'] = $listaExpRegion;     
@@ -1710,7 +1786,7 @@ function getExpedientesGC(){
   $listaExpDiscapacidad =  consulta($discapacidadBySistema);
   $regionBySistema =  'call tablaExpRegion("COMPLETO","","0000-00-00","0000-00-00")';
   $listaExpRegion=  consulta($regionBySistema);
-  $topBySistema =  'call tablaExpTop()';
+  $topBySistema =  'call tablaExpTop("COMPLETO","","","")';
   $listaExpTop=  consulta($topBySistema);
       $lista['tablaTopExp'] = $listaExpTop;   
       $lista['tablaRegionExp'] = $listaExpRegion;     
@@ -1731,6 +1807,7 @@ function getExpedientesByDefPeriodoP($fi,$ff,$def, $sistema, $atributos){
 function getExpedientesByPeriodoCP($fi,$ff, $sistema, $atributos){
 }
 function getExpedientesByDefPC($def, $sistema, $atributos){
+    
 }
 function getExpedientesPC($sistema, $atributos){
 }

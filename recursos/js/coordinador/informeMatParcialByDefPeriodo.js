@@ -76,7 +76,7 @@ function informeMatByDefPeriodo(sistema, atributos){
 				],
 				style: 'header'
 			},	
-			{ text: 'Con el objetivo de contribuir a una justicia pronta, expedita e imparcial, se obtuvieron xxxx registros de expedientes del defensor: xxxxx.', style: 'textoJustificado' },
+			{ text: 'Con el objetivo de contribuir a una justicia pronta, expedita e imparcial, se obtuvieron registros de expedientes del defensor.', style: 'textoJustificado' },
 			{ text: 'A continuación se muestra el estado general de los expedientes del defensor.', style: 'textoJustificado' },
             tablaGeneral,			
             { text: 'A continuación se desglosan las actividades realizadas sobre de los beneficiarios involucrados en los expedientess. :', style: 'textoJustificado' },

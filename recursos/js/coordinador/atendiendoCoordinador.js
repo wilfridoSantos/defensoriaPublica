@@ -648,11 +648,12 @@ function myFunctionDate2(val, nue) { //this.value from input date vista informeA
 		var fin = new Date(final);
 		if ((ini < fin) || (ini == fin)) {
 			var fechaI = ini.toISOString().split('T')[0];
-			$(".alert alert-danger").remove();
+			$("#labelFinal").hide();
+			$("#labelFinal").removeClass(".alert alert-danger");
 			generarInformeAct2(nue);
 			return true;
 		} else {			
-			$(".errors").remove();
+//			$(".errors").removeClass();
 			labelFinal.setAttribute("class", "alert alert-danger");
 
 			labelFinal.innerText = "la fecha Final debe ser Mayor";
@@ -674,30 +675,38 @@ function myFunctionDate(val) { //this.value from input date vista informeActivid
 	var final = $('#inputFinal')[0].value;
 	var labelFinal = document.getElementById('labelFinal');
 	var desc = $('#botonDesc').get(0);
-	//var selectSistema = $('#selectSistema').get(0);
 
 	if (inicio != '' && final != '') {
 		var ini = new Date(inicio);
 		var fin = new Date(final);
-		if (((ini < fin) || (ini == fin))) {
-			$(".alert").remove();
-			$(".errors").remove();
-			if(check){
-				if(inputProject != ''){
-					desc.disabled = false;
-					return true;	
-				}
-				desc.disabled = true;
+		var actual = (new Date).getFullYear();
+		var ante = 2000;
+		if ( ((ini < fin) || (ini == fin))) {
+			console.log('ini es menor o igual a fin');
+			if( fin.getFullYear() > actual){
+				//$(".errors").remove();
+				//$(".alert").remove();
+				$("#labelFinal").show();
+				labelFinal.setAttribute("class", "alert alert-danger");
+				labelFinal.innerText="";
+				labelFinal.innerText = "La fecha final debe ser menor al año actual!.";
 				return false;
+			}else if(ini.getFullYear()<ante){
+				$("#labelFinal").show();
+				labelFinal.setAttribute("class", "alert alert-danger");
+				labelFinal.innerText="";
+				labelFinal.innerText = "La fecha de inicio debe ser mayor al año 2000!.";
+				return false;
+			}else{					
+				$("#labelFinal").hide();
+				$("#labelFinal").removeClass(".alert alert-danger");
+				return true;
 			}
-			desc.disabled = false;
-			return true;
 		} else {
-					
-			//console.log( fechaI, 'fecha inicial');				
-			$(".errors").remove();
+			$("#labelFinal").show();
 			labelFinal.setAttribute("class", "alert alert-danger");
-			labelFinal.innerText = "La fecha final debe ser Mayor";
+			labelFinal.innerText="";
+			labelFinal.innerText = "La fecha final debe ser mayor a la fecha de inicio!.";
 			return false;
 		}
 	} 
@@ -1249,11 +1258,14 @@ function showMateria(str) {
 
 };
 function dataDefensor(){
+	//console.log("defenwsor en atendiendoCoordinador");
+	
     $.ajax({
       type: 'GET',
-      url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
-      success: function (data) {
-		 // console.log("data del defensor en ajax ",data);
+    //  url: '../../controlador/defensor/controladorListaDef.php?term=busqueda',
+	url: '../../controlador/defensor/listatodosDefensores.php?term=busqueda',  
+	success: function (data) {
+		  //console.log("data del defensor en ajax ",data);
 		  		 		
 		 functionInputDefensores(data);
       },
@@ -1265,6 +1277,8 @@ function dataDefensor(){
 }
 dataDefensor();
 function functionInputDefensores(dataDefe){
+	//console.log("datos en input def ",dataDefe);
+	
 	var desc = $('#botonDesc').get(0);
     var varUsuario=[];
 	var datos = $.parseJSON(dataDefe);
@@ -1608,6 +1622,86 @@ function verDetalleExp(llave) {//llave -> 0 exp1, 1 exp2 ....
 		}
 	});
 };
+function validarFecha(e, elemento) {  
+	var fechas= document.getElementById("").value;
+	  
+	  //console.log(fechas);
+	  var ano=fechas.split('-')[0];
+	  var mes=fechas.split('-')[1];
+	  var dia=fechas.split('-')[2];
+	  
+	  
+	//   alert("fff");
+	var date = new Date()
+	//   var error=elemento.parentElement.children[1];
+	var error=elemento.parentElement;
+  
+	// removeChild
+	
+	var ul=document.createElement('li');
+	//  ul.setAttribute("class", "errors");
+		  if(ano == "" || ano.length < 4 || ano.search(/\d{4}/) != 0)
+		  {
+		$(".errors").remove();
+		ul.setAttribute("class", "errors");
+			ul.innerText="solo 4 digito";
+			error.appendChild(ul);
+	  
+			  return false;
+		  }   
+	  
+	if(ano <date.getFullYear() || ano > date.getFullYear())
+	  { 
+		console.log(" año invalida");
+	  $(".errors").remove();
+		ul.setAttribute("class", "errors");
+  
+		ul.innerText="año invalida";
+		error.appendChild(ul);
+			  return false;
+	  } 
+	  else{
+		$(".errors").remove();
+	  }  
+	
+  
+	  if(mes < date.getMonth()+1 || mes > date.getMonth()+1)
+	  { 
+		console.log("mes invalida");
+	  $(".errors").remove();
+		ul.setAttribute("class", "errors");
+  
+		ul.innerText="Mes invalida";
+		error.appendChild(ul);
+			  return false;
+	  } 
+	  else{
+		$(".errors").remove();
+	  } 
+  
+	  if(dia < date.getDate()-5 || dia > date.getDate())
+	  { 
+		console.log("fecha invalida");
+	  $(".errors").remove();
+		ul.setAttribute("class", "errors");
+  
+		ul.innerText="Dia invalida";
+		error.appendChild(ul);
+			  return false;
+	  } 
+	  else{
+		$(".errors").remove();
+	  } 
+		  
+	  
+	  
+	  intMes  = parseInt(dia);
+	  intDia  = parseInt(mes);
+	  intano=parseInt(ano);
+  
+	  
+	  console.log( date.getYear());
+  }
 function validarSelect(str) {
 	console.log(str);
 
@@ -2578,9 +2672,12 @@ function generarPDFExpedientesGeneral(){
 					var nombreDef = jsonInforme['nombreDef'][0].nombre + ' '+ jsonInforme['nombreDef'][0].ap_paterno + ' '+ jsonInforme['nombreDef'][0].ap_materno;
 					//var totalAsesorias = parseInt(jsonInforme['actBySistemaDef'][0].actAsesoria);
 					var sistema= jsonInforme['nombreDef'][0].sistema;
-					var expedientes= jsonInforme['expBySistemaDef'][0];
-					//console.log(sistema,' valor sistema antes de crear pdf', nombreDef, ' nombre del defensro');
-					  pdfExp = informeGByDefPeriodo(nombreDef, sistema, expedientes);					  
+					if(jsonInforme['tablaGeneralExpDef'][1]== undefined || jsonInforme['tablaGeneralExpDef'][1]==null){
+						jsonInforme['tablaGeneralExpDef'][1]={"expedientesPorSistema":0};
+					}
+					var totalExp = parseInt(jsonInforme['tablaGeneralExpDef'][0].expedientesPorSistema)+ parseInt(jsonInforme['tablaGeneralExpDef'][1].expedientesPorSistema);
+
+					  pdfExp = informeGByDefPeriodo(nombreDef, sistema, totalExp);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
@@ -2598,11 +2695,13 @@ function generarPDFExpedientesGeneral(){
 					//console.log(data, ' DATA DEV');
 					 var jsonInforme = jQuery.parseJSON(data);
 					 console.log(jsonInforme, ' DATA JSONNNN');
-					 var totalAsesorias = parseInt(jsonInforme['expBySistema'][1].actAsesoria) + parseInt(jsonInforme['expBySistema'][0].actAsesoria);
-
 					constructor(jsonInforme);
-					var actividades= jsonInforme['expBySistema'];
-					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
+					if(jsonInforme['tablaGeneralExp'][1]== undefined || jsonInforme['tablaGeneralExp'][1]==null){
+						jsonInforme['tablaGeneralExp'][1]={"expedientesPorSistema":0};
+					}
+					var totalExp = parseInt(jsonInforme['tablaGeneralExp'][0].expedientesPorSistema)+ parseInt(jsonInforme['tablaGeneralExp'][1].expedientesPorSistema);
+
+					var pdfAct =  informeExpGPeriodo(totalExp);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
 					  // download the PDF
@@ -2648,7 +2747,8 @@ function generarPDFExpedientesGeneral(){
 						//pdfMake.createPdf(docDefinition).print();
 						// download the PDF
 						//pdfMake.createPdf(docDefinition).download('optionalName.pdf');					
-					  pdfMake.createPdf(pdfAct).open();					
+					  pdfMake.createPdf(pdfAct).open();	
+					  console.log("creando ppdfffff....");				
 				}
 			});
 		}
@@ -2900,10 +3000,13 @@ function generarPDFActividadesGeneral() {
 					//console.log(data, ' DATA DEV');
 					 var jsonInforme = jQuery.parseJSON(data);
 					 console.log(jsonInforme, ' DATA JSONNNN');
-					 var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
-
-					constructor(jsonInforme);
-					var actividades= jsonInforme['actBySistema'];
+					 if(jsonInforme['actBySistema'][1]==null || jsonInforme['actBySistema'][1]==undefined){
+						jsonInforme['actBySistema'][1]={"sistemaG":0,"actividadesPorSistema":0,"actAudiencia":0,"actVisita":0,"actAsesoria":0};
+					 }
+					var totalAsesorias = parseInt(jsonInforme['actBySistema'][1].actAsesoria) + parseInt(jsonInforme['actBySistema'][0].actAsesoria);
+					var actividades=jsonInforme['actBySistema']; //parseInt(jsonInforme['actBySistema'][0].actividadesPorSistema)+parseInt(jsonInforme['actBySistema'][0].actividadesPorSistema);
+					
+					constructor(jsonInforme);					
 					var pdfAct = informeGPeriodo(totalAsesorias, actividades);					  
 					  // print the PDF
 					  //pdfMake.createPdf(docDefinition).print();
