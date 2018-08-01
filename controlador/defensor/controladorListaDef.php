@@ -62,8 +62,14 @@
                     break;
                 }
             }
+<<<<<<< HEAD
 //            echo $contenido;
     }else{
        // echo $contenido;
+=======
+            
+    }else{
+        //echo $contenido;
+>>>>>>> 40a0c5151d8e9475b303dfdef1e845e96100e72d
     }
 ?>

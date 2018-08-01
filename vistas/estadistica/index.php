@@ -1,5 +1,5 @@
 <?php
-include "../../Controlador/sesion.php";
+include "../../controlador/sesion.php";
   //print_r( $_SESSION[session_name()]+" abcde123");
   if($_SESSION["rol"] != 3 ){
      header("Location: ../baseIndex.php");
@@ -83,7 +83,6 @@ include "../../Controlador/sesion.php";
                     <ul class="nav child_menu">
                       <li><a id="informeGExpedientes">Generar informe general de expedientes</a></li>
                       <li><a id="informeGActividades">Generar Informe general de Actividades</a></li>  
-                      <li><a id="informeDComponentes">Generar informe de componentes de la o..</a></li>
                     </ul>
                   </li>
 
@@ -94,12 +93,7 @@ include "../../Controlador/sesion.php";
              
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-home"></i> Consultas <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                      <li><a id="consultaActividades">Solicitar consulta de actividades</a></li>
-                      <li><a id="consultaExpedientes">Solicitar consulta de expedientes</a></li>
-                  </ul>
-                  </li>
+                  
               </ul>
             </div>
 
